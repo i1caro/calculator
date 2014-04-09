@@ -90,8 +90,8 @@
   $ = jQuery;
 </script>
 <!-- Require.js -->
-<script data-main="/wp-content/themes/bootstrapwp-87/js/pricing" src="/wp-content/themes/bootstrapwp-87/js/require.js"></script>
 <script src="/wp-content/themes/bootstrapwp-87/js/underscore-min.js"></script>
+<script data-main="/wp-content/themes/bootstrapwp-87/js/pricing" src="/wp-content/themes/bootstrapwp-87/js/require.js"></script>
 <link rel="stylesheet" href="/wp-content/themes/bootstrapwp-87/less/common.css">
 
 <style>
@@ -222,108 +222,6 @@ border:none;
     background-color: #22a6ff !important;
 }
 </style>
-
-<script>
-var current_zone = "";
-var zones = {
-    "lon-p": {
-        name: "London Portsmouth",
-        flag: "UKflag.png",
-        currency: "£"
-    },
-    "lon-b": {
-        name: "London Maidenhead",
-        flag: "UKflag.png",
-        currency: "£",
-    },
-    "ams-e": {
-        name: "Amsterdam",
-        flag: "NLFlag.png",
-        currency: "€"
-    },
-    "sjc-c": {
-        name: "San Jose, CA",
-        flag: "USAFlag.png",
-        currency: "$"
-    },
-    "lax-p": {
-        name: "Los Angeles, CA",
-        flag: "USAFlag.png",
-        currency: "$"
-    },
-    "sat-p": {
-        name: "San Antonio, TX",
-        flag: "USAFlag.png",
-        currency: "$",
-    },
-    "tor-p": {
-        name: "Toronto",
-        flag: "CANFlag.png",
-        currency: "US$"
-    },
-    "hkg-e": {
-        name: "Hong Kong",
-        flag: "HKGFlag.png",
-        currency: "US$"
-    },
-    "syd-v": {
-        name: "Sydney",
-        flag: "AUSFlag.png",
-    }
-};
-
-var domain = location.host.split('.').splice(-1,1)[0];
-var tld = {
-     'nl' : 'ams-e',
-     'au' : 'hkg-e',
-     'hk' : 'hkg-e',
-     'ca' : 'tor-p',
-     'uk' : 'lon-b',
-     'com': 'sjc-c'
-};
-
-jQuery(function(){
-  current_zone = tld[domain]
-    if (!current_zone){
-        current_zone = tld['com'];
-    }
-  buildFlags();
-  highlightStart();
-  jQuery(".zoneselector").bind('click', function() {
-      if (zones[this.id]["coming"] != true){
-        current_zone = this.id;
-        jQuery("#whichzone div").removeClass("selectedzone");
-        jQuery(this).addClass("selectedzone");;
-      }
-    });
-});
-
-function buildFlags() {
-    var started = false;
-    jQuery.each(zones, function(zone, body) {
-        var str = '<div id="' + zone + '" class="zoneselector" data-bind="event: {mousedown: $root.change_country}"><img src="/wp-content/uploads/'+body.flag+'" /><span>'+body.name+'</span></div>';
-        // this is to distribute spaces for text-align:justify to work
-        if (started)
-            str = ' ' + str;
-        started = true;
-        jQuery("#whichzone").append(str);
-        if(zones[zone]["coming"] == true){
-          jQuery("#" + zone).addClass("comingsoon");
-        }
-    })
-    // this is because span.stretch MUST come after the distributed divs
-    jQuery("#whichzone").append("<span class='stretch'></span>");
-}
-
-function highlightStart() {
-    if (tld){
-        jQuery("#" + current_zone).addClass("selectedzone");
-    } else {
-        jQuery("#sjc-c").addClass("selectedzone");
-    }
-}
-
-</script>
 
     <style media="print" type="text/css">
       div.faq_answer {display: block!important;}
@@ -597,8 +495,16 @@ function highlightStart() {
     <div class="box-large" style="color: #313785">
       <div class="pricing-stuff">
         <h2 id="zonetitle">I want servers in:</h2>
-        <div id="whichzone"></div>
 
+        <div id="whichzone">
+          <!-- ko foreach: country_flags -->
+            <div class="zoneselector" data-bind="attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }">
+              <img data-bind="attr: {src: '/wp-content/uploads/' + flag}"/>
+              <span data-bind="text: name"></span>
+            </div>
+          <!-- /ko -->
+          <span class='stretch'></span>
+        </div>
         <div class="panel panel-default">
           <div class="panel-heading" style="width:100%;">
             <div class="btn-toolbar" role="toolbar">
