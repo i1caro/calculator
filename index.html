@@ -283,6 +283,10 @@ var tld = {
 };
 
 jQuery(function(){
+  current_zone = tld[domain]
+    if (!current_zone){
+        current_zone = tld['com'];
+    }
   buildFlags();
   highlightStart();
   jQuery(".zoneselector").bind('click', function() {
@@ -588,6 +592,7 @@ function highlightStart() {
   <header class="subhead" id="overview">
     <h1>Calculator</h1>
   </header>
+<!-- /wordpress copy below -->
   <div style="padding: 0;">
     <div class="box-large" style="color: #313785">
       <div class="pricing-stuff">
@@ -642,6 +647,7 @@ function highlightStart() {
       <a href="/cloud-servers/free-trial" class="yellow-nohover hover-huge">Sign up now</a>
     </div>
   </div>
+<!-- /wordpress copy above -->
 </div><!-- /.span6 -->
 <!-- /Calculator -->
 

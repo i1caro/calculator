@@ -701,3 +701,4 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     ko.applyBindings(model);
   }
 );
+
