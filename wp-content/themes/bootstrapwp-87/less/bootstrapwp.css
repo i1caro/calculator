@@ -164,11 +164,11 @@ body {
   background-color: #ffffff;
 }
 a {
-  color: #3ea9f3;
+  color: #0032CF;
   text-decoration: none;
 }
 a:hover {
-  color: #3ea9f3;
+  color: #0032CF;
   text-decoration: underline;
 }
 .row {
@@ -199,10 +199,10 @@ a:hover {
 .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
+  width: 1050px;
 }
 .span12 {
-  width: 940px;
+  width: 1050px;
 }
 .span11 {
   width: 860px;
@@ -301,10 +301,10 @@ a:hover {
 .container,
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 978px;
+  width: 1050px;
 }
 .span12 {
-  width: 978px;
+  width: 1050px;
 }
 .span11 {
   width: 860px;
@@ -2601,7 +2601,7 @@ table .span24 {
   margin: 0 0 0;
   list-style: none;
   color:#fff;
-  background-color: #22A6FF;
+  background-color: #313785;
   /*border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
   *border-right-width: 2px;
@@ -4046,7 +4046,7 @@ input[type="submit"].btn.btn-mini {
 }
 .nav > li > a:hover {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #253588;
 }
 .nav > .pull-right {
   float: right;
@@ -4401,7 +4401,7 @@ input[type="submit"].btn.btn-mini {
   *border-left-color: #ffffff;
 }
 .topcontent {
-	width:978px;
+	width:1050px;
 	height:73px;
 	
 	padding-left:23px;	
@@ -4428,7 +4428,7 @@ input[type="submit"].btn.btn-mini {
 	/*height:36px;*/
 	
 	padding-left:23px;	
-	padding-right:23px;
+	padding-right:96px;
 	
 	background-color:#22a6ff;
 	
@@ -4623,8 +4623,8 @@ input[type="submit"].btn.btn-mini {
 }
 .navbar-fixed-top .container,
 .navbar-fixed-bottom .container {
-  width: 940px;
-  width: 940px;
+  width: 1050px;
+  width: 1050px;
 }
 .navbar-fixed-top {
   top: 0;
@@ -4866,9 +4866,17 @@ input[type="submit"].btn.btn-mini {
 .navbar .dropdown-menu .dropdown-menu {
 	margin-top:-24px!important;
 	margin-left:226px;
-	border-left:1px solid #66CCFF !important;	
+	border-left:1px solid #313785 !important;	
 }
 
+.navbar .dropdown-menu > li > a:hover{
+  background-color: #fff;
+  color: #313785;
+  border: 1px solid #313785;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-right: 13px;
+}
 
 .navbar-fixed-bottom .dropdown-menu:before {
   border-top: 7px solid #ccc;
@@ -6914,7 +6922,6 @@ Overriding some defaults from the Bootstrap defaults to improve/fix integration 
 	margin-right:auto;
 
 
-  min-height: 866px;
 	padding-bottom:0;	
 
 /*
@@ -7759,7 +7766,7 @@ a.blue-button:hover, a.blue-button-large:hover  {
 
 /* Homepage */
 #homepage-top {
-	width:978px;
+	width:1050px;
 	height:220px;
 	
 	padding-left:23px;	
@@ -8225,6 +8232,7 @@ a.blue-button:hover, a.blue-button-large:hover  {
 	
 	background-image:url(../../../../assets/backgrounds/background-blog.png);
 	background-repeat:no-repeat;	
+  position:relative;
 }
 
 .blog-title h1 {
@@ -8270,7 +8278,7 @@ a.blue-button:hover, a.blue-button-large:hover  {
 	margin-left:-23px;
 }
 
-.span6 table {
+.span6 table:not(.gstl_51)  {
 	width:570px!important;
 	border:1px solid #b7b6b6;
 	
@@ -8299,7 +8307,7 @@ a.blue-button:hover, a.blue-button-large:hover  {
 }
 
 #main-menu {
-	margin-left:-23px;
+	margin-left:12px;
 	font-size:13px;
 }
 
@@ -8345,6 +8353,25 @@ a.blue-button:hover, a.blue-button-large:hover  {
 
 .header-green h1, .freetrial h1 {
     background-color: #65CD00;
+}
+
+.freetrialbottom {
+font-size: 24px;
+color: #FFF;
+font-weight: bold;
+text-shadow: 0px 2px 2px rgba(150, 150, 150, 1);
+line-height: 30px;
+background-color: #fbc517;
+border: 1px solid #fbac29;
+text-decoration: none;
+text-align: center;
+border-radius: 20px;
+padding: 5px 45px 5px 45px;
+}
+
+a.freetrialbottom:hover {
+text-decoration: none;
+color: white;
 }
 
 /*Support homepage */
@@ -8825,8 +8852,6 @@ a.blue-button:hover, a.blue-button-large:hover  {
 	margin-right:30px;
 	margin-bottom:30px;
 	
-	background-color:#253588!important;
-	
 	position:relative;
 	float:left;
 }
@@ -8867,6 +8892,12 @@ font-family:Georgia, "Times New Roman", Times, serif;
 padding-left: 20px;
 } 
 */
+
+blockquote {
+    margin-bottom: -20px;
+    margin-top: 20px;
+}
+
 blockquote p:before, blockquote p:after {
     content: '”';
     font-size: 66px;
@@ -8875,11 +8906,29 @@ blockquote p:before, blockquote p:after {
     vertical-align:top;
     line-height:0.8
 }
+
 blockquote p:before {
     content: '\201C';
     position:absolute;
     margin-left:-30px;
 }
+
+blockquote:before, blockquote:after {
+    content: '”';
+    font-size: 66px;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    color: #22A6FF;
+    vertical-align:top;
+    line-height:0.8
+}
+
+blockquote:before {
+    content: '\201C';
+    position:absolute;
+    margin-left: -35px;
+    margin-top: -9px;
+}
+
 
 .source {
 	font-style:italic!important;
@@ -9111,19 +9160,11 @@ blockquote p:before {
 	display:none;	
 }
 
-/*MT 18/04/2013 Hide h4s and display items on API */
-.api-page h4 {
-	display:none!important;	
-}
-
-.api-page .faq-answer {
-	display:block!important;	
-}
-
 .widefooter {
   background-color: #F2F2F2;
   width: 100%;
   height: 325px;
+  margin-top: 50px;
 }
 
 /* Spaces out the links in the footer */
@@ -9137,4 +9178,173 @@ div.widefooter div.container {
 
 #offerarea {
   display:none;
+}
+
+
+a.freetrialtop {
+  position: absolute;
+  right: -43px;
+  top: 13px;
+  font-size: 24px;
+  color: #FFF;
+  font-weight: bold;
+  height: 40px;
+  line-height: 40px;
+  width: 198px;
+  background-color: #fbc517;
+  border: 1px solid #fbac29;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 4px;
+}
+
+a.freetrialtop:hover {
+  text-shadow: 0px 2px 2px rgba(150, 150, 150, 1);
+}
+
+a.newsletter-link, .newsletter-link{
+  position: absolute;
+  color: white;
+  left: 494px;
+  top: 10px;
+  border: 1px solid white;
+  padding: 4px;
+  cursor: pointer;
+}
+
+a.newsletter-link:hover, .newsletter-link:hover{
+  background-color: white;
+  color: #313785 !important;
+  text-decoration: none;
+  border: 1px solid #313785;
+}
+
+.hover-button {
+    cursor: pointer;
+    margin: 10px auto;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 40px;
+    text-decoration: none;
+    text-align: center;
+    padding-left: 35px;
+    padding-right: 35px;
+    display: block;
+    width: 55%;
+    white-space: nowrap;
+}
+.yellow-hover {
+    border: 1px solid #fbac29;
+    color: #fbac29;
+    background-color: white;
+}
+.yellow-hover:hover {
+    color: white;
+    background-color: #fbac29;
+    text-shadow: 0px 2px 2px rgba(100, 100, 100, 0.5);
+    text-decoration: none;
+}
+.yellow-nohover {
+    border: 1px solid #fbac29;
+    color: white;
+    background-color: #fbac29;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.yellow-nohover:hover{
+    text-shadow: 0px 2px 2px rgba(100, 100, 100, 0.5);
+    text-decoration: none;
+    color: white;
+}
+.blue-hover {
+    border: 1px solid #2296ff;
+    color: #2296ff;
+    background-color: white;
+}
+.blue-hover:hover {
+    color: white;
+    background-color: #2296ff;
+    text-shadow: 0px 2px 2px rgba(100, 100, 100, 0.5);
+    text-decoration: none;
+}
+.hover-small {
+  padding: 2px 5px 2px 5px;
+  line-height: 26px;
+}
+.hover-large {
+  line-height: 26px;
+  margin: 9px;
+  display: inline-block;
+  text-align: center;
+}
+.hover-huge {
+padding: 1% 20% 1% 20%;
+font-size: 20px;
+line-height: 50px;
+display: block;
+margin: 0 auto;
+width: 40%;
+text-align: center;
+}
+.pointerouter {
+    background: #333;
+    background: rgba(37, 53, 136, .8);
+    border-radius: 5px;
+    bottom: 0px;
+    color: #fff;
+    content: attr(data-title);
+    left: 0px;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    display: inline;
+    position: relative;
+    text-decoration: none;
+}
+
+.tooltipa, a.tooltipa, a.tooltipb, .tooltipb {
+    display: inline;
+    position: relative;
+    text-decoration: none;
+}
+.tooltipa:hover:after {
+    background: #333;
+    background: rgba(37, 53, 136, .8);
+    border-radius: 5px;
+    bottom: -37px;
+    color: #fff;
+    content: attr(data-title);
+    left: -25px;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    white-space:nowrap;
+}
+.tooltipb:hover:after {
+    background: #333;
+    background: rgba(37, 53, 136, .8);
+    border-radius: 5px;
+    bottom: 22px;
+    color: #fff;
+    content: attr(data-title);
+    left: -25px;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    white-space:nowrap;
+}
+.rightbar{
+text-align: center;
+background-color: rgba(220, 220, 255, 0.5);
+padding: 10px;
+}
+
+.rightbar img {
+height: 60px;
+padding: 15px;
+}
+
+.rightbar a {
+color: inherit;
+text-decoration: none;
 }

@@ -1,0 +1,544 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"lang",
+				"langselflag"
+			],
+			[
+				"lon",
+				"lon-b"
+			],
+			[
+				"to",
+				"tor-p"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"vm",
+				"vmdrawer"
+			],
+			[
+				"coming",
+				"comingsoon"
+			],
+			[
+				"in",
+				"innerContent"
+			],
+			[
+				"video",
+				"videoContainer"
+			],
+			[
+				"intro",
+				"introElements"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.html",
+			"settings":
+			{
+				"buffer_size": 40107,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index-wordpres.html",
+			"settings":
+			{
+				"buffer_size": 2631,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "wp-content/themes/bootstrapwp-87/less/common.css",
+			"settings":
+			{
+				"buffer_size": 8097,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
+			"settings":
+			{
+				"buffer_size": 233465,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 285.0,
+		"selected_items":
+		[
+			[
+				"html",
+				"HTMLPrettify"
+			],
+			[
+				"htm",
+				"HTMLPrettify"
+			],
+			[
+				"htmlp",
+				"HTMLPrettify"
+			],
+			[
+				"pretti",
+				"HTMLPrettify"
+			],
+			[
+				"pretty",
+				"HTMLPrettify: Set Prettify Preferences"
+			],
+			[
+				"prett",
+				"HTMLPrettify"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"diff",
+				"FileDiffs: Menu"
+			],
+			[
+				"filed",
+				"FileDiffs: Menu"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 139.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/jonathan/elastic-www/Bootstrap Theme/bootstrapwp.css",
+		"/home/jonathan/elastic-www/test.html",
+		"/home/jonathan/elastic-www/lastestfiles/index-wordpres.html",
+		"/home/jonathan/elastic-www/lastestfiles/common.css",
+		"/home/jonathan/elastic-www/calculator/common.css",
+		"/home/jonathan/elastic-www/index.html",
+		"/home/jonathan/elastic-www/Bootstrap Theme/vm.css",
+		"/home/jonathan/elastic-www/Bootstrap Theme/vm.html",
+		"/home/jonathan/elastic-www/lastestfiles/templates.html",
+		"/home/jonathan/elastic-www/theme php etc/page.php",
+		"/home/jonathan/elastic-www/lastestfiles/pricing.js",
+		"/home/jonathan/elastic-www/theme php etc/header.php",
+		"/home/jonathan/elastic-www/theme php etc/page-support.php",
+		"/home/jonathan/elastic-www/theme php etc/index.php",
+		"/home/jonathan/Downloads/wordpress/wp-admin/includes/class-wp-filesystem-ssh2.php",
+		"/home/jonathan/elastic-www/vm calc/test/index.html",
+		"/home/jonathan/elastic-www/theme php etc/footer.php",
+		"/home/jonathan/elastic-www/pricing/homepagetest.js",
+		"/home/jonathan/elastic-www/pricing/test.html",
+		"/home/jonathan/elastic-www/language selector.js",
+		"/home/jonathan/elastic-www/pricing/vm-calc.js",
+		"/home/jonathan/elastic-www/theme php etc/404.php",
+		"/home/jonathan/elastic-www/container/container.css",
+		"/home/jonathan/elastic-www/container/container.html",
+		"/home/jonathan/site-test/pricing2.js",
+		"/home/jonathan/elastic-www/pricing/pricing4.html",
+		"/home/jonathan/elastic-www/header.php",
+		"/home/jonathan/elastic-www/Bootstrap Theme/testformigration.html",
+		"/home/jonathan/elastic-www/theme php etc/5.44/header.php",
+		"/home/jonathan/elastic-www/bk/series",
+		"/home/jonathan/elastic-www/series",
+		"/home/jonathan/elastic-www/bk/status",
+		"/home/jonathan/elastic-www/status",
+		"/home/jonathan/elastic-www/Bootstrap Theme/wp-config.php",
+		"/home/jonathan/elastic-www/Bootstrap Theme/class-wp-filesystem-direct.php",
+		"/home/jonathan/elastic-www/Bootstrap Theme/file.php",
+		"/home/jonathan/.config/sublime-text-2/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
+		"/home/jonathan/elastic-www/pricing/test.php",
+		"/home/jonathan/.ssh/config",
+		"/home/jonathan/elastic-www/page-case-studies-sector.php",
+		"/home/jonathan/elastic-www/Bootstrap Theme/test.js",
+		"/home/jonathan/elastic-www/pricing/pricing3.js",
+		"/home/jonathan/elastic-www/pricing/pricing3.html",
+		"/home/jonathan/elastic-www/pricing/pricing.js",
+		"/media/jonathan/Windows7_OS/Users/Jonathan/Documents/Code/Site Testing/Sandbox/pricingpage JS and CSS.html",
+		"/home/jonathan/elastic-www/functions.php",
+		"/home/jonathan/Documents/somephp.php",
+		"/home/jonathan/site-test/cloudserverquote.html",
+		"/home/jonathan/site-test/index.html",
+		"/home/jonathan/site-test/pricing2.html",
+		"/home/jonathan/elastic-www/pricing/pricing.html",
+		"/media/jonathan/Windows7_OS/Users/Jonathan/Documents/Code/elastichosts marketing site/New Site Migration/functions.php",
+		"/home/jonathan/elastic-www/homepage.html",
+		"/home/jonathan/elastic-www/homepageJSandCSS2.js",
+		"/home/jonathan/Documents/bootstrapwp.css",
+		"/home/jonathan/elastic-www/homepageJSandCSS.js",
+		"/home/jonathan/elastic-www/default.html",
+		"/home/jonathan/elastic-www/css/default.css",
+		"/home/jonathan/.screenlayout/office.sh",
+		"/home/jonathan/.bashrc",
+		"/home/jonathan/.profile",
+		"/home/jonathan/Documents/jquery-1.11.0.min.js",
+		"/home/jonathan/fishfingersite/elastichosting.pxldev.eu/css/default.css",
+		"/home/jonathan/.config/sublime-text-2/Packages/Default/Default (Linux).sublime-keymap",
+		"/home/jonathan/.config/sublime-text-2/Packages/Default/Preferences.sublime-settings",
+		"/home/jonathan/.config/sublime-text-2/Packages/User/Preferences.sublime-settings",
+		"/home/jonathan/.hgrc"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"here",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"whichzone img",
+			"url",
+			"icon",
+			"vm-icon",
+			"20",
+			"13",
+			"20",
+			"hosting",
+			"2000",
+			"default",
+			"\\n",
+			"coming",
+			"comingsoon",
+			"#zone",
+			"zoneti",
+			"zonetit",
+			"tooltipa",
+			"-rad",
+			"class=\"text340\"",
+			"langsela",
+			"price",
+			"coming",
+			"jQuery",
+			"iclflag",
+			"s/res/",
+			"res",
+			":",
+			"hosting",
+			"safe",
+			"978px",
+			"978px\n",
+			"978px",
+			"940px",
+			"940",
+			"<span class=\"lightblue\">&gt;&gt;</span>",
+			"<span class=\"darkblue\">&gt;&gt;</span>",
+			"<span class=\"darkblue\">&gt;&gt;</span></td>",
+			"<span class=\"darkblue\"&gt;",
+			"&gt;",
+			"build",
+			"current_zone",
+			"@media",
+			"class=\"text340\"",
+			"253588",
+			":hover",
+			"Virtual",
+			"VM",
+			"form",
+			"pricing",
+			"pricing-form",
+			".case-study-image",
+			"pricing-form .btn",
+			"pricingplans",
+			"selectedzone",
+			"30",
+			"selectedzone",
+			"selectedser",
+			"after",
+			"dropdown",
+			"hover",
+			"dropdown-menu",
+			"color:",
+			"$",
+			"jQuery",
+			"pointer;",
+			"e",
+			"@medi",
+			"@media",
+			"max-width",
+			"1095",
+			"position",
+			"localStorage",
+			"data-country",
+			"data-countr",
+			"country",
+			"domain",
+			"jquery-ui",
+			".price",
+			":hover",
+			"div.chooserow div.pricerow a",
+			"price",
+			"i<4",
+			"updateprice",
+			"150",
+			"CUSTOMISE",
+			"hover",
+			"950",
+			"1150",
+			"img.bired",
+			"min-wid",
+			"div.innercontent",
+			"h2",
+			"h1",
+			"div.innercontent",
+			"1096",
+			"10",
+			"1096",
+			"viewport",
+			"form.gsc-search-box table.gsc-search-box",
+			"block",
+			"display:block",
+			"opacity",
+			"bird",
+			"ogg",
+			"mp3",
+			"sea",
+			"seag",
+			"seagull",
+			"mp",
+			"mp3",
+			"seag",
+			"seagul",
+			";\n",
+			"..",
+			"images",
+			"media",
+			"wp-content/uploads",
+			"wp-content"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.html",
+					"settings":
+					{
+						"buffer_size": 40107,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7812.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "index-wordpres.html",
+					"settings":
+					{
+						"buffer_size": 2631,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "wp-content/themes/bootstrapwp-87/less/common.css",
+					"settings":
+					{
+						"buffer_size": 8097,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
+					"settings":
+					{
+						"buffer_size": 233465,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								238,
+								238
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 121105.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 60.0,
+	"status_bar_visible": true
+}
