@@ -317,7 +317,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         return self.lower_input() * options.lower_price();
       });
       self.upper_price = ko.computed(function() {
-        return (self.upper_input() - self.lower_input()) * options.upper_price();
+        return (self.upper_input() - self.lower_input()) * options.upper_price() * 2;
       });
       self.formatted_price = ko.computed(function(){
         return format_price(self.price(), options.currency());
@@ -701,5 +701,3 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     ko.applyBindings(model);
   }
 );
-
-
