@@ -13,6 +13,9 @@
 
 
 /* JUST FOR EDITING - REMOVE AFTER PUTTING IN BOOTSTRAP  */
+.span6 .hover-huge {
+  margin:20px auto;
+}
 .tooltipa, a.tooltipa, a.tooltipb, .tooltipb, .lower-handle, .upper-handle {
     display: inline;
     position: relative;
@@ -100,7 +103,7 @@ padding: 7px;
 max-width: 100px;
 vertical-align: top;
 cursor: pointer;
-width: 75px;
+width: 80px;
 font-size: 12px;
 padding-bottom:0px;
 margin-bottom:5px;
@@ -394,11 +397,13 @@ ul.my-modal-ul {
   background-color: #22a6ff;
   color: white;
 }
-.pricing-stuff p, .pricing-stuff span {
+.my-total p, .my-total span {
   display:inline;
+  line-height: 30px;
 }
 .prominent-price {
 font-size: 25px;
+margin-left: 5px;
 }
 .prominent-price-label {
 font-size: 22px;

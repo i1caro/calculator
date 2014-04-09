@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"pr",
+				"pricing-stuff"
+			],
+			[
+				"in",
+				"inline"
+			],
+			[
+				"bur",
+				"burst-price-label"
+			],
+			[
+				"promin",
+				"prominent-price-label"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"drive",
+				"drive-icon"
+			],
+			[
 				"background",
 				"background-color"
 			],
@@ -24,20 +48,12 @@
 				"margin-top"
 			],
 			[
-				"text",
-				"text-decoration"
-			],
-			[
 				"vm",
 				"vmdrawer"
 			],
 			[
 				"coming",
 				"comingsoon"
-			],
-			[
-				"in",
-				"innerContent"
 			],
 			[
 				"video",
@@ -55,15 +71,15 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 40107,
+				"buffer_size": 37699,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "index-wordpres.html",
+			"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 			"settings":
 			{
-				"buffer_size": 2631,
+				"buffer_size": 24662,
 				"line_ending": "Unix"
 			}
 		},
@@ -71,7 +87,15 @@
 			"file": "wp-content/themes/bootstrapwp-87/less/common.css",
 			"settings":
 			{
-				"buffer_size": 8097,
+				"buffer_size": 8653,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
+			"settings":
+			{
+				"buffer_size": 10164,
 				"line_ending": "Unix"
 			}
 		},
@@ -79,8 +103,17 @@
 			"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
 			"settings":
 			{
-				"buffer_size": 233465,
+				"buffer_size": 233484,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/jonathan/elastic-www/emailtemplate.html",
+			"settings":
+			{
+				"buffer_size": 3407,
+				"line_ending": "Unix",
+				"name": "Hello {contact.first}!"
 			}
 		}
 	],
@@ -144,6 +177,11 @@
 	},
 	"file_history":
 	[
+		"/home/jonathan/elastic-www/calculator/index-wordpres.html",
+		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/less/bootstrapwp.css?ver=1.0",
+		"/home/jonathan/elastic-www/pricing/pricing4.js",
+		"/home/jonathan/elastic-www/vm calc/test/resources/js/pricing.js",
+		"/home/jonathan/elastic-www/vm calc/test/pricing.js",
 		"/home/jonathan/elastic-www/Bootstrap Theme/bootstrapwp.css",
 		"/home/jonathan/elastic-www/test.html",
 		"/home/jonathan/elastic-www/lastestfiles/index-wordpres.html",
@@ -230,6 +268,33 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bootstrapwp.css",
+			"bootstrap.css",
+			"bootstrapwp",
+			"burst-",
+			"burst",
+			"country",
+			"self.coun",
+			"lon-p",
+			"push",
+			"binding",
+			"ko.obser",
+			"this.ko",
+			"containers",
+			"container_template",
+			"push",
+			"add_vi",
+			"add_v",
+			"add",
+			"firewall",
+			"ssd",
+			"icon\n",
+			"drive\n",
+			"ssd\n",
+			"\";\n",
+			"range",
+			"/js/",
+			"pricing.js",
 			"whichzone img",
 			"url",
 			"icon",
@@ -330,24 +395,7 @@
 			"viewport",
 			"form.gsc-search-box table.gsc-search-box",
 			"block",
-			"display:block",
-			"opacity",
-			"bird",
-			"ogg",
-			"mp3",
-			"sea",
-			"seag",
-			"seagull",
-			"mp",
-			"mp3",
-			"seag",
-			"seagul",
-			";\n",
-			"..",
-			"images",
-			"media",
-			"wp-content/uploads",
-			"wp-content"
+			"display:block"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -365,7 +413,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 5,
 			"sheets":
 			[
 				{
@@ -373,15 +421,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 40107,
+						"buffer_size": 37699,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								26730,
+								26730
 							]
 						],
 						"settings":
@@ -391,30 +439,30 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7812.0,
+						"translation.y": 6928.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "index-wordpres.html",
+					"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 					"settings":
 					{
-						"buffer_size": 2631,
+						"buffer_size": 24662,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								13132,
+								13132
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -429,15 +477,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/less/common.css",
 					"settings":
 					{
-						"buffer_size": 8097,
+						"buffer_size": 8653,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								8348,
+								8348
 							]
 						],
 						"settings":
@@ -447,25 +495,53 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 4507.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
+					"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
 					"settings":
 					{
-						"buffer_size": 233465,
+						"buffer_size": 10164,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								238,
-								238
+								2948,
+								2948
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 282.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
+					"settings":
+					{
+						"buffer_size": 233484,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								232241,
+								232241
 							]
 						],
 						"settings":
@@ -475,7 +551,34 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 121105.0,
+						"translation.y": 120176.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/jonathan/elastic-www/emailtemplate.html",
+					"settings":
+					{
+						"buffer_size": 3407,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2613,
+								2613
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Hello {contact.first}!",
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 234.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
