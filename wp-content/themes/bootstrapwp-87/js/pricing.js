@@ -589,8 +589,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       };
       self.add_container = function() {
         self.containers.push(new container({
-          cpu: {lower:10, upper: 20},
-          ram: {lower:10, upper: 20},
+          cpu: {lower:0, upper: 10},
+          ram: {lower:0, upper: 2.36307},
           ip: true,
           firewall: false,
           drives: {
@@ -602,8 +602,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       };
       self.add_virtual_machine = function() {
         self.virtual_machines.push(new virtual_machine({
-          cpu: {upper: 20},
-          ram: {upper: 20},
+          cpu: {upper: 7.6923},
+          ram: {upper: 2.36307},
           ip: true,
           firewall: false,
           drives: {
@@ -646,23 +646,23 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.virtual_machines = ko.observableArray();
       self.containers = ko.observableArray();
       self.containers.push(new container({
-        cpu: {lower:10, upper: 20},
-        ram: {lower:10, upper: 20},
+        cpu: {lower:0, upper: 10},
+        ram: {lower:0, upper: 2.36307},
         ip: true,
         firewall: false,
         drives: {
-          ssd: [10],
+          ssd: [0.53763],
         },
         prices: self.prices()
       }));
       self.virtual_machines.push(new virtual_machine({
-        cpu: {upper: 20},
-        ram: {upper: 20},
+        cpu: {upper: 7.6923},
+        ram: {upper: 2.36307},
         ip: true,
         firewall: false,
         drives: {
-          ssd: [10],
-          hdd: [20],
+          ssd: [],
+          hdd: [1.6129],
         },
         prices: self.prices()
       }));
