@@ -10,6 +10,133 @@
 
 * * * * * * { background-color: rgba(255,255,0,.2); }
 */
+
+
+/* JUST FOR EDITING - REMOVE AFTER PUTTING IN BOOTSTRAP  */
+.tooltipa, a.tooltipa, a.tooltipb, .tooltipb, .lower-handle, .upper-handle {
+    display: inline;
+    position: relative;
+    text-decoration: none;
+}
+.tooltipa:hover:after {
+    background: #333;
+    background: rgba(37, 53, 136, .8);
+    border-radius: 5px;
+    bottom: -37px;
+    color: #fff;
+    content: attr(data-title);
+    left: -25px;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    white-space:nowrap;
+}
+.lower-handle:hover:after, .upper-handle:hover:after  {
+    background: #333;
+    background: rgba(37, 53, 136, .8);
+    border-radius: 5px;
+    bottom: 22px;
+    color: #fff;
+    content: attr(data-title);
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    white-space:nowrap;
+}
+.upper-handle:hover:after{
+    left: -43px;
+}
+.lower-handle:hover:after{
+    left: -48px;
+}
+.my-slider {
+  margin-left:5px;
+}
+.bandwith-icon{
+  background:url('/wp-content/uploads/datatransfer.png') center, no repeat;
+}
+[data-bind="template: { name: 'account-details-template', data: account_details }"] {
+  padding: 15px 0px 0px 0px;
+}
+.pricing-stuff a {
+  cursor:pointer;
+}
+.pricing-stuff button.close {
+  padding:5px;
+}
+#zonetitle, #servertitle {
+    padding: 10px 0 15px 0;
+}
+#whichzone {
+    -ms-text-justify: distribute-all-lines;
+    text-justify: distribute-all-lines;
+    margin-bottom: 79px;
+    text-align: justify;
+    height:105px;
+    line-height:15px;
+}
+.stretch{
+  width:100%!important;
+  display:inline-block!important;
+}
+.zoneselector {
+display: inline-block;
+zoom: 1;
+opacity: 0.6;
+padding: 7px;
+max-width: 100px;
+vertical-align: top;
+cursor: pointer;
+width: 75px;
+font-size: 12px;
+padding-bottom:0px;
+margin-bottom:5px;
+}
+#whichzone .selectedzone {
+    background-color: #22A6FF;
+    border-radius: 4px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-weight: bold;
+    opacity: 1;
+}
+#whichzone img {
+    display: block;
+    margin: 0 auto;
+    max-width: 58px;
+}
+#whichzone span {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+}
+#whichzone .comingsoon {
+  cursor: not-allowed;
+  opacity:0.4;
+}
+.comingsoon:before {
+    position: absolute;
+    content: '';
+    height: 100px;
+    width: 100px;
+    background: url("/wp-content/uploads/coming-soon.png") top right no-repeat;
+}
+.panel-heading {
+  vertical-align: middle;
+  display: table;
+}
+.panel-heading span {
+  vertical-align: middle;
+  display: table-cell;
+}
+.panel-heading .hover-large {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  float: left;
+  padding:3px 15px 3px 15px;
+  margin-right: 40px;
+}
 .example {
     border: 1px solid #DDD;
     border-radius: 4px;
@@ -91,7 +218,7 @@
 
 
 .btn-cp {
-  background-image: url('../images/buttons.png');
+  background-image: url('/wp-content/uploads/buttons.png');
   background-repeat: no-repeat;
   background-color: transparent;
   width: 31px;
@@ -107,7 +234,6 @@
 .drive-icon {
   width: 64px;
   height: 64px;
-  background-image: url('../images/drive_disk.png');
   background-repeat: no-repeat;
   float: left;
   margin-bottom: 3px;
@@ -116,13 +242,19 @@
   background-position: 0 -279px;
 }
 .vm-icon {
-  background: url('../images/vm.png');
+  background: url('/wp-content/uploads/vm.png');
+}
+.container-icon {
+  background: url('/wp-content/uploads/container.png');
 }
 .bandwith-icon {
-  background: url('../images/datatransfer.png');
+  background:url('/wp-content/uploads/datatransfer.png') 100% 12% no-repeat
 }
 .drive-ssd {
-  background-image: url('../images/drive_ssd.png');
+  background-image: url('/wp-content/uploads/drive_ssd.png');
+}
+.drive-hdd {
+  background-image: url('/wp-content/uploads/drive_disk.png');
 }
 .server-icon {
   width: 72px;
@@ -142,7 +274,7 @@
 }
 .storage-icon {
   cursor: pointer;
-  background: url("../images/drive_add.png") no-repeat top left;
+  background: url("/wp-content/uploads/drive_add.png") no-repeat top left;
   padding-left:23px;
   width: 20px;
   height: 20px;
@@ -175,7 +307,7 @@ li.slider-definition {
   border: 1px solid #444444;
 }
 .my-slider {
-  margin-left: 0px;
+  margin:7px 5px 0 5px;
   border: 1px solid #555555;
   border-color: #313785;
   border-radius: 0px;
@@ -185,7 +317,6 @@ li.slider-definition {
   text-align: left;
   font-family: 'Trebuchet MS',Verdana, Arial, sans-serif;
   font-size: 1.1em;
-  margin-top: 7px;
 }
 .my-input-box{
   margin-bottom: 0px;
