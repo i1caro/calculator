@@ -368,6 +368,8 @@ ul.my-modal-ul {
 }
 .my-total{
   padding-right: 14px;
+  padding-top: 20px;
+  text-align: right;
 }
 .my-burst-input{
   width: 70px;
@@ -391,4 +393,20 @@ ul.my-modal-ul {
 .pricing-stuff .btn-primary {
   background-color: #22a6ff;
   color: white;
+}
+.pricing-stuff p, .pricing-stuff span {
+  display:inline;
+}
+.prominent-price {
+font-size: 25px;
+}
+.prominent-price-label {
+font-size: 22px;
+}
+.burst-price-label {
+font-size: 12px;
+}
+.burst-price {
+font-size: 15px;
+padding:5px;
 }

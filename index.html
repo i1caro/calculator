@@ -621,25 +621,13 @@ function highlightStart() {
             <div class="panel-body" data-bind="template: { name: 'account-details-template', data: account_details }"></div>
           </div>
           <div class="panel panel-default my-total">
-            <h3 class="text-right">Monthly Cost:
-              <span data-bind='text: formatted_price'></span>
-            </h3>
-            <h3 class="text-right">Maximum cost of CPU, RAM burst usage:
-              <span data-bind='text: formatted_burst_price'></span>&nbsp;/&nbsp;MONTH
-            </h3>
-          </div>
-
-          <div class="row">
-            <div class="span5" style="vertical-align:top; text-align: right; padding-right: 50px">
-              <p class="my-final-price">
-                TOTAL:&nbsp;&nbsp;
-                <span data-bind='text: formatted_price' class="price-output"></span>
-                + up to
-                <span data-bind='text: formatted_burst_price'></span>
-                <span class="price-output">&nbsp;/&nbsp;MONTH</span>
-              </p>
-              <p></p>
-            </div>
+            <p class="text-right prominent-price-label">Total cost per month:
+            </p>
+              <span class="prominent-price" data-bind='text: formatted_price'></span>
+            <br />
+            <p class="text-right burst-price-label">Maximum additional monthly cost of CPU, RAM burst usage:
+            </p>
+            <span class="burst-price" data-bind='text: formatted_burst_price'></span>
           </div>
         </div>
       </div>
