@@ -18,18 +18,31 @@
     position: relative;
     text-decoration: none;
 }
-.tooltipa:hover:after {
-    background: #333;
-    background: rgba(37, 53, 136, .8);
-    border-radius: 5px;
-    bottom: -37px;
-    color: #fff;
-    content: attr(data-title);
-    left: -25px;
-    padding: 5px 15px;
-    position: absolute;
-    z-index: 98;
-    white-space:nowrap;
+.server-icon:hover:before, .drive-icon:hover:before {
+background: #333;
+background: rgba(37, 53, 136, .8);
+border-radius: 5px;
+color: #fff;
+padding: 5px 15px;
+float:right;
+z-index: 98;
+white-space: nowrap;
+margin:0 82px 0 0;
+}
+.vm-icon:hover:before {
+content: "Virtual Machine";
+}
+.container-icon:hover:before {
+content: "Elastic Container";
+}
+.bandwith-icon:hover:before {
+content: "Bandwidth Subscription";
+}
+.drive-ssd:hover:before{
+content: "SSD";
+}
+.drive-hdd:hover:before{
+content: "HDD";
 }
 .lower-handle:hover:after, .upper-handle:hover:after  {
     background: #333;
