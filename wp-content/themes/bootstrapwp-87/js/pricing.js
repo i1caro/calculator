@@ -464,7 +464,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       ];
       self.aditional_options = [
         new checkbox({'currency': options.prices.CURRENCY, 'name': 'Static IP', 'active': options.ip, 'price': options.prices.COST_PER_STATIC_IP}),
-        new checkbox({'currency': options.prices.CURRENCY, 'name': 'FireWall', 'active': options.firewall, 'price': options.prices.COST_PER_FIREWALL})
+        new checkbox({'currency': options.prices.CURRENCY, 'name': 'Firewall', 'active': options.firewall, 'price': options.prices.COST_PER_FIREWALL})
       ];
       self.drives = ko.observableArray([]);
 
