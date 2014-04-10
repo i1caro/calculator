@@ -1,5 +1,3 @@
-
-
 <script type="text/html" id="input-range-template">
   <li class="slider-definition">
     <div class="column slider-label my-text" data-bind="text: name" style="width: 5%"></div>
@@ -65,7 +63,7 @@
           server: $data,
           remove: $root.remove_container,
           icon: "container-icon",
-          has_licenses: false,
+          has_licenses: false
         }
       } -->
   <!-- /ko -->
@@ -80,16 +78,18 @@
   <div class="my-server" style ="padding: 5px">
       <div class="column" style="width: 10%">
         <div class="server-icon" data-bind="css: icon"></div>
-    <!-- ko with: server -->
-        <a class="my-event blue-hover hover-small" data-bind="event: {click: add_disk}">Add Disk</a>
-    <!-- /ko -->
+        <!-- ko with: server -->
+          <a class="my-event blue-hover hover-small" data-bind="event: {click: add_disk}">Add Disk</a>
+        <!-- /ko -->
       </div>
       <div class="column" style="width: 85%">
         <ul class="my-ul">
-    <!-- ko with: server -->
-          <div data-bind="template: { name: 'input-range-template', foreach: range }"></div>
-          <div data-bind="template: { name: 'input-checkboxes-template', foreach: aditional_options }"></div>
-    <!-- /ko -->
+          <!-- ko with: server -->
+            <div data-bind="template: { name: 'input-range-template', data: cpu }"></div>
+            <div data-bind="template: { name: 'input-range-template', data: ram }"></div>
+            <div data-bind="template: { name: 'input-checkboxes-template', data: ip }"></div>
+            <div data-bind="template: { name: 'input-checkboxes-template', data: firewall }"></div>
+          <!-- /ko -->
         </ul>
       </div>
       <div class="clearfix"></div>
@@ -117,8 +117,8 @@
       <li data-bind="if: windows_server_licenses.value">
         <div data-bind="template: {name: 'system-options-template', data: windows_server_licenses}"></div>
       </li>
-      <li data-bind="if: aditional_microsoft_licenses.value">
-        <div data-bind="template: {name: 'system-options-template', data: aditional_microsoft_licenses}"></div>
+      <li data-bind="if: additional_microsoft_licenses.value">
+        <div data-bind="template: {name: 'system-options-template', data: additional_microsoft_licenses}"></div>
       </li>
       <li data-bind="if: remote_desktops.value">
         <div data-bind="template: {name: 'system-options-template', data: remote_desktops}"></div>
@@ -202,8 +202,9 @@
   </div>
   <div class="column" style="width: 85%">
     <ul class="my-ul">
-        <div data-bind="template: { name: 'input-range-template', data: bandwidth}"></div>
-        <div data-bind="template: { name: 'input-choices-template', foreach: options}"></div>
+      <div data-bind="template: { name: 'input-range-template', data: bandwidth}"></div>
+      <div data-bind="template: { name: 'input-choices-template', data: additional_ips}"></div>
+      <div data-bind="template: { name: 'input-choices-template', data: additional_vlans}"></div>
     </ul>
   </div>
   <div class="clearfix"></div>
@@ -223,7 +224,7 @@
           </ul>
           <h2>Other Microsoft Server Licenses</h2>
           <ul class="my-modal-ul">
-            <!-- ko template: {name: 'system-options-modal-template', data: aditional_microsoft_licenses} --><!-- /ko -->
+            <!-- ko template: {name: 'system-options-modal-template', data: additional_microsoft_licenses} --><!-- /ko -->
             <li>
               <label>
                 <span data-bind="text: remote_desktops.name"></span>
