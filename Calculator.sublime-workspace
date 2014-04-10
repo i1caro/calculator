@@ -108,10 +108,13 @@
 			}
 		},
 		{
+			"contents": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n	<head>\n		<title>Newsletter</title>\n		<meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n	</head>\n	<body bgcolor=\"#f2f2f2\" leftmargin=\"0\" marginheight=\"0\" marginwidth=\"0\" topmargin=\"0\">\n		<table bgcolor=\"#f2f2f2\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" height=\"100%\" width=\"100%\">\n			<tbody>\n				<tr>\n					<td align=\"center\" valign=\"top\" id=\"rss0001\">\n						<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"551\">\n							<tbody>\n								\n								<tr>\n									<td align=\"left\" bgcolor=\"#ffffff\" style=\"border:1px solid #9c9c9c; padding:5px;\" id=\"rss0002\">\n										<div style=\"border:7px solid #424242;\">\n											<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"525\">\n												<tbody>\n													<tr>\n														<td style=\"padding:25px 20px 20px 20px;\" id=\"rss0003\">\n															<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"485\">\n																<tbody>\n																	<tr>\n																		<td id=\"rss0004\">\n																			<img height=\"40\" src=\"http://images.reallysimplesystems.com/1107/logo2.png\" width=\"220\" alt=\"Elastichosts\" class=\"rss_editable\"  id=\"rss0016\"/ align=\"left\"></td>\n																		<td align=\"right\" style=\"font-family:Arial, Helvetica, sans-serif; font-size:18px; color:#acabab;\" valign=\"middle\" class=\"rss_editable\" id=\"rss0005\"></td>\n																	</tr>\n																</tbody>\n															</table>\n														</td>\n													</tr>\n													<tr>\n														<td id=\"rss0006\">\n															<div style=\"border-bottom:1px solid #d6d6d6; border-top:1px solid #d6d6d6; padding-bottom:3px; padding-top:3px;\">\n																<div style=\"background-color:#424242;\">\n																	<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" height=\"39\">\n																		<tbody>\n																			<tr>\n																				<td id=\"rss0007\">&nbsp;</td>\n																			</tr>\n																		</tbody>\n																	</table>\n																</div>\n															</div>\n														</td>\n													</tr>\n													<tr>\n														<td style=\"padding:30px 20px 0px 20px; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#333333; line-height:20px;\" id=\"rss0008\">\n															<p style=\"margin:0 0 10px 0; font-size:18px; color:#0165ab;\" class=\"rss_editable\" id=\"rss0010\"><span style=\"color:#313785\" id=\"rss0017\">ElasticHosts Newsletter Spring 2014 - Elastic Containers and Price Drop</span></p>\n\n</p>\n														\n															\n<p id=\"rss0019\">Hello {contact.first}! We haven't had a newsletter in a while but that doesn't mean we have not been working hard behind the scenes. Today we have a lot of exciting news to let you know about:</p>\n\n<ul>\n    <li id=\"rss0030\">Pricing updates\n    </li>\n    <li id=\"rss0031\">New Cloud Servers product based on containerisation\n    </li>\n    <li id=\"rss0032\">New Cloud File Storage product\n    </li>\n    <li id=\"rss0033\">New look control panel\n    </li>\n    <li id=\"rss0034\">New look website\n    </li>\n    <li id=\"rss0035\">Infrastructure upgrades\n    </li>\n</ul>\n\n<h3>Pricing updates</h3>\n<p id=\"rss0020\">We have been making some changes to our pricing, including cutting the price of SSD everywhere and data transfer in some locations. We have also introduced 15 minute billing periods, reduced the minimum server size and minimum subscriptions.</p>\n<ul>\n    <li id=\"rss0036\">SSD now 50% off\n    </li>\n    <li id=\"rss0037\">Data transfer now £0.06 in UK, €0.06 in Amsterdam and $0.05 in San José\n    </li>\n    <li id=\"rss0038\">Minimum VM size cut to 500 core-MHz CPU and 256 MB RAM\n    </li>\n    <li id=\"rss0039\">15 minute billing, no minimum rates.\n</ul>\n\n<h3>Introducing Elastic Containers</h3>\n<p id=\"rss0021\">ElasticHosts has today launched Elastic Containers, a brand new type of cloud server. Aside from being very cost-effective, Elastic Containers are high performance, auto-scaling cloud servers for Linux. They scale up with load and are only billed for what they use. This means that if you run 1GB of software on a 4GB machine, we’ll only bill you for 1GB, but if you need 4GB, it scales up to that size as necessary. They boot in under 2 seconds and achieve superior performance than a standard VM thanks to less virtualisation overhead.</p>\n\n<p id=\"rss0022\">Technically, Elastic Containers are running as Linux namespace containers on a shared host kernel, rather than virtual machines running on the QEMU-KVM hypervisor. They support any Linux distribution and boot from Folder filesystem storage (see below).</p>\n\n<p id=\"rss0023\">Find out more here….<a href=\"http://www.elastichosts.com/cloud-servers/elastic-containers?utm_source=eh&utm_medium=email&utm_campaign=ContainerCustomer\" title=\"Container Info\" id=\"rsslink3393\">Twitter</a>\n</p>\n\n<h3>Introducing Folders for cloud file storage</h3>\n<p id=\"rss0024\">Folders are our new Cloud File Storage product, also launched today. They are SSD-backed network folders that you can mount as drives on our control panel and also remotely, on your own local machine, to easily and simply sync between them.</p>\n\n<p id=\"rss0025\">Folders are the storage for Elastic Containers, and are also “elastic”. Like a folder in a filesystem they will grow to match the size of their contents, so you never have to worry about increasing or decreasing disk size. They can also be used as a simple web server for static files such as images.\n</p>\n\n<h3>New look Control Panel</h3>\n<p id=\"rss0026\">As part of our Elastic Containers launch we have redesigned the icons and buttons on the control panel to give the site a more modern feel. Don’t miss our new drag and drop [[link to d&d video]] functionality too. See the attached screenshot or Log into your account and take a look for yourself.</p>\n\n<h3>New look website</h3>\n<p id=\"rss0027\">We have revamped our website to showcase our two products: Elastic Containers and Virtual Machines. The new site is designed to be faster and easier to navigate. We have recently added several tutorial videos to help you get started with\n</p>\n\n\n<p id=\"rss0028\">If you have any queries, just email us at <a href=\"mailto:sales@elastichosts.com\" title=\"sales@elastichosts.com\" id=\"rsslink3391\">sales@elastichosts.com</a> or call +44 (0)20 7183 8250.\n</p>\n\n<span style=\"color:#313785\" id=\"rss0018\">\n</span>\n\n\n<p id=\"rss0029\">Follow Us: <a href=\"https://twitter.com/Elastichosts?utm_source=eh&utm_medium=email&utm_campaign=ContainerCustomer\" title=\"Twitter\" id=\"rsslink3393\">Twitter</a> | <a href=\"https://www.facebook.com/ElasticHosts?utm_source=eh&utm_medium=email&utm_campaign=ContainerCustomer\" title=\"Facebook\" id=\"rsslink3395\">Facebook</a> | <a href=\"http://www.linkedin.com/company/elastichosts-ltd?utm_source=eh&utm_medium=email&utm_campaign=ContainerCustomer\" title=\"LinkedIn\" id=\"rsslink3397\">LinkedIn</a> | <a href=\"https://plus.google.com/118333517205567880510/posts?utm_source=eh&utm_medium=email&utm_campaign=ContainerCustomer\" title=\"Google+\" id=\"rsslink3399\">Google+</a></p>\n\n\n<style>\nli {\nlist-style: disc outside none;\nmargin-left: 30px;\n}\nh3 {\n	color:#22a6ff\n}\n#rss0006 * {\n	background-color:#22a6ff!important;\n	border: 1px solid #22a6ff;\n}\n\n#rss0002 > div {\n	border: 7px solid #7C7C7C!important;\n}\n#rss0002 > div > table > tbody > tr:nth-child(1), #rss0002 > div > table > tbody > tr:nth-child(2), #rss0002 > div > table > tbody > tr:nth-child(1) *, #rss0002 > div > table > tbody > tr:nth-child(2) * {\n	background-color: #22a6ff!important;\n	border-top:#22a6ff!important;\n}\n\n</style>							\n															\n														</td>\n													</tr>\n													<tr>\n														<td style=\"border-top:1px solid #d6d6d6; background-color:#f6f6f6; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#666666; line-height:17px;  padding:15px 0 15px 20px;\" class=\"rss_editable\" id=\"rss0009\">You are currently registered to receive this email as: {contact.email}<br>If you would prefer not to receive any further emails from Elastichosts, you may <a href=\"http://www.elastichosts.com/you-have-unsubscribed/?utm_source=eh&utm_medium=email&utm_campaign=SSDJul13W2USCust\" title=\"Unsubscribe\" id=\"rsslink3401\">unsubscribe</a> now. We respect your privacy, view our <a href=\"http://www.elastichosts.com/cloud-hosting/terms-of-service/?utm_source=eh&utm_medium=email&utm_campaign=SSDJul13W2USCust\" title=\"Privacy Policy\" id=\"rsslink3403\">Privacy Policy</a>.</td>\n													</tr>\n												</tbody>\n											</table>\n										</div>\n									</td>\n								</tr>\n								\n							</tbody>\n						</table>\n					</td>\n				</tr>\n			</tbody>\n		</table>\n	<img src=\"http://system.reallysimplesystems.com/open.asp?code={linkhashcode:1}\" id=\"rss_open\" style=\"display:none;\"></body>\n<style>\nli {\nlist-style: disc outside none;\n}\n</style>\n</html>",
 			"file": "/home/jonathan/elastic-www/emailtemplate.html",
+			"file_size": 8739,
+			"file_write_time": 1397065717000000,
 			"settings":
 			{
-				"buffer_size": 3407,
+				"buffer_size": 8827,
 				"line_ending": "Unix",
 				"name": "Hello {contact.first}!"
 			}
@@ -120,7 +123,7 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 285.0,
+		"height": 327.0,
 		"selected_items":
 		[
 			[
@@ -160,7 +163,7 @@
 				"FileDiffs: Menu"
 			]
 		],
-		"width": 449.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -256,7 +259,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"here",
@@ -268,6 +271,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"SSDJUL13W2USCust",
 			"bootstrapwp.css",
 			"bootstrap.css",
 			"bootstrapwp",
@@ -394,8 +398,7 @@
 			"1096",
 			"viewport",
 			"form.gsc-search-box table.gsc-search-box",
-			"block",
-			"display:block"
+			"block"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -404,7 +407,7 @@
 		"replace_history":
 		[
 		],
-		"reverse": false,
+		"reverse": true,
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
@@ -561,15 +564,15 @@
 					"file": "/home/jonathan/elastic-www/emailtemplate.html",
 					"settings":
 					{
-						"buffer_size": 3407,
+						"buffer_size": 8827,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2613,
-								2613
+								8827,
+								8827
 							]
 						],
 						"settings":
@@ -578,7 +581,7 @@
 							"syntax": "Packages/HTML/HTML.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 234.0,
+						"translation.y": 1623.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -588,7 +591,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 34.0
 	},
 	"input":
 	{

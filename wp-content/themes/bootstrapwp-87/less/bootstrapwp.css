@@ -9349,3 +9349,14 @@ padding: 15px;
 color: inherit;
 text-decoration: none;
 }
+
+.404div {
+height: 100px;
+width: 200px;
+margin: 0 auto;
+padding: 119px;
+font-size: 108px;
+text-shadow: -2px -2px #ccc;
+color: #eee;
+line-height: 70px;
+}
