@@ -113,70 +113,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       'hkg-e': HONG_KONG_PRICE,
       'syd-v': AUSTRALIA_PRICE
     };
-    var ZONES = [
-      {
-        id: "lon-p",
-        name: "London Portsmouth",
-        flag: "UKflag.png",
-      },
-      {
-        id: "lon-b",
-        name: "London Maidenhead",
-        flag: "UKflag.png",
-      },
-      {
-        id: "ams-e",
-        name: "Amsterdam",
-        flag: "NLFlag.png",
-      },
-      {
-        id: "sjc-c",
-        name: "San Jose, CA",
-        flag: "USAFlag.png",
-      },
-      {
-        id: "lax-p",
-        name: "Los Angeles, CA",
-        flag: "USAFlag.png",
-      },
-      {
-        id: "sat-p",
-        name: "San Antonio, TX",
-        flag: "USAFlag.png",
-      },
-      {
-        id: "tor-p",
-        name: "Toronto",
-        flag: "CANFlag.png",
-      },
-      {
-        id: "hkg-e",
-        name: "Hong Kong",
-        flag: "HKGFlag.png",
-      },
-      {
-        id: "syd-v",
-        name: "Sydney",
-        flag: "AUSFlag.png",
-      }
-    ];
-    var DOMAINS_TO_LOCATION = {
-      'nl' : 'ams-e',
-      'au' : 'hkg-e',
-      'hk' : 'hkg-e',
-      'ca' : 'tor-p',
-      'uk' : 'lon-b',
-      'com': 'sjc-c'
-    };
-    $("body").append(templates);
 
-    function get_country_based_on_location(){
-      var domain = location.host.split('.').splice(-1,1)[0],
-          local = DOMAINS_TO_LOCATION[domain];
-      if (local)
-        return local;
-      return DOMAINS_TO_LOCATION['com'];
-    }
+    $("body").append(templates);
     function pageOffset() {
       if(window.pageXOffset === undefined ){
         window.pageXOffset = document.documentElement.scrollLeft;
@@ -611,13 +549,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
     // Main View Model
     function viewModel() {
-      var self = this,
-          first_country = get_country_based_on_location();
-
-      //Constants
-      self.country_flags = ZONES;
-
       // Actions
+      var self = this;
       var move_handler = function(event) {
             var data = event.data,
                 mouse_move = ((event.clientX - data.offset) * 100) / data.bar_size,
@@ -652,7 +585,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         start_mouse_down(data, event, this.upper, lower_bound, 100);
       };
       self.change_country = function(data, event) {
-        self.prices(data.id);
+        self.prices(event.currentTarget.id);
       };
       self.add_container = function() {
         self.containers.push(new container({
@@ -687,7 +620,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         self.containers.remove(data.server);
       };
       // Normal attributes
-      self.country = ko.observable(first_country);
+      self.country = ko.observable('lon-p');
 
       function build_prices_obj() {
         var result = {};
@@ -709,7 +642,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         },
         owner: self
       });
-      self.prices(first_country);
+      self.prices('lon-p');
       self.virtual_machines = ko.observableArray();
       self.containers = ko.observableArray();
       self.containers.push(new container({
@@ -733,7 +666,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         },
         prices: self.prices()
       }));
-      self.account_details = new account_details({lower:1, vms: 0, ips: 0, prices: self.prices()});
+      self.account_details = new account_details({lower:10, vms: 0, ips: 0, prices: self.prices()});
 
 
       // Computed
@@ -756,7 +689,6 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
         return total;
       });
-
 
       self.formatted_burst_price = ko.computed(function(){
         return format_price(self.burst_price(), self.prices().CURRENCY());

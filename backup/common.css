@@ -13,9 +13,6 @@
 
 
 /* JUST FOR EDITING - REMOVE AFTER PUTTING IN BOOTSTRAP  */
-.span6 .hover-huge {
-  margin:20px auto;
-}
 .tooltipa, a.tooltipa, a.tooltipb, .tooltipb, .lower-handle, .upper-handle {
     display: inline;
     position: relative;
@@ -103,7 +100,7 @@ padding: 7px;
 max-width: 100px;
 vertical-align: top;
 cursor: pointer;
-width: 80px;
+width: 75px;
 font-size: 12px;
 padding-bottom:0px;
 margin-bottom:5px;
@@ -371,8 +368,6 @@ ul.my-modal-ul {
 }
 .my-total{
   padding-right: 14px;
-  padding-top: 20px;
-  text-align: right;
 }
 .my-burst-input{
   width: 70px;
@@ -385,7 +380,7 @@ ul.my-modal-ul {
 }
 .pricing-stuff .btn, .pricing-stuff .btn-primary {
   font-size: 9.5pt;
-  font-family: Arial;
+  font-familty: Arial;
   font-weight: bold;
   box-shadow: none;
   background-color: white;
@@ -396,22 +391,4 @@ ul.my-modal-ul {
 .pricing-stuff .btn-primary {
   background-color: #22a6ff;
   color: white;
-}
-.my-total p, .my-total span {
-  display:inline;
-  line-height: 30px;
-}
-.prominent-price {
-font-size: 25px;
-margin-left: 5px;
-}
-.prominent-price-label {
-font-size: 22px;
-}
-.burst-price-label {
-font-size: 12px;
-}
-.burst-price {
-font-size: 15px;
-padding:5px;
 }
