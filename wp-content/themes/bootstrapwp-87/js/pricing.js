@@ -4,7 +4,9 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     var LIMITS = {
       CPU_CONTAINER_MIN: 0,
       CPU_CONTAINER_MAX: 20000, // Mhz
+      CPU_INCREMENTS: 50,
       RAM_CONTAINER_MIN: 256, // MB
+      RAM_INCREMENTS: 64,
       RAM_CONTAINER_MAX: 32768,
       CPU_VM_MIN: 500,
       CPU_VM_MAX: 20000, // Mhz
@@ -190,13 +192,22 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         return upper_bound;
       return distance;
     }
-    function compute_value(value, min, max) {
-      var parcel = (max - min)/100;
-      return value * parcel + min;
+    function snap_value(value, snap) {
+      if(value > 0)
+          return Math.ceil(value / snap) * snap;
+      else if(value < 0)
+          return Math.floor(value / snap) * snap;
+      else
+          return value;
     }
-    function get_computed_value_back(value, min, max) {
-      var parcel = (max - min)/100;
-      return (value - min)/parcel;
+    function compute_value(percentage, min, max, snap) {
+      var value = min + (max - min) * (Math.pow(10, (percentage / 100.0)) - 1) / (10 - 1);
+
+      return snap_value(value, snap);
+    }
+    function get_percentage_from_value(value, min, max, snap) {
+      var snapped_value = snap_value(value, snap);
+      return 43.4294*Math.log((max-10*min+9*snapped_value)/(max-min));
     }
     function sum_function(memo, obj) {
       var price = obj.price();
@@ -213,35 +224,37 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       return 0;
     }
     function bandwidth(lower, prices) {
-      return new handle_bar({
+      return new slider({
         'currency': prices.CURRENCY,
         'name': 'Data',
         'min': LIMITS.BANDWIDTH_MIN,
         'max': LIMITS.BANDWIDTH_MAX,
         'lower_bar': lower,
         'lower_price': prices.BANDWIDTH_PER_GB,
-        'upper_bar': 100,
+        'upper_bar': LIMITS.BANDWIDTH_MAX,
         'upper_price': prices.BANDWIDTH_PER_GB,
+        'snap': 1,
         'unit': 'GB',
         'double_bars': false
       });
     }
     function cpu_virtual_machine(lower, prices) {
-      return new handle_bar({
+      return new slider({
         'currency': prices.CURRENCY,
         'name': 'CPU',
         'min': LIMITS.CPU_VM_MIN,
         'max': LIMITS.CPU_VM_MAX,
         'lower_bar': lower,
         'lower_price': prices.CPU_PER_MHZ,
-        'upper_bar': 100,
+        'upper_bar': LIMITS.CPU_VM_MAX,
         'upper_price': prices.CPU_PER_MHZ,
+        'snap': LIMITS.CPU_INCREMENTS,
         'unit': 'MHz',
         'double_bars': false
       });
     }
     function cpu_container(lower, upper, prices) {
-      return new handle_bar({
+      return new slider({
         'currency': prices.CURRENCY,
         'name': 'CPU',
         'min': LIMITS.CPU_CONTAINER_MIN,
@@ -250,26 +263,28 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         'lower_price': prices.CPU_CONTAINER_PER_MHZ,
         'upper_bar': upper,
         'upper_price': prices.CPU_CONTAINER_PER_MHZ,
+        'snap': LIMITS.CPU_INCREMENTS,
         'unit': 'MHz',
         'double_bars': true
       });
     }
     function ram_virtual_machine(lower, prices) {
-      return new handle_bar({
+      return new slider({
         'currency': prices.CURRENCY,
         'name': 'RAM',
         'min': LIMITS.RAM_VM_MIN,
         'max': LIMITS.RAM_VM_MAX,
         'lower_bar': lower,
         'lower_price': prices.MEMORY_PER_MB,
-        'upper_bar': 100,
+        'upper_bar': LIMITS.RAM_VM_MAX,
         'upper_price': prices.MEMORY_PER_MB,
+        'snap': LIMITS.RAM_INCREMENTS,
         'unit': 'MB',
         'double_bars': false
       });
     }
     function ram_container(lower, upper, prices) {
-      return new handle_bar({
+      return new slider({
         'currency': prices.CURRENCY,
         'name': 'RAM',
         'min': LIMITS.RAM_CONTAINER_MIN,
@@ -278,71 +293,78 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         'lower_price': prices.MEMORY_CONTAINER_PER_MB,
         'upper_bar': upper,
         'upper_price': prices.MEMORY_CONTAINER_PER_MB,
+        'snap': LIMITS.RAM_INCREMENTS,
         'unit': 'MB',
         'double_bars': true
       });
     }
     function ssd_folder(lower, prices) {
       var self = this;
-      self = new handle_bar({
+      self = new slider({
         'currency': prices.CURRENCY,
         'name': 'SSD',
         'min': LIMITS.SSD_MIN,
         'max': LIMITS.SSD_MAX,
         'lower_bar': lower,
         'lower_price': prices.SSD_PER_GB,
-        'upper_bar': 100,
+        'upper_bar': LIMITS.SSD_MAX,
         'upper_price': prices.SSD_PER_GB,
+        'snap': 1,
         'unit': 'GB',
         'double_bars': false
       });
       self.template = 'ssd-folder-template';
+      self.type = 'ssd';
       return self;
     }
     function ssd_drive(lower, prices) {
       var self = this;
-      self = new handle_bar({
+      self = new slider({
         'currency': prices.CURRENCY,
         'name': 'SSD',
         'min': LIMITS.SSD_MIN,
         'max': LIMITS.SSD_MAX,
         'lower_bar': lower,
         'lower_price': prices.SSD_PER_GB,
-        'upper_bar': 100,
+        'upper_bar': LIMITS.SSD_MAX,
         'upper_price': prices.SSD_PER_GB,
+        'snap': 1,
         'unit': 'GB',
         'double_bars': false
       });
       self.template = 'ssd-drive-template';
+      self.type = 'ssd';
       return self;
     }
     function hdd_drive(lower, prices) {
       var self = this;
-      self = new handle_bar({
+      self = new slider({
         'currency': prices.CURRENCY,
         'name': 'HDD',
         'min': LIMITS.HDD_MIN,
         'max': LIMITS.HDD_MAX,
         'lower_bar': lower,
         'lower_price': prices.DISK_PER_GB,
-        'upper_bar': 100,
+        'upper_bar': LIMITS.HDD_MAX,
         'upper_price': prices.DISK_PER_GB,
+        'snap': 1,
         'unit': 'GB',
         'double_bars': false
       });
+      self.type = 'hdd';
       self.template = 'drive-template';
       return self;
     }
-    function handle_bar(options) {
+    function slider(options) {
       var self = this;
       self.unit = options.unit;
       self.name = options.name;
       self.double_bars = options.double_bars;
-      self.lower = ko.observable(options.lower_bar);
-      self.upper = ko.observable(options.upper_bar);
+      self.lower = ko.observable(get_percentage_from_value(options.lower_bar, options.min, options.max, options.snap));
+      self.upper = ko.observable(get_percentage_from_value(options.upper_bar, options.min, options.max, options.snap));
       self.lower_input = ko.computed({
         read: function() {
-          return parseInt(compute_value(self.lower(), options.min, options.max).toFixed(0));
+          return parseInt(compute_value(self.lower(), options.min, options.max, options.snap).toFixed(0));
         },
         write: function(value) {
           var upper = self.upper_input();
@@ -350,14 +372,14 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
             value = options.min;
           if (value > upper)
             value = upper;
-          var percentage = get_computed_value_back(value, options.min, options.max);
+          var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);
           self.lower(percentage);
         },
         owner: self
       });
       self.upper_input = ko.computed({
         read: function() {
-          return parseInt(compute_value(self.upper(), options.min, options.max).toFixed(0));
+          return parseInt(compute_value(self.upper(), options.min, options.max, options.snap).toFixed(0));
         },
         write: function(value) {
           var lower = self.lower_input();
@@ -365,13 +387,13 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
             value = lower;
           else if (value > options.max)
             value = options.max;
-          var percentage = get_computed_value_back(value, options.min, options.max);
+          var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);
           self.upper(percentage);
         },
         owner: self
       });
       self.value = ko.computed(function() {
-        return compute_value(self.lower(), options.min, options.max);
+        return compute_value(self.lower(), options.min, options.max, options.snap);
       });
       self.price = ko.computed(function() {
         return self.lower_input() * options.lower_price();
@@ -500,7 +522,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         self.drives.remove(data.data);
       };
       self.add_disk = function(data, event) {
-        self.drives.push(new ssd_folder(20, options.prices));
+        self.drives.push(new ssd_folder(50, options.prices));
         $("#pop1, #pop2, #pop3").fadeOut(2000);
       };
       self.price = function(){
@@ -614,7 +636,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         var index = _.indexOf(self.drives(), data),
             new_drive;
         if (index > -1) {
-          new_drive = new factory(data.drive.lower(), options.prices);
+          new_drive = new factory(data.lower_input(), options.prices);
           self.drives.remove(data);
           self.drives.splice(index, 0, new_drive);
         }
@@ -685,8 +707,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       };
       self.add_container = function() {
         self.containers.push(new container({
-          cpu: {lower:0, upper: 10},
-          ram: {lower:0, upper: 2.36307},
+          cpu: {lower:0, upper: 2000},
+          ram: {lower:256, upper: 1024},
           ip: true,
           firewall: false,
           drives: {
@@ -698,8 +720,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       };
       self.add_virtual_machine = function() {
         self.virtual_machines.push(new virtual_machine({
-          cpu: {upper: 7.6923},
-          ram: {upper: 2.36307},
+          cpu: {upper: 2000},
+          ram: {upper: 1024},
           ip: true,
           firewall: false,
           drives: {
@@ -741,7 +763,34 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.prices(first_country);
       self.virtual_machines = ko.observableArray();
       self.containers = ko.observableArray();
-      self.account_details = new account_details({lower:1, vms: 0, ips: 0, prices: self.prices()});
+      // self.containers.push(new container({
+      //   cpu: {lower:0, upper: 2000},
+      //   ram: {lower:256, upper: 1024},
+      //   ip: true,
+      //   firewall: false,
+      //   drives: {
+      //     ssd: [10],
+      //     hdd: []
+      //   },
+      //   prices: self.prices()
+      // }));
+      // self.virtual_machines.push(new virtual_machine({
+      //   cpu: {upper: 2000},
+      //   ram: {upper: 1024},
+      //   ip: true,
+      //   firewall: false,
+      //   drives: {
+      //     ssd: [10],
+      //     hdd: [],
+      //   },
+      //   remote_desktops: 1,
+      //   additional_microsoft_license: 2,
+      //   windows_server_license: 0,
+      //   prices: self.prices()
+      // }));
+      // self.account_details = new account_details({lower:10, vms: 0, ips: 0, prices: self.prices()});
+      self.account_details = new account_details({lower:10, vms: 0, ips: 0, prices: self.prices()});
+
 
 
       // Computed
