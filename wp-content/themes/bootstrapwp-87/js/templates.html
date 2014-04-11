@@ -1,3 +1,4 @@
+
 <script type="text/html" id="input-range-template">
   <li class="slider-definition">
     <div class="column slider-label my-text" data-bind="text: name" style="width: 5%"></div>
@@ -94,8 +95,8 @@
       </div>
       <div class="clearfix"></div>
     <!-- ko with: server -->
-      <ul class="my-ul" data-bind="foreach: drives, as: 'drive'">
-        <div data-bind="template: { name: template, data: {drive: $data, granparent: $parent} }"></div>
+      <ul class="my-ul" data-bind="foreach: drives">
+        <div data-bind="template: template "></div>
       </ul>
     <!-- /ko -->
     <!-- ko if: has_licenses -->
@@ -132,8 +133,7 @@
     data: {
       icon: 'drive-ssd',
       can_switch: false,
-      remove: granparent.remove_disk,
-      data: drive
+      data: $data
     }
   }"></div>
 </script>
@@ -144,9 +144,8 @@
       icon: 'drive-ssd',
       can_switch: true,
       switch_message: 'Switch to HDD',
-      switch_disk: granparent.switch_to_hdd,
-      remove: granparent.remove_disk,
-      data: drive
+      switch_disk: $parent.switch_to_hdd,
+      data: $data
     }
   }"></div>
 </script>
@@ -157,32 +156,34 @@
       icon: 'drive-hdd',
       can_switch: true,
       switch_message: 'Switch to SSD',
-      switch_disk: granparent.switch_to_ssd,
-      remove: granparent.remove_disk,
-      data: drive
+      switch_disk: $parent.switch_to_ssd,
+      data: $data
     }
   }"></div>
 </script>
 <script type="text/html" id="storage-template">
   <div class="btn-toolbar" role="toolbar">
-    <button type="button" class="close" style="margin-top:-8px;font-size:17px;padding-bottom:2px;" title="Remove disk" data-bind="click: remove" aria-hidden="true">×</button>
-  <li>
-    <div class="column" style="width: 9%; padding-bottom: 10px">
-      <div class="drive-icon" data-bind="css: icon"></div>
-      <span>
-
-      <!-- ko if: can_switch -->
-        <a class="my-event blue-hover hover-small" data-bind="event: {click: switch_disk}, text: switch_message"></a>
+    <button type="button" class="close" style="margin-top:-8px;font-size:17px;padding-bottom:2px;" title="Remove disk" data-bind="click: $parents[1].remove_disk" aria-hidden="true">×</button>
+    <li>
+      <div class="column" style="width: 9%; padding-bottom: 10px">
+        <div class="drive-icon" data-bind="css: icon"></div>
+        <span>
+          <!-- ko if: can_switch -->
+            <a class="my-event blue-hover hover-small" data-bind="event: {click: switch_disk}, text: switch_message"></a>
+          <!-- /ko -->
+        </span>
+      </div>
+      <!-- ko with: data -->
+        <div class="column" style="width: 86%">
+          <ul class="my-ul" >
+            <div data-bind="template: 'input-range-template'"></div>
+          </ul>
+        </div>
       <!-- /ko -->
-      </span>
-    </div>
-    <div class="column" style="width: 86%">
-      <ul class="my-ul" >
-        <div data-bind="template: { name: 'input-range-template', data: data.drive }"></div>
-      </ul>
-    </div>
-    <div class="clearfix"></div>
-  </li>
+      <div class="clearfix"></div>
+    </li>
+  </div>
+
 </script>
 <script type="text/html" id="system-options-template">
   <div class="column" style="text-align: right; width: 45%">
