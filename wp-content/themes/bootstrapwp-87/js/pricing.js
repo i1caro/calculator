@@ -826,34 +826,29 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     ko.applyBindings(model);
     tutorialsPop();
     function tutorialsPop(){
-      var once = false;
-      var once2 = false;
-      $("#pop1").fadeIn(2000);
-      $(".zoneselector").click(function(){
+      var popServer = _.once(function(){
         $("#pop1").fadeOut(2000);
-        if (once==false){
-          $("#pop2").fadeIn(2000);
-          once = true;
-        }
+        $("#pop2").fadeIn(2000);
       });
-      $(".hover-large").click(function(){
-        $("#pop1, #pop2").fadeOut(2000);
+      var popDisk = _.once(function(){
         var popstr =
           '<div id="pop3" class="popover left" style="position: absolute;top: -48px;left: -185px;width: 150px;white-space: normal;">' +
             '<div class="arrow" style="border-left:5px solid #313785"></div>' +
             '<div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">' +
             'Click here to add drives and storage to this server.</div>' +
           '</div>'       
-        if (once2 == false){
-          $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
-          $("#pop3").fadeIn(2000);
-          once2 = true;
-        }
+        $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
+        $("#pop1, #pop2").fadeOut(2000);
+        $("#pop3").fadeIn(2000);
       });
+      $("#pop1").fadeIn(2000);
+      $(".zoneselector").click(popServer);
+      $(".hover-large").click(popDisk);
       $("my-event blue-hover hover-small").click(function(){
         $("#pop1, #pop2, #pop3").fadeOut(2000);
       });
     }
+    
   }
 );
 
