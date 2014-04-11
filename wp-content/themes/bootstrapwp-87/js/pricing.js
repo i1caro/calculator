@@ -749,10 +749,15 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     ko.applyBindings(model);
     tutorialsPop();
     function tutorialsPop(){
+      var once = false;
+      var once2 = false;
       $("#pop1").fadeIn(2000);
       $(".zoneselector").click(function(){
         $("#pop1").fadeOut(2000);
-        $("#pop2").fadeIn(2000);
+        if (once==false){
+          $("#pop2").fadeIn(2000);
+          once = true;
+        }
       });
       $(".hover-large").click(function(){
         $("#pop1, #pop2").fadeOut(2000);
@@ -761,9 +766,12 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
             '<div class="arrow" style="border-left:5px solid #313785"></div>' + 
             '<div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">' + 
             'Click here to add drives and storage to this server.</div>' +
-          '</div>'
-        $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
-        $("#pop3").fadeIn(2000);
+          '</div>'       
+        if (once2 == false){
+          $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
+          $("#pop3").fadeIn(2000);
+          once2 = true;
+        }
       });
       $("my-event blue-hover hover-small").click(function(){
         $("#pop1, #pop2, #pop3").fadeOut(2000);
