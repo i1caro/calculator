@@ -95,6 +95,14 @@
 <script data-main="/wp-content/themes/bootstrapwp-87/js/pricing" src="/wp-content/themes/bootstrapwp-87/js/require.js"></script>
 <link rel="stylesheet" href="/wp-content/themes/bootstrapwp-87/less/common.css">
 
+
+<script>
+
+
+  
+</script>
+
+
 <style>
 select {
     background-color: white;
@@ -463,6 +471,9 @@ border:none;
 
     });
   //});
+
+
+
 </script><!-- Page Template -->
   <div class="">
   <div class="">
@@ -486,6 +497,9 @@ border:none;
 </ul></div></div> </div><!--/.well .sidebar-nav -->
 </div><!-- /.span2 -->
 
+
+
+
 <!-- Calculator -->
 <div class="span6">
   <header class="subhead" id="overview">
@@ -497,22 +511,32 @@ border:none;
       <div class="pricing-stuff">
         <h2 id="zonetitle">I want servers in:</h2>
 
-        <div id="whichzone">
+        <div id="whichzone" style="position:relative;">
+          <div id="pop1" class="popover right in" style="display:none;position: absolute; top: 0; left: 600px;width: 150px;">
+            <div class="arrow" style="border-right: 5px solid #313785;"></div>
+            <div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">
+              Please pick a zone. We've tried to select your closest one, but another may be more cost efficient. You can read about our data centres <a href="/cloud-servers/data-centres/" style="color:#fbac29" alt="Our Data Centres">here</a></div>
+          </div>
           <!-- ko foreach: country_flags -->
-            <div class="zoneselector" data-bind="attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }">
-              <img data-bind="attr: {src: '/wp-content/uploads/' + flag}"/>
-              <span data-bind="text: name"></span>
-            </div>
+          <div class="zoneselector" data-bind="attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }">
+            <img data-bind="attr: {src: '/wp-content/uploads/' + flag}"/>
+            <span data-bind="text: name"></span>
+          </div>
           <!-- /ko -->
           <span class='stretch'></span>
         </div>
         <div class="panel panel-default">
           <div class="panel-heading" style="width:100%;">
-            <div class="btn-toolbar" role="toolbar">
-              <span>I want to add a new:</span>
-              <div class="btn-group" style="position: relative; bottom: -8px; left: 10px; display:block;margin: 0 auto;width: 70%;">
-                <a class="blue-hover hover-large" data-bind="click: add_virtual_machine">Virtual Machine</a>
-                <a class="blue-hover hover-large" data-bind="click: add_container">Elastic Container</a>
+            <div class="btn-toolbar" style="position: relative;" id="add-new-buttons" role="toolbar">
+              <div id="pop2"  class="popover right in" style="display:none;position: absolute; top: 0; left: 600px;width: 150px;">
+                <div class="arrow" style="border-right: 5px solid #313785;"></div>
+                <div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">
+                  Click here to add cloud servers to your plan.</div>
+              </div>
+              <span  >I want to add a new:</span>
+              <div class="btn-group" style="left: 10px; display:block;margin: 0 auto;width: 60%;">
+                <a class="blue-hover hover-large" style="position: relative;" data-bind="click: add_virtual_machine">Virtual Machine</a>
+                <a class="blue-hover hover-large" style="position: relative;" data-bind="click: add_container">Elastic Container</a>
               </div>
             </div>
           </div>
@@ -702,6 +726,7 @@ var google_remarketing_only = true;
 </script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 </script>
+
 <noscript>
 <div style="display:inline;">
 <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1053205492/?value=0&amp;guid=ON&amp;script=0"/>

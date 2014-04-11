@@ -491,6 +491,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       };
       self.add_disk = function(data, event) {
         self.drives.push(new ssd_folder(20, options.prices));
+        $("#pop1, #pop2, #pop3").fadeOut(2000);
       };
 
       self.price = ko.computed(function() {
@@ -712,27 +713,6 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.prices(first_country);
       self.virtual_machines = ko.observableArray();
       self.containers = ko.observableArray();
-      self.containers.push(new container({
-        cpu: {lower:0, upper: 10},
-        ram: {lower:0, upper: 2.36307},
-        ip: true,
-        firewall: false,
-        drives: {
-          ssd: [0.53763],
-        },
-        prices: self.prices()
-      }));
-      self.virtual_machines.push(new virtual_machine({
-        cpu: {upper: 7.6923},
-        ram: {upper: 2.36307},
-        ip: true,
-        firewall: false,
-        drives: {
-          ssd: [],
-          hdd: [1.6129],
-        },
-        prices: self.prices()
-      }));
       self.account_details = new account_details({lower:1, vms: 0, ips: 0, prices: self.prices()});
 
 
@@ -767,6 +747,29 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     }
     var model = new viewModel();
     ko.applyBindings(model);
+    tutorialsPop();
+    function tutorialsPop(){
+      $("#pop1").fadeIn(2000);
+      $(".zoneselector").click(function(){
+        $("#pop1").fadeOut(2000);
+        $("#pop2").fadeIn(2000);
+      });
+      $(".hover-large").click(function(){
+        $("#pop1, #pop2").fadeOut(2000);
+        var popstr = 
+          '<div id="pop3" class="popover left" style="position: absolute;top: -48px;left: -185px;width: 150px;white-space: normal;">' + 
+            '<div class="arrow" style="border-left:5px solid #313785"></div>' + 
+            '<div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">' + 
+            'Click here to add drives and storage to this server.</div>' +
+          '</div>'
+        $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
+        $("#pop3").fadeIn(2000);
+      });
+      $("my-event blue-hover hover-small").click(function(){
+        $("#pop1, #pop2, #pop3").fadeOut(2000);
+      });
+    }     
   }
 );
+
 
