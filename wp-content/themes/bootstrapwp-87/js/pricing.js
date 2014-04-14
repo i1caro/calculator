@@ -546,15 +546,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.remove_disk = function(data, event) {
         self.drives.remove(data.data);
       };
-      self.price = function(){
-        return 0;
-      };
-
-      self.formatted_price = ko.computed(function(){
-        return format_price(self.price(), options.prices.CURRENCY());
-      });
-
     }
+
 
     function get_base_server_price() {
       var total = 0;
@@ -578,14 +571,15 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.ram = new ram_container(options.ram, options.prices);
 
       self.price = ko.computed(get_base_server_price, self);
+      self.formatted_price = ko.computed(function() {
+        return format_price(self.price(), options.prices.CURRENCY());
+      });
 
       self.burst_price = ko.computed(function() {
-        var total = _.reduce(self.range, function(memo, obj) {
-          var price = parseFloat(obj.upper_price());
-          if (_.isNumber(price))
-            return memo + price;
-          return memo;
-        }, 0);
+        var total = 0;
+        total += self.cpu.upper_price();
+        total += self.ram.upper_price();
+
         return total;
       });
       self.add_disk = function(data, event) {
@@ -632,6 +626,10 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
         return total;
       });
+      self.formatted_price = ko.computed(function() {
+        return format_price(self.price(), options.prices.CURRENCY());
+      });
+
 
       // Actions
       self.switch_to_hdd = function(data, event) {
@@ -987,7 +985,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
             '<div class="arrow" style="border-left:5px solid #313785"></div>' +
             '<div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">' +
             'Click here to add drives and storage to this server.</div>' +
-          '</div>'       
+          '</div>'
         $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
         $("#pop1, #pop2").fadeOut(2000);
         $("#pop3").fadeIn(2000);
