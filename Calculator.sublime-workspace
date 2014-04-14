@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"container",
+				"containerWarning"
+			],
+			[
+				"zone",
+				"zoneselector"
+			],
+			[
+				"hover",
+				"hover-large"
+			],
+			[
+				"data-",
+				"data-title"
+			],
+			[
+				"popover",
+				"popover-content"
+			],
+			[
 				"back",
 				"background-color"
 			],
@@ -79,7 +99,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 38348,
+				"buffer_size": 38529,
 				"line_ending": "Unix"
 			}
 		},
@@ -87,15 +107,12 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 			"settings":
 			{
-				"buffer_size": 24131,
+				"buffer_size": 27484,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "/** { background-color: rgba(255,0,0,.2); }\n\n* * { background-color: rgba(0,255,0,.2); }\n\n* * * { background-color: rgba(0,0,255,.2); }\n\n* * * * { background-color: rgba(255,0,255,.2); }\n\n* * * * * { background-color: rgba(0,255,255,.2); }\n\n* * * * * * { background-color: rgba(255,255,0,.2); }\n*/\n\n\n/* JUST FOR EDITING - REMOVE AFTER PUTTING IN BOOTSTRAP  */\n.panel-heading > .btn-toolbar > .btn-group > a {\n  position:relative;\n}\n.rightbar{\ndisplay:none;\n}\n.span6 .hover-huge {\n  margin:20px auto;\n}\n.tooltipa, a.tooltipa, a.tooltipb, .tooltipb, .lower-handle, .upper-handle {\n    display: inline;\n    position: relative;\n    text-decoration: none;\n}\n.server-icon:hover:before, .drive-icon:hover:before {\nbackground: #333;\nbackground: rgba(37, 53, 136, .8);\nborder-radius: 5px;\ncolor: #fff;\npadding: 5px 15px;\nfloat:right;\nz-index: 98;\nwhite-space: nowrap;\nmargin:0 82px 0 0;\n}\n.vm-icon:hover:before {\ncontent: \"Virtual Machine\";\n}\n.container-icon:hover:before {\ncontent: \"Elastic Container\";\n}\n.bandwith-icon:hover:before {\ncontent: \"Bandwidth Subscription\";\n}\n.drive-ssd:hover:before{\ncontent: \"SSD\";\n}\n.drive-hdd:hover:before{\ncontent: \"HDD\";\n}\n.lower-handle:hover:after, .upper-handle:hover:after  {\n    background: #333;\n    background: rgba(37, 53, 136, .8);\n    border-radius: 5px;\n    bottom: 22px;\n    color: #fff;\n    content: attr(data-title);\n    padding: 5px 15px;\n    position: absolute;\n    z-index: 98;\n    white-space:nowrap;\n}\n.upper-handle:hover:after{\n    left: -43px;\n}\n.lower-handle:hover:after{\n    left: -48px;\n}\n.my-slider {\n  margin-left:5px;\n}\n.bandwith-icon{\n  background:url('/wp-content/uploads/datatransfer.png') center, no repeat;\n}\n[data-bind=\"template: { name: 'account-details-template', data: account_details }\"] {\n  padding: 15px 0px 0px 0px;\n}\n.pricing-stuff a {\n  cursor:pointer;\n}\n.pricing-stuff button.close {\n  padding:5px;\n}\n#zonetitle, #servertitle {\n    padding: 10px 0 15px 0;\n}\n#whichzone {\n    -ms-text-justify: distribute-all-lines;\n    text-justify: distribute-all-lines;\n    margin-bottom: 79px;\n    text-align: justify;\n    height:105px;\n    line-height:15px;\n}\n.stretch{\n  width:100%!important;\n  display:inline-block!important;\n}\n.zoneselector {\ndisplay: inline-block;\nzoom: 1;\nopacity: 0.6;\npadding: 7px;\nmax-width: 100px;\nvertical-align: top;\ncursor: pointer;\nwidth: 80px;\nfont-size: 12px;\npadding-bottom:0px;\nmargin-bottom:5px;\n}\n#whichzone .selectedzone {\n    background-color: #22A6FF;\n    border-radius: 4px;\n    color: #FFFFFF;\n    cursor: pointer;\n    font-weight: bold;\n    opacity: 1;\n}\n#whichzone img {\n    display: block;\n    margin: 0 auto;\n    max-width: 58px;\n}\n#whichzone span {\n    display: block;\n    margin: 10px auto;\n    text-align: center;\n}\n#whichzone .comingsoon {\n  cursor: not-allowed;\n  opacity:0.4;\n}\n.comingsoon:before {\n    position: absolute;\n    content: '';\n    height: 100px;\n    width: 100px;\n    background: url(\"/wp-content/uploads/coming-soon.png\") top right no-repeat;\n}\n.panel-heading {\n  vertical-align: middle;\n  display: table;\n}\n.panel-heading span {\n  vertical-align: middle;\n  display: table-cell;\n}\n.panel-heading .hover-large {\n  text-align: center;\n  vertical-align: middle;\n  display: table-cell;\n  float: left;\n  padding:3px 15px 3px 15px;\n  margin-right: 15px;\n}\n.example {\n    border: 1px solid #DDD;\n    border-radius: 4px;\n    position: relative;\n    padding: 50px 30px 20px;\n    margin: 30px 0px 20px;\n    overflow: hidden;\n}\n\n.big-letter {\n  font-size:48px;\n}\n.small-bar {\n  height: 8px;\n}\n.handler {\n  background-color: green;\n  position: absolute;\n  width: 1.5em;\n  height: 1.5em;\n  cursor: default;\n}\n.container {\n  width: 980px;\n  margin-left: auto;\n  margin-right: auto;\n}\n.three-fourths {\n  width: 75%;\n}\n.one-fourth {\n  width: 25%;\n}\n.column {\n  float: left;\n  padding-left: 6px;\n  padding-right: 6px;\n}\n\n.slider-tooltip {\n  position: absolute;\n  display: block;\n  top: -25px;\n  width: 35px;\n  height: 20px;\n  color: #fff;\n  text-align: center;\n  font: 10pt Tahoma, Arial, sans-serif ;\n  border-radius: 3px;\n  border: 1px solid #333;\n    -webkit-box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);\n    box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box;\n  background: -moz-linear-gradient(top,  rgba(69,72,77,0.5) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */\n  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,0.5)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */\n  background: -webkit-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */\n  background: -o-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */\n  background: -ms-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */\n  background: linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */\n}\n.noUi-target {\n  border-radius: 4px;\n  border: 1px solid #D3D3D3;\n  box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;\n}\n.noUi-horizontal {\n  /*position: relative;*/\n  height: 20px;\n}\n.noUI-base {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  background-color: #f0ad4e;\n}\n\n\n.btn-cp {\n  background-image: url('/wp-content/uploads/buttons.png');\n  background-repeat: no-repeat;\n  background-color: transparent;\n  width: 31px;\n  height: 31px;\n  text-decoration: none;\n  border: 0;\n  cursor: pointer;\n  text-indent: -9999px;\n  padding: 0;\n  display: inline-block;\n  vertical-align: middle;\n}\n.drive-icon {\n  width: 64px;\n  height: 64px;\n  background-repeat: no-repeat;\n  float: left;\n  margin-bottom: 3px;\n}\n.btn-delete {\n  background-position: 0 -279px;\n}\n.vm-icon {\n  background: url('/wp-content/uploads/vm.png');\n}\n.container-icon {\n  background: url('/wp-content/uploads/container.png');\n}\n.bandwith-icon {\n  background:url('/wp-content/uploads/datatransfer.png') 100% 12% no-repeat\n}\n.drive-ssd {\n  background-image: url('/wp-content/uploads/drive_ssd.png');\n}\n.drive-hdd {\n  background-image: url('/wp-content/uploads/drive_disk.png');\n}\n.server-icon {\n  width: 72px;\n  height: 72px;\n  background-repeat: no-repeat;\n  float: left;\n  position: relative;\n  margin-bottom: 10px;\n  margin-left: -4px;\n}\n.my-checkbox {\n  margin-left: 36px !important;\n}\n.my-input-select-box {\n  margin-left: 10px;\n  width: 45px;\n}\n.storage-icon {\n  cursor: pointer;\n  background: url(\"/wp-content/uploads/drive_add.png\") no-repeat top left;\n  padding-left:23px;\n  width: 20px;\n  height: 20px;\n  line-height: 21px;\n  display: inline-block;\n  font-weight: bold;\n}\nul.my-ul {\n  list-style-type: none;\n  padding: 0;\n  margin: 0 0 9px 5px;\n}\nli.slider-definition {\n  font-weight: bold;\n  text-align: left;\n  display:inline;\n}\n.my-slider-handle {\n  border-color: #313785;\n  border-radius: 0px;\n  background-image: none;\n  cursor: pointer;\n  background-color: #22a6ff;\n  top: -.3em;\n  margin-left: -.6em;\n  position: absolute;\n  z-index: 2;\n  width: 1.2em;\n  height: 1.2em;\n  border: 1px solid #444444;\n}\n.my-slider {\n  margin:7px 5px 0 5px;\n  border: 1px solid #555555;\n  border-color: #313785;\n  border-radius: 0px;\n  background-color: white;\n  height: .8em;\n  position: relative;\n  text-align: left;\n  font-family: 'Trebuchet MS',Verdana, Arial, sans-serif;\n  font-size: 1.1em;\n}\n.my-input-box{\n  margin-bottom: 0px;\n  border-color: #313785;\n  width: 35px;\n}\n.my-text {\n  margin-top: 5px;\n}\n.my-text-number {\n  margin-top: 5px;\n  float: right;\n}\n.my-event {\n  white-space: nowrap;\n  overflow: auto;\n}\n.my-server {\n  background-color: rgba(100,100,100, 0.1);\n}\n.text-right {\n  text-align: right;\n}\n.panel-body {\n  background-color: rgba(100,100,100, 0.1);\n}\nul.my-modal-ul {\n  list-style-type: none;\n  padding: 6px;\n  margin: 0 0 5px 5px;\n}\n.my-final-price {\n  font-size: 11pt;\n  font-weight: bold;\n  color: #313785;\n}\n.my-total{\n  padding-right: 14px;\n  padding-top: 20px;\n  text-align: right;\n}\n.my-burst-input{\n  width: 70px;\n  text-align: right;\n}\n.pricing-stuff {\n  font-size: 9.5pt;\n  font-weight: bold;\n  color: #313785;\n}\n.pricing-stuff .btn, .pricing-stuff .btn-primary {\n  font-size: 9.5pt;\n  font-family: Arial;\n  font-weight: bold;\n  box-shadow: none;\n  background-color: white;\n  border-radius: 0px !important;\n  background-image: none;\n  color: #313785;\n}\n.pricing-stuff .btn-primary {\n  background-color: #22a6ff;\n  color: white;\n}\n.my-total p, .my-total span {\n  display:inline;\n  line-height: 30px;\n}\n.prominent-price {\nfont-size: 25px;\nmargin-left: 5px;\n}\n.prominent-price-label {\nfont-size: 22px;\n}\n.burst-price-label {\nfont-size: 12px;\n}\n.burst-price {\nfont-size: 15px;\npadding:5px;\n}",
 			"file": "wp-content/themes/bootstrapwp-87/less/common.css",
-			"file_size": 8893,
-			"file_write_time": 1397147093000000,
 			"settings":
 			{
 				"buffer_size": 8751,
@@ -114,58 +131,28 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
 			"settings":
 			{
-				"buffer_size": 10159,
+				"buffer_size": 10360,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "backup/indexbackup.html",
+			"file": "/home/jonathan/elastic-www/bkup/calc bkup/wpindex.html",
 			"settings":
 			{
-				"buffer_size": 7888,
-				"line_ending": "Unix",
-				"name": "<div style=\"padding: 0;\">"
+				"buffer_size": 3007,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n<html>\n\n<head>\n    <title>Newsletter</title>\n    <meta content=\"text/html; charset=utf-8\" http-equiv=\"Content-Type\" />\n    <style>\n    li {\n        list-style: disc outside none;\n        margin-left: 30px;\n    }\n    h3 {\n        color:#22a6ff\n    }\n    .email-header {\n        background-color:#47c2eb;\n        margin-bottom: 5px;\n    }\n    .email-header > * {\n        display:block;\n        clear: both;\n    }\n    .email-body td {\n        background-color: #fff;\n        padding: 30px;\n    }\n    .email-wrapper {\n        border: 7px solid #7C7C7C;\n    }\n    .email-footer {\n        text-align: center;\n        font-size: 11px;\n        font-style: italic;\n    }\n    </style>\n</head>\n\n<body bgcolor=\"#f2f2f2\" leftmargin=\"0\" marginheight=\"0\" marginwidth=\"0\" topmargin=\"0\">\n    <div class=\"email-wrapper\">\n        <table class=\"email-table\">\n            <tbody>\n                <tr class=\"email-header\">\n                    <td>\n                        <img src=\"http://images.reallysimplesystems.com/1107/EmailHeader3.jpg\" width=\"400\" alt=\"ElasticHosts - Price Reduction and New Product\" class=\"rss_editable\" id=\"rss0016\" align=\"left\" style=\"\">\n                    </td>\n                </tr>\n                <tr class=\"email-body\">\n                    <td>\n                        <p id=\"rss0019\">Hello {contact.first}!</p>\n                        <p>We haven't sent a newsletter in a while but we have been working hard behind the scenes here at ElasticHosts and we now have a lot of exciting news to let you know about:</p>\n                        <ul>\n                            <li>Pricing updates\n                            </li>\n                            <li>New Cloud Servers product based on containerisation\n                            </li>\n                            <li>New Cloud File Storage product\n                            </li>\n                            <li>New look control panel\n                            </li>\n                            <li>New look website\n                            </li>\n                            <li>Infrastructure upgrades\n                            </li>\n                        </ul>\n                        <h3>Pricing updates</h3>\n                        <p>We have been making some changes to our pricing, including reducing the price of SSD everywhere and data transfer in some locations. We have also introduced 15 minute billing periods, reduced the minimum server size and minimum subscriptions.</p>\n                        <ul>\n                            <li>SSD now 50% off in all locations\n                            </li>\n                            <li>Data transfer reduced by &gt; 40% to £0.06 in UK, €0.06 in Amsterdam and $0.05 in San Jose\n                            </li>\n                            <li>Minimum VM size cut to 500 core-MHz CPU and 256 MB RAM\n                            </li>\n                            <li>15 minute billing, no minimum rates.\n                            </li>\n                        </ul>\n                        <h3>Introducing Elastic Containers</h3>\n                        <p>ElasticHosts yesterday launched Elastic Containers, a brand new type of cloud server. We will be offering these as a second product, alongside the Virtual Machines that you are currently using. In addition to being very cost-effective, Elastic Containers are high performance, auto-scaling cloud servers for Linux. They scale up with load and are only billed for what they use. This means that if you run 1GB of software on a 4GB machine, we’ll only bill you for 1GB, but if you need 4GB, it scales up to that size as necessary. They boot in under 2 seconds and achieve superior performance than a standard VM thanks to less virtualisation overhead.</p>\n                        <p>Technically, Elastic Containers are running as Linux namespace containers on a shared host kernel, similar to LXC, rather than virtual machines running on the QEMU-KVM hypervisor. They support any Linux distribution and boot from Folder filesystem storage (see below).</p>\n                        <p><a href=\"http://www.elastichosts.com/cloud-servers/elastic-containers?utm_source=eh&#38;utm_medium=email&#38;utm_campaign=ContainerCustomer\" title=\"Container Info\">Find out more about Elastic Containers</a>\n                        </p>\n                        <h3>Introducing Folders for cloud file storage</h3>\n                        <p>Folders are our new Cloud File Storage product, also launched yesterday. They are SSD-backed network folders that you can mount as drives on your cloud servers and also remotely, on your own local machine, to easily and simply sync between them, e.g. with rsync, sshfs or WebDAV. They can also be used as a simple web server for static files such as images.</p>\n                        <p>Folders are the storage for Elastic Containers, and are also “elastic”. Like a folder in a filesystem they will grow to match the size of their contents, so you never have to worry about increasing or decreasing disk size.\n                        </p>\n                        <h3>New look Control Panel</h3>\n                        <p>As part of our Elastic Containers launch we have redesigned the icons and buttons on the control panel to give the site a more modern feel. Don’t miss our new\n                            <a href=\"http://www.elastichosts.com/blog/2014/02/20/new-feature-drag-and-drop?utm_source=eh&#38;utm_medium=email&#38;utm_campaign=ContainerCustomer\" title=\"Drag Drop\">drag and drop</a>\n                            functionality too. We have also added a Statistics section where you can track the usage in your account. Why not log into your account and take a look for yourself?\n                        </p>\n                        <h3>New look website</h3>\n                        <p>We have revamped our\n                            <a href=\"http://www.elastichosts.com?utm_source=eh&#38;utm_medium=email&#38;utm_campaign=ContainerCustomer\" title=\"www.elastichosts.com\">website</a>\n                            to showcase our two products: Virtual Machines and Elastic Containers. The new site is designed to be faster and easier to navigate. We have recently added several\n                            <a href=\"http://www.elastichosts.com/support/tutorials?utm_source=eh&#38;utm_medium=email&#38;utm_campaign=ContainerCustomer\" title=\"Tutorials\">tutorial videos</a>\n                            to help you make the most of your cloud servers.\n                        </p>\n                        <h3>Infrastructure upgrades</h3>\n                        <p>Over the last few months we have been expanding and upgrading the hardware in several of our zones, including Amsterdam, Los Angeles and San Jose. These upgrades include a move to brand new Intel hardware and you can now run cloud servers up to 64GB in these locations.</p>\n                        <p>Please let us know if you have any ideas on how to improve our service. We are always happy to receive feedback.</p>\n                        <p>Until next time, happy hosting!\n                            <br>Anna.</p>\n                        <p>Anna Griffiths\n                            <br>Sales and Support Manager\n                            <br>ElasticHosts Ltd\n                            <br>\n                            <a href=\"mailto:sales@elastichosts.com\" title=\"sales@elastichosts.com\" target=\"_blank\">sales@elastichosts.com</a>\n                        </p>\n                        <span style=\"color:#313785\" id=\"rss0018\">\n                        </span>\n                    </td>\n                </tr>\n                <tr class=\"email-footer\">\n                    <td>\n                        <p>You are currently registered to receive this newsletter as: {contact.email}. If you would prefer not to receive any further emails from Elastichosts, you may <a href=\"http://www.elastichosts.com/you-have-unsubscribed/\" title=\"Unsubscribe\">unsubscribe</a> now. We respect your privacy, view our <a href=\"http://www.elastichosts.com/cloud-servers/terms-of-service/\" title=\"Privacy Policy\" id=\"rsslink1753\">Privacy Policy</a>.\n                        </p>\n                    </td>\n                </tr>\n            </tbody>\n        </table>\n    </div>\n\n</body>\n\n</html>",
-			"file": "/home/jonathan/elastic-www/email template/index.html",
-			"file_size": 8378,
-			"file_write_time": 1397137913000000,
-			"settings":
-			{
-				"buffer_size": 8367,
-				"line_ending": "Unix",
-				"name": "Hello {contact.first}!"
-			}
-		},
-		{
-			"contents": "<p>We haven't sent a newsletter in a while but we have been working hard behind the scenes here at ElasticHosts and we now have a lot of exciting news to let you know about:</p>\n\n<ul>\n    <li>Pricing updates\n    </li>\n    <li>New Cloud Servers product based on containerisation\n    </li>\n    <li>New Cloud File Storage product\n    </li>\n    <li>New look control panel\n    </li>\n    <li>New look website\n    </li>\n    <li>Infrastructure upgrades\n    </li>\n</ul>\n\n<h3>Pricing updates</h3>\n<p>We have been making some changes to our pricing, including reducing the price of SSD everywhere and data transfer in some locations. We have also introduced 15 minute billing periods, reduced the minimum server size and minimum subscriptions.</p>\n\n<ul>\n    <li>SSD now 50% off in all locations\n    </li>\n    <li>Data transfer reduced by &gt; 40% to £0.06 in UK, €0.06 in Amsterdam and $0.05 in San Jose\n    </li>\n    <li>Minimum VM size cut to 500 core-MHz CPU and 256 MB RAM\n    </li>\n    <li>15 minute billing, no minimum rates.\n</li></ul>\n\n<h3>Introducing Elastic Containers</h3>\n<p>ElasticHosts yesterday launched Elastic Containers, a brand new type of cloud server. We will be offering these as a second product, alongside the Virtual Machines that you are currently using. In addition to being very cost-effective, Elastic Containers are high performance, auto-scaling cloud servers for Linux. They scale up with load and are only billed for what they use. This means that if you run 1GB of software on a 4GB machine, we’ll only bill you for 1GB, but if you need 4GB, it scales up to that size as necessary. They boot in under 2 seconds and achieve superior performance than a standard VM thanks to less virtualisation overhead.</p>\n\n\n<p>Technically, Elastic Containers are running as Linux namespace containers on a shared host kernel, similar to LXC, rather than virtual machines running on the QEMU-KVM hypervisor. They support any Linux distribution and boot from Folder filesystem storage (see below).</p>\n\n\n<p><a href=\"http://system.reallysimplesystems.com/redirect.asp?code=ndJZHKZOkAZTx&amp;transaction=update\" title=\"Elastic Containers\" target=\"_blank\">Find out more about Elastic Containers</a>\n</p>\n\n<h3>Introducing Folders for cloud file storage</h3>\n<p>Folders are our new Cloud File Storage product, also launched yesterday. They are SSD-backed network folders that you can mount as drives on your cloud servers and also remotely, on your own local machine, to easily and simply sync between them, e.g. with rsync, sshfs or WebDAV. They can also be used as a simple web server for static files such as images.</p>\n\n\n<p>Folders are the storage for Elastic Containers, and are also “elastic”. Like a folder in a filesystem they will grow to match the size of their contents, so you never have to worry about increasing or decreasing disk size. \n</p>\n\n<h3>New look Control Panel</h3>\n<p>As part of our Elastic Containers launch we have redesigned the icons and buttons on the control panel to give the site a more modern feel. Don’t miss our new \n\n<a href=\"http://system.reallysimplesystems.com/redirect.asp?code=zdJZHKZOkAZT9&amp;transaction=update\" title=\"Drag Drop\" target=\"_blank\">drag and drop</a>\n\nfunctionality too. We have also added a Statistics section where you can track the usage in your account. Why not log into your account and take a look for yourself?\n</p>\n\n<h3>New look website</h3>\n<p>We have revamped our \n\n<a href=\"http://system.reallysimplesystems.com/redirect.asp?code=5dJZHKZOkAZTU&amp;transaction=update\" title=\"www.elastichosts.com\" target=\"_blank\">website</a>\n\nto showcase our two products: Virtual Machines and Elastic Containers. The new site is designed to be faster and easier to navigate. We have recently added several \n\n<a href=\"http://system.reallysimplesystems.com/redirect.asp?code=1dJZHKZOkAZTQ&amp;transaction=update\" title=\"Tutorials\" target=\"_blank\">tutorial videos</a>\n\nto help you make the most of your cloud servers. \n</p>\n\n\n<h3>Infrastructure upgrades</h3>\n\n<p>Over the last few months we have been expanding and upgrading the hardware in several of our zones, including Amsterdam, Los Angeles and San Jose. These upgrades include a move to brand new Intel hardware and you can now run cloud servers up to 64GB in these locations.</p>\n\n\n\n\n\n<p>Please let us know if you have any ideas on how to improve our service. We are always happy to receive feedback. </p>\n\n<p>Until next time, happy hosting!<br>Anna.</p>\n\n<p>Anna Griffiths<br>Sales and Support Manager<br>ElasticHosts Ltd<br>\n<a href=\"mailto:sales@elastichosts.com\" title=\"sales@elastichosts.com\" target=\"_blank\">sales@elastichosts.com</a>\n</p>\n\n<span style=\"color:#313785\">\n</span>\n\n\n<p>Follow Us: <a href=\"http://system.reallysimplesystems.com/redirect.asp?code=ndJZHKZOkAZTx&amp;transaction=update\" title=\"Twitter\" target=\"_blank\">Twitter</a> | <a href=\"http://system.reallysimplesystems.com/redirect.asp?code=pdJZHKZOkAZTz&amp;transaction=update\" title=\"Facebook\" target=\"_blank\">Facebook</a> | <a href=\"http://system.reallysimplesystems.com/redirect.asp?code=rdJZHKZOkAZT1&amp;transaction=update\" title=\"LinkedIn\" target=\"_blank\">LinkedIn</a> | <a href=\"http://system.reallysimplesystems.com/redirect.asp?code=tdJZHKZOkAZT3&amp;transaction=update\" title=\"Google+\" target=\"_blank\">Google+</a></p>\n\n						\n															\n														</td>\n\n\n\n<tr>\n                                                        <td style=\"border-top:1px solid #d6d6d6;background-color:#f6f6f6;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#666666;line-height:17px;padding:15px 0 15px 20px\">You are currently registered to receive this email as: <a href=\"mailto:ahgriffiths@googlemail.com\" target=\"_blank\">ahgriffiths@googlemail.com</a><br>\nIf you would prefer not to receive any further emails from ElasticHosts, you may <a href=\"http://system.reallysimplesystems.com/redirect.asp?code=vdJZHKZOkAZT5&amp;transaction=update\" title=\"Unsubscribe\" target=\"_blank\">unsubscribe</a> now. We respect your privacy, view our <a href=\"http://system.reallysimplesystems.com/redirect.asp?code=xdJZHKZOkAZT7&amp;transaction=update\" title=\"Privacy Policy\" target=\"_blank\">Privacy Policy</a>.</td>\n\n                                                    </tr>\n                                                        ",
-			"settings":
-			{
-				"buffer_size": 6302,
-				"line_ending": "Unix",
-				"name": "<p>We haven't sent a newsletter in a while but we"
-			}
-		},
-		{
-			"contents": ".highlighted-start {\nwidth: 100%;\nheight: 100%;\nbackground-color: yellow;\nz-index: -10;\ncontent: \"\";\nposition: absolute;\ntop: -1px;\n}\n\n\n$(\".panel-heading > .btn-toolbar\").addClass(\"highlighted-start\");\n	window.setTimeout(3000);\n$(\".panel-heading > .btn-toolbar\").removeClass(\"highlighted-start\");\n",
+			"contents": "<script src=\"/wp-content/themes/bootstrapwp-87/js/jquery-ui-1.8.13.custom.min.js\" type=\"text/javascript\"></script>\n<script type='text/javascript' src='/wp-includes/js/jquery/jquery.js?ver=1.7.2'></script>\n<style>\n#trial_create .controls > .checkbox:first-child {\npadding-top:5px;\n}\n#trial_create.form-horizontal .control-label {\npadding-top: 6px;\n}\n#trial_create select {\n    border: black;\n    border-width: 1px;\n    border-style: solid;\n}\n.container .box-large {\n    margin: 13px auto;\n    border:none;\n}\n.control-group p {\nwidth: 400px;\ndisplay: block;\nmargin: 0 auto;\n}\n</style>\n<script>\n    $1813 = jQuery.noConflict(true);\n</script>\n<script type='text/javascript'>\n$1813(document).ready(function () {\n\n   /* $1813('#country_menu').click(containerWarning); */\n\n    $1813('#warning a.close').click(function () {\n        $1813('#warning').hide();\n    });\n\n    // Remove spaces from phone numbers\n    function formatPhoneNumber(string) {\n        var phone_number = string.split(' ').join('');\n        return phone_number;\n    }\n    $1813('#phone').blur(function () {\n        $1813(this).val(formatPhoneNumber($1813(this).val()));\n    });\n\n    function showWarning(error) {\n        $1813('#warning-content').text(error);\n        $1813('#warning').show();\n    }\n\n    function isValidEmailAddress(emailAddress) {\n    var pattern = new RegExp(/^((\"[\\w-+\\s]+\")|([\\w-+]+(?:\\.[\\w-+]+)*)|(\"[\\w-+\\s]+\")([\\w-+]+(?:\\.[\\w-+]+)*))(@((?:[\\w-+]+\\.)*\\w[\\w-+]{0,66})\\.([a-z]{2,6}(?:\\.[a-z]{2})?)$)|(@\\[?((25[0-5]\\.|2[0-4][\\d]\\.|1[\\d]{2}\\.|[\\d]{1,2}\\.))((25[0-5]|2[0-4][\\d]|1[\\d]{2}|[\\d]{1,2})\\.){2}(25[0-5]|2[0-4][\\d]|1[\\d]{2}|[\\d]{1,2})\\]?$)/i);\n    return pattern.test(emailAddress);\n    }; \n\n    // Set action to appropriate subdomain on change\n    $1813('#country_menu').change(function() {\n        var subdomain = \"https://\" + $1813('#country_menu option:selected').val();\n        subdomain += \".elastichosts.com/accounts/trial/\";\n        $1813('#trial_create').attr('action', subdomain);\n    });\n\n    // Validate form on submit.\n    $1813('#trial_create').submit(function () {\n        // Check required fields are present.\n        if (($1813(\"#first_name\").val().trim() === \"\") ||\n        ($1813(\"#last_name\").val().trim() === \"\")) {\n            showWarning('Please supply both names.');\n            return false;\n        }\n        if (($1813(\"#email\").val().trim() === \"\") ||\n        (!isValidEmailAddress($1813('#email').val()))) {\n            showWarning('Please supply a valid email address - we need this so we can send you your trial password.');\n            return false;\n        }\n        if ($1813(\"#phone\").val().trim() === \"\") {\n            showWarning('Please supply your cellphone number - we need this so we can send you your trial password.');\n            return false;\n        }\n        if ($1813(\"#tandc\").is(':checked') === false) {\n            showWarning('Please agree to the Terms of the free trial.');\n            return false;\n        }\n\n        // Reformat phone number if required.\n        $1813('#phone').val(formatPhoneNumber($1813('#phone').val()));\n\n        return true;\n\n    });\n    \n    var domain = location.host.split('.').splice(-1,1)[0];\n    var zone = {\n        'nl' : 'ams-e',\n        'au' : 'syd-v',\n        'hk' : 'hkg-e',\n        'ca' : 'tor-p'\n    };\n    var us_zones = ['lax-p', 'sat-p', 'sjc-c'];\n    var uk_zones = ['lon-p', 'lon-b'];\n    zone['com'] = us_zones[parseInt(Math.random()*3)];\n    zone['uk'] = uk_zones[parseInt(Math.random()*2)]; \n    $1813('#country_menu').val(zone[domain]).attr('selected', 'selected');\n    $1813('#country_menu').change();\n\n});\n\n// Clickthrough handler\nvar i,\ns,\nhashcode;\nvar query_name = \"rss_code\";\ns = window.location.search;\nif (s !== \"\") {\n    i = s.indexOf(query_name + \"=\");\n    if (i !== -1) {\n        s = s.substring(i);\n        i = s.indexOf(\"&\");\n        if (i !== -1) {\n            s = s.substring(0, i);\n        }\n        i = s.indexOf(\"=\");\n        hashcode = s.substring(i + 1);\n        var currentTime = new Date();\n        var month = currentTime.getMonth() + 1;\n        var day = currentTime.getDate();\n        var year = currentTime.getFullYear();\n        s = '<img border=\"0\" src=\"http://system.reallysimplesystems.com/campaign.gif';\n        s += '?transaction=update&code=' + hashcode + '&status=ClickThrough';\n        s += '¬es=Trial%20page%20on%20';\n        s += day + '-' + month + '-' + year + '\" />';\n        document.write(s);\n    }\n}\n\nvar containerWarning = function (){\n    var popstr =\n          '<div id=\"pop4\" class=\"popover left\" style=\"position: absolute;top: -30px;left: -266px;width: 150px;white-space: normal;\">' +\n            '<div class=\"arrow\" style=\"border-left:5px solid #313785\"></div>' +\n            '<div class=\"popover-content\" style=\"background-color:#313785;color: #fff;border-radius: 3px;\">' +\n            'Be aware that Elastic Containers are not yet available in this zone!</div>' +\n          '</div>'\n    if (country_menu.value == \"lon-b\" || country_menu.value == \"sat-p\" || country_menu.value == \"syd-v\"){\n        $1813(\"#country_menu\").parent().css(\"position\", \"relative\").append(popstr);\n        $1813(\".popover\").css(\"display\", \"block\");\n    } else {\n        $1813(\"#pop4\").hide()\n    }\n}\n</script>",
 			"file": "/home/jonathan/elastic-www/test.js",
-			"file_size": 309,
-			"file_write_time": 1397141898000000,
+			"file_size": 5172,
+			"file_write_time": 1397237557000000,
 			"settings":
 			{
-				"buffer_size": 297,
+				"buffer_size": 5224,
 				"line_ending": "Unix",
-				"name": ".highlighted-start {"
-			}
-		},
-		{
-			"file": "/home/jonathan/elastic-www/pricing/pricing4.js",
-			"settings":
-			{
-				"buffer_size": 17930,
-				"line_ending": "Unix"
+				"name": "<script src=\"/wp-content/themes/bootstrapwp-87/js/"
 			}
 		}
 	],
@@ -237,13 +224,16 @@
 	},
 	"file_history":
 	[
-		"/home/jonathan/elastic-www/calculator/highlight.js",
+		"/home/jonathan/elastic-www/pricing/pricing4.js",
+		"/home/jonathan/elastic-www/test.js",
+		"/home/jonathan/elastic-www/calculator/backup/indexbackup.html",
+		"/home/jonathan/elastic-www/email template/index.html",
 		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/js/templates.html",
+		"/home/jonathan/elastic-www/calculator/highlight.js",
 		"/home/jonathan/elastic-www/theme php etc/404.php",
 		"/home/jonathan/elastic-www/calculator/wp-includes/js/jquery/jquery.js",
 		"/home/jonathan/elastic-www/calculator/index-wordpres.html",
 		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/less/bootstrapwp.css?ver=1.0",
-		"/home/jonathan/elastic-www/pricing/pricing4.js",
 		"/home/jonathan/elastic-www/vm calc/test/resources/js/pricing.js",
 		"/home/jonathan/elastic-www/vm calc/test/pricing.js",
 		"/home/jonathan/elastic-www/Bootstrap Theme/bootstrapwp.css",
@@ -319,7 +309,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"<open file>",
@@ -332,6 +322,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"prices()",
+			"burst",
+			"jquery",
+			"self.drives.push(",
+			"s",
+			"self",
+			"self.drives.push(",
+			"add_disk",
+			"container",
+			"pop",
+			"popu",
 			"document",
 			"yellow",
 			"fade",
@@ -448,18 +449,7 @@
 			"domain",
 			"jquery-ui",
 			".price",
-			":hover",
-			"div.chooserow div.pricerow a",
-			"price",
-			"i<4",
-			"updateprice",
-			"150",
-			"CUSTOMISE",
-			"hover",
-			"950",
-			"1150",
-			"img.bired",
-			"min-wid"
+			":hover"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -478,7 +468,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 6,
 			"sheets":
 			[
 				{
@@ -486,15 +476,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 38348,
+						"buffer_size": 38529,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1899,
-								1899
+								27402,
+								27402
 							]
 						],
 						"settings":
@@ -504,7 +494,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 302.0,
+						"translation.y": 10173.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -514,15 +504,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 					"settings":
 					{
-						"buffer_size": 24131,
+						"buffer_size": 27484,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23062,
-								23062
+								27047,
+								27047
 							]
 						],
 						"settings":
@@ -532,7 +522,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8772.0,
+						"translation.y": 10293.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -577,8 +567,8 @@
 						"selection":
 						[
 							[
-								231591,
-								231591
+								231530,
+								231530
 							]
 						],
 						"settings":
@@ -598,15 +588,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
 					"settings":
 					{
-						"buffer_size": 10159,
+						"buffer_size": 10360,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1222,
+								1222
 							]
 						],
 						"settings":
@@ -623,23 +613,22 @@
 				},
 				{
 					"buffer": 5,
-					"file": "backup/indexbackup.html",
+					"file": "/home/jonathan/elastic-www/bkup/calc bkup/wpindex.html",
 					"settings":
 					{
-						"buffer_size": 7888,
+						"buffer_size": 3007,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								785,
-								785
+								3005,
+								3005
 							]
 						],
 						"settings":
 						{
-							"auto_name": "<div style=\"padding: 0;\">",
 							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
@@ -652,110 +641,29 @@
 				},
 				{
 					"buffer": 6,
-					"file": "/home/jonathan/elastic-www/email template/index.html",
-					"settings":
-					{
-						"buffer_size": 8367,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2181,
-								2181
-							]
-						],
-						"settings":
-						{
-							"auto_name": "Hello {contact.first}!",
-							"syntax": "Packages/HTML/HTML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"settings":
-					{
-						"buffer_size": 6302,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6180,
-								6180
-							]
-						],
-						"settings":
-						{
-							"auto_name": "<p>We haven't sent a newsletter in a while but we",
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 624.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 8,
 					"file": "/home/jonathan/elastic-www/test.js",
 					"settings":
 					{
-						"buffer_size": 297,
+						"buffer_size": 5224,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								297,
-								297
+								5214,
+								5214
 							]
 						],
 						"settings":
 						{
-							"auto_name": ".highlighted-start {",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "/home/jonathan/elastic-www/pricing/pricing4.js",
-					"settings":
-					{
-						"buffer_size": 17930,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1868,
-								1868
-							]
-						],
-						"settings":
-						{
+							"auto_name": "<script src=\"/wp-content/themes/bootstrapwp-87/js/",
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1328.0,
+						"translation.y": 1326.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

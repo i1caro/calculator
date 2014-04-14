@@ -848,7 +848,6 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         $("#pop1, #pop2, #pop3").fadeOut(2000);
       });
     }
-    
   }
 );
 
