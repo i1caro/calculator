@@ -848,10 +848,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
           ram: [256, 1024],
           ip: true,
           firewall: false,
-          drives: {
-            ssd: [1],
-            hdd: [],
-          },
+          ssd: [20],
+          hdd: [],
           prices: self.prices()
         }));
       };
@@ -861,10 +859,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
           ram: 1024,
           ip: true,
           firewall: false,
-          drives: {
-            ssd: [],
-            hdd: [20],
-          },
+          ssd: [],
+          hdd: [20],
           prices: self.prices()
         }));
       };
@@ -991,7 +987,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
             '<div class="arrow" style="border-left:5px solid #313785"></div>' +
             '<div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">' +
             'Click here to add more storage devices to this server, or move the sliders to increase size.</div>' +
-          '</div>'       
+          '</div>'
         $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
         $("#pop3").fadeIn(2000);
       });
