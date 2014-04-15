@@ -712,7 +712,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
           ip: true,
           firewall: false,
           drives: {
-            ssd: [],
+            ssd: [1],
             hdd: [],
           },
           prices: self.prices()
@@ -726,7 +726,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
           firewall: false,
           drives: {
             ssd: [],
-            hdd: [],
+            hdd: [20],
           },
           prices: self.prices()
         }));
@@ -789,7 +789,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       //   prices: self.prices()
       // }));
       // self.account_details = new account_details({lower:10, vms: 0, ips: 0, prices: self.prices()});
-      self.account_details = new account_details({lower:10, vms: 0, ips: 0, prices: self.prices()});
+      self.account_details = new account_details({lower:0, vms: 0, ips: 0, prices: self.prices()});
 
 
 
@@ -826,24 +826,31 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     ko.applyBindings(model);
     tutorialsPop();
     function tutorialsPop(){
+      var popZone = _.once(function(){
+        $("#pop1").fadeIn(2000);
+      })
       var popServer = _.once(function(){
-        $("#pop1").fadeOut(2000);
         $("#pop2").fadeIn(2000);
       });
       var popDisk = _.once(function(){
         var popstr =
-          '<div id="pop3" class="popover left" style="position: absolute;top: -48px;left: -185px;width: 150px;white-space: normal;">' +
+          '<div id="pop3" class="popover left" style="position: absolute; line-height:16px;top: -58px;left: -185px;width: 150px;white-space: normal;">' +
             '<div class="arrow" style="border-left:5px solid #313785"></div>' +
             '<div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">' +
-            'Click here to add drives and storage to this server.</div>' +
+            'Click here to add more storage devices to this server, or move the sliders to increase size.</div>' +
           '</div>'       
         $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
-        $("#pop1, #pop2").fadeOut(2000);
         $("#pop3").fadeIn(2000);
       });
-      $("#pop1").fadeIn(2000);
-      $(".zoneselector").click(popServer);
-      $(".hover-large").click(popDisk);
+      popZone();
+      $(".zoneselector").click(function(){
+        popServer();
+        $("#pop1").fadeOut(2000);
+      });
+      $(".hover-large").click(function(){
+        popDisk();
+        $("#pop1, #pop2").fadeOut(2000);
+      });
       $("my-event blue-hover hover-small").click(function(){
         $("#pop1, #pop2, #pop3").fadeOut(2000);
       });
