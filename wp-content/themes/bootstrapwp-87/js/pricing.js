@@ -172,6 +172,12 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     };
     $("body").append(templates);
 
+    function build_prices_obj() {
+      var result = {};
+      for (var key in UK_PRICE)
+        result[key] = ko.observable();
+      return result;
+    }
     function calc_checksum(string) {
       var checksum = _.reduce(string, function(memo, c) {
         return memo ^ c.charCodeAt(0);
@@ -518,10 +524,21 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         return self.value();
       });
     }
+    function select_option(option, currency) {
+      var self = this;
+      self.name = ko.observable(option.name);
+      self.price = ko.observable(option.price())
+      self.formatted_price = ko.computed(function(){
+        return format_price(self.price(), currency()) + '/month';
+      });
+    }
     function server_licenses(options, currency, choosen) {
       var self = this,
           value;
-      self.options = ko.observableArray(options);
+      self.options = ko.observableArray();
+      for (var i=0; i < options.length; i++) {
+        self.options.push(new select_option(options[i], currency));
+      }
       value = self.options()[choosen] || null;
       self.value = ko.observable(value);
       self.remove_option = function() {
@@ -535,6 +552,43 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       });
       self.formatted_price = ko.computed(function(){
         return format_price(self.price(), currency());
+      });
+      self.choosen = ko.computed(function() {
+        return _.indexOf(self.options(), self.value());
+      });
+    }
+    function select_percentage_option(option) {
+      var self = this;
+      self.name = ko.observable(option.name);
+      self.price = ko.observable(option.price);
+      self.times = ko.observable(option.times);
+      self.formatted_price = ko.computed(function(){
+        var calc_price = self.price() * 100;
+        if (calc_price)
+          return calc_price + '%' + ' discount';
+        return '';
+      });
+    }
+    function subscription_plans(options, currency, total_price, choosen) {
+      var self = this,
+          initial_value;
+
+      self.options = ko.observableArray();
+      for (var i=0; i < options.length; i++) {
+        self.options.push(new select_percentage_option(options[i], currency));
+      }
+      initial_value = self.options()[choosen];
+
+      self.value = ko.observable(initial_value);
+      self.price = ko.computed(function(){
+        var choice = self.value();
+        if (choice)
+          return -1 * choice.price() * total_price();
+        return 0;
+      });
+      self.times = ko.computed(function() {
+        var value = self.value();
+        return  value ? value.times() : 0;
       });
       self.choosen = ko.computed(function() {
         return _.indexOf(self.options(), self.value());
@@ -559,7 +613,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         self.selected(0);
       };
       self.formatted_price = ko.computed(function(){
-        return format_price(self.price(), options.currency());
+
+        return format_price(self.price(), options.currency()) + '/month';
       });
       self.choosen = ko.computed(function() {
         return self.selected() || 0;
@@ -836,6 +891,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
           data['virtual_machines'] = self.get_virtual_machines();
           data['containers'] = self.get_containers();
           data['account_details'] = self.build_account_details();
+          data['subscription'] = self.shift();
           data['country'] = self.shift();
         }
         return data;
@@ -867,6 +923,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
               'ips': 0,
               'vlans': 10
             },
+            'subscription': 0,
             'country': first_country
           };
 
@@ -954,12 +1011,6 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       // Normal attributes
       self.country = ko.observable(initial_data['country']);
 
-      function build_prices_obj() {
-        var result = {};
-        for (var key in UK_PRICE)
-          result[key] = ko.observable();
-        return result;
-      }
       self.countries_prices = build_prices_obj();
       self.prices = ko.computed({
         read: function() {
@@ -1008,6 +1059,18 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
         return total;
       });
+
+      self.subscription_plans = new subscription_plans(
+        [
+          {'name': 'No plan', 'times':0, 'price': 0},
+          {'name': '6 Months', 'times':6, 'price': 0.10},
+          {'name': '12 Months', 'times':12, 'price': 0.15},
+          {'name': '24 Months', 'times':24, 'price': 0.25}
+        ],
+        self.prices().CURRENCY,
+        self.price,
+        initial_data['subscription']
+      );
       self.burst_price = ko.computed(function() {
         var total = _.reduce(self.containers(), function(memo, obj) {
           var price = parseFloat(obj.burst_price());
@@ -1038,6 +1101,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         result.push(temp_list);
         result.push(']');
         result.push(self.account_details.serialize());
+        result.push(self.subscription_plans.choosen());
         result.push(self.country());
 
         var result_string = _.flatten(result).join(','),
@@ -1045,13 +1109,28 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
         location.hash = encodeURI(checksum + '%' + result_string);
         return result_string;
-      });
+      }).extend({ rateLimit: 500 });
 
-      self.formatted_burst_price = ko.computed(function(){
+      self.formatted_burst_price = ko.computed(function() {
         return format_price(self.burst_price(), self.prices().CURRENCY());
       });
-      self.formatted_price = ko.computed(function(){
+      self.formatted_discount = ko.computed(function() {
+        var price = self.subscription_plans.price();
+        if (price)
+          return '-' + format_price(-1*price, self.prices().CURRENCY());
+        return format_price(price, self.prices().CURRENCY());
+      });
+      self.formatted_price = ko.computed(function() {
         return format_price(self.price(), self.prices().CURRENCY());
+      });
+      self.formatted_total_price = ko.computed(function() {
+        var price_month = self.subscription_plans.price() + self.price(),
+            price_month_formatted = format_price(price_month, self.prices().CURRENCY()),
+            times = self.subscription_plans.times(),
+            total_formatted = format_price(price_month * times, self.prices().CURRENCY());
+        if (times)
+          return price_month_formatted + ' * ' + times + ' = ' + total_formatted
+        return price_month_formatted;
       });
     }
 
