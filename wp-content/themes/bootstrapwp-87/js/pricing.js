@@ -172,6 +172,12 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     };
     $("body").append(templates);
 
+    function calc_checksum(string) {
+      var checksum = _.reduce(string, function(memo, c) {
+        return memo ^ c.charCodeAt(0);
+      }, 123); // salt
+      return checksum;
+    }
     function get_country_based_on_location(){
       var domain = location.host.split('.').splice(-1, 1)[0],
           local = DOMAINS_TO_LOCATION[domain];
@@ -781,7 +787,12 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     function parse_string_into_data(string) {
       var no_hash = string.substring(1),
           decoded = decodeURI(no_hash),
-          parser = new Parser(decoded.split(','));
+          splited_info = decoded.split('%')
+          checksum = splited_info[0],
+          parser = new Parser(splited_info[1].split(','));
+
+      if (parseInt(checksum) !== calc_checksum(splited_info[1]))
+        throw "Wrong checksum";
       return parser.parse();
     }
     // Main View Model
@@ -800,8 +811,13 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
           };
 
       // See if the url can turn into a data set
-      if (location.hash)
-        initial_data = parse_string_into_data(location.hash);
+      if (location.hash) {
+        try {
+          initial_data = parse_string_into_data(location.hash);
+        }
+        catch(err) {
+        }
+      }
       //Constants
       self.country_flags = ZONES;
 
@@ -959,8 +975,10 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         result.push(self.account_details.serialize());
         result.push(self.country());
 
-        var result_string = _.flatten(result).join(',');
-        location.hash = encodeURI(result_string);
+        var result_string = _.flatten(result).join(','),
+            checksum = calc_checksum(result_string);
+
+        location.hash = encodeURI(checksum + '%' + result_string);
         return result_string;
       });
 
@@ -971,6 +989,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         return format_price(self.price(), self.prices().CURRENCY());
       });
     }
+
     var model = new viewModel();
     ko.applyBindings(model);
     tutorialsPop();
