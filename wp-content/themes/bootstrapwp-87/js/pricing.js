@@ -173,7 +173,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     $("body").append(templates);
 
     function get_country_based_on_location(){
-      var domain = location.host.split('.').splice(-1,1)[0],
+      var domain = location.host.split('.').splice(-1, 1)[0],
           local = DOMAINS_TO_LOCATION[domain];
       if (local)
         return local;
@@ -224,94 +224,84 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       return 0;
     }
     function bandwidth(lower, prices) {
-      return new slider({
+      return new single_slider({
         'currency': prices.CURRENCY,
         'name': 'Data',
         'min': LIMITS.BANDWIDTH_MIN,
         'max': LIMITS.BANDWIDTH_MAX,
         'lower_bar': lower,
         'lower_price': prices.BANDWIDTH_PER_GB,
-        'upper_bar': LIMITS.BANDWIDTH_MAX,
         'upper_price': prices.BANDWIDTH_PER_GB,
         'snap': 1,
-        'unit': 'GB',
-        'double_bars': false
+        'unit': 'GB'
       });
     }
     function cpu_virtual_machine(lower, prices) {
-      return new slider({
+      return new single_slider({
         'currency': prices.CURRENCY,
         'name': 'CPU',
         'min': LIMITS.CPU_VM_MIN,
         'max': LIMITS.CPU_VM_MAX,
         'lower_bar': lower,
         'lower_price': prices.CPU_PER_MHZ,
-        'upper_bar': LIMITS.CPU_VM_MAX,
         'upper_price': prices.CPU_PER_MHZ,
         'snap': LIMITS.CPU_INCREMENTS,
-        'unit': 'MHz',
-        'double_bars': false
+        'unit': 'MHz'
       });
     }
-    function cpu_container(lower, upper, prices) {
-      return new slider({
+    function cpu_container(lower_upper, prices) {
+      return new double_slider({
         'currency': prices.CURRENCY,
         'name': 'CPU',
         'min': LIMITS.CPU_CONTAINER_MIN,
         'max': LIMITS.CPU_CONTAINER_MAX,
-        'lower_bar': lower,
+        'lower_bar': lower_upper[0],
         'lower_price': prices.CPU_CONTAINER_PER_MHZ,
-        'upper_bar': upper,
+        'upper_bar': lower_upper[1],
         'upper_price': prices.CPU_CONTAINER_PER_MHZ,
         'snap': LIMITS.CPU_INCREMENTS,
-        'unit': 'MHz',
-        'double_bars': true
+        'unit': 'MHz'
       });
     }
     function ram_virtual_machine(lower, prices) {
-      return new slider({
+      return new single_slider({
         'currency': prices.CURRENCY,
         'name': 'RAM',
         'min': LIMITS.RAM_VM_MIN,
         'max': LIMITS.RAM_VM_MAX,
         'lower_bar': lower,
         'lower_price': prices.MEMORY_PER_MB,
-        'upper_bar': LIMITS.RAM_VM_MAX,
         'upper_price': prices.MEMORY_PER_MB,
         'snap': LIMITS.RAM_INCREMENTS,
-        'unit': 'MB',
-        'double_bars': false
+        'unit': 'MB'
       });
     }
-    function ram_container(lower, upper, prices) {
-      return new slider({
+    function ram_container(lower_upper, prices) {
+      return new double_slider({
         'currency': prices.CURRENCY,
         'name': 'RAM',
         'min': LIMITS.RAM_CONTAINER_MIN,
         'max': LIMITS.RAM_CONTAINER_MAX,
-        'lower_bar': lower,
+        'lower_bar': lower_upper[0],
         'lower_price': prices.MEMORY_CONTAINER_PER_MB,
-        'upper_bar': upper,
+        'upper_bar': lower_upper[1],
         'upper_price': prices.MEMORY_CONTAINER_PER_MB,
         'snap': LIMITS.RAM_INCREMENTS,
-        'unit': 'MB',
-        'double_bars': true
+        'unit': 'MB'
       });
     }
     function ssd_folder(lower, prices) {
       var self = this;
-      self = new slider({
+      self = new single_slider({
         'currency': prices.CURRENCY,
         'name': 'SSD',
         'min': LIMITS.SSD_MIN,
         'max': LIMITS.SSD_MAX,
         'lower_bar': lower,
         'lower_price': prices.SSD_PER_GB,
-        'upper_bar': LIMITS.SSD_MAX,
         'upper_price': prices.SSD_PER_GB,
         'snap': 1,
-        'unit': 'GB',
-        'double_bars': false
+        'unit': 'GB'
       });
       self.template = 'ssd-folder-template';
       self.type = 'ssd';
@@ -319,18 +309,16 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     }
     function ssd_drive(lower, prices) {
       var self = this;
-      self = new slider({
+      self = new single_slider({
         'currency': prices.CURRENCY,
         'name': 'SSD',
         'min': LIMITS.SSD_MIN,
         'max': LIMITS.SSD_MAX,
         'lower_bar': lower,
         'lower_price': prices.SSD_PER_GB,
-        'upper_bar': LIMITS.SSD_MAX,
         'upper_price': prices.SSD_PER_GB,
         'snap': 1,
-        'unit': 'GB',
-        'double_bars': false
+        'unit': 'GB'
       });
       self.template = 'ssd-drive-template';
       self.type = 'ssd';
@@ -338,21 +326,57 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
     }
     function hdd_drive(lower, prices) {
       var self = this;
-      self = new slider({
+      self = new single_slider({
         'currency': prices.CURRENCY,
         'name': 'HDD',
         'min': LIMITS.HDD_MIN,
         'max': LIMITS.HDD_MAX,
         'lower_bar': lower,
         'lower_price': prices.DISK_PER_GB,
-        'upper_bar': LIMITS.HDD_MAX,
         'upper_price': prices.DISK_PER_GB,
         'snap': 1,
-        'unit': 'GB',
-        'double_bars': false
+        'unit': 'GB'
       });
       self.type = 'hdd';
       self.template = 'drive-template';
+      return self;
+    }
+    function single_slider(options) {
+      options.double_bars = false;
+      var self = new slider(options);
+
+      self.choosen = ko.computed(function() {
+        return self.lower_input();
+      });
+      return self;
+    }
+    function double_slider(options){
+      options.double_bars = true;
+      var self = new slider(options);
+      self.upper_input = ko.computed({
+        read: function() {
+          return parseInt(compute_value(self.upper(), options.min, options.max, options.snap).toFixed(0));
+        },
+        write: function(value) {
+          var lower = self.lower_input();
+          if (value < lower)
+            value = lower;
+          else if (value > options.max)
+            value = options.max;
+          var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);
+          self.upper(percentage);
+        },
+        owner: self
+      });
+      self.upper_price = ko.computed(function() {
+        return (self.upper_input() - self.lower_input()) * options.upper_price() * 2;
+      });
+      self.upper_style = function() {
+        return self.upper() + '%';
+      };
+      self.choosen = ko.computed(function() {
+        return [self.lower_input(), self.upper_input()];
+      });
       return self;
     }
     function slider(options) {
@@ -377,42 +401,22 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         },
         owner: self
       });
-      self.upper_input = ko.computed({
-        read: function() {
-          return parseInt(compute_value(self.upper(), options.min, options.max, options.snap).toFixed(0));
-        },
-        write: function(value) {
-          var lower = self.lower_input();
-          if (value < lower)
-            value = lower;
-          else if (value > options.max)
-            value = options.max;
-          var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);
-          self.upper(percentage);
-        },
-        owner: self
-      });
+
       self.value = ko.computed(function() {
         return compute_value(self.lower(), options.min, options.max, options.snap);
       });
       self.price = ko.computed(function() {
         return self.lower_input() * options.lower_price();
       });
-      self.upper_price = ko.computed(function() {
-        return (self.upper_input() - self.lower_input()) * options.upper_price() * 2;
-      });
+
       self.formatted_price = ko.computed(function(){
         return format_price(self.price(), options.currency());
       });
-
+      self.upper_input = function() {
+        return options.max;
+      };
       self.lower_style = function() {
         return self.lower() + '%';
-      };
-      self.upper_style = function() {
-        return self.upper() + '%';
-      };
-      self.choosen = function() {
-        return {'lower': self.lower(), 'upper': self.upper()};
       };
     }
 
@@ -429,9 +433,9 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.formatted_price = ko.computed(function(){
         return format_price(self.price(), options.currency());
       });
-      self.choosen = function() {
+      self.choosen = ko.computed(function() {
         return self.active();
-      };
+      });
     }
     function account_option(options) {
       var self = this;
@@ -443,6 +447,9 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       });
       self.formatted_price = ko.computed(function(){
         return format_price(self.price(), options.currency());
+      });
+      self.choosen = ko.computed(function(){
+        return self.value();
       });
     }
     function server_licenses(options, currency, choosen) {
@@ -463,9 +470,9 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.formatted_price = ko.computed(function(){
         return format_price(self.price(), currency());
       });
-      self.choosen = function() {
+      self.choosen = ko.computed(function() {
         return _.indexOf(self.options(), self.value());
-      };
+      });
     }
     function remote_desktops(options) {
       var self = this;
@@ -488,9 +495,9 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.formatted_price = ko.computed(function(){
         return format_price(self.price(), options.currency());
       });
-      self.choosen = function() {
-        return self.selected();
-      };
+      self.choosen = ko.computed(function() {
+        return self.selected() || 0;
+      });
     }
     var unique_id = {
       build: function() {
@@ -500,8 +507,26 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       name: 'server',
       prev: 0
     };
+    function serialize_function() {
+      var drives_data = {ssd: [], hdd: []},
+          drives = this.drives();
+      for (var i=0; i < drives.length; i++) {
+        drives_data[drives[i].type].push(drives[i].choosen());
+      }
+      var result = [
+        this.cpu.choosen(),
+        this.ram.choosen(),
+        this.ip.choosen(),
+        this.firewall.choosen()
+      ];
+      result.push(drives_data['ssd']);
+      result.push(']');
+      result.push(drives_data['hdd']);
+      result.push(']');
+      return result;
+    }
 
-    function BaseServer(options, builder) {
+    function base_server(options, builder) {
       var self = this,
           i;
       self.ip = new checkbox({'currency': options.prices.CURRENCY, 'name': 'Static IP', 'active': options.ip, 'price': options.prices.COST_PER_STATIC_IP});
@@ -510,30 +535,19 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       self.drives = ko.observableArray([]);
 
       // Init
-      for (i = 0; i < options.drives.ssd.length; i++) {
-        self.drives.push(new builder.ssd(options.drives.ssd[i], options.prices));
+      for (i = 0; i < options.ssd.length; i++) {
+        self.drives.push(new builder.ssd(options.ssd[i], options.prices));
       }
-      for (i = 0; i < options.drives.hdd.length; i++) {
-        self.drives.push(new builder.hdd(options.drives.hdd[i], options.prices));
+      for (i = 0; i < options.hdd.length; i++) {
+        self.drives.push(new builder.hdd(options.hdd[i], options.prices));
       }
 
       // Actions
       self.remove_disk = function(data, event) {
         self.drives.remove(data.data);
       };
-      self.add_disk = function(data, event) {
-        self.drives.push(new ssd_folder(50, options.prices));
-        $("#pop1, #pop2, #pop3").fadeOut(2000);
-      };
-      self.price = function(){
-        return 0;
-      };
-
-      self.formatted_price = ko.computed(function(){
-        return format_price(self.price(), options.prices.CURRENCY());
-      });
-
     }
+
 
     function get_base_server_price() {
       var total = 0;
@@ -550,54 +564,42 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
             ssd: ssd_folder,
             hdd: hdd_drive
           },
-          self = new BaseServer(options, builder);
+          self = new base_server(options, builder);
 
       // Normal attributes
-      self.cpu = new cpu_container(options.cpu.lower, options.cpu.upper, options.prices);
-      self.ram = new ram_container(options.ram.lower, options.ram.upper, options.prices);
+      self.cpu = new cpu_container(options.cpu, options.prices);
+      self.ram = new ram_container(options.ram, options.prices);
 
       self.price = ko.computed(get_base_server_price, self);
-
-      self.burst_price = ko.computed(function() {
-        var total = _.reduce(self.range, function(memo, obj) {
-          var price = parseFloat(obj.upper_price());
-          if (_.isNumber(price))
-            return memo + price;
-          return memo;
-        }, 0);
-        return total;
+      self.formatted_price = ko.computed(function() {
+        return format_price(self.price(), options.prices.CURRENCY());
       });
 
+      self.burst_price = ko.computed(function() {
+        var total = 0;
+        total += self.cpu.upper_price();
+        total += self.ram.upper_price();
+
+        return total;
+      });
+      self.add_disk = function(data, event) {
+        self.drives.push(new ssd_folder(50, options.prices));
+        $("#pop1, #pop2, #pop3").fadeOut(2000);
+      };
+      self.serialize = ko.computed(serialize_function, self);
       return self;
     }
-    // container.prototype = new BaseServer;
-    // function parse_virtual_machine(virtual_machine) {
-    //   return {
-    //     cpu: virtual_machine.range[0].choosen(),
-    //     ram: virtual_machine.range[1].choosen(),
-    //     ip: virtual_machine.additional_options[0].choosen(),
-    //     firewall: virtual_machine.additional_options[1].choosen(),
-    //     drives: {
-    //       ssd: [],
-    //       hdd: [1.6129],
-    //     },
-    //     remote_desktops: 1,
-    //     additional_microsoft_license: 2,
-    //     windows_server_license: 0,
-    //     // prices: self.prices()
-    //   };
-    // }
     function virtual_machine(options) {
       var builder = {
             ssd: ssd_drive,
             hdd: hdd_drive
           },
-          self = new BaseServer(options, builder);
+          self = new base_server(options, builder);
       self.unique_id = unique_id.build();
 
       // Normal attributes
-      self.cpu = new cpu_virtual_machine(options.cpu.upper, options.prices);
-      self.ram = new ram_virtual_machine(options.ram.upper, options.prices);
+      self.cpu = new cpu_virtual_machine(options.cpu, options.prices);
+      self.ram = new ram_virtual_machine(options.ram, options.prices);
 
       self.windows_server_licenses = new server_licenses([
         {'name': 'Web Server 2008', 'price': options.prices.COST_PER_WINSERVERWEB},
@@ -624,6 +626,10 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
         return total;
       });
+      self.formatted_price = ko.computed(function() {
+        return format_price(self.price(), options.prices.CURRENCY());
+      });
+
 
       // Actions
       self.switch_to_hdd = function(data, event) {
@@ -641,14 +647,38 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
           self.drives.splice(index, 0, new_drive);
         }
       };
+      self.add_disk = function(data, event) {
+        self.drives.push(new ssd_drive(50, options.prices));
+        $("#pop1, #pop2, #pop3").fadeOut(2000);
+      };
+      self.serialize = ko.computed(function() {
+        var machine_data = serialize_function.call(self),
+            result = [
+              self.windows_server_licenses.choosen(),
+              self.additional_microsoft_licenses.choosen(),
+              self.remote_desktops.choosen()
+            ];
+        machine_data.push(result);
+        return machine_data;
+      });
       return self;
     }
 
     function account_details(options) {
       var self = this;
       self.bandwidth = new bandwidth(options.lower, options.prices);
-      self.additional_ips = new account_option({currency: options.prices.CURRENCY, range: 6, name: 'Additional IPs', price: options.prices.COST_PER_STATIC_IP, value: 0});
-      self.additional_vlans = new account_option({currency: options.prices.CURRENCY, range: 6, name: 'Additional VLANs', price: options.prices.COST_PER_VLAN, value: 0});
+      self.additional_ips = new account_option({currency: options.prices.CURRENCY,
+        range: 6,
+        name: 'Additional IPs',
+        price: options.prices.COST_PER_STATIC_IP,
+        value: options.ips
+      });
+      self.additional_vlans = new account_option({currency: options.prices.CURRENCY,
+        range: 6,
+        name: 'Additional VLANs',
+        price: options.prices.COST_PER_VLAN,
+        value: options.virtual_lans
+      });
 
       self.price = ko.computed(function() {
         var total = 0;
@@ -658,13 +688,120 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
         return total;
       });
+      self.serialize = ko.computed(function() {
+        var result = [
+          self.bandwidth.choosen(),
+          self.additional_ips.choosen(),
+          self.additional_vlans.choosen()
+        ];
+        return result;
+      });
     }
 
+    function Parser(list) {
+      var self = this;
+      for (var i=0; i < list.length; i++) {
+        self.push(list[i]);
+      }
+
+      self.build_virtual_machine = function() {
+        var result = {
+          'cpu': self.shift(),
+          'ram': self.shift(),
+          'ip': self.shift(),
+          'firewall': self.shift(),
+          'ssd': self.get_drives(),
+          'hdd': self.get_drives(),
+          'windows_server_license': self.shift(),
+          'additional_microsoft_license': self.shift(),
+          'remote_desktops': self.shift()
+        };
+        return result;
+      };
+      self.build_container = function() {
+        var result = {
+          'cpu': [self.shift(), self.shift()],
+          'ram': [self.shift(), self.shift()],
+          'ip': self.shift(),
+          'firewall': self.shift(),
+          'ssd': self.get_drives(),
+          'hdd': self.get_drives()
+        };
+        return result;
+      };
+      self.get_drives = function() {
+        var list = [],
+            element = self.shift();
+        while(self.not_end(element)) {
+          list.push(element);
+          element = self.shift();
+        }
+        return list;
+      };
+      self.get_virtual_machines = function() {
+        return self.get_servers(self.build_virtual_machine);
+      };
+      self.get_containers = function() {
+        return self.get_servers(self.build_container);
+      };
+      self.get_servers = function(factory) {
+        var element = self[0],
+            servers = [];
+        while(self.not_end(element)) {
+          servers.push(factory());
+          element = self[0];
+        }
+        self.shift(); // remove ']'
+        return servers;
+      };
+      self.not_end = function(element) {
+        return element !== ']' && self.length > 0;
+      };
+      self.build_account_details = function() {
+        return {
+          'bandwidth': self.shift(),
+          'virtual_lans': self.shift(),
+          'ips': self.shift()
+        };
+      };
+      self.parse = function() {
+        var data = {};
+        if (self.length) {
+          data['virtual_machines'] = self.get_virtual_machines();
+          data['containers'] = self.get_containers();
+          data['account_details'] = self.build_account_details();
+          data['country'] = self.shift();
+        }
+        return data;
+      };
+    }
+    Parser.prototype = Object.create(Array.prototype);
+    Parser.constructor = Parser;
+
+    function parse_string_into_data(string) {
+      var no_hash = string.substring(1),
+          decoded = decodeURI(no_hash),
+          parser = new Parser(decoded.split(','));
+      return parser.parse();
+    }
     // Main View Model
     function viewModel() {
       var self = this,
-          first_country = get_country_based_on_location();
+          first_country = get_country_based_on_location(),
+          initial_data = {
+            'virtual_machines': [],
+            'containers': [],
+            'account_details': {
+              'bandwidth': 10,
+              'ips': 0,
+              'vlans': 10
+            },
+            'country': first_country
+          };
 
+      // See if the url can turn into a data set
+      if (location.hash)
+        initial_data = parse_string_into_data(location.hash);
       //Constants
       self.country_flags = ZONES;
 
@@ -707,8 +844,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       };
       self.add_container = function() {
         self.containers.push(new container({
-          cpu: {lower:0, upper: 2000},
-          ram: {lower:256, upper: 1024},
+          cpu: [0, 2000],
+          ram: [256, 1024],
           ip: true,
           firewall: false,
           drives: {
@@ -720,8 +857,8 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       };
       self.add_virtual_machine = function() {
         self.virtual_machines.push(new virtual_machine({
-          cpu: {upper: 2000},
-          ram: {upper: 1024},
+          cpu: 2000,
+          ram: 1024,
           ip: true,
           firewall: false,
           drives: {
@@ -738,7 +875,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         self.containers.remove(data.server);
       };
       // Normal attributes
-      self.country = ko.observable(first_country);
+      self.country = ko.observable(initial_data['country']);
 
       function build_prices_obj() {
         var result = {};
@@ -760,38 +897,29 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
         },
         owner: self
       });
-      self.prices(first_country);
+      // Set country for first time
+      self.prices(self.country());
+
       self.virtual_machines = ko.observableArray();
+      var temp,
+          temp_prices = self.prices();
+      for (var i=0; i < initial_data['virtual_machines'].length; i++) {
+        temp = initial_data['virtual_machines'][i];
+        temp['prices'] = temp_prices;
+        self.virtual_machines.push(new virtual_machine(temp));
+      }
       self.containers = ko.observableArray();
-      // self.containers.push(new container({
-      //   cpu: {lower:0, upper: 2000},
-      //   ram: {lower:256, upper: 1024},
-      //   ip: true,
-      //   firewall: false,
-      //   drives: {
-      //     ssd: [10],
-      //     hdd: []
-      //   },
-      //   prices: self.prices()
-      // }));
-      // self.virtual_machines.push(new virtual_machine({
-      //   cpu: {upper: 2000},
-      //   ram: {upper: 1024},
-      //   ip: true,
-      //   firewall: false,
-      //   drives: {
-      //     ssd: [10],
-      //     hdd: [],
-      //   },
-      //   remote_desktops: 1,
-      //   additional_microsoft_license: 2,
-      //   windows_server_license: 0,
-      //   prices: self.prices()
-      // }));
-      // self.account_details = new account_details({lower:10, vms: 0, ips: 0, prices: self.prices()});
-      self.account_details = new account_details({lower:0, vms: 0, ips: 0, prices: self.prices()});
-
-
+      for (i=0; i < initial_data.containers.length; i++) {
+        temp = initial_data['containers'][i];
+        temp['prices'] = temp_prices;
+        self.containers.push(new container(temp));
+      }
+      self.account_details = new account_details({
+        lower: initial_data['account_details']['bandwidth'],
+        virtual_lans: initial_data['account_details']['virtual_lans'],
+        ips: initial_data['account_details']['ips'],
+        prices: self.prices()
+      });
 
       // Computed
       self.price =  ko.computed(function() {
@@ -813,7 +941,32 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
         return total;
       });
+      self.serialize = ko.computed(function() {
+        var virtual_machines = self.virtual_machines(),
+            containers = self.containers(),
+            temp_list,
+            result = [],
+            i;
 
+        temp_list = [];
+        for (i=0; i < virtual_machines.length; i++) {
+          temp_list.push(virtual_machines[i].serialize());
+        }
+        result.push(temp_list);
+        result.push(']');
+        temp_list = [];
+        for (i=0; i < containers.length; i++) {
+          temp_list.push(containers[i].serialize());
+        }
+        result.push(temp_list);
+        result.push(']');
+        result.push(self.account_details.serialize());
+        result.push(self.country());
+
+        var result_string = _.flatten(result).join(',');
+        location.hash = encodeURI(result_string);
+        return result_string;
+      });
 
       self.formatted_burst_price = ko.computed(function(){
         return format_price(self.burst_price(), self.prices().CURRENCY());
