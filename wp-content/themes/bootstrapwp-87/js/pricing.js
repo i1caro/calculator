@@ -283,7 +283,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       });
     }
     function ram_container(lower_upper, prices) {
-      return new double_slider({
+      return new double_locked_sliders({
         'currency': prices.CURRENCY,
         'name': 'RAM',
         'min': LIMITS.RAM_CONTAINER_MIN,
@@ -356,7 +356,67 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       });
       return self;
     }
-    function double_slider(options){
+    function double_locked_sliders(options) {
+      var self = new double_slider(options);
+
+      self.lower_input = ko.computed({
+        read: function() {
+          var result = parseInt(compute_value(self.lower(), options.min, options.max, options.snap).toFixed(0));
+              upper_lock = result*4;
+          if (upper_lock < self.upper_input()) {
+            self.upper_input(upper_lock);
+          }
+          return result;
+        },
+        write: function(value) {
+          var upper = self.upper_input(),
+              upper_lock;
+
+          if (value < options.min)
+            value = options.min;
+          if (value > upper)
+            value = upper;
+
+          upper_lock = value*4;
+          if (upper_lock < self.upper_input()) {
+            self.upper_input(upper_lock);
+          }
+          var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);
+          self.lower(percentage);
+        },
+        owner: self
+      });
+      self.upper_input = ko.computed({
+        read: function() {
+          var result = parseInt(compute_value(self.upper(), options.min, options.max, options.snap).toFixed(0));
+              lower_lock = result/4;
+          if (lower_lock > self.lower_input()) {
+            self.lower_input(lower_lock);
+          }
+          return result;
+        },
+        write: function(value) {
+          var lower = self.lower_input(),
+              lower_lock;
+
+          if (value < lower)
+            value = lower;
+          else if (value > options.max)
+            value = options.max;
+
+          lower_lock = value/4;
+          if (lower_lock > self.lower_input()) {
+            self.lower_input(lower_lock);
+          }
+
+          var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);
+          self.upper(percentage);
+        },
+        owner: self
+      });
+      return self;
+    }
+    function double_slider(options) {
       options.double_bars = true;
       var self = new slider(options);
       self.upper_input = ko.computed({
@@ -825,7 +885,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       var move_handler = function(event) {
             var data = event.data,
                 mouse_move = ((event.clientX - data.offset) * 100) / data.bar_size,
-                distance = limit(data.start + mouse_move, data.lower_bound, data.upper_bound);
+                distance = limit(data.start + mouse_move, data.lower_bound(), data.upper_bound());
             data.element(distance);
           },
           stop_move_handler  = function(event) {
@@ -842,18 +902,23 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
 
             }, move_handler);
             $(document).one('mouseup', stop_move_handler);
+          },
+          upper_bound = function() {
+            return 100;
+          },
+          lower_bound = function() {
+            return 0;
           };
+
       self.mouse_down_lower = function(data, event) {
-        var upper_bound = 100;
-        if (data.double_bars)
-          upper_bound = data.upper();
-        start_mouse_down(data, event, this.lower, 0, upper_bound);
+        var tmp_bound = data.double_bars ? data.upper: upper_bound;
+
+        start_mouse_down(data, event, data.lower, lower_bound, tmp_bound);
       };
       self.mouse_down_upper = function(data, event) {
-        var lower_bound = 0;
-        if (data.double_bars)
-          lower_bound = data.lower();
-        start_mouse_down(data, event, this.upper, lower_bound, 100);
+        var tmp_bound = data.double_bars ? data.lower: lower_bound;
+
+        start_mouse_down(data, event, data.upper, tmp_bound, upper_bound);
       };
       self.change_country = function(data, event) {
         self.prices(data.id);
