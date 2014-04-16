@@ -1,6 +1,6 @@
 /* globals _ */
 
-define(['./knockout-3.1.0.debug', './constants', './utils', './parser'], function(ko, CONSTANTS, utils, parser) {
+define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, CONSTANTS, utils, parser) {
   function snap_value(value, snap) {
     if(value > 0)
         return Math.ceil(value / snap) * snap;

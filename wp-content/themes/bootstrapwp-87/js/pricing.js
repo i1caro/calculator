@@ -1,5 +1,5 @@
 /* globals _ */
-define(['./knockout-3.1.0.debug', 'text!./templates.html', './constants', './models', './utils', './parser'],
+define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', './utils', './parser'],
   function(ko, templates, CONSTANTS, models, utils, parser) {
 
     $("body").append(templates);

@@ -1,6 +1,6 @@
 /* globals _ */
 
-define(['./knockout-3.1.0.debug', './utils'], function(ko, utils) {
+define(['./knockout-3.1.0', './utils'], function(ko, utils) {
   function Parser(list) {
     var self = this;
     for (var i=0; i < list.length; i++) {
