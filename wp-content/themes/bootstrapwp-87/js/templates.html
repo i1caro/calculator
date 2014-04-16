@@ -230,7 +230,7 @@
               <label>
                 <span data-bind="text: remote_desktops.name"></span>
                 <select class="form-control" data-bind="options: [0,1,2,3,4], value: remote_desktops.selected"></select>
-                <span>$<span data-bind="text: remote_desktops.price"></span>/month</span>
+                <span data-bind="text: remote_desktops.formatted_price"></span>
               </label>
             </li>
           </ul>
@@ -248,7 +248,7 @@
         <label>
           <span data-bind="text: name"></span>
           <input type="radio" data-bind="checkedValue: $data, checked: $parent.value" />
-          <span>$<span data-bind="text: price"></span>/month</span>
+          <span data-bind="text: formatted_price"></span>
         </label>
       </div>
     </li>

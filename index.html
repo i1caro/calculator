@@ -556,6 +556,16 @@ border:none;
             <p class="text-right burst-price-label">Maximum additional monthly cost of CPU, RAM burst usage:
             </p>
             <span class="burst-price" data-bind='text: formatted_burst_price'></span>
+            <br/>
+            <p class="text-right prominent-price-label">
+              <a class="my-event blue-hover hover-small" data-toggle="modal" data-target="#subscription">Add discount</a>
+            </p>
+            <span class="prominent-price" data-bind='text: formatted_discount'></span>
+            <br/>
+            <p class="text-right prominent-price-label">
+                Totals to:
+            </p>
+            <span class="prominent-price" data-bind='text: formatted_total_price'></span>
           </div>
         </div>
       </div>
@@ -564,6 +574,24 @@ border:none;
   </div>
 <!-- /wordpress copy above -->
 </div><!-- /.span6 -->
+<div id="subscription" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 class="modal-title">Choose a subscription</h4>
+      </div>
+      <div class="modal-body">
+        <ul class="my-modal-ul">
+          <!-- ko template: {name: 'system-options-modal-template', data: subscription_plans} --><!-- /ko -->
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- /Calculator -->
 
 <div class="span2 rightbar">
