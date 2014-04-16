@@ -53,6 +53,9 @@ content: "SSD";
 .drive-hdd:hover:before{
 content: "HDD";
 }
+.drive-folder:hover:before{
+content: "Folder";
+}
 .lower-handle:hover:after, .upper-handle:hover:after  {
     background: #333;
     background: rgba(37, 53, 136, .8);

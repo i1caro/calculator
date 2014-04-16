@@ -103,7 +103,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 38529,
+				"buffer_size": 37563,
 				"line_ending": "Unix"
 			}
 		},
@@ -111,7 +111,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 			"settings":
 			{
-				"buffer_size": 27673,
+				"buffer_size": 32256,
 				"line_ending": "Unix"
 			}
 		},
@@ -163,9 +163,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 327.0,
+		"height": 54.0,
 		"selected_items":
 		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"html",
 				"HTMLPrettify"
@@ -199,10 +203,6 @@
 				"HTMLPrettify"
 			],
 			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
 				"diff",
 				"FileDiffs: Menu"
 			],
@@ -211,7 +211,7 @@
 				"FileDiffs: Menu"
 			]
 		],
-		"width": 575.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -228,6 +228,7 @@
 	},
 	"file_history":
 	[
+		"/home/jonathan/elastic-www/calculator/.git/MERGE_MSG",
 		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
 		"/home/jonathan/elastic-www/test2.js",
 		"/home/jonathan/Downloads/301 Redirects ‹ — WordPress_files/scripts.js",
@@ -475,7 +476,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -483,15 +484,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 38529,
+						"buffer_size": 37563,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								27402,
-								27402
+								3277,
+								3277
 							]
 						],
 						"settings":
@@ -501,7 +502,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1359.0,
+						"translation.y": 5134.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -511,15 +512,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 					"settings":
 					{
-						"buffer_size": 27673,
+						"buffer_size": 32256,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23434,
-								23434
+								16403,
+								16403
 							]
 						],
 						"settings":
@@ -529,7 +530,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8723.0,
+						"translation.y": 6263.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -574,8 +575,8 @@
 						"selection":
 						[
 							[
-								5725,
-								5725
+								2946,
+								2946
 							]
 						],
 						"settings":
@@ -585,7 +586,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1354.0,
+						"translation.y": 327.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

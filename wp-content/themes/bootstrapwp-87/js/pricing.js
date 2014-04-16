@@ -1074,8 +1074,34 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
           '</div>'
         $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
         $("#pop3").fadeIn(2000);
+        window.setTimeout(function(){
+          $("#pop3").fadeOut(2000);
+        },4000);
       });
+      // Longer explanation in Folder popover on longer mouseover
+      var popFolder = function(){
+        $("<style type='text/css' id='dynamic' />").appendTo("head");
+        var timeoutId;
+        $(".drive-folder").hover(function() {
+          if (!timeoutId) {
+            timeoutId = window.setTimeout(function() {
+              console.log("2")
+              timeoutId = null;
+              $("#dynamic").text(".drive-folder:hover:before{white-space:normal; width:150px;;content: 'Folders are the cloud storage that Elastic Containers use. They are also elastic and resize automatically to fit their contents'!important}");
+            }, 1500);
+          }
+        }, function () {
+          if (timeoutId) {
+            window.clearTimeout(timeoutId);
+            timeoutId = null;
+          }
+          else {
+            $("#dynamic").text("");
+          }
+        });
+      }
       popZone();
+      popFolder();
       $(".zoneselector").click(function(){
         popServer();
         $("#pop1").fadeOut(2000);
@@ -1083,6 +1109,7 @@ define(['./knockout-3.1.0.debug', 'text!./templates.html'],
       $(".hover-large").click(function(){
         popDisk();
         $("#pop1, #pop2").fadeOut(2000);
+        popFolder();
       });
       $("my-event blue-hover hover-small").click(function(){
         $("#pop1, #pop2, #pop3").fadeOut(2000);
