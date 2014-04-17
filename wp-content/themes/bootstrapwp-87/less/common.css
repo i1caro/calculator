@@ -414,16 +414,43 @@ ul.my-modal-ul {
   line-height: 30px;
 }
 .prominent-price {
-font-size: 25px;
+font-size: 22px;
 margin-left: 5px;
 }
 .prominent-price-label {
-font-size: 22px;
+font-size: 19px;
 }
 .burst-price-label {
 font-size: 12px;
 }
 .burst-price {
 font-size: 15px;
-padding:5px;
+margin-left: 5px;
+}
+.final-price {
+  font-size:25px;
+  margin-left: 5px;
+}
+.final-price-label {
+  font-size:22px;
+}
+.modal-body h2 {
+  margin-top:0px;
+}
+.modal-header {
+  background-color:#f5f5f5;
+}
+.pricing-stuff .modal-header button.close {
+  padding:0px;
+}
+div.pricing-stuff div.popover {
+  z-index: 1000;
+}
+#subscription .modal-body ul {
+  width: 225px;
+  float: left;
+}
+#subscription .modal-description {
+  float: left;
+  width: 49%;
 }

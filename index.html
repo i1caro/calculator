@@ -549,21 +549,21 @@ border:none;
             <div class="panel-body" data-bind="template: { name: 'account-details-template', data: account_details }"></div>
           </div>
           <div class="panel panel-default my-total">
-            <p class="text-right prominent-price-label">Total cost per month:
+            <p class="text-right burst-price-label">Total cost per month:
             </p>
-              <span class="prominent-price" data-bind='text: formatted_price'></span>
+              <span class="burst-price" data-bind='text: formatted_price'></span>
             <br />
             <p class="text-right burst-price-label">Maximum additional monthly cost of CPU, RAM burst usage:
             </p>
             <span class="burst-price" data-bind='text: formatted_burst_price'></span>
             <br/>
-            <p class="text-right prominent-price-label">
+            <p class="text-right burst-price-label">
               <a class="my-event blue-hover hover-small" data-toggle="modal" data-target="#subscription">Add discount</a>
             </p>
-            <span class="prominent-price" data-bind='text: formatted_discount'></span>
+            <span class="burst-price" data-bind='text: formatted_discount'></span>
             <br/>
             <p class="text-right prominent-price-label">
-                Totals to:
+                Total <span data-bind="if: afterDiscount"> after discount</span> :
             </p>
             <span class="prominent-price" data-bind='text: formatted_total_price'></span>
           </div>
@@ -585,6 +585,9 @@ border:none;
         <ul class="my-modal-ul">
           <!-- ko template: {name: 'system-options-modal-template', data: subscription_plans} --><!-- /ko -->
         </ul>
+        <div class='modal-description'>
+          Here you can receive a discount for purchasing an up-front subscription for a fixed number of months.
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

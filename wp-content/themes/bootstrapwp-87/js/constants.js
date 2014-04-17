@@ -175,11 +175,16 @@ define(['./knockout-3.1.0'], function(ko) {
       result[key] = ko.observable();
     return result;
   }
+  var SUBSCRIPTION_DISCOUNTS = [
+    {'name': 'No plan', 'times':0, 'price': 0},
+    {'name': '12 Months', 'times':12, 'price': 0.10}
+  ];
   return {
     'LIMITS': LIMITS,
     'KO_PRICE_OBJ': build_prices_obj(),
     'DOMAINS_TO_LOCATION': DOMAINS_TO_LOCATION,
     'ZONES': ZONES,
+    'SUBSCRIPTION_DISCOUNTS': SUBSCRIPTION_DISCOUNTS,
     'COUNTRIES_PRICES': COUNTRIES_PRICES,
   };
-});
+})

@@ -156,12 +156,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
       });
 
       self.subscription_plans = new models.subscription_plans(
-        [
-          {'name': 'No plan', 'times':0, 'price': 0},
-          {'name': '6 Months', 'times':6, 'price': 0.10},
-          {'name': '12 Months', 'times':12, 'price': 0.15},
-          {'name': '24 Months', 'times':24, 'price': 0.25}
-        ],
+        CONSTANTS.SUBSCRIPTION_DISCOUNTS,
         self.prices().currency,
         self.price,
         initial_data['subscription']
@@ -186,6 +181,9 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
       self.formatted_burst_price = ko.computed(function() {
         return utils.format_price(self.burst_price(), self.prices().currency());
       });
+      self.afterDiscount = ko.computed(function() {
+        return self.subscription_plans.price();
+      });
       self.formatted_discount = ko.computed(function() {
         var price = self.subscription_plans.price();
         if (price)
@@ -201,7 +199,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
             times = self.subscription_plans.times(),
             total_formatted = utils.format_price(price_month * times, self.prices().currency());
         if (times)
-          return price_month_formatted + ' * ' + times + ' = ' + total_formatted;
+          return price_month_formatted + '  (for ' + times + ' months) = ' + total_formatted;
         return price_month_formatted;
       });
     }

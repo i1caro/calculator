@@ -352,9 +352,10 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     self.formatted_price = ko.computed(function(){
       var calc_price = self.price() * 100;
       if (calc_price)
-        return calc_price + '%' + ' discount';
+        return '(' + calc_price + '%' + ' discount)';
       return '';
     });
+    return "testing";
   }
   function subscription_plans(options, currency, total_price, choosen) {
     var self = this,
