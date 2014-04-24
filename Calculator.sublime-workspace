@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"margin",
+				"margin-bottom"
+			],
+			[
+				"su",
+				"subscription_plans"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
 				"i",
 				"i"
 			],
@@ -76,10 +88,6 @@
 				"tor-p"
 			],
 			[
-				"margin",
-				"margin-top"
-			],
-			[
 				"vm",
 				"vmdrawer"
 			],
@@ -103,7 +111,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 38871,
+				"buffer_size": 39285,
 				"line_ending": "Unix"
 			}
 		},
@@ -111,31 +119,28 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 			"settings":
 			{
-				"buffer_size": 9440,
+				"buffer_size": 9643,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "wp-content/themes/bootstrapwp-87/js/parser.js",
+			"contents": "Searching 10 files for \"country_flags\" (case sensitive)\n\n/home/jonathan/elastic-www/bkup/calc bkup/wpindex.html:\n    5  \n    6          <div id=\"whichzone\">\n    7:           <!-- ko foreach: country_flags -->\n    8              <div class=\"zoneselector\" data-bind=\"attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }\">\n    9                <img data-bind=\"attr: {src: '/wp-content/uploads/' + flag}\"/>\n\n/home/jonathan/elastic-www/calculator/index.html:\n  515                Please pick a zone. We've tried to select your closest one, but another may be more cost efficient for bandwidth. You can read about our data centres <a href=\"/cloud-servers/data-centres/\" style=\"color:#fbac29\" alt=\"Our Data Centres\">here</a></div>\n  516            </div>\n  517:           <!-- ko foreach: country_flags -->\n  518            <div class=\"zoneselector\" data-bind=\"attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }\">\n  519              <img data-bind=\"attr: {src: '/wp-content/uploads/' + flag}\"/>\n\n/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/js/pricing.js:\n   31        }\n   32        //Constants\n   33:       self.country_flags = CONSTANTS.ZONES;\n   34  \n   35        // Actions\n\n3 matches across 3 files\n",
 			"settings":
 			{
-				"buffer_size": 4708,
-				"line_ending": "Unix"
+				"buffer_size": 1326,
+				"line_ending": "Unix",
+				"name": "Find Results",
+				"scratch": true
 			}
 		},
 		{
+			"contents": "/* globals _ */\n\ndefine(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, CONSTANTS, utils, parser) {\n  function snap_value(value, snap) {\n    if(value > 0)\n        return Math.ceil(value / snap) * snap;\n    else if(value < 0)\n        return Math.floor(value / snap) * snap;\n    else\n        return value;\n  }\n  function compute_value(percentage, min, max, snap) {\n    var value = min + (max - min) * (Math.pow(10, (percentage / 100.0)) - 1) / (10 - 1);\n\n    return snap_value(value, snap);\n  }\n  function get_percentage_from_value(value, min, max, snap) {\n    var snapped_value = snap_value(value, snap);\n    return 43.4294 * Math.log((max - 10 * min + 9 * snapped_value) / (max - min));\n  }\n  function sum_attr(attribute) {\n    var price_func = attribute.price();\n    if (price_func)\n      return price_func;\n    return 0;\n  }\n  function bandwidth(lower, prices) {\n    return new single_slider({\n      'currency': prices.currency,\n      'name': 'Data',\n      'min': CONSTANTS.LIMITS.bandwidth_min,\n      'max': CONSTANTS.LIMITS.bandwidth_max,\n      'lower_bar': lower,\n      'lower_price': prices.bandwidth_per_gb,\n      'upper_price': prices.bandwidth_per_gb,\n      'snap': 1,\n      'unit': 'GB'\n    });\n  }\n  function cpu_virtual_machine(lower, prices) {\n    return new single_slider({\n      'currency': prices.currency,\n      'name': 'CPU',\n      'min': CONSTANTS.LIMITS.cpu_vm_min,\n      'max': CONSTANTS.LIMITS.cpu_vm_max,\n      'lower_bar': lower,\n      'lower_price': prices.cpu_per_mhz,\n      'upper_price': prices.cpu_per_mhz,\n      'snap': CONSTANTS.LIMITS.cpu_increments,\n      'unit': 'MHz'\n    });\n  }\n  function cpu_container(lower_upper, prices) {\n    return new double_slider({\n      'currency': prices.currency,\n      'name': 'CPU',\n      'min': CONSTANTS.LIMITS.cpu_container_min,\n      'max': CONSTANTS.LIMITS.cpu_container_max,\n      'lower_bar': lower_upper[0],\n      'lower_price': prices.cpu_container_per_mhz,\n      'upper_bar': lower_upper[1],\n      'upper_price': prices.cpu_container_per_mhz,\n      'snap': CONSTANTS.LIMITS.cpu_increments,\n      'unit': 'MHz'\n    });\n  }\n  function ram_virtual_machine(lower, prices) {\n    return new single_slider({\n      'currency': prices.currency,\n      'name': 'RAM',\n      'min': CONSTANTS.LIMITS.ram_vm_min,\n      'max': CONSTANTS.LIMITS.ram_vm_max,\n      'lower_bar': lower,\n      'lower_price': prices.memory_per_mb,\n      'upper_price': prices.memory_per_mb,\n      'snap': CONSTANTS.LIMITS.ram_increments,\n      'unit': 'MB'\n    });\n  }\n  function ram_container(lower_upper, prices) {\n    return new double_locked_sliders({\n      'currency': prices.currency,\n      'name': 'RAM',\n      'min': CONSTANTS.LIMITS.ram_container_min,\n      'max': CONSTANTS.LIMITS.ram_container_max,\n      'lower_bar': lower_upper[0],\n      'lower_price': prices.memory_container_per_mb,\n      'upper_bar': lower_upper[1],\n      'upper_price': prices.memory_container_per_mb,\n      'snap': CONSTANTS.LIMITS.ram_increments,\n      'unit': 'MB'\n    });\n  }\n  function ssd_folder(lower, prices) {\n    var self = this;\n    self = new single_slider({\n      'currency': prices.currency,\n      'name': 'SSD',\n      'min': CONSTANTS.LIMITS.ssd_min,\n      'max': CONSTANTS.LIMITS.ssd_max,\n      'lower_bar': lower,\n      'lower_price': prices.ssd_per_gb,\n      'upper_price': prices.ssd_per_gb,\n      'snap': 1,\n      'unit': 'GB'\n    });\n    self.template = 'ssd-folder-template';\n    self.type = 'ssd';\n    return self;\n  }\n  function ssd_drive(lower, prices) {\n    var self = this;\n    self = new single_slider({\n      'currency': prices.currency,\n      'name': 'SSD',\n      'min': CONSTANTS.LIMITS.ssd_min,\n      'max': CONSTANTS.LIMITS.ssd_max,\n      'lower_bar': lower,\n      'lower_price': prices.ssd_per_gb,\n      'upper_price': prices.ssd_per_gb,\n      'snap': 1,\n      'unit': 'GB'\n    });\n    self.template = 'ssd-drive-template';\n    self.type = 'ssd';\n    return self;\n  }\n  function hdd_drive(lower, prices) {\n    var self = this;\n    self = new single_slider({\n      'currency': prices.currency,\n      'name': 'HDD',\n      'min': CONSTANTS.LIMITS.hdd_min,\n      'max': CONSTANTS.LIMITS.hdd_max,\n      'lower_bar': lower,\n      'lower_price': prices.disk_per_gb,\n      'upper_price': prices.disk_per_gb,\n      'snap': 1,\n      'unit': 'GB'\n    });\n    self.type = 'hdd';\n    self.template = 'drive-template';\n    return self;\n  }\n  function single_slider(options) {\n    options.double_bars = false;\n    var self = new slider(options);\n\n    self.choosen = self.lower_input;\n    return self;\n  }\n\n  // to much duplicated code do it again\n  function double_locked_sliders(options) {\n    var self = new double_slider(options);\n\n    self.lower_input = ko.computed({\n      read: function() {\n        var result = parseInt(compute_value(self.lower(), options.min, options.max, options.snap).toFixed(0)),\n            upper_lock = result * 4;\n        if (upper_lock < self.upper_input()) {\n          self.upper_input(upper_lock);\n        }\n        return result;\n      },\n      write: function(value) {\n        var upper = self.upper_input(),\n            upper_lock;\n\n        if (value < options.min)\n          value = options.min;\n        if (value > upper)\n          value = upper;\n\n        upper_lock = value*4;\n        if (upper_lock < self.upper_input()) {\n          self.upper_input(upper_lock);\n        }\n        var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);\n        self.lower(percentage);\n      },\n      owner: self\n    });\n    self.upper_input = ko.computed({\n      read: function() {\n        var result = parseInt(compute_value(self.upper(), options.min, options.max, options.snap).toFixed(0)),\n            lower_lock = result / 4;\n        if (lower_lock > self.lower_input()) {\n          self.lower_input(lower_lock);\n        }\n        return result;\n      },\n      write: function(value) {\n        var lower = self.lower_input(),\n            lower_lock;\n\n        if (value < lower)\n          value = lower;\n        else if (value > options.max)\n          value = options.max;\n\n        lower_lock = value/4;\n        if (lower_lock > self.lower_input()) {\n          self.lower_input(lower_lock);\n        }\n\n        var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);\n        self.upper(percentage);\n      },\n      owner: self\n    });\n    return self;\n  }\n  function double_slider(options) {\n    options.double_bars = true;\n    var self = new slider(options);\n    self.upper_input = ko.computed({\n      read: function() {\n        return parseInt(compute_value(self.upper(), options.min, options.max, options.snap).toFixed(0));\n      },\n      write: function(value) {\n        var lower = self.lower_input();\n        if (value < lower)\n          value = lower;\n        else if (value > options.max)\n          value = options.max;\n        var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);\n        self.upper(percentage);\n      },\n      owner: self\n    });\n    self.upper_price = ko.computed(function() {\n      return (self.upper_input() - self.lower_input()) * options.upper_price() * 2;\n    });\n    self.upper_style = function() {\n      return self.upper() + '%';\n    };\n    self.choosen = function() {\n      return [self.lower_input(), self.upper_input()];\n    };\n    return self;\n  }\n  function slider(options) {\n    var self = this;\n    self.unit = options.unit;\n    self.name = options.name;\n    self.double_bars = options.double_bars;\n    self.lower = ko.observable(get_percentage_from_value(options.lower_bar, options.min, options.max, options.snap));\n    self.upper = ko.observable(get_percentage_from_value(options.upper_bar, options.min, options.max, options.snap));\n    self.lower_input = ko.computed({\n      read: function() {\n        return parseInt(compute_value(self.lower(), options.min, options.max, options.snap).toFixed(0));\n      },\n      write: function(value) {\n        var upper = self.upper_input();\n        if (value < options.min)\n          value = options.min;\n        if (value > upper)\n          value = upper;\n        var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);\n        self.lower(percentage);\n      },\n      owner: self\n    });\n\n    self.value = ko.computed(function() {\n      return compute_value(self.lower(), options.min, options.max, options.snap);\n    });\n    self.price = ko.computed(function() {\n      return self.lower_input() * options.lower_price();\n    });\n\n    self.formatted_price = ko.computed(function(){\n      return utils.format_price(self.price(), options.currency());\n    });\n    self.upper_input = function() {\n      return options.max;\n    };\n    self.lower_style = function() {\n      return self.lower() + '%';\n    };\n  }\n\n  function checkbox(options) {\n    var self = this;\n    self.name = options.name;\n    self.active = ko.observable(options.active);\n    self.price = ko.computed(function() {\n      if (self.active())\n        return options.price();\n      else\n        return 0;\n    });\n    self.formatted_price = ko.computed(function(){\n      return utils.format_price(self.price(), options.currency());\n    });\n    self.choosen = function() {\n      return ~~self.active(); // turns true to 1 and false to 0\n    };\n  }\n  function account_option(options) {\n    var self = this;\n    self.name = options.name;\n    self.range = _.range(options.range);\n    self.value = ko.observable(options.value);\n    self.price = ko.computed(function() {\n      return self.value() * options.price();\n    });\n    self.formatted_price = ko.computed(function(){\n      return utils.format_price(self.price(), options.currency());\n    });\n    self.choosen = self.value;\n  }\n  function select_option(option, currency) {\n    var self = this;\n    self.name = ko.observable(option.name);\n    self.price = ko.observable(option.price());\n    self.formatted_price = ko.computed(function(){\n      return utils.format_price(self.price(), currency()) + '/month';\n    });\n  }\n  function server_licenses(options, currency, choosen) {\n    var self = this,\n        value;\n    self.options = ko.observableArray();\n    for (var i=0; i < options.length; i++) {\n      self.options.push(new select_option(options[i], currency));\n    }\n    value = self.options()[choosen] || null;\n    self.value = ko.observable(value);\n    self.remove_option = function() {\n      self.value(0);\n    };\n    self.price = ko.computed(function(){\n      var value = self.value();\n      if (value)\n        return value.price();\n      return 0;\n    });\n    self.formatted_price = ko.computed(function(){\n      return utils.format_price(self.price(), currency());\n    });\n    self.choosen = function() {\n      return _.indexOf(self.options(), self.value());\n    };\n  }\n  function select_percentage_option(option) {\n    var self = this;\n    self.name = ko.observable(option.name);\n    self.price = ko.observable(option.price);\n    self.times = ko.observable(option.times);\n    self.formatted_price = ko.computed(function(){\n      var calc_price = self.price() * 100;\n      if (calc_price)\n        return '(' + calc_price + '%' + ' discount)';\n      return '';\n    });\n  }\n  function subscription_plans(options, currency, total_price, choosen) {\n    var self = this,\n        initial_value;\n\n    self.options = ko.observableArray();\n    for (var i=0; i < options.length; i++) {\n      self.options.push(new select_percentage_option(options[i], currency));\n    }\n    initial_value = self.options()[choosen];\n\n    self.value = ko.observable(initial_value);\n    self.price = ko.computed(function(){\n      var choice = self.value();\n      if (choice)\n        return -1 * choice.price() * total_price();\n      return 0;\n    });\n    self.times = ko.computed(function() {\n      var value = self.value();\n      return  value ? value.times() : 0;\n    });\n    self.choosen = function() {\n      return _.indexOf(self.options(), self.value());\n    };\n  }\n  function remote_desktops(options) {\n    var self = this;\n    self.name = 'Remote Desktop CALs';\n    self.selected = ko.observable(options.choosen);\n    self.value = ko.computed(function(){\n      if (self.selected())\n        return {\n          name: self.name,\n          price: self.price\n        };\n    });\n    self.price_unit = options.price;\n    self.price = ko.computed(function(){\n      return self.price_unit() * self.selected();\n    });\n    self.remove_option = function() {\n      self.selected(0);\n    };\n    self.formatted_price = ko.computed(function(){\n\n      return utils.format_price(self.price(), options.currency()) + '/month';\n    });\n    self.choosen = function() {\n      return self.selected() || 0;\n    };\n  }\n  var unique_id = {\n    build: function() {\n      unique_id.prev++;\n      return unique_id.name + unique_id.prev;\n    },\n    name: 'server',\n    prev: 0\n  };\n\n  function base_server(options, builder) {\n    var self = this,\n        i;\n    self.ip = new checkbox({\n      'currency': options.prices.currency,\n      'name': 'Static IP',\n      'active': options.ip,\n      'price': options.prices.cost_per_static_ip\n    });\n    self.firewall = new checkbox({\n      'currency': options.prices.currency,\n      'name': 'Firewall',\n      'active': options.firewall,\n      'price': options.prices.cost_per_firewall\n    });\n\n    self.drives = ko.observableArray([]);\n\n    // Init\n    for (i = 0; i < options.ssd.length; i++) {\n      self.drives.push(new builder.ssd(options.ssd[i], options.prices));\n    }\n    for (i = 0; i < options.hdd.length; i++) {\n      self.drives.push(new builder.hdd(options.hdd[i], options.prices));\n    }\n\n    // Actions\n    self.remove_disk = function(data, event) {\n      self.drives.remove(data.data);\n    };\n  }\n\n  function get_base_server_price() {\n    var total = 0;\n    total += this.cpu.price();\n    total += this.ram.price();\n    total += this.ip.price();\n    total += this.firewall.price();\n    total += _.reduce(this.drives(), utils.sum_function, 0);\n\n    return total;\n  }\n  function container(options) {\n    var builder = {\n          ssd: ssd_folder,\n          hdd: hdd_drive\n        },\n        self = new base_server(options, builder);\n\n    // Normal attributes\n    self.cpu = new cpu_container(options.cpu, options.prices);\n    self.ram = new ram_container(options.ram, options.prices);\n\n    self.price = ko.computed(get_base_server_price, self);\n    self.formatted_price = ko.computed(function() {\n      return utils.format_price(self.price(), options.prices.currency());\n    });\n\n    self.burst_price = ko.computed(function() {\n      var total = 0;\n      total += self.cpu.upper_price();\n      total += self.ram.upper_price();\n\n      return total;\n    });\n    self.add_disk = function(data, event) {\n      self.drives.push(new ssd_folder(50, options.prices));\n      $(\"#pop1, #pop2, #pop3\").fadeOut(2000);\n    };\n    self.serialize = parser.serialize_base_server;\n    return self;\n  }\n  function virtual_machine(options) {\n    var builder = {\n          ssd: ssd_drive,\n          hdd: hdd_drive\n        },\n        self = new base_server(options, builder);\n    self.unique_id = unique_id.build();\n\n    // Normal attributes\n    self.cpu = new cpu_virtual_machine(options.cpu, options.prices);\n    self.ram = new ram_virtual_machine(options.ram, options.prices);\n\n    self.windows_server_licenses = new server_licenses([\n      {'name': 'Web Server 2008', 'price': options.prices.cost_per_winserverweb},\n      {'name': 'Server 2008 Standard', 'price': options.prices.cost_per_winserverstd},\n      {'name': 'Server 2012 Standard', 'price': options.prices.cost_per_winserverent},\n      {'name': 'Server 2008 Enterprise', 'price': options.prices.cost_per_winserver12}\n    ], options.prices.currency, options.windows_server_license);\n    self.additional_microsoft_licenses = new server_licenses([\n      {'name': 'SQL Server 2008 Web', 'price': options.prices.cost_per_mssqlserverweb},\n      {'name': 'SQL Server 2008 Std', 'price': options.prices.cost_per_mssqlserverstd},\n      {'name': 'SQL Server 2012', 'price': options.prices.cost_per_mssqlserver12}\n    ], options.prices.currency, options.additional_microsoft_license);\n    self.remote_desktops = new remote_desktops({\n      'currency': options.prices.currency, 'price': options.prices.cost_per_desktopcal, 'choosen': options.remote_desktops\n    });\n\n    //Computed\n    self.price = ko.computed(function() {\n      var total = get_base_server_price.call(self);\n\n      total += sum_attr(self.windows_server_licenses);\n      total += sum_attr(self.additional_microsoft_licenses);\n      total += sum_attr(self.remote_desktops);\n\n      return total;\n    });\n    self.formatted_price = ko.computed(function() {\n      return utils.format_price(self.price(), options.prices.currency());\n    });\n\n\n    // Actions\n    self.switch_to_hdd = function(data, event) {\n      self.switch_type_disk(data.data, event, hdd_drive);\n    };\n    self.switch_to_ssd = function(data, event) {\n      self.switch_type_disk(data.data, event, ssd_drive);\n    };\n    self.switch_type_disk = function(data, event, factory) {\n      var index = _.indexOf(self.drives(), data),\n          new_drive;\n      if (index > -1) {\n        new_drive = new factory(data.lower_input(), options.prices);\n        self.drives.remove(data);\n        self.drives.splice(index, 0, new_drive);\n      }\n    };\n    self.add_disk = function(data, event) {\n      self.drives.push(new ssd_drive(50, options.prices));\n      $(\"#pop1, #pop2, #pop3\").fadeOut(2000); // this has to move out of here\n    };\n    self.serialize = parser.serialize_virtual_machine;\n    return self;\n  }\n\n  function account_details(options) {\n    var self = this;\n    self.bandwidth = new bandwidth(options.lower, options.prices);\n    self.additional_ips = new account_option({currency: options.prices.currency,\n      range: 6,\n      name: 'Additional IPs',\n      price: options.prices.cost_per_static_ip,\n      value: options.ips\n    });\n    self.additional_vlans = new account_option({currency: options.prices.currency,\n      range: 6,\n      name: 'Additional VLANs',\n      price: options.prices.cost_per_vlan,\n      value: options.virtual_lans\n    });\n\n    self.price = ko.computed(function() {\n      var total = 0;\n      total += self.bandwidth.price();\n      total += self.additional_vlans.price();\n      total += self.additional_vlans.price();\n\n      return total;\n    });\n    self.serialize = ko.computed(function() {\n      var result = [\n        self.bandwidth.choosen(),\n        self.additional_ips.choosen(),\n        self.additional_vlans.choosen()\n      ];\n      return result;\n    });\n  }\n\n  return {\n    'account_details': account_details,\n    'subscription_plans': subscription_plans,\n    'container': container,\n    'virtual_machine': virtual_machine,\n  };\n});\n",
 			"file": "wp-content/themes/bootstrapwp-87/js/models.js",
+			"file_size": 18799,
+			"file_write_time": 1397732014000000,
 			"settings":
 			{
-				"buffer_size": 18770,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "wp-content/themes/bootstrapwp-87/js/utils.js",
-			"settings":
-			{
-				"buffer_size": 1420,
+				"buffer_size": 18777,
 				"line_ending": "Unix"
 			}
 		},
@@ -143,7 +148,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/less/common.css",
 			"settings":
 			{
-				"buffer_size": 8877,
+				"buffer_size": 9510,
 				"line_ending": "Unix"
 			}
 		},
@@ -151,7 +156,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/constants.js",
 			"settings":
 			{
-				"buffer_size": 4554,
+				"buffer_size": 5019,
 				"line_ending": "Unix"
 			}
 		},
@@ -159,7 +164,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
 			"settings":
 			{
-				"buffer_size": 10346,
+				"buffer_size": 10343,
 				"line_ending": "Unix"
 			}
 		},
@@ -175,7 +180,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
 			"settings":
 			{
-				"buffer_size": 233637,
+				"buffer_size": 233541,
 				"line_ending": "Unix"
 			}
 		},
@@ -190,30 +195,21 @@
 				"line_ending": "Unix",
 				"name": "<script src=\"/wp-content/themes/bootstrapwp-87/js/"
 			}
-		},
-		{
-			"file": "/home/jonathan/elastic-www/test2.js",
-			"settings":
-			{
-				"buffer_size": 717,
-				"line_ending": "Unix",
-				"name": "var timeoutId;"
-			}
 		}
 	],
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 54.0,
+		"height": 348.0,
 		"selected_items":
 		[
 			[
-				"install",
-				"Package Control: Install Package"
-			],
-			[
 				"html",
 				"HTMLPrettify"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
 			],
 			[
 				"",
@@ -252,7 +248,7 @@
 				"FileDiffs: Menu"
 			]
 		],
-		"width": 467.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -269,11 +265,14 @@
 	},
 	"file_history":
 	[
+		"/home/jonathan/elastic-www/test2.html",
+		"/home/jonathan/elastic-www/test2.js",
+		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/js/utils.js",
+		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/js/parser.js",
 		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/js/text.js",
 		"/home/jonathan/elastic-www/calculator/highlight.js",
 		"/home/jonathan/elastic-www/calculator/.git/MERGE_MSG",
 		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
-		"/home/jonathan/elastic-www/test2.js",
 		"/home/jonathan/Downloads/301 Redirects ‹ — WordPress_files/scripts.js",
 		"/home/jonathan/elastic-www/pricing/pricing4.js",
 		"/home/jonathan/elastic-www/test.js",
@@ -359,7 +358,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 			"<open file>",
@@ -369,9 +368,51 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"computed",
+			"observable",
+			"visib",
+			"false",
+			"true",
+			"AVAILAB",
+			"get_country_container_availability",
+			"SUBSCRIPTION_DISCOUNTS",
+			"CONTAINER_AVAILABILITY",
+			"AUSTRALIA_PRICE",
+			"UK_PRICE",
+			"true",
+			"country_flags",
+			"ZONES",
+			"zoneselector",
+			"ZONES",
+			"country_flags",
+			"zones",
+			"zonese",
+			"hosting",
+			"storage",
+			"CONSTANTS",
+			"subscriptions",
+			"ZONES",
+			"SUBSCRIPTION_DISCOUNTS",
+			"times",
+			"name",
+			"*",
+			"select_per",
+			"modal",
+			"licences",
+			"licenses",
+			"modal",
+			"no plan",
+			"subscription_plans",
+			"models.subscription_plans",
+			"no plan",
+			"select_percentage_option",
+			"no plan",
+			"radio",
+			"discount",
+			"totals",
 			"add disk",
 			"prices()",
 			"burst",
@@ -457,49 +498,7 @@
 			"940px",
 			"940",
 			"<span class=\"lightblue\">&gt;&gt;</span>",
-			"<span class=\"darkblue\">&gt;&gt;</span>",
-			"<span class=\"darkblue\">&gt;&gt;</span></td>",
-			"<span class=\"darkblue\"&gt;",
-			"&gt;",
-			"build",
-			"current_zone",
-			"@media",
-			"class=\"text340\"",
-			"253588",
-			":hover",
-			"Virtual",
-			"VM",
-			"form",
-			"pricing",
-			"pricing-form",
-			".case-study-image",
-			"pricing-form .btn",
-			"pricingplans",
-			"selectedzone",
-			"30",
-			"selectedzone",
-			"selectedser",
-			"after",
-			"dropdown",
-			"hover",
-			"dropdown-menu",
-			"color:",
-			"$",
-			"jQuery",
-			"pointer;",
-			"e",
-			"@medi",
-			"@media",
-			"max-width",
-			"1095",
-			"position",
-			"localStorage",
-			"data-country",
-			"data-countr",
-			"country",
-			"domain",
-			"jquery-ui",
-			".price"
+			"<span class=\"darkblue\">&gt;&gt;</span>"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -518,7 +517,7 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 9,
 			"sheets":
 			[
 				{
@@ -526,15 +525,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 38871,
+						"buffer_size": 39285,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3181,
-								3181
+								23543,
+								23543
 							]
 						],
 						"settings":
@@ -544,7 +543,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6323.0,
+						"translation.y": 5620.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -554,15 +553,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 					"settings":
 					{
-						"buffer_size": 9440,
+						"buffer_size": 9643,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2478,
+								2478
 							]
 						],
 						"settings":
@@ -572,32 +571,55 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2874.0,
+						"translation.y": 677.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "wp-content/themes/bootstrapwp-87/js/parser.js",
 					"settings":
 					{
-						"buffer_size": 4708,
+						"buffer_size": 1326,
 						"regions":
 						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										191,
+										204
+									],
+									[
+										832,
+										845
+									],
+									[
+										1235,
+										1248
+									]
+								],
+								"scope": ""
+							}
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1243,
+								1243
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"detect_indentation": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -610,15 +632,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/js/models.js",
 					"settings":
 					{
-						"buffer_size": 18770,
+						"buffer_size": 18777,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								920,
-								920
+								4348,
+								4348
 							]
 						],
 						"settings":
@@ -628,53 +650,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7416.0,
+						"translation.y": 1262.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 4,
-					"file": "wp-content/themes/bootstrapwp-87/js/utils.js",
-					"settings":
-					{
-						"buffer_size": 1420,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1420,
-								1420
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
 					"file": "wp-content/themes/bootstrapwp-87/less/common.css",
 					"settings":
 					{
-						"buffer_size": 8877,
+						"buffer_size": 9510,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1405,
-								1405
+								9508,
+								9508
 							]
 						],
 						"settings":
@@ -684,25 +678,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 351.0,
+						"translation.y": 5137.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 5,
 					"file": "wp-content/themes/bootstrapwp-87/js/constants.js",
 					"settings":
 					{
-						"buffer_size": 4554,
+						"buffer_size": 5019,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4554,
-								4554
+								4408,
+								4408
 							]
 						],
 						"settings":
@@ -712,25 +706,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1872.0,
+						"translation.y": 1879.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
 					"settings":
 					{
-						"buffer_size": 10346,
+						"buffer_size": 10343,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								3492,
+								3492
 							]
 						],
 						"settings":
@@ -740,13 +734,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 106.0,
+						"translation.y": 563.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "/home/jonathan/elastic-www/bkup/calc bkup/wpindex.html",
 					"settings":
 					{
@@ -774,19 +768,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
 					"settings":
 					{
-						"buffer_size": 233637,
+						"buffer_size": 233541,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								741,
-								741
+								226935,
+								226935
 							]
 						],
 						"settings":
@@ -796,13 +790,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 121116.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 9,
 					"file": "/home/jonathan/elastic-www/test.js",
 					"settings":
 					{
@@ -826,35 +820,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 1446.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 11,
-					"file": "/home/jonathan/elastic-www/test2.js",
-					"settings":
-					{
-						"buffer_size": 717,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1,
-								1
-							]
-						],
-						"settings":
-						{
-							"auto_name": "var timeoutId;",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

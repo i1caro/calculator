@@ -503,16 +503,16 @@ border:none;
     <h1>Calculator</h1>
   </header>
 <!-- /wordpress copy below -->
-  <div style="padding: 0;">
+  <div style="">
     <div style="color: #313785">
       <div class="pricing-stuff">
         <h2 id="zonetitle">I want servers in:</h2>
 
         <div id="whichzone" style="position:relative;">
-          <div id="pop1" class="popover right in" style="display:none;position: absolute; top: 0; left: 600px;width: 150px;">
+          <div id="pop1" class="popover right in" style="display:none;position: absolute; top: 0; left: 560px;width: 157px;">
             <div class="arrow" style="border-right: 5px solid #313785;"></div>
             <div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">
-              Please pick a zone. We've tried to select your closest one, but another may be more cost efficient. You can read about our data centres <a href="/cloud-servers/data-centres/" style="color:#fbac29" alt="Our Data Centres">here</a></div>
+              Please pick a zone. We've tried to select your closest one, but another may be more cost efficient for bandwidth. You can read about our data centres <a href="/cloud-servers/data-centres/" style="color:#fbac29" alt="Our Data Centres">here</a></div>
           </div>
           <!-- ko foreach: country_flags -->
           <div class="zoneselector" data-bind="attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }">
@@ -525,13 +525,14 @@ border:none;
         <div class="panel panel-default">
           <div class="panel-heading" style="width:100%;">
             <div class="btn-toolbar" style="position: relative;" id="add-new-buttons" role="toolbar">
-              <div id="pop2"  class="popover right in" style="display:none;position: absolute; top: 0; left: 600px;width: 150px;">
+              <div id="pop2"  class="popover right in" style="display:none;position: absolute; top: 0; left: 560px;width: 150px;">
                 <div class="arrow" style="border-right: 5px solid #313785;"></div>
                 <div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">
                   Click here to add cloud servers to your plan.</div>
               </div>
+              <p class="cont-warning" data-bind="visible: coming_soon">Please be aware that Elastic Containers are not yet available in this zone.</p>
               <span  >I want to add a new:</span>
-              <div class="btn-group" style="left: 10px; display:block;margin: 0 auto;width: 60%;">
+              <div class="btn-group" style="left: 10px; display:block;margin-left: 105px;">
                 <a class="blue-hover hover-large" style="position: relative;" data-bind="click: add_virtual_machine">Virtual Machine</a>
                 <a class="blue-hover hover-large" style="position: relative;" data-bind="click: add_container">Elastic Container</a>
               </div>
@@ -557,11 +558,11 @@ border:none;
             </p>
             <span class="burst-price" data-bind='text: formatted_burst_price'></span>
             <br/>
-            <p class="text-right burst-price-label">
-              <a class="my-event blue-hover hover-small" data-toggle="modal" data-target="#subscription">Add discount</a>
+<!--            <p class="text-right burst-price-label">
+              <a class="my-event blue-hover hover-small" data-toggle="modal" data-target="#subscription">Add<span data-bind="if: afterDiscount"> / Remove</span> discount</a>
             </p>
             <span class="burst-price" data-bind='text: formatted_discount'></span>
-            <br/>
+            <br/> -->
             <p class="text-right prominent-price-label">
                 Total <span data-bind="if: afterDiscount"> after discount</span> :
             </p>

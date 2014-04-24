@@ -4,7 +4,9 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
 
     $("body").append(templates);
 
-
+    function get_country_container_availability(id) {
+      return CONSTANTS.CONTAINER_UNAVAILABILITY[id];
+    }
     // Main View Model
     function viewModel() {
       var self = this,
@@ -73,7 +75,9 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
       };
       self.change_country = function(data, event) {
         self.prices(data.id);
+        self.coming_soon(get_country_container_availability(data.id));
       };
+      
       self.add_container = function() {
         self.containers.push(new models.container({
           cpu: [0, 2000],
@@ -104,6 +108,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
       };
       // Normal attributes
       self.country = ko.observable(initial_data['country']);
+      self.coming_soon = ko.observable(get_country_container_availability(initial_data['country']));
 
       self.countries_prices = CONSTANTS.KO_PRICE_OBJ;
       self.prices = ko.computed({
@@ -224,7 +229,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
         $("#pop3").fadeIn(2000);
         window.setTimeout(function(){
           $("#pop3").fadeOut(2000);
-        },4000);
+        },10000);
       });
       // Longer explanation in Folder popover on longer mouseover
       var popFolder = function(){
@@ -234,7 +239,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
           if (!timeoutId) {
             timeoutId = window.setTimeout(function() {
               timeoutId = null;
-              $("#dynamic").text(".drive-folder:hover:before{white-space:normal; width:150px;;content: 'Folders are the cloud storage that Elastic Containers use. They are also elastic and resize automatically to fit their contents'!important}");
+              $("#dynamic").text(".drive-folder:hover:before{white-space:normal; width:150px;content: 'Folders are the cloud storage that Elastic Containers use. They are also elastic and resize automatically to fit their contents'!important}");
             }, 1500);
           }
         }, function () {

@@ -24,8 +24,8 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
       var result = {
         'cpu': [self.shift(), self.shift()],
         'ram': [self.shift(), self.shift()],
-        'ip': self.shift(),
-        'firewall': self.shift(),
+        'ip': utils.toBoolean(self.shift()),
+        'firewall': utils.toBoolean(self.shift()),
         'ssd': self.get_drives(),
         'hdd': self.get_drives()
       };

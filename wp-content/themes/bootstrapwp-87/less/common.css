@@ -416,6 +416,7 @@ ul.my-modal-ul {
 .prominent-price {
 font-size: 22px;
 margin-left: 5px;
+line-height: 40px !important;
 }
 .prominent-price-label {
 font-size: 19px;
@@ -443,6 +444,10 @@ margin-left: 5px;
 .pricing-stuff .modal-header button.close {
   padding:0px;
 }
+.span6 div.pricing-stuff h3 {
+  margin-top: 0px;
+  margin-bottom: 10px
+}
 div.pricing-stuff div.popover {
   z-index: 1000;
 }
@@ -453,4 +458,10 @@ div.pricing-stuff div.popover {
 #subscription .modal-description {
   float: left;
   width: 49%;
+}
+.cont-warning {
+  background-color: #fc6666;
+  color: #fcf8e3;
+  text-align: center;
+  padding: 10px;
 }

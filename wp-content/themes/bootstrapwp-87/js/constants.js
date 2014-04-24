@@ -114,6 +114,17 @@ define(['./knockout-3.1.0'], function(ko) {
     'hkg-e': HONG_KONG_PRICE,
     'syd-v': AUSTRALIA_PRICE
   };
+  var CONTAINER_UNAVAILABILITY = {
+    'lon-p': false,
+    'lon-b': true,
+    'ams-e': false,
+    'sjc-c': false,
+    'lax-p': false,
+    'sat-p': true,
+    'tor-p': false,
+    'hkg-e': false,
+    'syd-v': true
+  };
   var ZONES = [
     {
       id: "lon-p",
@@ -166,7 +177,7 @@ define(['./knockout-3.1.0'], function(ko) {
     'au' : 'hkg-e',
     'hk' : 'hkg-e',
     'ca' : 'tor-p',
-    'uk' : 'lon-b',
+    'uk' : 'lon-p',
     'com': 'sjc-c'
   };
   function build_prices_obj() {
@@ -185,6 +196,7 @@ define(['./knockout-3.1.0'], function(ko) {
     'DOMAINS_TO_LOCATION': DOMAINS_TO_LOCATION,
     'ZONES': ZONES,
     'SUBSCRIPTION_DISCOUNTS': SUBSCRIPTION_DISCOUNTS,
+    'CONTAINER_UNAVAILABILITY': CONTAINER_UNAVAILABILITY,
     'COUNTRIES_PRICES': COUNTRIES_PRICES,
   };
 })
