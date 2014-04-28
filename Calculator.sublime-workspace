@@ -124,6 +124,22 @@
 			}
 		},
 		{
+			"file": "wp-content/themes/bootstrapwp-87/js/parser.js",
+			"settings":
+			{
+				"buffer_size": 4742,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "wp-content/themes/bootstrapwp-87/js/utils.js",
+			"settings":
+			{
+				"buffer_size": 1420,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"contents": "Searching 10 files for \"country_flags\" (case sensitive)\n\n/home/jonathan/elastic-www/bkup/calc bkup/wpindex.html:\n    5  \n    6          <div id=\"whichzone\">\n    7:           <!-- ko foreach: country_flags -->\n    8              <div class=\"zoneselector\" data-bind=\"attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }\">\n    9                <img data-bind=\"attr: {src: '/wp-content/uploads/' + flag}\"/>\n\n/home/jonathan/elastic-www/calculator/index.html:\n  515                Please pick a zone. We've tried to select your closest one, but another may be more cost efficient for bandwidth. You can read about our data centres <a href=\"/cloud-servers/data-centres/\" style=\"color:#fbac29\" alt=\"Our Data Centres\">here</a></div>\n  516            </div>\n  517:           <!-- ko foreach: country_flags -->\n  518            <div class=\"zoneselector\" data-bind=\"attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }\">\n  519              <img data-bind=\"attr: {src: '/wp-content/uploads/' + flag}\"/>\n\n/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/js/pricing.js:\n   31        }\n   32        //Constants\n   33:       self.country_flags = CONSTANTS.ZONES;\n   34  \n   35        // Actions\n\n3 matches across 3 files\n",
 			"settings":
 			{
@@ -145,10 +161,13 @@
 			}
 		},
 		{
+			"contents": "/** { background-color: rgba(255,0,0,.2); }\n\n* * { background-color: rgba(0,255,0,.2); }\n\n* * * { background-color: rgba(0,0,255,.2); }\n\n* * * * { background-color: rgba(255,0,255,.2); }\n\n* * * * * { background-color: rgba(0,255,255,.2); }\n\n* * * * * * { background-color: rgba(255,255,0,.2); }\n*/\n\n\n/* JUST FOR EDITING - REMOVE AFTER PUTTING IN BOOTSTRAP  */\n.panel-heading > .btn-toolbar > .btn-group > a {\n  position:relative;\n}\n.rightbar{\ndisplay:none;\n}\n.span6 .hover-huge {\n  margin:20px auto;\n}\n.tooltipa, a.tooltipa, a.tooltipb, .tooltipb, .lower-handle, .upper-handle {\n    display: inline;\n    position: relative;\n    text-decoration: none;\n}\n.server-icon:hover:before, .drive-icon:hover:before {\nbackground: #333;\nbackground: rgba(37, 53, 136, .8);\nborder-radius: 5px;\ncolor: #fff;\npadding: 5px 15px;\nfloat:right;\nz-index: 98;\nwhite-space: nowrap;\nmargin:0 82px 0 0;\n}\n.vm-icon:hover:before {\ncontent: \"Virtual Machine\";\n}\n.container-icon:hover:before {\ncontent: \"Elastic Container\";\n}\n.bandwith-icon:hover:before {\ncontent: \"Bandwidth Subscription\";\n}\n.drive-ssd:hover:before{\ncontent: \"SSD\";\n}\n.drive-hdd:hover:before{\ncontent: \"HDD\";\n}\n.drive-folder:hover:before{\ncontent: \"Folder\";\n}\n.lower-handle:hover:after, .upper-handle:hover:after  {\n    background: #333;\n    background: rgba(37, 53, 136, .8);\n    border-radius: 5px;\n    bottom: 22px;\n    color: #fff;\n    content: attr(data-title);\n    padding: 5px 15px;\n    position: absolute;\n    z-index: 98;\n    white-space:nowrap;\n}\n.upper-handle:hover:after{\n    left: -43px;\n}\n.lower-handle:hover:after{\n    left: -48px;\n}\n.my-slider {\n  margin-left:5px;\n}\n.bandwith-icon{\n  background:url('/wp-content/uploads/datatransfer.png') center, no repeat;\n}\n[data-bind=\"template: { name: 'account-details-template', data: account_details }\"] {\n  padding: 15px 0px 0px 0px;\n}\n.pricing-stuff a {\n  cursor:pointer;\n}\n.pricing-stuff button.close {\n  padding:5px;\n}\n#zonetitle, #servertitle {\n    padding: 10px 0 15px 0;\n}\n#whichzone {\n    -ms-text-justify: distribute-all-lines;\n    text-justify: distribute-all-lines;\n    margin-bottom: 79px;\n    text-align: justify;\n    height:105px;\n    line-height:15px;\n}\n.stretch{\n  width:100%!important;\n  display:inline-block!important;\n}\n.zoneselector {\ndisplay: inline-block;\nzoom: 1;\nopacity: 0.6;\npadding: 7px;\nmax-width: 100px;\nvertical-align: top;\ncursor: pointer;\nwidth: 80px;\nfont-size: 12px;\npadding-bottom:0px;\nmargin-bottom:5px;\n}\n#whichzone .selectedzone {\n    background-color: #22A6FF;\n    border-radius: 4px;\n    color: #FFFFFF;\n    cursor: pointer;\n    font-weight: bold;\n    opacity: 1;\n}\n#whichzone img {\n    display: block;\n    margin: 0 auto;\n    max-width: 58px;\n}\n#whichzone span {\n    display: block;\n    margin: 10px auto;\n    text-align: center;\n}\n#whichzone .comingsoon {\n  cursor: not-allowed;\n  opacity:0.4;\n}\n.comingsoon:before {\n    position: absolute;\n    content: '';\n    height: 100px;\n    width: 100px;\n    background: url(\"/wp-content/uploads/coming-soon.png\") top right no-repeat;\n}\n.panel-heading {\n  vertical-align: middle;\n  display: table;\n}\n.panel-heading span {\n  vertical-align: middle;\n  display: table-cell;\n}\n.panel-heading .hover-large {\n  text-align: center;\n  vertical-align: middle;\n  display: table-cell;\n  float: left;\n  padding:3px 15px 3px 15px;\n  margin-right: 15px;\n}\n.example {\n    border: 1px solid #DDD;\n    border-radius: 4px;\n    position: relative;\n    padding: 50px 30px 20px;\n    margin: 30px 0px 20px;\n    overflow: hidden;\n}\n\n.big-letter {\n  font-size:48px;\n}\n.small-bar {\n  height: 8px;\n}\n.handler {\n  background-color: green;\n  position: absolute;\n  width: 1.5em;\n  height: 1.5em;\n  cursor: default;\n}\n.container {\n  width: 980px;\n  margin-left: auto;\n  margin-right: auto;\n}\n.three-fourths {\n  width: 75%;\n}\n.one-fourth {\n  width: 25%;\n}\n.column {\n  float: left;\n  padding-left: 6px;\n  padding-right: 6px;\n}\n\n.slider-tooltip {\n  position: absolute;\n  display: block;\n  top: -25px;\n  width: 35px;\n  height: 20px;\n  color: #fff;\n  text-align: center;\n  font: 10pt Tahoma, Arial, sans-serif ;\n  border-radius: 3px;\n  border: 1px solid #333;\n    -webkit-box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);\n    box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box;\n  background: -moz-linear-gradient(top,  rgba(69,72,77,0.5) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */\n  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,0.5)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */\n  background: -webkit-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */\n  background: -o-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */\n  background: -ms-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */\n  background: linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */\n}\n.noUi-target {\n  border-radius: 4px;\n  border: 1px solid #D3D3D3;\n  box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;\n}\n.noUi-horizontal {\n  /*position: relative;*/\n  height: 20px;\n}\n.noUI-base {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  background-color: #f0ad4e;\n}\n\n\n.btn-cp {\n  background-repeat: no-repeat;\n  background-color: transparent;\n  width: 31px;\n  height: 31px;\n  text-decoration: none;\n  border: 0;\n  cursor: pointer;\n  text-indent: -9999px;\n  padding: 0;\n  display: inline-block;\n  vertical-align: middle;\n}\n.drive-icon {\n  width: 64px;\n  height: 64px;\n  background-repeat: no-repeat;\n  float: left;\n  margin-bottom: 3px;\n}\n.btn-delete {\n  background-position: 0 -279px;\n}\n.vm-icon {\n  background: url('/wp-content/uploads/vm.png');\n}\n.container-icon {\n  background: url('/wp-content/uploads/container.png');\n}\n.bandwith-icon {\n  background:url('/wp-content/uploads/datatransfer.png') 100% 12% no-repeat\n}\n.drive-ssd {\n  background-image: url('/wp-content/uploads/drive_ssd.png');\n}\n.drive-hdd {\n  background-image: url('/wp-content/uploads/drive_disk.png');\n}\n.drive-folder {\n  background-image: url('/wp-content/uploads/folder.png');\n}\n.server-icon {\n  width: 72px;\n  height: 72px;\n  background-repeat: no-repeat;\n  float: left;\n  position: relative;\n  margin-bottom: 10px;\n  margin-left: -4px;\n}\n.my-checkbox {\n  margin-left: 36px !important;\n}\n.my-input-select-box {\n  margin-left: 10px;\n  width: 45px;\n}\n.storage-icon {\n  cursor: pointer;\n  background: url(\"/wp-content/uploads/drive_add.png\") no-repeat top left;\n  padding-left:23px;\n  width: 20px;\n  height: 20px;\n  line-height: 21px;\n  display: inline-block;\n  font-weight: bold;\n}\nul.my-ul {\n  list-style-type: none;\n  padding: 0;\n  margin: 0 0 9px 5px;\n}\nli.slider-definition {\n  font-weight: bold;\n  text-align: left;\n  display:inline;\n}\n.my-slider-handle {\n  border-color: #313785;\n  border-radius: 0px;\n  background-image: none;\n  cursor: pointer;\n  background-color: #22a6ff;\n  top: -.3em;\n  margin-left: -.6em;\n  position: absolute;\n  z-index: 2;\n  width: 1.2em;\n  height: 1.2em;\n  border: 1px solid #444444;\n}\n.my-slider {\n  margin:7px 5px 0 5px;\n  border: 1px solid #555555;\n  border-color: #313785;\n  border-radius: 0px;\n  background-color: white;\n  height: .8em;\n  position: relative;\n  text-align: left;\n  font-family: 'Trebuchet MS',Verdana, Arial, sans-serif;\n  font-size: 1.1em;\n}\n.my-input-box{\n  margin-bottom: 0px;\n  border-color: #313785;\n  width: 35px;\n}\n.my-text {\n  margin-top: 5px;\n}\n.my-text-number {\n  margin-top: 5px;\n  float: right;\n}\n.my-event {\n  white-space: nowrap;\n  overflow: auto;\n}\n.my-server {\n  background-color: rgba(100,100,100, 0.1);\n}\n.text-right {\n  text-align: right;\n}\n.panel-body {\n  background-color: rgba(100,100,100, 0.1);\n}\nul.my-modal-ul {\n  list-style-type: none;\n  padding: 6px;\n  margin: 0 0 5px 5px;\n}\n.my-final-price {\n  font-size: 11pt;\n  font-weight: bold;\n  color: #313785;\n}\n.my-total{\n  padding-right: 14px;\n  padding-top: 20px;\n  text-align: right;\n}\n.my-burst-input{\n  width: 70px;\n  text-align: right;\n}\n.pricing-stuff {\n  font-size: 9.5pt;\n  font-weight: bold;\n  color: #313785;\n}\n.pricing-stuff .btn, .pricing-stuff .btn-primary {\n  font-size: 9.5pt;\n  font-family: Arial;\n  font-weight: bold;\n  box-shadow: none;\n  background-color: white;\n  border-radius: 0px !important;\n  background-image: none;\n  color: #313785;\n}\n.pricing-stuff .btn-primary {\n  background-color: #22a6ff;\n  color: white;\n}\n.my-total p, .my-total span {\n  display:inline;\n  line-height: 30px;\n}\n.prominent-price {\nfont-size: 22px;\nmargin-left: 5px;\nline-height: 40px !important;\n}\n.prominent-price-label {\nfont-size: 19px;\n}\n.burst-price-label {\nfont-size: 12px;\n}\n.burst-price {\nfont-size: 15px;\nmargin-left: 5px;\n}\n.final-price {\n  font-size:25px;\n  margin-left: 5px;\n}\n.final-price-label {\n  font-size:22px;\n}\n.modal-body h2 {\n  margin-top:0px;\n}\n.modal-header {\n  background-color:#f5f5f5;\n}\n.pricing-stuff .modal-header button.close {\n  padding:0px;\n}\n.span6 div.pricing-stuff h3 {\n  margin-top: 0px;\n  margin-bottom: 10px\n}\ndiv.pricing-stuff div.popover {\n  z-index: 1000;\n}\n#subscription .modal-body ul {\n  width: 225px;\n  float: left;\n}\n#subscription .modal-description {\n  float: left;\n  width: 49%;\n}\n.cont-warning {\n  background-color: #fc6666;\n  color: #fcf8e3;\n  text-align: center;\n  padding: 10px;\n}",
 			"file": "wp-content/themes/bootstrapwp-87/less/common.css",
+			"file_size": 9510,
+			"file_write_time": 1398259177000000,
 			"settings":
 			{
-				"buffer_size": 9510,
+				"buffer_size": 9450,
 				"line_ending": "Unix"
 			}
 		},
@@ -180,7 +199,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
 			"settings":
 			{
-				"buffer_size": 233541,
+				"buffer_size": 233582,
 				"line_ending": "Unix"
 			}
 		},
@@ -200,9 +219,13 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 348.0,
+		"height": 96.0,
 		"selected_items":
 		[
+			[
+				"diff",
+				"FileDiffs: Menu"
+			],
 			[
 				"html",
 				"HTMLPrettify"
@@ -240,15 +263,11 @@
 				"HTMLPrettify"
 			],
 			[
-				"diff",
-				"FileDiffs: Menu"
-			],
-			[
 				"filed",
 				"FileDiffs: Menu"
 			]
 		],
-		"width": 575.0
+		"width": 449.0
 	},
 	"console":
 	{
@@ -358,7 +377,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"<open file>",
@@ -371,6 +390,10 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"self.shift()",
+			"parser",
+			"parser.strin",
+			"hash",
 			"computed",
 			"observable",
 			"visib",
@@ -494,11 +517,7 @@
 			"safe",
 			"978px",
 			"978px\n",
-			"978px",
-			"940px",
-			"940",
-			"<span class=\"lightblue\">&gt;&gt;</span>",
-			"<span class=\"darkblue\">&gt;&gt;</span>"
+			"978px"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -517,7 +536,7 @@
 	"groups":
 	[
 		{
-			"selected": 9,
+			"selected": 11,
 			"sheets":
 			[
 				{
@@ -560,8 +579,8 @@
 						"selection":
 						[
 							[
-								2478,
-								2478
+								956,
+								956
 							]
 						],
 						"settings":
@@ -571,13 +590,73 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 677.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "wp-content/themes/bootstrapwp-87/js/parser.js",
+					"settings":
+					{
+						"buffer_size": 4742,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								862,
+								862
+							],
+							[
+								913,
+								913
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "wp-content/themes/bootstrapwp-87/js/utils.js",
+					"settings":
+					{
+						"buffer_size": 1420,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								949,
+								949
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"settings":
 					{
 						"buffer_size": 1326,
@@ -628,7 +707,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 5,
 					"file": "wp-content/themes/bootstrapwp-87/js/models.js",
 					"settings":
 					{
@@ -639,8 +718,8 @@
 						"selection":
 						[
 							[
-								4348,
-								4348
+								121,
+								121
 							]
 						],
 						"settings":
@@ -650,25 +729,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1262.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 6,
 					"file": "wp-content/themes/bootstrapwp-87/less/common.css",
 					"settings":
 					{
-						"buffer_size": 9510,
+						"buffer_size": 9450,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								9508,
-								9508
+								6531,
+								6531
 							]
 						],
 						"settings":
@@ -678,13 +757,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5137.0,
+						"translation.y": 3740.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 7,
 					"file": "wp-content/themes/bootstrapwp-87/js/constants.js",
 					"settings":
 					{
@@ -712,7 +791,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 8,
 					"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
 					"settings":
 					{
@@ -740,7 +819,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "/home/jonathan/elastic-www/bkup/calc bkup/wpindex.html",
 					"settings":
 					{
@@ -768,19 +847,19 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
 					"settings":
 					{
-						"buffer_size": 233541,
+						"buffer_size": 233582,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								226935,
-								226935
+								0,
+								0
 							]
 						],
 						"settings":
@@ -796,7 +875,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "/home/jonathan/elastic-www/test.js",
 					"settings":
 					{
@@ -807,8 +886,8 @@
 						"selection":
 						[
 							[
-								3963,
-								3963
+								4922,
+								4922
 							]
 						],
 						"settings":
@@ -819,7 +898,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1446.0,
+						"translation.y": 1114.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

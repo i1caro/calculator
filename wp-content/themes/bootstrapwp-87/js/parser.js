@@ -14,8 +14,8 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
         'firewall': utils.toBoolean(self.shift()),
         'ssd': self.get_drives(),
         'hdd': self.get_drives(),
-        'windows_server_license': self.shift(),
-        'additional_microsoft_license': self.shift(),
+        'windows_server_license': utils.toBoolean(self.shift()),
+        'additional_microsoft_license': utils.toBoolean(self.shift()),
         'remote_desktops': self.shift()
       };
       return result;

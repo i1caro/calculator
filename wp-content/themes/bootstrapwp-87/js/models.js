@@ -332,9 +332,9 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
       self.value(0);
     };
     self.price = ko.computed(function(){
-      var value = self.value();
-      if (value)
-        return value.price();
+      var value2 = self.value();
+      if (value2)
+        return value2.price();
       return 0;
     });
     self.formatted_price = ko.computed(function(){
@@ -355,7 +355,6 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
         return '(' + calc_price + '%' + ' discount)';
       return '';
     });
-    return "testing";
   }
   function subscription_plans(options, currency, total_price, choosen) {
     var self = this,
@@ -504,8 +503,8 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     self.windows_server_licenses = new server_licenses([
       {'name': 'Web Server 2008', 'price': options.prices.cost_per_winserverweb},
       {'name': 'Server 2008 Standard', 'price': options.prices.cost_per_winserverstd},
-      {'name': 'Server 2012 Standard', 'price': options.prices.cost_per_winserverent},
-      {'name': 'Server 2008 Enterprise', 'price': options.prices.cost_per_winserver12}
+      {'name': 'Server 2008 Enterprise', 'price': options.prices.cost_per_winserverent},
+      {'name': 'Server 2012 Standard', 'price': options.prices.cost_per_winserver12}
     ], options.prices.currency, options.windows_server_license);
     self.additional_microsoft_licenses = new server_licenses([
       {'name': 'SQL Server 2008 Web', 'price': options.prices.cost_per_mssqlserverweb},
