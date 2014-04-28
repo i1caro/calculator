@@ -313,10 +313,10 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
   }
   function select_option(option, currency) {
     var self = this;
-    self.name = ko.observable(option.name);
-    self.price = ko.observable(option.price());
+    self.name = option.name;
+    self.price = option.price;
     self.formatted_price = ko.computed(function(){
-      return utils.format_price(self.price(), currency()) + '/month';
+      return utils.format_price(self.price(), currency());
     });
   }
   function server_licenses(options, currency, choosen) {
