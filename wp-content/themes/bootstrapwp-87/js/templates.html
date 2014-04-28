@@ -52,6 +52,8 @@
           server: $data,
           remove: $root.remove_virtual_machine,
           icon: "vm-icon",
+          pop: "Virtual Machine",
+          long: 'Our VMs are virtualized, flexible, on-demand servers for any OS. They are designed to behave just like physical servers.',
           has_licenses: true,
         }
       } -->
@@ -64,6 +66,8 @@
           server: $data,
           remove: $root.remove_container,
           icon: "container-icon",
+          pop: "Elastic Container",
+          long: "Elastic Containers are hassle-free, high performance Linux cloud servers that scale up and down automatically, saving you money when not running at maximum load.",
           has_licenses: false
         }
       } -->
@@ -78,7 +82,7 @@
   </div>
   <div class="my-server" style ="padding: 5px">
       <div class="column" style="width: 10%">
-        <div class="server-icon" data-bind="css: icon"></div>
+        <div class="server-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
         <!-- ko with: server -->
           <a class="my-event blue-hover hover-small" data-bind="event: {click: add_disk}">Add Disk</a>
         <!-- /ko -->
@@ -133,6 +137,8 @@
     data: {
       icon: 'drive-folder',
       can_switch: false,
+      pop: 'Folder',
+      long: 'Folders are the cloud storage that Elastic Containers use. They are also elastic and resize automatically to fit their contents. All Folders are backed by Enterprise-Grade SSD.',
       data: $data
     }
   }"></div>
@@ -145,6 +151,8 @@
       can_switch: true,
       switch_message: 'Switch to HDD',
       switch_disk: $parent.switch_to_hdd,
+      pop: 'SSD',
+      long: 'Our Enterprise-Grade Solid State Drives are recommended for IO-intensive applications like streaming media servers or large databases.',
       data: $data
     }
   }"></div>
@@ -157,6 +165,8 @@
       can_switch: true,
       switch_message: 'Switch to SSD',
       switch_disk: $parent.switch_to_ssd,
+      pop: 'HDD',
+      long: 'Hard Disk Drive. Moving from HDD to SSD is often a bigger performance improvement than increasing CPU or Memory.',
       data: $data
     }
   }"></div>
@@ -166,7 +176,7 @@
     <button type="button" class="close" style="margin-top:-8px;font-size:17px;padding-bottom:2px;" title="Remove disk" data-bind="click: $parents[1].remove_disk" aria-hidden="true">×</button>
     <li>
       <div class="column" style="width: 9%; padding-bottom: 10px">
-        <div class="drive-icon" data-bind="css: icon"></div>
+        <div class="drive-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
         <span>
           <!-- ko if: can_switch -->
             <a class="my-event blue-hover hover-small" data-bind="event: {click: switch_disk}, text: switch_message"></a>
@@ -199,7 +209,7 @@
 </script>
 <script type="text/html" id="account-details-template">
   <div class="column" style="width: 10%">
-    <div class="server-icon bandwith-icon"></div>
+    <div class="server-icon bandwith-icon" data-pop="Bandwidth Subscription" data-long="Your monthly data transfer subscription."></div>
   </div>
   <div class="column" style="width: 85%">
     <ul class="my-ul">

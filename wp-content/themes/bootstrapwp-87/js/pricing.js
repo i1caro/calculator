@@ -212,18 +212,25 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
     var model = new viewModel();
     ko.applyBindings(model);
     function tutorialsPop() {
+      $("<style type='text/css' id='dynamicpop' />").appendTo("head");
       var popZone = _.once(function(){
         $("#pop1").fadeIn(2000);
+        window.setTimeout(function(){
+          $("#pop1").fadeOut(2000);
+        },15000);
       });
       var popServer = _.once(function(){
         $("#pop2").fadeIn(2000);
+        window.setTimeout(function(){
+          $("#pop2").fadeOut(2000);
+        },15000);
       });
       var popDisk = _.once(function(){
         var popstr =
           '<div id="pop3" class="popover left" style="position: absolute; line-height:16px;top: -58px;left: -185px;width: 150px;white-space: normal;">' +
             '<div class="arrow" style="border-left:5px solid #313785"></div>' +
-            '<div class="popover-content" style="background-color:#313785;color: #fff;border-radius: 3px;">' +
-            'Click here to add more storage devices to this server, or move the sliders to increase size.</div>' +
+            '<div class="popover-content">' +
+              'Click here to add more storage devices to this server, or move the sliders to increase size.</div>' +
           '</div>';
         $("a[data-bind='event: {click: add_disk}']").css("position","relative").prepend(popstr);
         $("#pop3").fadeIn(2000);
@@ -231,29 +238,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
           $("#pop3").fadeOut(2000);
         },10000);
       });
-      // Longer explanation in Folder popover on longer mouseover
-      var popFolder = function(){
-        $("<style type='text/css' id='dynamic' />").appendTo("head");
-        var timeoutId;
-        $(".drive-folder").hover(function() {
-          if (!timeoutId) {
-            timeoutId = window.setTimeout(function() {
-              timeoutId = null;
-              $("#dynamic").text(".drive-folder:hover:before{white-space:normal; width:150px;content: 'Folders are the cloud storage that Elastic Containers use. They are also elastic and resize automatically to fit their contents'!important}");
-            }, 1500);
-          }
-        }, function () {
-          if (timeoutId) {
-            window.clearTimeout(timeoutId);
-            timeoutId = null;
-          }
-          else {
-            $("#dynamic").text("");
-          }
-        });
-      };
       popZone();
-      popFolder();
       $(".zoneselector").click(function(){
         popServer();
         $("#pop1").fadeOut(2000);
@@ -261,13 +246,14 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
       $(".hover-large").click(function(){
         popDisk();
         $("#pop1, #pop2").fadeOut(2000);
-        popFolder();
+        utils.dynPop();
       });
-      $("my-event blue-hover hover-small").click(function(){
+      $(".my-event blue-hover hover-small").click(function(){
         $("#pop1, #pop2, #pop3").fadeOut(2000);
       });
     }
     tutorialsPop();
+    utils.dynPop();
   }
 );
 

@@ -401,7 +401,7 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     };
     self.formatted_price = ko.computed(function(){
 
-      return utils.format_price(self.price(), options.currency()) + '/month';
+      return utils.format_price(self.price(), options.currency());
     });
     self.choosen = function() {
       return self.selected() || 0;
@@ -484,6 +484,7 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     self.add_disk = function(data, event) {
       self.drives.push(new ssd_folder(50, options.prices));
       $("#pop1, #pop2, #pop3").fadeOut(2000);
+      utils.dynPop();
     };
     self.serialize = parser.serialize_base_server;
     return self;
@@ -501,15 +502,15 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     self.ram = new ram_virtual_machine(options.ram, options.prices);
 
     self.windows_server_licenses = new server_licenses([
-      {'name': 'Web Server 2008', 'price': options.prices.cost_per_winserverweb},
+      {'name': 'Server 2008 Web', 'price': options.prices.cost_per_winserverweb},
       {'name': 'Server 2008 Standard', 'price': options.prices.cost_per_winserverstd},
       {'name': 'Server 2008 Enterprise', 'price': options.prices.cost_per_winserverent},
       {'name': 'Server 2012 Standard', 'price': options.prices.cost_per_winserver12}
     ], options.prices.currency, options.windows_server_license);
     self.additional_microsoft_licenses = new server_licenses([
-      {'name': 'SQL Server 2008 Web', 'price': options.prices.cost_per_mssqlserverweb},
-      {'name': 'SQL Server 2008 Std', 'price': options.prices.cost_per_mssqlserverstd},
-      {'name': 'SQL Server 2012', 'price': options.prices.cost_per_mssqlserver12}
+      {'name': 'SQL Server 2008 / 2012 Web', 'price': options.prices.cost_per_mssqlserverweb},
+      {'name': 'SQL Server 2008 Standard', 'price': options.prices.cost_per_mssqlserverstd},
+      {'name': 'SQL Server 2012 Standard', 'price': options.prices.cost_per_mssqlserver12}
     ], options.prices.currency, options.additional_microsoft_license);
     self.remote_desktops = new remote_desktops({
       'currency': options.prices.currency, 'price': options.prices.cost_per_desktopcal, 'choosen': options.remote_desktops
@@ -545,10 +546,12 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
         self.drives.remove(data);
         self.drives.splice(index, 0, new_drive);
       }
+      utils.dynPop();
     };
     self.add_disk = function(data, event) {
       self.drives.push(new ssd_drive(50, options.prices));
-      $("#pop1, #pop2, #pop3").fadeOut(2000); // this has to move out of here
+      $("#pop1, #pop2, #pop3").fadeOut(2000);
+      utils.dynPop();
     };
     self.serialize = parser.serialize_virtual_machine;
     return self;
