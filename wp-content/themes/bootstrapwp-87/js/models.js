@@ -1,10 +1,14 @@
 /* globals _ */
 
-define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, CONSTANTS, utils, parser) {
+define(['./knockout-3.1.0', './constants', './utils', './parser', './pricing'], function(ko, CONSTANTS, utils, parser, pricing) {
+
+  function formatted_price() {
+    return utils.format_price(this.price());
+  }
   function snap_value(value, snap) {
-    if(value > 0)
+    if (value > 0)
         return Math.ceil(value / snap) * snap;
-    else if(value < 0)
+    else if (value < 0)
         return Math.floor(value / snap) * snap;
     else
         return value;
@@ -24,83 +28,77 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
       return price_func;
     return 0;
   }
-  function bandwidth(lower, prices) {
+
+  function bandwidth(lower) {
     return new single_slider({
-      'currency': prices.currency,
       'name': 'Data',
       'min': CONSTANTS.LIMITS.bandwidth_min,
       'max': CONSTANTS.LIMITS.bandwidth_max,
       'lower_bar': lower,
-      'lower_price': prices.bandwidth_per_gb,
-      'upper_price': prices.bandwidth_per_gb,
+      'lower_price': pricing.bandwidth_per_gb,
+      'upper_price': pricing.bandwidth_per_gb,
       'snap': 1,
       'unit': 'GB'
     });
   }
-  function cpu_virtual_machine(lower, prices) {
+  function cpu_virtual_machine(lower) {
     return new single_slider({
-      'currency': prices.currency,
       'name': 'CPU',
       'min': CONSTANTS.LIMITS.cpu_vm_min,
       'max': CONSTANTS.LIMITS.cpu_vm_max,
       'lower_bar': lower,
-      'lower_price': prices.cpu_per_mhz,
-      'upper_price': prices.cpu_per_mhz,
+      'lower_price': pricing.cpu_per_mhz,
+      'upper_price': pricing.cpu_per_mhz,
       'snap': CONSTANTS.LIMITS.cpu_increments,
       'unit': 'MHz'
     });
   }
-  function cpu_container(lower_upper, prices) {
+  function cpu_container(lower_upper) {
     return new double_slider({
-      'currency': prices.currency,
       'name': 'CPU',
       'min': CONSTANTS.LIMITS.cpu_container_min,
       'max': CONSTANTS.LIMITS.cpu_container_max,
       'lower_bar': lower_upper[0],
-      'lower_price': prices.cpu_container_per_mhz,
+      'lower_price': pricing.cpu_container_per_mhz,
       'upper_bar': lower_upper[1],
-      'upper_price': prices.cpu_container_per_mhz,
+      'upper_price': pricing.cpu_container_per_mhz,
       'snap': CONSTANTS.LIMITS.cpu_increments,
       'unit': 'MHz'
     });
   }
-  function ram_virtual_machine(lower, prices) {
+  function ram_virtual_machine(lower) {
     return new single_slider({
-      'currency': prices.currency,
       'name': 'RAM',
       'min': CONSTANTS.LIMITS.ram_vm_min,
       'max': CONSTANTS.LIMITS.ram_vm_max,
       'lower_bar': lower,
-      'lower_price': prices.memory_per_mb,
-      'upper_price': prices.memory_per_mb,
+      'lower_price': pricing.memory_per_mb,
+      'upper_price': pricing.memory_per_mb,
       'snap': CONSTANTS.LIMITS.ram_increments,
       'unit': 'MB'
     });
   }
-  function ram_container(lower_upper, prices) {
+  function ram_container(lower_upper) {
     return new double_locked_sliders({
-      'currency': prices.currency,
       'name': 'RAM',
       'min': CONSTANTS.LIMITS.ram_container_min,
       'max': CONSTANTS.LIMITS.ram_container_max,
       'lower_bar': lower_upper[0],
-      'lower_price': prices.memory_container_per_mb,
+      'lower_price': pricing.memory_container_per_mb,
       'upper_bar': lower_upper[1],
-      'upper_price': prices.memory_container_per_mb,
+      'upper_price': pricing.memory_container_per_mb,
       'snap': CONSTANTS.LIMITS.ram_increments,
       'unit': 'MB'
     });
   }
-  function ssd_folder(lower, prices) {
-    var self = this;
-    self = new single_slider({
-      'currency': prices.currency,
+  function ssd_folder(lower) {
+    var self = new single_slider({
       'name': 'SSD',
       'min': CONSTANTS.LIMITS.ssd_min,
       'max': CONSTANTS.LIMITS.ssd_max,
       'lower_bar': lower,
-      'lower_price': prices.ssd_per_gb,
-      'upper_price': prices.ssd_per_gb,
+      'lower_price': pricing.ssd_per_gb,
+      'upper_price': pricing.ssd_per_gb,
       'snap': 1,
       'unit': 'GB'
     });
@@ -108,16 +106,14 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     self.type = 'ssd';
     return self;
   }
-  function ssd_drive(lower, prices) {
-    var self = this;
-    self = new single_slider({
-      'currency': prices.currency,
+  function ssd_drive(lower) {
+    var self = new single_slider({
       'name': 'SSD',
       'min': CONSTANTS.LIMITS.ssd_min,
       'max': CONSTANTS.LIMITS.ssd_max,
       'lower_bar': lower,
-      'lower_price': prices.ssd_per_gb,
-      'upper_price': prices.ssd_per_gb,
+      'lower_price': pricing.ssd_per_gb,
+      'upper_price': pricing.ssd_per_gb,
       'snap': 1,
       'unit': 'GB'
     });
@@ -125,16 +121,14 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     self.type = 'ssd';
     return self;
   }
-  function hdd_drive(lower, prices) {
-    var self = this;
-    self = new single_slider({
-      'currency': prices.currency,
+  function hdd_drive(lower) {
+    var self = new single_slider({
       'name': 'HDD',
       'min': CONSTANTS.LIMITS.hdd_min,
       'max': CONSTANTS.LIMITS.hdd_max,
       'lower_bar': lower,
-      'lower_price': prices.disk_per_gb,
-      'upper_price': prices.disk_per_gb,
+      'lower_price': pricing.disk_per_gb,
+      'upper_price': pricing.disk_per_gb,
       'snap': 1,
       'unit': 'GB'
     });
@@ -172,7 +166,7 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
         if (value > upper)
           value = upper;
 
-        upper_lock = value*4;
+        upper_lock = value * 4;
         if (upper_lock < self.upper_input()) {
           self.upper_input(upper_lock);
         }
@@ -199,7 +193,7 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
         else if (value > options.max)
           value = options.max;
 
-        lower_lock = value/4;
+        lower_lock = value / 4;
         if (lower_lock > self.lower_input()) {
           self.lower_input(lower_lock);
         }
@@ -270,9 +264,7 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
       return self.lower_input() * options.lower_price();
     });
 
-    self.formatted_price = ko.computed(function(){
-      return utils.format_price(self.price(), options.currency());
-    });
+    self.formatted_price = ko.computed(formatted_price, self);
     self.upper_input = function() {
       return options.max;
     };
@@ -291,9 +283,7 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
       else
         return 0;
     });
-    self.formatted_price = ko.computed(function(){
-      return utils.format_price(self.price(), options.currency());
-    });
+    self.formatted_price = ko.computed(formatted_price, self);
     self.choosen = function() {
       return ~~self.active(); // turns true to 1 and false to 0
     };
@@ -306,40 +296,34 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     self.price = ko.computed(function() {
       return self.value() * options.price();
     });
-    self.formatted_price = ko.computed(function(){
-      return utils.format_price(self.price(), options.currency());
-    });
+    self.formatted_price = ko.computed(formatted_price, self);
     self.choosen = self.value;
   }
-  function select_option(option, currency) {
+  function select_option(option) {
     var self = this;
     self.name = option.name;
     self.price = option.price;
-    self.formatted_price = ko.computed(function(){
-      return utils.format_price(self.price(), currency());
-    });
+    self.formatted_price = ko.computed(formatted_price, self);
   }
-  function server_licenses(options, currency, choosen) {
+  function server_licenses(options, choosen) {
     var self = this,
         value;
     self.options = ko.observableArray();
     for (var i=0; i < options.length; i++) {
-      self.options.push(new select_option(options[i], currency));
+      self.options.push(new select_option(options[i]));
     }
     value = self.options()[choosen] || null;
     self.value = ko.observable(value);
     self.remove_option = function() {
       self.value(0);
     };
-    self.price = ko.computed(function(){
+    self.price = ko.computed(function() {
       var value2 = self.value();
       if (value2)
         return value2.price();
       return 0;
     });
-    self.formatted_price = ko.computed(function(){
-      return utils.format_price(self.price(), currency());
-    });
+    self.formatted_price = ko.computed(formatted_price, self);
     self.choosen = function() {
       return _.indexOf(self.options(), self.value());
     };
@@ -348,26 +332,27 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     var self = this;
     self.name = ko.observable(option.name);
     self.price = ko.observable(option.price);
-    self.times = ko.observable(option.times);
-    self.formatted_price = ko.computed(function(){
+    self.times = ko.
+    observable(option.times);
+    self.formatted_price = ko.computed(function() {
       var calc_price = self.price() * 100;
       if (calc_price)
         return '(' + calc_price + '%' + ' discount)';
       return '';
     });
   }
-  function subscription_plans(options, currency, total_price, choosen) {
+  function subscription_plans(options, total_price, choosen) {
     var self = this,
         initial_value;
 
     self.options = ko.observableArray();
     for (var i=0; i < options.length; i++) {
-      self.options.push(new select_percentage_option(options[i], currency));
+      self.options.push(new select_percentage_option(options[i]));
     }
     initial_value = self.options()[choosen];
 
     self.value = ko.observable(initial_value);
-    self.price = ko.computed(function(){
+    self.price = ko.computed(function() {
       var choice = self.value();
       if (choice)
         return -1 * choice.price() * total_price();
@@ -385,7 +370,7 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
     var self = this;
     self.name = 'Remote Desktop CALs';
     self.selected = ko.observable(options.choosen);
-    self.value = ko.computed(function(){
+    self.value = ko.computed(function() {
       if (self.selected())
         return {
           name: self.name,
@@ -393,16 +378,13 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
         };
     });
     self.price_unit = options.price;
-    self.price = ko.computed(function(){
+    self.price = ko.computed(function() {
       return self.price_unit() * self.selected();
     });
     self.remove_option = function() {
       self.selected(0);
     };
-    self.formatted_price = ko.computed(function(){
-
-      return utils.format_price(self.price(), options.currency());
-    });
+    self.formatted_price = ko.computed(formatted_price, self);
     self.choosen = function() {
       return self.selected() || 0;
     };
@@ -417,38 +399,54 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
   };
 
   function base_server(options, builder) {
-    var self = this,
-        i;
+    var self = this;
     self.ip = new checkbox({
-      'currency': options.prices.currency,
       'name': 'Static IP',
       'active': options.ip,
-      'price': options.prices.cost_per_static_ip
+      'price': pricing.cost_per_static_ip
     });
     self.firewall = new checkbox({
-      'currency': options.prices.currency,
       'name': 'Firewall',
       'active': options.firewall,
-      'price': options.prices.cost_per_firewall
+      'price': pricing.cost_per_firewall
     });
 
     self.drives = ko.observableArray([]);
 
-    // Init
-    for (i = 0; i < options.ssd.length; i++) {
-      self.drives.push(new builder.ssd(options.ssd[i], options.prices));
-    }
-    for (i = 0; i < options.hdd.length; i++) {
-      self.drives.push(new builder.hdd(options.hdd[i], options.prices));
-    }
+    self.number_of_instances = ko.observable(1);
 
     // Actions
     self.remove_disk = function(data, event) {
       self.drives.remove(data.data);
     };
+    self.plus = function() {
+      var num = self.number_of_instances();
+      self.number_of_instances(num + 1);
+    };
+    self.minus = function() {
+      var num = self.number_of_instances();
+      self.number_of_instances(num - 1);
+    };
   }
 
-  function get_base_server_price() {
+  function add_drives(drives, builder) {
+    for (var i = 0; i < drives.length; i++) {
+      this.drives.push(new builder(drives[i]));
+    }
+  }
+  function server_formatted_price() {
+    var single_total = utils.format_price(this.single_price()),
+        total = utils.format_price(this.price()),
+        number_of_instances = this.number_of_instances();
+    if (number_of_instances > 1)
+      return total + ' = ' + number_of_instances + ' X ' + single_total;
+    else
+      return total;
+  }
+  function calc_full_price() {
+    return this.single_price() * this.number_of_instances();
+  }
+  function calc_single_price() {
     var total = 0;
     total += this.cpu.price();
     total += this.ram.price();
@@ -458,78 +456,105 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
 
     return total;
   }
+
   function container(options) {
-    var builder = {
-          ssd: ssd_folder,
-          hdd: hdd_drive
-        },
-        self = new base_server(options, builder);
+    var self = this;
 
+    ko.utils.extend(self, new base_server(options));
     // Normal attributes
-    self.cpu = new cpu_container(options.cpu, options.prices);
-    self.ram = new ram_container(options.ram, options.prices);
 
-    self.price = ko.computed(get_base_server_price, self);
-    self.formatted_price = ko.computed(function() {
-      return utils.format_price(self.price(), options.prices.currency());
-    });
+    self.cpu = new cpu_container(options.cpu);
+    self.ram = new ram_container(options.ram);
+    self.type = 'container';
+    self.template = 'container-template';
+
+    // Computed
+    self.single_price = ko.computed(calc_single_price, self);
+    self.price = ko.computed(calc_full_price, self);
+    self.formatted_price = ko.computed(server_formatted_price, self);
 
     self.burst_price = ko.computed(function() {
       var total = 0;
       total += self.cpu.upper_price();
       total += self.ram.upper_price();
 
-      return total;
+      return total * self.number_of_instances();
     });
     self.add_disk = function(data, event) {
-      self.drives.push(new ssd_folder(50, options.prices));
+      self.drives.unshift(new ssd_folder(50));
       $("#pop1, #pop2, #pop3").fadeOut(2000);
       utils.dynPop();
     };
     self.serialize = parser.serialize_base_server;
-    return self;
+
+    // Init
+    add_drives.apply(self, [options.ssd, ssd_folder]);
+    add_drives.apply(self, [options.hdd, hdd_drive]);
   }
+
+  var windows_server_licenses = [
+    {
+      'name': 'Server 2008 Web',
+      'price': pricing.cost_per_winserverweb
+    },
+    {
+      'name': 'Server 2008 Standard',
+      'price': pricing.cost_per_winserverstd
+    },
+    {
+      'name': 'Server 2008 Enterprise',
+      'price': pricing.cost_per_winserverent
+    },
+    {
+      'name': 'Server 2012 Standard',
+      'price': pricing.cost_per_winserver12
+    }
+  ],
+  other_windows_licenses = [
+    {
+      'name': 'SQL Server 2008 / 2012 Web',
+      'price': pricing.cost_per_mssqlserverweb
+    },
+    {
+      'name': 'SQL Server 2008 Standard',
+      'price': pricing.cost_per_mssqlserverstd
+    },
+    {
+      'name': 'SQL Server 2012 Standard',
+      'price': pricing.cost_per_mssqlserver12
+    }
+  ];
+
   function virtual_machine(options) {
-    var builder = {
-          ssd: ssd_drive,
-          hdd: hdd_drive
-        },
-        self = new base_server(options, builder);
-    self.unique_id = unique_id.build();
+
+    var self = this;
+    ko.utils.extend(self, new base_server(options));
+
+    self.type = 'virtual_machine';
+    self.cpu = new cpu_virtual_machine(options.cpu);
+    self.ram = new ram_virtual_machine(options.ram);
 
     // Normal attributes
-    self.cpu = new cpu_virtual_machine(options.cpu, options.prices);
-    self.ram = new ram_virtual_machine(options.ram, options.prices);
+    self.template = 'virtual-machine-template';
 
-    self.windows_server_licenses = new server_licenses([
-      {'name': 'Server 2008 Web', 'price': options.prices.cost_per_winserverweb},
-      {'name': 'Server 2008 Standard', 'price': options.prices.cost_per_winserverstd},
-      {'name': 'Server 2008 Enterprise', 'price': options.prices.cost_per_winserverent},
-      {'name': 'Server 2012 Standard', 'price': options.prices.cost_per_winserver12}
-    ], options.prices.currency, options.windows_server_license);
-    self.additional_microsoft_licenses = new server_licenses([
-      {'name': 'SQL Server 2008 / 2012 Web', 'price': options.prices.cost_per_mssqlserverweb},
-      {'name': 'SQL Server 2008 Standard', 'price': options.prices.cost_per_mssqlserverstd},
-      {'name': 'SQL Server 2012 Standard', 'price': options.prices.cost_per_mssqlserver12}
-    ], options.prices.currency, options.additional_microsoft_license);
-    self.remote_desktops = new remote_desktops({
-      'currency': options.prices.currency, 'price': options.prices.cost_per_desktopcal, 'choosen': options.remote_desktops
-    });
+    self.unique_id = unique_id.build();
 
-    //Computed
-    self.price = ko.computed(function() {
-      var total = get_base_server_price.call(self);
+    self.windows_server_licenses = new server_licenses(windows_server_licenses, options.windows_server_license);
+    self.additional_microsoft_licenses = new server_licenses(other_windows_licenses, options.additional_microsoft_license);
+    self.remote_desktops = new remote_desktops({'price': pricing.cost_per_desktopcal, 'choosen': options.remote_desktops});
+
+    // Computed
+    self.single_price = ko.computed(function() {
+      var total = calc_single_price.call(self);
 
       total += sum_attr(self.windows_server_licenses);
       total += sum_attr(self.additional_microsoft_licenses);
       total += sum_attr(self.remote_desktops);
 
       return total;
-    });
-    self.formatted_price = ko.computed(function() {
-      return utils.format_price(self.price(), options.prices.currency());
-    });
-
+    }, self);
+    self.price = ko.computed(calc_full_price, self);
+    self.formatted_price = ko.computed(server_formatted_price, self);
 
     // Actions
     self.switch_to_hdd = function(data, event) {
@@ -542,34 +567,37 @@ define(['./knockout-3.1.0', './constants', './utils', './parser'], function(ko, 
       var index = _.indexOf(self.drives(), data),
           new_drive;
       if (index > -1) {
-        new_drive = new factory(data.lower_input(), options.prices);
+        new_drive = new factory(data.lower_input());
         self.drives.remove(data);
         self.drives.splice(index, 0, new_drive);
       }
       utils.dynPop();
     };
     self.add_disk = function(data, event) {
-      self.drives.push(new ssd_drive(50, options.prices));
+      self.drives.unshift(new ssd_drive(50));
       $("#pop1, #pop2, #pop3").fadeOut(2000);
       utils.dynPop();
     };
     self.serialize = parser.serialize_virtual_machine;
-    return self;
+
+    // Init
+    add_drives.apply(self, [options.ssd, ssd_drive]);
+    add_drives.apply(self, [options.hdd, hdd_drive]);
   }
 
   function account_details(options) {
     var self = this;
-    self.bandwidth = new bandwidth(options.lower, options.prices);
-    self.additional_ips = new account_option({currency: options.prices.currency,
+    self.bandwidth = new bandwidth(options.lower);
+    self.additional_ips = new account_option({
       range: 6,
       name: 'Additional IPs',
-      price: options.prices.cost_per_static_ip,
+      price: pricing.cost_per_static_ip,
       value: options.ips
     });
-    self.additional_vlans = new account_option({currency: options.prices.currency,
+    self.additional_vlans = new account_option({
       range: 6,
       name: 'Additional VLANs',
-      price: options.prices.cost_per_vlan,
+      price: pricing.cost_per_vlan,
       value: options.virtual_lans
     });
 

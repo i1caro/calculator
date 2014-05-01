@@ -173,30 +173,24 @@ define(['./knockout-3.1.0'], function(ko) {
     }
   ];
   var DOMAINS_TO_LOCATION = {
-    'nl' : 'ams-e',
-    'au' : 'hkg-e',
-    'hk' : 'hkg-e',
-    'ca' : 'tor-p',
-    'uk' : 'lon-p',
+    'nl': 'ams-e',
+    'au': 'hkg-e',
+    'hk': 'hkg-e',
+    'ca': 'tor-p',
+    'uk': 'lon-p',
     'com': 'sjc-c'
   };
-  function build_prices_obj() {
-    var result = {};
-    for (var key in UK_PRICE)
-      result[key] = ko.observable();
-    return result;
-  }
   var SUBSCRIPTION_DISCOUNTS = [
-    {'name': 'No plan', 'times':0, 'price': 0},
-    {'name': '12 Months', 'times':12, 'price': 0.10}
+    {'name': 'No plan', 'times': 0, 'price': 0},
+    {'name': '12 Months', 'times': 12, 'price': 0.10}
   ];
   return {
     'LIMITS': LIMITS,
-    'KO_PRICE_OBJ': build_prices_obj(),
+    'UK_PRICE': UK_PRICE,
     'DOMAINS_TO_LOCATION': DOMAINS_TO_LOCATION,
     'ZONES': ZONES,
     'SUBSCRIPTION_DISCOUNTS': SUBSCRIPTION_DISCOUNTS,
     'CONTAINER_UNAVAILABILITY': CONTAINER_UNAVAILABILITY,
     'COUNTRIES_PRICES': COUNTRIES_PRICES,
   };
-})
+});

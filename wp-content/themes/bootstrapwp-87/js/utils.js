@@ -1,6 +1,19 @@
 /* globals _ */
 
-define(['./constants'], function(CONSTANTS) {
+define(['./constants', './pricing'], function(CONSTANTS, pricing) {
+
+  function extend_objects(child, parent) {
+      for (var property in parent)
+        if (parent.hasOwnProperty(property))
+          child[property] = parent[property];
+      function child_constructor() {
+        this.constructor = child;
+      }
+      child_constructor.prototype = parent.prototype;
+      child.prototype = new child_constructor();
+  }
+  var extend = this.extend || extend_objects;
+
   function toBoolean(string) {
     return string === '1';
   }
@@ -10,9 +23,9 @@ define(['./constants'], function(CONSTANTS) {
     return memo + price;
   }
 
-  function format_price(price, signal) {
+  function format_price(price) {
     var clean_price = price ? price.toFixed(2) : '0.00';
-    return signal + clean_price;
+    return pricing.currency() + clean_price;
   }
 
   function get_country_based_on_location() {
@@ -59,7 +72,8 @@ define(['./constants'], function(CONSTANTS) {
         if (timeoutId) {
           window.clearTimeout(timeoutId);
           timeoutId = null;
-        } else {
+        }
+        else {
           $("#dynamicpop").text("");
         }
       });
@@ -72,6 +86,7 @@ define(['./constants'], function(CONSTANTS) {
     'pageOffset': pageOffset,
     'toBoolean': toBoolean,
     'limit': limit,
-    'dynPop': dynPop
+    'dynPop': dynPop,
+    'extend': extend
   };
 });
