@@ -83,6 +83,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
           ram: [256, 1024],
           ip: true,
           firewall: false,
+          number_of_instances: 1,
           ssd: [20],
           hdd: []
         }));
@@ -93,6 +94,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
           ram: 1024,
           ip: true,
           firewall: false,
+          number_of_instances: 1,
           ssd: [],
           hdd: [20]
         }));
@@ -173,7 +175,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
       self.formatted_discount = ko.computed(function() {
         var price = self.subscription_plans.price();
         if (price)
-          return '-' + utils.format_price(-1*price);
+          return '-' + utils.format_price(-1 * price);
         return utils.format_price(price);
       });
       self.formatted_price = ko.computed(function() {
@@ -192,6 +194,30 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
 
     var model = new viewModel();
     ko.applyBindings(model);
+
+    //attach event handlers
+    $("#server-list").delegate(".minus", "click", function() {
+      var context = ko.contextFor(this),
+          num = context.$data.server.number_of_instances() - 1;
+
+      if (num <= 0) {
+        context.$root.servers.remove(context.$data.server);
+      }
+      else {
+        context.$data.server.number_of_instances(num);
+      }
+
+      return false;
+    });
+    $("#server-list").delegate(".plus", "click", function() {
+      //retrieve the context
+      var context = ko.contextFor(this),
+          num = context.$data.server.number_of_instances() + 1;
+      context.$data.server.number_of_instances(num);
+
+      return false;
+    });
+
     function tutorialsPop() {
       $("<style type='text/css' id='dynamicpop' />").appendTo("head");
       var popZone = _.once(function() {

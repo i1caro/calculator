@@ -398,8 +398,13 @@ define(['./knockout-3.1.0', './constants', './utils', './parser', './pricing'], 
     prev: 0
   };
 
-  function base_server(options, builder) {
-    var self = this;
+  function base_server(options) {
+    var self = this,
+        number_of_instances = 1;
+
+    if (options.number_of_instances > 0)
+      number_of_instances = options.number_of_instances;
+
     self.ip = new checkbox({
       'name': 'Static IP',
       'active': options.ip,
@@ -413,19 +418,12 @@ define(['./knockout-3.1.0', './constants', './utils', './parser', './pricing'], 
 
     self.drives = ko.observableArray([]);
 
-    self.number_of_instances = ko.observable(1);
+
+    self.number_of_instances = ko.observable(number_of_instances);
 
     // Actions
     self.remove_disk = function(data, event) {
       self.drives.remove(data.data);
-    };
-    self.plus = function() {
-      var num = self.number_of_instances();
-      self.number_of_instances(num + 1);
-    };
-    self.minus = function() {
-      var num = self.number_of_instances();
-      self.number_of_instances(num - 1);
     };
   }
 

@@ -12,6 +12,7 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
         'ram': self.shift(),
         'ip': utils.toBoolean(self.shift()),
         'firewall': utils.toBoolean(self.shift()),
+        'number_of_instances': self.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives(),
         'windows_server_license': self.shift(),
@@ -26,6 +27,7 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
         'ram': [self.shift(), self.shift()],
         'ip': utils.toBoolean(self.shift()),
         'firewall': utils.toBoolean(self.shift()),
+        'number_of_instances': self.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives()
       };
@@ -103,7 +105,8 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
       this.cpu.choosen(),
       this.ram.choosen(),
       this.ip.choosen(),
-      this.firewall.choosen()
+      this.firewall.choosen(),
+      this.number_of_instances()
     ];
     result.push(drives_data['ssd']);
     result.push(']');
