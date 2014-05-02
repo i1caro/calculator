@@ -72,6 +72,16 @@
   <!-- /ko -->
 </script>
 <script type="text/html" id="server-template">
+<div class="stack">
+  <!-- ko foreach: { data: server.css_for_instances(), as: 'style' } -->
+    <div class="border" data-bind="{style: {bottom: style.bottom, left: style.left, zIndex: style.zIndex}}"></div>
+  <!-- /ko -->
+  <div class="server">
+    <!-- ko template: 'server-content-template' --><!-- /ko -->
+  </div>
+</div>
+</script>
+<script type="text/html" id="server-content-template">
   <div class="panel-body">
     <div class="btn-toolbar" role="toolbar">
       <button type="button" class="minus close" data-bind="click: server.minus" aria-hidden="true">&minus;</button>

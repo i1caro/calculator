@@ -418,8 +418,19 @@ define(['./knockout-3.1.0', './constants', './utils', './parser', './pricing'], 
 
     self.drives = ko.observableArray([]);
 
-
     self.number_of_instances = ko.observable(number_of_instances);
+
+    self.css_for_instances = function() {
+      var result = [];
+      for (var i=1; i < self.number_of_instances() && i < 3; i++) {
+        result.push({
+          'bottom': (i * 6) + 'px',
+          'left': (i * 6) + 'px',
+          'zIndex': i * -10
+        });
+      }
+      return result;
+    };
 
     // Actions
     self.remove_disk = function(data, event) {

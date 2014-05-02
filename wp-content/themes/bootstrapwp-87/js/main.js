@@ -198,7 +198,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
     //attach event handlers
     $("#server-list").delegate(".minus", "click", function() {
       var context = ko.contextFor(this),
-          num = context.$data.server.number_of_instances() - 1;
+          num = parseInt(context.$data.server.number_of_instances()) - 1;
 
       if (num <= 0) {
         context.$root.servers.remove(context.$data.server);
@@ -212,8 +212,10 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
     $("#server-list").delegate(".plus", "click", function() {
       //retrieve the context
       var context = ko.contextFor(this),
-          num = context.$data.server.number_of_instances() + 1;
-      context.$data.server.number_of_instances(num);
+          num = parseInt(context.$data.server.number_of_instances()) + 1;
+
+      if (num < 11)  // No more than 10 servers per stack
+        context.$data.server.number_of_instances(num);
 
       return false;
     });
