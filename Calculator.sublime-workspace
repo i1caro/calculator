@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"dyn",
+				"dynPop"
+			],
+			[
 				"margin",
 				"margin-bottom"
 			],
@@ -111,7 +115,7 @@
 			"file": "index.html",
 			"settings":
 			{
-				"buffer_size": 39285,
+				"buffer_size": 39155,
 				"line_ending": "Unix"
 			}
 		},
@@ -119,15 +123,12 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 			"settings":
 			{
-				"buffer_size": 9643,
+				"buffer_size": 8982,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "/* globals _ */\n\ndefine(['./knockout-3.1.0', './utils'], function(ko, utils) {\n  function Parser(list) {\n    var self = this;\n    for (var i=0; i < list.length; i++) {\n      self.push(list[i]);\n    }\n    self.build_virtual_machine = function() {\n      var result = {\n        'cpu': self.shift(),\n        'ram': self.shift(),\n        'ip': utils.toBoolean(self.shift()),\n        'firewall': utils.toBoolean(self.shift()),\n        'ssd': self.get_drives(),\n        'hdd': self.get_drives(),\n        'windows_server_license': self.shift(),\n        'additional_microsoft_license': self.shift(),\n        'remote_desktops': self.shift()\n      };\n      return result;\n    };\n    self.build_container = function() {\n      var result = {\n        'cpu': [self.shift(), self.shift()],\n        'ram': [self.shift(), self.shift()],\n        'ip': utils.toBoolean(self.shift()),\n        'firewall': utils.toBoolean(self.shift()),\n        'ssd': self.get_drives(),\n        'hdd': self.get_drives()\n      };\n      return result;\n    };\n    self.get_drives = function() {\n      var list = [],\n          element = self.shift();\n      while(self.not_end(element)) {\n        list.push(element);\n        element = self.shift();\n      }\n      return list;\n    };\n    self.get_virtual_machines = function() {\n      return self.get_servers(self.build_virtual_machine);\n    };\n    self.get_containers = function() {\n      return self.get_servers(self.build_container);\n    };\n    self.get_servers = function(factory) {\n      var element = self[0],\n          servers = [];\n      while(self.not_end(element)) {\n        servers.push(factory());\n        element = self[0];\n      }\n      self.shift(); // remove ']'\n      return servers;\n    };\n    self.not_end = function(element) {\n      return element !== ']' && self.length > 0;\n    };\n    self.build_account_details = function() {\n      return {\n        'bandwidth': self.shift(),\n        'ips': self.shift(),\n        'virtual_lans': self.shift()\n      };\n    };\n    self.parse = function() {\n      var data = {};\n      if (self.length) {\n        data['virtual_machines'] = self.get_virtual_machines();\n        data['containers'] = self.get_containers();\n        data['account_details'] = self.build_account_details();\n        data['subscription'] = self.shift();\n        data['country'] = self.shift();\n      }\n      return data;\n    };\n  }\n  Parser.prototype = Object.create(Array.prototype);\n  Parser.constructor = Parser;\n\n  function string_into_data(string) {\n    var no_hash = string.substring(1),\n        decoded = decodeURI(no_hash),\n        splited_info = decoded.split('%'),\n        checksum = splited_info[0],\n        parser = new Parser(splited_info[1].split(','));\n\n    if (parseInt(checksum) !== utils.calc_checksum(splited_info[1]))\n      throw \"Wrong checksum\";\n    return parser.parse();\n  }\n\n  function serialize_base_server() {\n    var drives_data = {ssd: [], hdd: []},\n        drives = this.drives();\n    for (var i=0; i < drives.length; i++) {\n      drives_data[drives[i].type].push(drives[i].choosen());\n    }\n    var result = [\n      this.cpu.choosen(),\n      this.ram.choosen(),\n      this.ip.choosen(),\n      this.firewall.choosen()\n    ];\n    result.push(drives_data['ssd']);\n    result.push(']');\n    result.push(drives_data['hdd']);\n    result.push(']');\n    return result;\n  }\n\n  function serialize_virtual_machine() {\n    var machine_data = serialize_base_server.call(this),\n        result = [\n          this.windows_server_licenses.choosen(),\n          this.additional_microsoft_licenses.choosen(),\n          this.remote_desktops.choosen()\n        ];\n    machine_data.push(result);\n    return machine_data;\n  }\n\n  function serialize_view() {\n    var virtual_machines = this.virtual_machines(),\n        containers = this.containers(),\n        temp_list,\n        result = [],\n        i;\n\n    temp_list = [];\n    for (i=0; i < virtual_machines.length; i++) {\n      temp_list.push(virtual_machines[i].serialize());\n    }\n    result.push(temp_list);\n    result.push(']');\n    temp_list = [];\n    for (i=0; i < containers.length; i++) {\n      temp_list.push(containers[i].serialize());\n    }\n    result.push(temp_list);\n    result.push(']');\n    result.push(this.account_details.serialize());\n    result.push(this.subscription_plans.choosen());\n    result.push(this.country());\n\n    var result_string = _.flatten(result).join(','),\n        checksum = utils.calc_checksum(result_string);\n\n    location.hash = encodeURI(checksum + '%' + result_string);\n    return result_string;\n  }\n\n  return {\n    'string_into_data': string_into_data,\n    'serialize_base_server': serialize_base_server,\n    'serialize_virtual_machine': serialize_virtual_machine,\n    'serialize_view': serialize_view\n  };\n});\n",
 			"file": "wp-content/themes/bootstrapwp-87/js/parser.js",
-			"file_size": 4776,
-			"file_write_time": 1398678843000000,
 			"settings":
 			{
 				"buffer_size": 4742,
@@ -138,7 +139,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/utils.js",
 			"settings":
 			{
-				"buffer_size": 1420,
+				"buffer_size": 2033,
 				"line_ending": "Unix"
 			}
 		},
@@ -146,18 +147,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/models.js",
 			"settings":
 			{
-				"buffer_size": 18758,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"contents": "/** { background-color: rgba(255,0,0,.2); }\n\n* * { background-color: rgba(0,255,0,.2); }\n\n* * * { background-color: rgba(0,0,255,.2); }\n\n* * * * { background-color: rgba(255,0,255,.2); }\n\n* * * * * { background-color: rgba(0,255,255,.2); }\n\n* * * * * * { background-color: rgba(255,255,0,.2); }\n*/\n\n\n/* JUST FOR EDITING - REMOVE AFTER PUTTING IN BOOTSTRAP  */\n.panel-heading > .btn-toolbar > .btn-group > a {\n  position:relative;\n}\n.rightbar{\ndisplay:none;\n}\n.span6 .hover-huge {\n  margin:20px auto;\n}\n.tooltipa, a.tooltipa, a.tooltipb, .tooltipb, .lower-handle, .upper-handle {\n    display: inline;\n    position: relative;\n    text-decoration: none;\n}\n.server-icon:hover:before, .drive-icon:hover:before {\nbackground: #333;\nbackground: rgba(37, 53, 136, .8);\nborder-radius: 5px;\ncolor: #fff;\npadding: 5px 15px;\nfloat:right;\nz-index: 98;\nwhite-space: nowrap;\nmargin:0 82px 0 0;\n}\n.vm-icon:hover:before {\ncontent: \"Virtual Machine\";\n}\n.container-icon:hover:before {\ncontent: \"Elastic Container\";\n}\n.bandwith-icon:hover:before {\ncontent: \"Bandwidth Subscription\";\n}\n.drive-ssd:hover:before{\ncontent: \"SSD\";\n}\n.drive-hdd:hover:before{\ncontent: \"HDD\";\n}\n.drive-folder:hover:before{\ncontent: \"Folder\";\n}\n.lower-handle:hover:after, .upper-handle:hover:after  {\n    background: #333;\n    background: rgba(37, 53, 136, .8);\n    border-radius: 5px;\n    bottom: 22px;\n    color: #fff;\n    content: attr(data-title);\n    padding: 5px 15px;\n    position: absolute;\n    z-index: 98;\n    white-space:nowrap;\n}\n.upper-handle:hover:after{\n    left: -43px;\n}\n.lower-handle:hover:after{\n    left: -48px;\n}\n.my-slider {\n  margin-left:5px;\n}\n.bandwith-icon{\n  background:url('/wp-content/uploads/datatransfer.png') center, no repeat;\n}\n[data-bind=\"template: { name: 'account-details-template', data: account_details }\"] {\n  padding: 15px 0px 0px 0px;\n}\n.pricing-stuff a {\n  cursor:pointer;\n}\n.pricing-stuff button.close {\n  padding:5px;\n}\n#zonetitle, #servertitle {\n    padding: 10px 0 15px 0;\n}\n#whichzone {\n    -ms-text-justify: distribute-all-lines;\n    text-justify: distribute-all-lines;\n    margin-bottom: 79px;\n    text-align: justify;\n    height:105px;\n    line-height:15px;\n}\n.stretch{\n  width:100%!important;\n  display:inline-block!important;\n}\n.zoneselector {\ndisplay: inline-block;\nzoom: 1;\nopacity: 0.6;\npadding: 7px;\nmax-width: 100px;\nvertical-align: top;\ncursor: pointer;\nwidth: 80px;\nfont-size: 12px;\npadding-bottom:0px;\nmargin-bottom:5px;\n}\n#whichzone .selectedzone {\n    background-color: #22A6FF;\n    border-radius: 4px;\n    color: #FFFFFF;\n    cursor: pointer;\n    font-weight: bold;\n    opacity: 1;\n}\n#whichzone img {\n    display: block;\n    margin: 0 auto;\n    max-width: 58px;\n}\n#whichzone span {\n    display: block;\n    margin: 10px auto;\n    text-align: center;\n}\n#whichzone .comingsoon {\n  cursor: not-allowed;\n  opacity:0.4;\n}\n.comingsoon:before {\n    position: absolute;\n    content: '';\n    height: 100px;\n    width: 100px;\n    background: url(\"/wp-content/uploads/coming-soon.png\") top right no-repeat;\n}\n.panel-heading {\n  vertical-align: middle;\n  display: table;\n}\n.panel-heading span {\n  vertical-align: middle;\n  display: table-cell;\n}\n.panel-heading .hover-large {\n  text-align: center;\n  vertical-align: middle;\n  display: table-cell;\n  float: left;\n  padding:3px 15px 3px 15px;\n  margin-right: 15px;\n}\n.example {\n    border: 1px solid #DDD;\n    border-radius: 4px;\n    position: relative;\n    padding: 50px 30px 20px;\n    margin: 30px 0px 20px;\n    overflow: hidden;\n}\n\n.big-letter {\n  font-size:48px;\n}\n.small-bar {\n  height: 8px;\n}\n.handler {\n  background-color: green;\n  position: absolute;\n  width: 1.5em;\n  height: 1.5em;\n  cursor: default;\n}\n.container {\n  width: 980px;\n  margin-left: auto;\n  margin-right: auto;\n}\n.three-fourths {\n  width: 75%;\n}\n.one-fourth {\n  width: 25%;\n}\n.column {\n  float: left;\n  padding-left: 6px;\n  padding-right: 6px;\n}\n\n.slider-tooltip {\n  position: absolute;\n  display: block;\n  top: -25px;\n  width: 35px;\n  height: 20px;\n  color: #fff;\n  text-align: center;\n  font: 10pt Tahoma, Arial, sans-serif ;\n  border-radius: 3px;\n  border: 1px solid #333;\n    -webkit-box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);\n    box-shadow:  1px 1px 2px 0px rgba(0, 0, 0, .3);\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box;\n  background: -moz-linear-gradient(top,  rgba(69,72,77,0.5) 0%, rgba(0,0,0,0.5) 100%); /* FF3.6+ */\n  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(69,72,77,0.5)), color-stop(100%,rgba(0,0,0,0.5))); /* Chrome,Safari4+ */\n  background: -webkit-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Chrome10+,Safari5.1+ */\n  background: -o-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* Opera 11.10+ */\n  background: -ms-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */\n  background: linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */\n  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */\n}\n.noUi-target {\n  border-radius: 4px;\n  border: 1px solid #D3D3D3;\n  box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;\n}\n.noUi-horizontal {\n  /*position: relative;*/\n  height: 20px;\n}\n.noUI-base {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  background-color: #f0ad4e;\n}\n\n\n.btn-cp {\n  background-repeat: no-repeat;\n  background-color: transparent;\n  width: 31px;\n  height: 31px;\n  text-decoration: none;\n  border: 0;\n  cursor: pointer;\n  text-indent: -9999px;\n  padding: 0;\n  display: inline-block;\n  vertical-align: middle;\n}\n.drive-icon {\n  width: 64px;\n  height: 64px;\n  background-repeat: no-repeat;\n  float: left;\n  margin-bottom: 3px;\n}\n.btn-delete {\n  background-position: 0 -279px;\n}\n.vm-icon {\n  background: url('/wp-content/uploads/vm.png');\n}\n.container-icon {\n  background: url('/wp-content/uploads/container.png');\n}\n.bandwith-icon {\n  background:url('/wp-content/uploads/datatransfer.png') 100% 12% no-repeat\n}\n.drive-ssd {\n  background-image: url('/wp-content/uploads/drive_ssd.png');\n}\n.drive-hdd {\n  background-image: url('/wp-content/uploads/drive_disk.png');\n}\n.drive-folder {\n  background-image: url('/wp-content/uploads/folder.png');\n}\n.server-icon {\n  width: 72px;\n  height: 72px;\n  background-repeat: no-repeat;\n  float: left;\n  position: relative;\n  margin-bottom: 10px;\n  margin-left: -4px;\n}\n.my-checkbox {\n  margin-left: 36px !important;\n}\n.my-input-select-box {\n  margin-left: 10px;\n  width: 45px;\n}\n.storage-icon {\n  cursor: pointer;\n  background: url(\"/wp-content/uploads/drive_add.png\") no-repeat top left;\n  padding-left:23px;\n  width: 20px;\n  height: 20px;\n  line-height: 21px;\n  display: inline-block;\n  font-weight: bold;\n}\nul.my-ul {\n  list-style-type: none;\n  padding: 0;\n  margin: 0 0 9px 5px;\n}\nli.slider-definition {\n  font-weight: bold;\n  text-align: left;\n  display:inline;\n}\n.my-slider-handle {\n  border-color: #313785;\n  border-radius: 0px;\n  background-image: none;\n  cursor: pointer;\n  background-color: #22a6ff;\n  top: -.3em;\n  margin-left: -.6em;\n  position: absolute;\n  z-index: 2;\n  width: 1.2em;\n  height: 1.2em;\n  border: 1px solid #444444;\n}\n.my-slider {\n  margin:7px 5px 0 5px;\n  border: 1px solid #555555;\n  border-color: #313785;\n  border-radius: 0px;\n  background-color: white;\n  height: .8em;\n  position: relative;\n  text-align: left;\n  font-family: 'Trebuchet MS',Verdana, Arial, sans-serif;\n  font-size: 1.1em;\n}\n.my-input-box{\n  margin-bottom: 0px;\n  border-color: #313785;\n  width: 35px;\n}\n.my-text {\n  margin-top: 5px;\n}\n.my-text-number {\n  margin-top: 5px;\n  float: right;\n}\n.my-event {\n  white-space: nowrap;\n  overflow: auto;\n}\n.my-server {\n  background-color: rgba(100,100,100, 0.1);\n}\n.text-right {\n  text-align: right;\n}\n.panel-body {\n  background-color: rgba(100,100,100, 0.1);\n}\nul.my-modal-ul {\n  list-style-type: none;\n  padding: 6px;\n  margin: 0 0 5px 5px;\n}\n.my-final-price {\n  font-size: 11pt;\n  font-weight: bold;\n  color: #313785;\n}\n.my-total{\n  padding-right: 14px;\n  padding-top: 20px;\n  text-align: right;\n}\n.my-burst-input{\n  width: 70px;\n  text-align: right;\n}\n.pricing-stuff {\n  font-size: 9.5pt;\n  font-weight: bold;\n  color: #313785;\n}\n.pricing-stuff .btn, .pricing-stuff .btn-primary {\n  font-size: 9.5pt;\n  font-family: Arial;\n  font-weight: bold;\n  box-shadow: none;\n  background-color: white;\n  border-radius: 0px !important;\n  background-image: none;\n  color: #313785;\n}\n.pricing-stuff .btn-primary {\n  background-color: #22a6ff;\n  color: white;\n}\n.my-total p, .my-total span {\n  display:inline;\n  line-height: 30px;\n}\n.prominent-price {\nfont-size: 22px;\nmargin-left: 5px;\nline-height: 40px !important;\n}\n.prominent-price-label {\nfont-size: 19px;\n}\n.burst-price-label {\nfont-size: 12px;\n}\n.burst-price {\nfont-size: 15px;\nmargin-left: 5px;\n}\n.final-price {\n  font-size:25px;\n  margin-left: 5px;\n}\n.final-price-label {\n  font-size:22px;\n}\n.modal-body h2 {\n  margin-top:0px;\n}\n.modal-header {\n  background-color:#f5f5f5;\n}\n.pricing-stuff .modal-header button.close {\n  padding:0px;\n}\n.span6 div.pricing-stuff h3 {\n  margin-top: 0px;\n  margin-bottom: 10px\n}\ndiv.pricing-stuff div.popover {\n  z-index: 1000;\n}\n#subscription .modal-body ul {\n  width: 225px;\n  float: left;\n}\n#subscription .modal-description {\n  float: left;\n  width: 49%;\n}\n.cont-warning {\n  background-color: #fc6666;\n  color: #fcf8e3;\n  text-align: center;\n  padding: 10px;\n}",
-			"file": "wp-content/themes/bootstrapwp-87/less/common.css",
-			"file_size": 9510,
-			"file_write_time": 1398259177000000,
-			"settings":
-			{
-				"buffer_size": 9450,
+				"buffer_size": 18781,
 				"line_ending": "Unix"
 			}
 		},
@@ -165,7 +155,7 @@
 			"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
 			"settings":
 			{
-				"buffer_size": 10343,
+				"buffer_size": 11436,
 				"line_ending": "Unix"
 			}
 		},
@@ -198,6 +188,17 @@
 			}
 		},
 		{
+			"contents": "/** { background-color: rgba(255,0,0,.2); }\n\n* * { background-color: rgba(0,255,0,.2); }\n\n* * * { background-color: rgba(0,0,255,.2); }\n\n* * * * { background-color: rgba(255,0,255,.2); }\n\n* * * * * { background-color: rgba(0,255,255,.2); }\n\n* * * * * * { background-color: rgba(255,255,0,.2); }\n*/\n .panel-heading > .btn-toolbar > .btn-group > a {\n  position:relative;\n}\n.rightbar {\n  display:none;\n}\n.span6 .hover-huge {\n  margin:20px auto;\n}\n.tooltipa, a.tooltipa, a.tooltipb, .tooltipb, .lower-handle, .upper-handle {\n  display: inline;\n  position: relative;\n  text-decoration: none;\n}\n.server-icon:hover:before, .drive-icon:hover:before {\n  float:right;\n  margin:0 82px 0 0;\n  content:attr(data-pop);\n}\n.lower-handle:hover:after, .upper-handle:hover:after, .server-icon:hover:before, .drive-icon:hover:before {\n  background: #333;\n  background: rgba(37, 53, 136, .8);\n  border-radius: 5px;\n  bottom: 22px;\n  color: #fff;\n  padding: 5px 15px;\n  z-index: 98;\n  white-space:nowrap;\n}\n.lower-handle:hover:after, .upper-handle:hover:after {\n  bottom: 22px;\n  content: attr(data-title);\n  position: absolute;\n}\n.upper-handle:hover:after {\n  left: -43px;\n}\n.lower-handle:hover:after {\n  left: -48px;\n}\n.popover-content{\n  background-color:#313785;\n  color: #fff;\n  border-radius: 5px;\n}\n.bandwith-icon {\n  background:url('/wp-content/uploads/datatransfer.png') center, no repeat;\n}\n[data-bind=\"template: { name: 'account-details-template', data: account_details }\"] {\n  padding: 15px 0px 0px 0px;\n}\n.pricing-stuff a {\n  cursor:pointer;\n}\n.pricing-stuff button.close {\n  padding:5px;\n}\n#zonetitle, #servertitle {\n  padding: 10px 0 15px 0;\n}\n#whichzone {\n  -ms-text-justify: distribute-all-lines;\n  text-justify: distribute-all-lines;\n  margin-bottom: 79px;\n  text-align: justify;\n  height:105px;\n  line-height:15px;\n}\n.stretch {\n  width:100%!important;\n  display:inline-block!important;\n}\n.zoneselector {\n  display: inline-block;\n  zoom: 1;\n  opacity: 0.6;\n  padding: 7px;\n  max-width: 100px;\n  vertical-align: top;\n  cursor: pointer;\n  width: 80px;\n  font-size: 12px;\n  padding-bottom:0px;\n  margin-bottom:5px;\n}\n#whichzone .selectedzone {\n  background-color: #22A6FF;\n  border-radius: 4px;\n  color: #FFFFFF;\n  cursor: pointer;\n  font-weight: bold;\n  opacity: 1;\n}\n#whichzone img {\n  display: block;\n  margin: 0 auto;\n  max-width: 58px;\n}\n#whichzone span {\n  display: block;\n  margin: 10px auto;\n  text-align: center;\n}\n#whichzone .comingsoon {\n  cursor: not-allowed;\n  opacity:0.4;\n}\n.comingsoon:before {\n  position: absolute;\n  content:'';\n  height: 100px;\n  width: 100px;\n  background: url(\"/wp-content/uploads/coming-soon.png\") top right no-repeat;\n}\n.panel-heading {\n  vertical-align: middle;\n  display: table;\n}\n.panel-heading span {\n  vertical-align: middle;\n  display: table-cell;\n}\n.panel-heading .hover-large {\n  text-align: center;\n  vertical-align: middle;\n  display: table-cell;\n  float: left;\n  padding:3px 15px 3px 15px;\n  margin-right: 15px;\n}\n.example {\n  border: 1px solid #DDD;\n  border-radius: 4px;\n  position: relative;\n  padding: 50px 30px 20px;\n  margin: 30px 0px 20px;\n  overflow: hidden;\n}\n.big-letter {\n  font-size:48px;\n}\n.small-bar {\n  height: 8px;\n}\n.handler {\n  background-color: green;\n  position: absolute;\n  width: 1.5em;\n  height: 1.5em;\n  cursor: default;\n}\n.container {\n  width: 980px;\n  margin-left: auto;\n  margin-right: auto;\n}\n.three-fourths {\n  width: 75%;\n}\n.one-fourth {\n  width: 25%;\n}\n.column {\n  float: left;\n  padding-left: 6px;\n  padding-right: 6px;\n}\n.slider-tooltip {\n  position: absolute;\n  display: block;\n  top: -25px;\n  width: 35px;\n  height: 20px;\n  color: #fff;\n  text-align: center;\n  font: 10pt Tahoma, Arial, sans-serif;\n  border-radius: 3px;\n  border: 1px solid #333;\n  -webkit-box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, .3);\n  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, .3);\n  -moz-box-sizing: border-box;\n  -webkit-box-sizing: border-box;\n  box-sizing: border-box;\n  background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);\n  /* FF3.6+ */\n  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(69, 72, 77, 0.5)), color-stop(100%, rgba(0, 0, 0, 0.5)));\n  /* Chrome,Safari4+ */\n  background: -webkit-linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);\n  /* Chrome10+,Safari5.1+ */\n  background: -o-linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);\n  /* Opera 11.10+ */\n  background: -ms-linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);\n  /* IE10+ */\n  background: linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);\n  /* W3C */\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8045484d', endColorstr='#80000000', GradientType=0);\n  /* IE6-9 */\n}\n.noUi-target {\n  border-radius: 4px;\n  border: 1px solid #D3D3D3;\n  box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;\n}\n.noUi-horizontal {\n  /*position: relative;*/\n  height: 20px;\n}\n.noUI-base {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  background-color: #f0ad4e;\n}\n.btn-cp {\n  background-repeat: no-repeat;\n  background-color: transparent;\n  width: 31px;\n  height: 31px;\n  text-decoration: none;\n  border: 0;\n  cursor: pointer;\n  text-indent: -9999px;\n  padding: 0;\n  display: inline-block;\n  vertical-align: middle;\n}\n.drive-icon {\n  width: 64px;\n  height: 64px;\n  background-repeat: no-repeat;\n  float: left;\n  margin-bottom: 3px;\n}\n.btn-delete {\n  background-position: 0 -279px;\n}\n.vm-icon {\n  background: url('/wp-content/uploads/vm.png');\n}\n.container-icon {\n  background: url('/wp-content/uploads/container.png');\n}\n.bandwith-icon {\n  background:url('/wp-content/uploads/datatransfer.png') 100% 12% no-repeat\n}\n.drive-ssd {\n  background-image: url('/wp-content/uploads/drive_ssd.png');\n}\n.drive-hdd {\n  background-image: url('/wp-content/uploads/drive_disk.png');\n}\n.drive-folder {\n  background-image: url('/wp-content/uploads/folder.png');\n}\n.server-icon {\n  width: 72px;\n  height: 72px;\n  background-repeat: no-repeat;\n  float: left;\n  position: relative;\n  margin-bottom: 10px;\n  margin-left: -4px;\n}\n.my-checkbox {\n  margin-left: 36px !important;\n}\n.my-input-select-box {\n  margin-left: 10px;\n  width: 45px;\n}\n.storage-icon {\n  cursor: pointer;\n  background: url(\"/wp-content/uploads/drive_add.png\") no-repeat top left;\n  padding-left:23px;\n  width: 20px;\n  height: 20px;\n  line-height: 21px;\n  display: inline-block;\n  font-weight: bold;\n}\nul.my-ul {\n  list-style-type: none;\n  padding: 0;\n  margin: 0 0 9px 5px;\n}\nli.slider-definition {\n  font-weight: bold;\n  text-align: left;\n  display:inline;\n}\n.my-slider-handle {\n  border-color: #313785;\n  border-radius: 0px;\n  background-image: none;\n  cursor: pointer;\n  background-color: #22a6ff;\n  top: -.3em;\n  margin-left: -.6em;\n  position: absolute;\n  z-index: 2;\n  width: 1.2em;\n  height: 1.2em;\n  border: 1px solid #444444;\n}\n.my-slider {\n  margin:7px 5px 0 5px;\n  border: 1px solid #555555;\n  border-color: #313785;\n  border-radius: 0px;\n  background-color: white;\n  height: .8em;\n  position: relative;\n  text-align: left;\n  margin-left:5px;\n}\n.my-input-box {\n  margin-bottom: 0px;\n  border-color: #313785;\n  width: 35px;\n}\n.my-text {\n  margin-top: 5px;\n}\n.my-text-number {\n  margin-top: 5px;\n  float: right;\n}\n.my-event {\n  white-space: nowrap;\n  overflow: auto;\n}\n.my-server {\n  background-color: rgba(100, 100, 100, 0.1);\n}\n.text-right {\n  text-align: right;\n}\n.panel-body {\n  background-color: rgba(100, 100, 100, 0.1);\n}\nul.my-modal-ul {\n  list-style-type: none;\n  padding: 6px;\n  margin: 0 0 5px 5px;\n}\n.my-final-price {\n  font-size: 11pt;\n  font-weight: bold;\n  color: #313785;\n}\n.my-total {\n  padding-right: 14px;\n  padding-top: 20px;\n  text-align: right;\n}\n.my-burst-input {\n  width: 70px;\n  text-align: right;\n}\n.pricing-stuff {\n  font-size: 9.5pt;\n  font-weight: bold;\n  color: #313785;\n}\n.pricing-stuff .btn, .pricing-stuff .btn-primary {\n  font-size: 9.5pt;\n  font-family: Arial;\n  font-weight: bold;\n  box-shadow: none;\n  background-color: white;\n  border-radius: 0px !important;\n  background-image: none;\n  color: #313785;\n}\n.pricing-stuff .btn-primary {\n  background-color: #22a6ff;\n  color: white;\n}\n.my-total p, .my-total span {\n  display:inline;\n  line-height: 30px;\n}\n.prominent-price {\n  font-size: 22px;\n  margin-left: 5px;\n  line-height: 40px !important;\n}\n.prominent-price-label {\n  font-size: 19px;\n}\n.burst-price-label {\n  font-size: 12px;\n}\n.burst-price {\n  font-size: 15px;\n  margin-left: 5px;\n}\n.final-price {\n  font-size:25px;\n  margin-left: 5px;\n}\n.final-price-label {\n  font-size:22px;\n}\n.modal-body h2 {\n  margin-top:0px;\n}\n.modal-header {\n  background-color:#f5f5f5;\n}\n.pricing-stuff .modal-header button.close {\n  padding:0px;\n}\n.span6 div.pricing-stuff h3 {\n  margin-top: 0px;\n  margin-bottom: 10px\n}\ndiv.pricing-stuff div.popover {\n  z-index: 1000;\n}\n#subscription .modal-body ul {\n  width: 225px;\n  float: left;\n}\n#subscription .modal-description {\n  float: left;\n  width: 49%;\n}\n.cont-warning {\n  background-color: #fc6666;\n  color: #fcf8e3;\n  text-align: center;\n  padding: 10px;\n}",
+			"file": "wp-content/themes/bootstrapwp-87/less/common.css",
+			"file_size": 9076,
+			"file_write_time": 1398704024000000,
+			"settings":
+			{
+				"buffer_size": 9076,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "wp-content/themes/bootstrapwp-87/js/constants.js",
 			"settings":
 			{
@@ -209,16 +210,20 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 96.0,
+		"height": 306.0,
 		"selected_items":
 		[
 			[
-				"diff",
-				"FileDiffs: Menu"
-			],
-			[
 				"html",
 				"HTMLPrettify"
+			],
+			[
+				"prett",
+				"HTMLPrettify: Set Prettify Preferences"
+			],
+			[
+				"diff",
+				"FileDiffs: Menu"
 			],
 			[
 				"install",
@@ -249,15 +254,11 @@
 				"HTMLPrettify: Set Prettify Preferences"
 			],
 			[
-				"prett",
-				"HTMLPrettify"
-			],
-			[
 				"filed",
 				"FileDiffs: Menu"
 			]
 		],
-		"width": 449.0
+		"width": 467.0
 	},
 	"console":
 	{
@@ -274,6 +275,8 @@
 	},
 	"file_history":
 	[
+		"/home/jonathan/.config/sublime-text-2/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
+		"/home/jonathan/.config/sublime-text-2/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
 		"/home/jonathan/elastic-www/test2.html",
 		"/home/jonathan/elastic-www/test2.js",
 		"/home/jonathan/elastic-www/calculator/wp-content/themes/bootstrapwp-87/js/utils.js",
@@ -329,7 +332,6 @@
 		"/home/jonathan/elastic-www/Bootstrap Theme/wp-config.php",
 		"/home/jonathan/elastic-www/Bootstrap Theme/class-wp-filesystem-direct.php",
 		"/home/jonathan/elastic-www/Bootstrap Theme/file.php",
-		"/home/jonathan/.config/sublime-text-2/Packages/HTML-CSS-JS Prettify/.jsbeautifyrc",
 		"/home/jonathan/elastic-www/pricing/test.php",
 		"/home/jonathan/.ssh/config",
 		"/home/jonathan/elastic-www/page-case-studies-sector.php",
@@ -363,7 +365,7 @@
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
@@ -380,6 +382,32 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"builder",
+			"hdd_drive",
+			"drive-templ",
+			"my-slid",
+			"sdd",
+			"bandwid",
+			"add_disk",
+			"add",
+			"utils",
+			"add",
+			"add_disk",
+			"pop",
+			"subsc",
+			"Band",
+			"bBand",
+			"bandwidth",
+			"self =",
+			"ssd",
+			"my-event",
+			"add",
+			"pop",
+			"popF",
+			"tutorial",
+			"bandwi",
+			"bandwid",
+			"folder",
 			"value",
 			"server_licenses",
 			"cost_per_winserverweb",
@@ -481,33 +509,7 @@
 			"containers",
 			"container_template",
 			"push",
-			"add_vi",
-			"add_v",
-			"add",
-			"firewall",
-			"ssd",
-			"icon\n",
-			"drive\n",
-			"ssd\n",
-			"\";\n",
-			"range",
-			"/js/",
-			"pricing.js",
-			"whichzone img",
-			"url",
-			"icon",
-			"vm-icon",
-			"20",
-			"13",
-			"20",
-			"hosting",
-			"2000",
-			"default",
-			"\\n",
-			"coming",
-			"comingsoon",
-			"#zone",
-			"zoneti"
+			"add_vi"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -534,15 +536,15 @@
 					"file": "index.html",
 					"settings":
 					{
-						"buffer_size": 39285,
+						"buffer_size": 39155,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								23543,
-								23543
+								27629,
+								27629
 							]
 						],
 						"settings":
@@ -552,7 +554,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 5620.0,
+						"translation.y": 4998.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -562,15 +564,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/js/pricing.js",
 					"settings":
 					{
-						"buffer_size": 9643,
+						"buffer_size": 8982,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4228,
-								4228
+								8712,
+								8712
 							]
 						],
 						"settings":
@@ -580,7 +582,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1159.0,
+						"translation.y": 2429.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -597,8 +599,8 @@
 						"selection":
 						[
 							[
-								902,
-								902
+								488,
+								488
 							]
 						],
 						"settings":
@@ -618,15 +620,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/js/utils.js",
 					"settings":
 					{
-						"buffer_size": 1420,
+						"buffer_size": 2033,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								317,
-								317
+								924,
+								924
 							]
 						],
 						"settings":
@@ -646,15 +648,15 @@
 					"file": "wp-content/themes/bootstrapwp-87/js/models.js",
 					"settings":
 					{
-						"buffer_size": 18758,
+						"buffer_size": 18781,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16374,
-								16374
+								13259,
+								13259
 							]
 						],
 						"settings":
@@ -664,53 +666,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6276.0,
+						"translation.y": 5063.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 5,
-					"file": "wp-content/themes/bootstrapwp-87/less/common.css",
-					"settings":
-					{
-						"buffer_size": 9450,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6531,
-								6531
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CSS/CSS.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 3740.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
 					"file": "wp-content/themes/bootstrapwp-87/js/templates.html",
 					"settings":
 					{
-						"buffer_size": 10343,
+						"buffer_size": 11436,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8558,
-								8558
+								6428,
+								6428
 							]
 						],
 						"settings":
@@ -720,13 +694,13 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2293.0,
+						"translation.y": 1961.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 6,
 					"file": "/home/jonathan/elastic-www/bkup/calc bkup/wpindex.html",
 					"settings":
 					{
@@ -754,7 +728,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "wp-content/themes/bootstrapwp-87/less/bootstrapwp.css",
 					"settings":
 					{
@@ -782,7 +756,7 @@
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "/home/jonathan/elastic-www/test.js",
 					"settings":
 					{
@@ -817,6 +791,34 @@
 			"sheets":
 			[
 				{
+					"buffer": 9,
+					"file": "wp-content/themes/bootstrapwp-87/less/common.css",
+					"settings":
+					{
+						"buffer_size": 9076,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								441,
+								441
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
 					"buffer": 10,
 					"file": "wp-content/themes/bootstrapwp-87/js/constants.js",
 					"settings":
@@ -828,8 +830,8 @@
 						"selection":
 						[
 							[
-								1155,
-								1155
+								4117,
+								4117
 							]
 						],
 						"settings":
@@ -839,7 +841,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1084.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
