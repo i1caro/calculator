@@ -12,6 +12,7 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
         'ram': self.shift(),
         'ip': utils.toBoolean(self.shift()),
         'firewall': utils.toBoolean(self.shift()),
+        'number_of_instances': self.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives(),
         'windows_server_license': self.shift(),
@@ -26,6 +27,7 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
         'ram': [self.shift(), self.shift()],
         'ip': utils.toBoolean(self.shift()),
         'firewall': utils.toBoolean(self.shift()),
+        'number_of_instances': self.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives()
       };
@@ -34,7 +36,7 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
     self.get_drives = function() {
       var list = [],
           element = self.shift();
-      while(self.not_end(element)) {
+      while (self.not_end(element)) {
         list.push(element);
         element = self.shift();
       }
@@ -49,7 +51,7 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
     self.get_servers = function(factory) {
       var element = self[0],
           servers = [];
-      while(self.not_end(element)) {
+      while (self.not_end(element)) {
         servers.push(factory());
         element = self[0];
       }
@@ -103,7 +105,8 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
       this.cpu.choosen(),
       this.ram.choosen(),
       this.ip.choosen(),
-      this.firewall.choosen()
+      this.firewall.choosen(),
+      this.number_of_instances()
     ];
     result.push(drives_data['ssd']);
     result.push(']');
@@ -124,23 +127,22 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
   }
 
   function serialize_view() {
-    var virtual_machines = this.virtual_machines(),
-        containers = this.containers(),
+    var servers = this.servers(),
+        temp_server,
         temp_list,
         result = [],
         i;
-
-    temp_list = [];
-    for (i=0; i < virtual_machines.length; i++) {
-      temp_list.push(virtual_machines[i].serialize());
+    temp_list = {
+      'container': [],
+      'virtual_machine': []
+    };
+    for (i=0; i < servers.length; i++) {
+      temp_server = servers[i];
+      temp_list[temp_server.type].push(temp_server.serialize());
     }
-    result.push(temp_list);
+    result.push(temp_list['virtual_machine']);
     result.push(']');
-    temp_list = [];
-    for (i=0; i < containers.length; i++) {
-      temp_list.push(containers[i].serialize());
-    }
-    result.push(temp_list);
+    result.push(temp_list['container']);
     result.push(']');
     result.push(this.account_details.serialize());
     result.push(this.subscription_plans.choosen());

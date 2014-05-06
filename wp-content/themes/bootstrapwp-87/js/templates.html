@@ -50,7 +50,6 @@
         name: "server-template",
         data: {
           server: $data,
-          remove: $root.remove_virtual_machine,
           icon: "vm-icon",
           pop: "Virtual Machine",
           long: 'Our VMs are virtualized, flexible, on-demand servers for any OS. They are designed to behave just like physical servers.',
@@ -64,7 +63,6 @@
         name: "server-template",
         data: {
           server: $data,
-          remove: $root.remove_container,
           icon: "container-icon",
           pop: "Elastic Container",
           long: "Elastic Containers are hassle-free, high performance Linux cloud servers that scale up and down automatically, saving you money when not running at maximum load.",
@@ -74,9 +72,20 @@
   <!-- /ko -->
 </script>
 <script type="text/html" id="server-template">
+<div class="stack">
+  <!-- ko foreach: { data: server.css_for_instances(), as: 'style' } -->
+    <div class="border" data-bind="{style: {bottom: style.bottom, left: style.left, zIndex: style.zIndex}}"></div>
+  <!-- /ko -->
+  <div class="server">
+    <!-- ko template: 'server-content-template' --><!-- /ko -->
+  </div>
+</div>
+</script>
+<script type="text/html" id="server-content-template">
   <div class="panel-body">
     <div class="btn-toolbar" role="toolbar">
-      <button type="button" class="close" data-bind="click: remove" aria-hidden="true">&times;</button>
+      <button type="button" class="minus close" data-bind="click: server.minus" aria-hidden="true">&minus;</button>
+      <button type="button" class="plus close" data-bind="click: server.plus" aria-hidden="true">&plus;</button>
     </div>
     <div style="clear: both;"></div>
   </div>
