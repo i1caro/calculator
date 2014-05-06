@@ -441,15 +441,8 @@ div.pricing-stuff div.popover {
 
 .stack {
   position: relative;
-  z-index: 6;
+  z-index: 2;
   margin-bottom: 20px;
-}
-
-.modal-backdrop {
-  z-index: 7;
-}
-.modal-body {
-  z-index: 1500;
 }
 
 /* Image styles */
