@@ -78,6 +78,12 @@ define(['./constants', './pricing'], function(CONSTANTS, pricing) {
         }
       });
   }
+
+  function serverSlideDown() {
+    jQuery("div.server").first().hide();
+    jQuery("div.server").first().slideDown();
+  }
+
   return {
     'get_country_based_on_location': get_country_based_on_location,
     'calc_checksum': calc_checksum,
@@ -87,6 +93,7 @@ define(['./constants', './pricing'], function(CONSTANTS, pricing) {
     'toBoolean': toBoolean,
     'limit': limit,
     'dynPop': dynPop,
+    'serverSlideDown': serverSlideDown,
     'extend': extend
   };
 });

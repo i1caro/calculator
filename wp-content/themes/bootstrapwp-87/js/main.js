@@ -87,6 +87,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
           ssd: [20],
           hdd: []
         }));
+        utils.serverSlideDown();
       };
       self.add_virtual_machine = function() {
         self.servers.unshift(new models.virtual_machine({
@@ -98,6 +99,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
           ssd: [],
           hdd: [20]
         }));
+        utils.serverSlideDown();
       };
 
       // Normal attributes
