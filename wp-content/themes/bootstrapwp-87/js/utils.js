@@ -84,6 +84,11 @@ define(['./constants', './pricing'], function(CONSTANTS, pricing) {
     jQuery("div.server").first().slideDown();
   }
 
+  function serverSlideUp(e, callback) {
+    jQuery(e).parents(".server").slideUp();
+    window.setTimeout(function(){callback()},500);
+  }
+
   return {
     'get_country_based_on_location': get_country_based_on_location,
     'calc_checksum': calc_checksum,
@@ -94,6 +99,7 @@ define(['./constants', './pricing'], function(CONSTANTS, pricing) {
     'limit': limit,
     'dynPop': dynPop,
     'serverSlideDown': serverSlideDown,
+    'serverSlideUp': serverSlideUp,
     'extend': extend
   };
 });

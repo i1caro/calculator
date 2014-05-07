@@ -203,7 +203,10 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
           num = parseInt(context.$data.server.number_of_instances()) - 1;
 
       if (num <= 0) {
-        context.$root.servers.remove(context.$data.server);
+        console.log(this);
+        utils.serverSlideUp(this, function(){
+          context.$root.servers.remove(context.$data.server);
+        });
       }
       else {
         context.$data.server.number_of_instances(num);
