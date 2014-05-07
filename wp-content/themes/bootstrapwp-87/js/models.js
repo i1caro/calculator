@@ -447,8 +447,9 @@ define(['./knockout-3.1.0', './constants', './utils', './parser', './pricing'], 
     var single_total = utils.format_price(this.single_price()),
         total = utils.format_price(this.price()),
         number_of_instances = this.number_of_instances();
+        stype = this.type.replace("_", " ");
     if (number_of_instances > 1)
-      return total + ' = ' + number_of_instances + ' X ' + single_total;
+      return number_of_instances + ' ' + stype + 's, at ' + single_total + ' per ' + stype + ' = ' + total;
     else
       return total;
   }
