@@ -1,6 +1,9 @@
 /* globals _ */
 
 define(['./knockout-3.1.0', './utils'], function(ko, utils) {
+  var SPLIT_CHECKSUM = '+',
+      SPLIT_INSTANCES = '/';
+
   function Parser(list) {
     var self = this;
     for (var i=0; i < list.length; i++) {
@@ -55,11 +58,11 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
         servers.push(factory());
         element = self[0];
       }
-      self.shift(); // remove ']'
+      self.shift(); // remove SPLIT_INSTANCES
       return servers;
     };
     self.not_end = function(element) {
-      return element !== ']' && self.length > 0;
+      return element !== SPLIT_INSTANCES && self.length > 0;
     };
     self.build_account_details = function() {
       return {
@@ -85,8 +88,8 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
 
   function string_into_data(string) {
     var no_hash = string.substring(1),
-        decoded = decodeURI(no_hash),
-        splited_info = decoded.split('%'),
+        decoded = no_hash,
+        splited_info = decoded.split(SPLIT_CHECKSUM),
         checksum = splited_info[0],
         parser = new Parser(splited_info[1].split(','));
 
@@ -109,9 +112,9 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
       this.number_of_instances()
     ];
     result.push(drives_data['ssd']);
-    result.push(']');
+    result.push(SPLIT_INSTANCES);
     result.push(drives_data['hdd']);
-    result.push(']');
+    result.push(SPLIT_INSTANCES);
     return result;
   }
 
@@ -141,17 +144,17 @@ define(['./knockout-3.1.0', './utils'], function(ko, utils) {
       temp_list[temp_server.type].push(temp_server.serialize());
     }
     result.push(temp_list['virtual_machine']);
-    result.push(']');
+    result.push(SPLIT_INSTANCES);
     result.push(temp_list['container']);
-    result.push(']');
+    result.push(SPLIT_INSTANCES);
     result.push(this.account_details.serialize());
     result.push(this.subscription_plans.choosen());
     result.push(this.country());
 
     var result_string = _.flatten(result).join(','),
-        checksum = utils.calc_checksum(result_string);
-
-    location.hash = encodeURI(checksum + '%' + result_string);
+        checksum = utils.calc_checksum(result_string),
+        encoded_uri = checksum + SPLIT_CHECKSUM + result_string;
+    location.hash = encoded_uri;
     return result_string;
   }
 
