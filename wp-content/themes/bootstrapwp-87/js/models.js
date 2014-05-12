@@ -614,7 +614,7 @@ define(['./knockout-3.1.0', './constants', './utils', './parser', './pricing'], 
     self.price = ko.computed(function() {
       var total = 0;
       total += self.bandwidth.price();
-      total += self.additional_vlans.price();
+      total += self.additional_ips.price();
       total += self.additional_vlans.price();
 
       return total;
