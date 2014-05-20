@@ -480,3 +480,14 @@ div.pricing-stuff div.popover {
   /* transition: 0.3s all ease-out; */
   background-color: white;
 }
+
+.upper-handle {
+top: -10px;
+border-left: 10px solid transparent;
+border-right: 10px solid transparent;
+width: 0;
+border-top: 10px solid;
+height: 3px;
+background: none;
+border-bottom: none;
+}

@@ -116,7 +116,7 @@ define(['./knockout-3.1.0'], function(ko) {
   };
   var CONTAINER_UNAVAILABILITY = {
     'lon-p': false,
-    'lon-b': true,
+    'lon-b': false,
     'ams-e': false,
     'sjc-c': false,
     'lax-p': false,
