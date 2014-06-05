@@ -203,7 +203,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
       "referrer" : document.referrer,
       "cookie" : document.cookie
       } 
-      $.post("http://jonsmarketingfunnel.co.uk:5000/", data);
+      $.post("/calculator/stats", data);
     });
     $("#server-list").delegate(".minus", "click", function() {
       var context = ko.contextFor(this),
