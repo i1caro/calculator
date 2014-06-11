@@ -198,12 +198,20 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
     ko.applyBindings(model);
 
     //attach event handlers
-    $(".yellow-nohover.hover-huge").click(function(){
-      var data = { "url": location.origin+location.hash,
-      "referrer" : document.referrer,
-      "cookie" : document.cookie
-      } 
-      $.post("/calculator/stats", data);
+    $(".yellow-nohover.hover-huge").click(function(e){
+      e.preventDefault(); 
+      var h = location.hash
+      var l = $(this)
+      l.css('cursor','wait').text("Just a second...")
+      $.ajax({
+        url:'http://jonsmarketingfunnel.co.uk:5000/?'+encodeURIComponent(JSON.stringify(h)), 
+        type:'GET', 
+        crossDomain:true
+      })
+      .done(function(){
+        window.location = l.attr('href');      
+      })
+      return false;   
     });
     $("#server-list").delegate(".minus", "click", function() {
       var context = ko.contextFor(this),
@@ -272,6 +280,8 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
       $(".my-event blue-hover hover-small").click(function() {
         $("#pop1, #pop2, #pop3").fadeOut(2000);
       });
+      // to hide bandwidth slider
+      //$(".bandwith-icon, [data-bind='template: { name: 'input-range-template', data: bandwidth}']").hide()
     }
     tutorialsPop();
     utils.dynPop();
