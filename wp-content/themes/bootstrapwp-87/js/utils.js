@@ -80,9 +80,8 @@ define(['./constants', './pricing'], function(CONSTANTS, pricing) {
   }
 
   function serverSlideDown() {
-    var e = jQuery("div.server").first()
-    e.hide();
-    e.slideDown();
+    jQuery("div.server").first().hide();
+    jQuery("div.server").first().slideDown();
   }
 
   function serverSlideUp(e, callback) {

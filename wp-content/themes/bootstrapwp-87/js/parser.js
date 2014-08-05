@@ -1,38 +1,36 @@
 /* globals _ */
 
-define(['./utils'], function(utils) {
+define(['./knockout-3.1.0', './utils'], function(ko, utils) {
   var SPLIT_CHECKSUM = '+',
       SPLIT_INSTANCES = '/';
 
   function Parser(list) {
-    var self = this,
-        output = [];
-
+    var self = this;
     for (var i=0; i < list.length; i++) {
-      output.push(list[i]);
+      self.push(list[i]);
     }
     self.build_virtual_machine = function() {
       var result = {
-        'cpu': output.shift(),
-        'ram': output.shift(),
-        'ip': utils.toBoolean(output.shift()),
-        'firewall': utils.toBoolean(output.shift()),
-        'number_of_instances': output.shift(),
+        'cpu': self.shift(),
+        'ram': self.shift(),
+        'ip': utils.toBoolean(self.shift()),
+        'firewall': utils.toBoolean(self.shift()),
+        'number_of_instances': self.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives(),
-        'windows_server_license': output.shift(),
-        'additional_microsoft_license': output.shift(),
-        'remote_desktops': output.shift()
+        'windows_server_license': self.shift(),
+        'additional_microsoft_license': self.shift(),
+        'remote_desktops': self.shift()
       };
       return result;
     };
     self.build_container = function() {
       var result = {
-        'cpu': [output.shift(), output.shift()],
-        'ram': [output.shift(), output.shift()],
-        'ip': utils.toBoolean(output.shift()),
-        'firewall': utils.toBoolean(output.shift()),
-        'number_of_instances': output.shift(),
+        'cpu': [self.shift(), self.shift()],
+        'ram': [self.shift(), self.shift()],
+        'ip': utils.toBoolean(self.shift()),
+        'firewall': utils.toBoolean(self.shift()),
+        'number_of_instances': self.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives()
       };
@@ -40,10 +38,10 @@ define(['./utils'], function(utils) {
     };
     self.get_drives = function() {
       var list = [],
-          element = output.shift();
+          element = self.shift();
       while (self.not_end(element)) {
         list.push(element);
-        element = output.shift();
+        element = self.shift();
       }
       return list;
     };
@@ -54,33 +52,33 @@ define(['./utils'], function(utils) {
       return self.get_servers(self.build_container);
     };
     self.get_servers = function(factory) {
-      var element = output[0],
+      var element = self[0],
           servers = [];
       while (self.not_end(element)) {
         servers.push(factory());
-        element = output[0];
+        element = self[0];
       }
-      output.shift(); // remove SPLIT_INSTANCES
+      self.shift(); // remove SPLIT_INSTANCES
       return servers;
     };
     self.not_end = function(element) {
-      return element !== SPLIT_INSTANCES && output.length > 0;
+      return element !== SPLIT_INSTANCES && self.length > 0;
     };
     self.build_account_details = function() {
       return {
-        'bandwidth': output.shift(),
-        'ips': output.shift(),
-        'virtual_lans': output.shift()
+        'bandwidth': self.shift(),
+        'ips': self.shift(),
+        'virtual_lans': self.shift()
       };
     };
     self.parse = function() {
       var data = {};
-      if (output.length) {
+      if (self.length) {
         data['virtual_machines'] = self.get_virtual_machines();
         data['containers'] = self.get_containers();
         data['account_details'] = self.build_account_details();
-        data['subscription'] = output.shift();
-        data['country'] = output.shift();
+        data['subscription'] = self.shift();
+        data['country'] = self.shift();
       }
       return data;
     };
@@ -88,24 +86,16 @@ define(['./utils'], function(utils) {
   Parser.prototype = Object.create(Array.prototype);
   Parser.constructor = Parser;
 
-  function split_string(string) {
-    var no_hash = string.substring(1),
-        splited_info = no_hash.split(SPLIT_CHECKSUM);
-
-    return {checksum: splited_info[0], data: splited_info[1]};
-  }
-
   function string_into_data(string) {
-    var result = split_string(string);
+    var no_hash = string.substring(1),
+        decoded = no_hash,
+        splited_info = decoded.split(SPLIT_CHECKSUM),
+        checksum = splited_info[0],
+        parser = new Parser(splited_info[1].split(','));
 
-    if (parseInt(result.checksum) !== utils.calc_checksum(data))
+    if (parseInt(checksum) !== utils.calc_checksum(splited_info[1]))
       throw "Wrong checksum";
-    return new Parser(result.data.split(',')).parse();
-  }
-
-  function unchecked_string_into_data(string) {
-    var result = split_string(string);
-    return new Parser(result.data.split(',')).parse();
+    return parser.parse();
   }
 
   function serialize_base_server() {

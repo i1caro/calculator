@@ -152,11 +152,6 @@ define(['./knockout-3.1.0'], function(ko) {
       flag: "USAFlag.png",
     },
     {
-      id: "sat-p",
-      name: "San Antonio, TX",
-      flag: "USAFlag.png",
-    },
-    {
       id: "tor-p",
       name: "Toronto",
       flag: "CANFlag.png",
