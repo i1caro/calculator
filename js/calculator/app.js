@@ -2,8 +2,7 @@ require.config({
   'baseUrl': 'js',
   'paths': {
     'text': 'lib/require.text',
-    'css': 'lib/require.css',
-    'app': 'calculator',
+    'css': 'lib/require.css'
   },
   'shim': {
     'lib/underscore': {
