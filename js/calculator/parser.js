@@ -1,6 +1,6 @@
 /* globals _ */
 
-define(['./knockout-3.1.0', './utils'], function(ko, utils) {
+define(['lib/knockout', './utils'], function(ko, utils) {
   var SPLIT_CHECKSUM = '+',
       SPLIT_INSTANCES = '/';
 

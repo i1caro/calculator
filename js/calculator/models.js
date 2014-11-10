@@ -1,6 +1,6 @@
 /* globals _ */
 
-define(['./knockout-3.1.0', './constants', './utils', './parser', './pricing'], function(ko, CONSTANTS, utils, parser, pricing) {
+define(['lib/knockout', './constants', './utils', './parser', './pricing'], function(ko, CONSTANTS, utils, parser, pricing) {
 
   function formatted_price() {
     return utils.format_price(this.price());

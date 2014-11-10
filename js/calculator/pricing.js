@@ -1,4 +1,4 @@
-define(['./knockout-3.1.0', './constants'], function(ko, CONSTANTS) {
+define(['lib/knockout', './constants'], function(ko, CONSTANTS) {
 
 
   function Prices() {

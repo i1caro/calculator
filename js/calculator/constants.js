@@ -1,5 +1,4 @@
-/* globals _ */
-define(['./knockout-3.1.0'], function(ko) {
+define(['lib/knockout', 'lib/underscore'], function(ko) {
   var LIMITS = {
     cpu_container_min: 0,
     cpu_container_max: 20000, // Mhz

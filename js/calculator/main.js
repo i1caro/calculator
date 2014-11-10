@@ -1,5 +1,5 @@
 /* globals _ */
-define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', './utils', './parser', './pricing'],
+define(['lib/knockout', 'text!./templates.html', './constants', './models', './utils', './parser', './pricing'],
     function(ko, templates, CONSTANTS, models, utils, parser, pricing) {
 
         $("body").append(templates);
@@ -198,7 +198,7 @@ define(['./knockout-3.1.0', 'text!./templates.html', './constants', './models', 
 
         //attach event handlers
 
-        
+
 
         $(".yellow-nohover.hover-huge").click(function(e) {
             e.preventDefault();
