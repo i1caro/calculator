@@ -1,6 +1,4 @@
-/* globals _ */
-
-define(['./constants', './pricing'], function(CONSTANTS, pricing) {
+define(['lib/underscore', './constants', './pricing'], function(_, CONSTANTS, pricing) {
 
   function extend_objects(child, parent) {
       for (var property in parent)

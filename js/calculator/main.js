@@ -1,6 +1,5 @@
-/* globals _ */
-define(['lib/knockout', 'text!./templates.html', './constants', './models', './utils', './parser', './pricing'],
-    function(ko, templates, CONSTANTS, models, utils, parser, pricing) {
+define(['lib/knockout', 'lib/underscore', 'text!./templates.html', './constants', './models', './utils', './parser', './pricing'],
+    function(ko, _, templates, CONSTANTS, models, utils, parser, pricing) {
 
         $("body").append(templates);
 

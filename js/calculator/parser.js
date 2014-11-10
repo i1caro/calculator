@@ -1,6 +1,4 @@
-/* globals _ */
-
-define(['lib/knockout', './utils'], function(ko, utils) {
+define(['lib/knockout', 'lib/underscore', './utils'], function(ko, _, utils) {
   var SPLIT_CHECKSUM = '+',
       SPLIT_INSTANCES = '/';
 
