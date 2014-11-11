@@ -1,118 +1,5 @@
-define(['lib/knockout', 'lib/underscore'], function(ko) {
-  var LIMITS = {
-    cpu_container_min: 0,
-    cpu_container_max: 20000, // Mhz
-    cpu_increments: 50,
-    ram_container_min: 256, // MB
-    ram_increments: 64,
-    ram_container_max: 32768,
-    cpu_vm_min: 500,
-    cpu_vm_max: 20000, // Mhz
-    ram_vm_min: 256, // MB
-    ram_vm_max: 32768,
-    hdd_min: 0, // GB
-    hdd_max: 1862,
-    ssd_min: 0,
-    ssd_max: 1862,
-    bandwidth_min: 0, // GB
-    bandwidth_max: 1000
-  };
-  var UK_PRICE = {
-    cpu_per_mhz: 0.012 *720/1000.0,
-    memory_per_mb: 0.016 *720/1024.0,
-    cpu_container_per_mhz: 0.005 *720/1000.0,
-    memory_container_per_mb: 0.007 *720/1024.0,
+define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing) {
 
-    // Disk/transfer costs.
-    disk_per_gb: 0.06,
-    ssd_per_gb: 0.15,
-    bandwidth_per_gb: 0.06,
-
-    // Extra costs.
-    cost_per_static_ip:  2.00,
-    cost_per_vlan: 5.00,
-    cost_per_firewall: 5.00,
-    cost_per_winserverweb: 10.00,
-    cost_per_winserverstd: 20.00,
-    cost_per_winserverent: 45.00,
-    cost_per_winserver12: 20.00,
-    cost_per_mssqlserverweb: 15.00,
-    cost_per_mssqlserverstd: 240.00,
-    cost_per_mssqlserver12: 240.00,
-    cost_per_desktopcal: 4.00,
-    currency: '£'
-  };
-  var NL_PRICE = {
-    cpu_per_mhz: 0.015 *720/1000.0,
-    memory_per_mb: 0.02 *720/1024.0,
-    cpu_container_per_mhz: 0.006 *720/1000.0,
-    memory_container_per_mb: 0.009 *720/1024.0,
-
-    // Disk/transfer costs.
-    disk_per_gb: 0.07,
-    ssd_per_gb: 0.18,
-    bandwidth_per_gb: 0.06,
-
-    // Extra costs.
-    cost_per_static_ip:  2.50,
-    cost_per_vlan: 6.00,
-    cost_per_firewall: 6.00,
-    cost_per_winserverweb: 12.00,
-    cost_per_winserverstd: 24.00,
-    cost_per_winserverent: 55.00,
-    cost_per_winserver12: 24.00,
-    cost_per_mssqlserverweb: 18.00,
-    cost_per_mssqlserverstd: 300.00,
-    cost_per_mssqlserver12: 300.00,
-    cost_per_desktopcal: 5.00,
-    currency: '€'
-  };
-  var US_LA_PRICE = {
-    cpu_per_mhz: 0.018 *720/1000.0,
-    memory_per_mb: 0.025 *720/1024.0,
-    cpu_container_per_mhz: 0.008 *720/1000.0,
-    memory_container_per_mb: 0.011 *720/1024.0,
-
-    // Disk/transfer costs. Quoted in US dollars per month.
-    disk_per_gb: 0.10,
-    ssd_per_gb: 0.25,
-    bandwidth_per_gb: 0.15,
-
-    // Extra costs. Quoted in US dollars per month.
-    cost_per_static_ip:  3.00,
-    cost_per_vlan: 7.50,
-    cost_per_firewall: 7.50,
-    cost_per_winserverweb: 15.00,
-    cost_per_winserverstd: 30.00,
-    cost_per_winserverent: 75.00,
-    cost_per_winserver12: 30.00,
-    cost_per_mssqlserverweb: 22.50,
-    cost_per_mssqlserverstd: 385.00,
-    cost_per_mssqlserver12: 385.00,
-    cost_per_desktopcal: 5.50,
-    currency: '$'
-  };
-  var US_SAN_JOSE_PRICE = _.clone(US_LA_PRICE),
-      US_TEXAS_PRICE = _.clone(US_LA_PRICE),
-      CANADA_PRICE = _.clone(US_LA_PRICE),
-      HONG_KONG_PRICE = _.clone(US_LA_PRICE),
-      AUSTRALIA_PRICE = _.clone(US_LA_PRICE);
-
-  US_SAN_JOSE_PRICE.bandwidth_per_gb = 0.05;
-  HONG_KONG_PRICE.bandwidth_per_gb = 0.40;
-  AUSTRALIA_PRICE.bandwidth_per_gb = 0.65;
-
-  var COUNTRIES_PRICES = {
-    'lon-p': UK_PRICE,
-    'lon-b': UK_PRICE,
-    'ams-e': NL_PRICE,
-    'sjc-c': US_SAN_JOSE_PRICE,
-    'lax-p': US_LA_PRICE,
-    'sat-p': US_TEXAS_PRICE,
-    'tor-p': CANADA_PRICE,
-    'hkg-e': HONG_KONG_PRICE,
-    'syd-v': AUSTRALIA_PRICE
-  };
   var CONTAINER_UNAVAILABILITY = {
     'lon-p': false,
     'lon-b': false,
@@ -124,6 +11,7 @@ define(['lib/knockout', 'lib/underscore'], function(ko) {
     'hkg-e': false,
     'syd-v': true
   };
+
   var ZONES = [
     {
       id: "lon-p",
@@ -151,6 +39,11 @@ define(['lib/knockout', 'lib/underscore'], function(ko) {
       flag: "USAFlag.png",
     },
     {
+      id: "sat-p",
+      name: "San Antonio, TX",
+      flag: "USAFlag.png",
+    },
+    {
       id: "tor-p",
       name: "Toronto",
       flag: "CANFlag.png",
@@ -166,6 +59,7 @@ define(['lib/knockout', 'lib/underscore'], function(ko) {
       flag: "AUSFlag.png",
     }
   ];
+
   var DOMAINS_TO_LOCATION = {
     'nl': 'ams-e',
     'au': 'hkg-e',
@@ -174,17 +68,61 @@ define(['lib/knockout', 'lib/underscore'], function(ko) {
     'uk': 'lon-p',
     'com': 'sjc-c'
   };
-  var SUBSCRIPTION_DISCOUNTS = [
-    {'name': 'No plan', 'times': 0, 'price': 0},
-    {'name': '12 Months', 'times': 12, 'price': 0.10}
+
+  var RESOURCES = {
+    'cpu_virtual_machine': 'vm_cpu',
+    'ram_virtual_machine': 'vm_mem',
+    'cpu_container': 'container_cpu',
+    'ram_container': 'container_mem',
+    'hdd': 'disk',
+    'ssd': 'ssd',
+    'ip': 'ip',
+    'ip6': 'ip6',
+    'vlan': 'vlan',
+    'firewall': 'firewall',
+    'bandwidth': 'xfer',
+    'windows_web_server_2008': 'msft_lwa_00135',
+    'windows_web_server_2008_standard': 'msft_p73_04837',
+    'windows_web_server_2008_enterprise': 'msft_p72_04169',
+    'windows_server_2012_standard': 'msft_p73_04837_2012std',
+    'windows_remote_desktop': 'msft_6wc_00002',
+    'microsoft_sql_server_2008_web': 'msft_tfa_00009',
+    'microsoft_sql_server_2008_standard': 'msft_228_03159'
+  };
+
+  var WINDOWS_LICENSE_ORDER = [
+    '',
+    RESOURCES.windows_web_server_2008,
+    RESOURCES.windows_web_server_2008_standard,
+    RESOURCES.windows_web_server_2008_enterprise,
+    RESOURCES.windows_server_2012_standard
   ];
+
+  var ADDITIONAL_MICROSOFT_LICENSE_ORDER = [
+    '',
+    RESOURCES.microsoft_sql_server_2008_web,
+    RESOURCES.microsoft_sql_server_2008_standard
+  ];
+
+  var LICENSES_KEYS = _.union(WINDOWS_LICENSE_ORDER, ADDITIONAL_MICROSOFT_LICENSE_ORDER, [RESOURCES.windows_remote_desktop]);
+
+  var TYPES = {
+    'virtual_machine': 'vm',
+    'container': 'container',
+    'ssd': 'ssd',
+    'hdd': 'disk',
+  };
+
   return {
-    'LIMITS': LIMITS,
-    'UK_PRICE': UK_PRICE,
+    'RESOURCES': RESOURCES,
+    'TYPES': TYPES,
+    'WINDOWS_LICENSE_ORDER': WINDOWS_LICENSE_ORDER,
+    'ADDITIONAL_MICROSOFT_LICENSE_ORDER': ADDITIONAL_MICROSOFT_LICENSE_ORDER,
     'DOMAINS_TO_LOCATION': DOMAINS_TO_LOCATION,
     'ZONES': ZONES,
-    'SUBSCRIPTION_DISCOUNTS': SUBSCRIPTION_DISCOUNTS,
     'CONTAINER_UNAVAILABILITY': CONTAINER_UNAVAILABILITY,
-    'COUNTRIES_PRICES': COUNTRIES_PRICES,
+    'LICENSES_KEYS': LICENSES_KEYS,
+    'LIMITS': limits,
+    'PRICES': pricing,
   };
 });
