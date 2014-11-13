@@ -1,4 +1,4 @@
-/* exported LIMITS, PRICES, CURRENCY, LOCAL_PRICES */
+/* exported LIMITS, PRICES, CURRENCY, LOCAL_PRICES, DEVICE_LIST */
 
 require.config({
   'baseUrl': 'js',
@@ -16,6 +16,15 @@ require.config({
 function clone(data) {
   return JSON.parse(JSON.stringify(data));
 }
+
+var DEVICE_LIST = [
+  'ide:0:0', 'ide:0:1', 'ide:1:0', 'ide:1:1',
+  'block:0', 'block:1', 'block:2', 'block:3',
+  'block:4', 'block:5', 'block:6', 'block:7',
+  'ata:0:0', 'ata:0:1', 'ata:0:2', 'ata:0:3', 'ata:0:4', 'ata:0:5',
+  'scsi:0:0', 'scsi:0:1', 'scsi:0:2', 'scsi:0:3',
+  'scsi:0:4', 'scsi:0:5', 'scsi:0:6'
+];
 
 // Globals
 var POUND_PRICES = {
