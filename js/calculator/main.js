@@ -1,8 +1,5 @@
-define(['lib/knockout', 'lib/underscore', 'text!./templates.html', './constants', './models', './utils', './parser', './pricing'],
-    function(ko, _, templates, CONSTANTS, models, utils, parser, pricing) {
-
-        $("body").append(templates);
-
+define(['lib/knockout', 'lib/underscore', './constants', './models', './utils', './parser', './pricing', './load_templates'],
+    function(ko, _, CONSTANTS, models, utils, parser, pricing) {
         function get_country_container_availability(id) {
             return CONSTANTS.CONTAINER_UNAVAILABILITY[id];
         }
