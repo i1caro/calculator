@@ -1,6 +1,7 @@
 define([
-  'text!./templates/templates.txt',
-],
+    'text!./templates/templates.txt',
+  ],
   function(templates) {
     $("body").append(templates);
-});
+  }
+);
