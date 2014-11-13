@@ -1,34 +1,36 @@
-define(['lib/knockout', 'lib/underscore', './utils'], function(ko, _, utils) {
+define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANTS) {
   var SPLIT_CHECKSUM = '+',
       SPLIT_INSTANCES = '/';
 
   function Parser(list) {
-    var self = this;
+    var self = this,
+        output = [];
+
     for (var i=0; i < list.length; i++) {
-      self.push(list[i]);
+      output.push(list[i]);
     }
     self.build_virtual_machine = function() {
       var result = {
-        'cpu': self.shift(),
-        'ram': self.shift(),
-        'ip': utils.toBoolean(self.shift()),
-        'firewall': utils.toBoolean(self.shift()),
-        'number_of_instances': self.shift(),
+        'cpu': output.shift(),
+        'ram': output.shift(),
+        'ip': utils.toBoolean(output.shift()),
+        'firewall': utils.toBoolean(output.shift()),
+        'number_of_instances': output.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives(),
-        'windows_server_license': self.shift(),
-        'additional_microsoft_license': self.shift(),
-        'remote_desktops': self.shift()
+        'windows_server_license': output.shift(),
+        'additional_microsoft_license': output.shift(),
+        'remote_desktops': output.shift()
       };
       return result;
     };
     self.build_container = function() {
       var result = {
-        'cpu': [self.shift(), self.shift()],
-        'ram': [self.shift(), self.shift()],
-        'ip': utils.toBoolean(self.shift()),
-        'firewall': utils.toBoolean(self.shift()),
-        'number_of_instances': self.shift(),
+        'cpu': [output.shift(), output.shift()],
+        'ram': [output.shift(), output.shift()],
+        'ip': utils.toBoolean(output.shift()),
+        'firewall': utils.toBoolean(output.shift()),
+        'number_of_instances': output.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives()
       };
@@ -36,10 +38,10 @@ define(['lib/knockout', 'lib/underscore', './utils'], function(ko, _, utils) {
     };
     self.get_drives = function() {
       var list = [],
-          element = self.shift();
+          element = output.shift();
       while (self.not_end(element)) {
         list.push(element);
-        element = self.shift();
+        element = output.shift();
       }
       return list;
     };
@@ -50,33 +52,33 @@ define(['lib/knockout', 'lib/underscore', './utils'], function(ko, _, utils) {
       return self.get_servers(self.build_container);
     };
     self.get_servers = function(factory) {
-      var element = self[0],
+      var element = output[0],
           servers = [];
       while (self.not_end(element)) {
         servers.push(factory());
-        element = self[0];
+        element = output[0];
       }
-      self.shift(); // remove SPLIT_INSTANCES
+      output.shift(); // remove SPLIT_INSTANCES
       return servers;
     };
     self.not_end = function(element) {
-      return element !== SPLIT_INSTANCES && self.length > 0;
+      return element !== SPLIT_INSTANCES && output.length > 0;
     };
     self.build_account_details = function() {
       return {
-        'bandwidth': self.shift(),
-        'ips': self.shift(),
-        'virtual_lans': self.shift()
+        'bandwidth': output.shift(),
+        'ips': output.shift(),
+        'vlans': output.shift()
       };
     };
     self.parse = function() {
       var data = {};
-      if (self.length) {
+      if (output.length) {
         data['virtual_machines'] = self.get_virtual_machines();
         data['containers'] = self.get_containers();
         data['account_details'] = self.build_account_details();
-        data['subscription'] = self.shift();
-        data['country'] = self.shift();
+        data['subscription'] = output.shift();
+        data['country'] = output.shift();
       }
       return data;
     };
@@ -84,45 +86,63 @@ define(['lib/knockout', 'lib/underscore', './utils'], function(ko, _, utils) {
   Parser.prototype = Object.create(Array.prototype);
   Parser.constructor = Parser;
 
-  function string_into_data(string) {
+  function split_string(string) {
     var no_hash = string.substring(1),
-        decoded = no_hash,
-        splited_info = decoded.split(SPLIT_CHECKSUM),
-        checksum = splited_info[0],
-        parser = new Parser(splited_info[1].split(','));
+        splited_info = no_hash.split(SPLIT_CHECKSUM);
 
-    if (parseInt(checksum) !== utils.calc_checksum(splited_info[1]))
+    return {checksum: splited_info[0], data: splited_info[1]};
+  }
+
+  function string_into_data(string) {
+    var result = split_string(string);
+
+    if (parseInt(result.checksum) !== utils.calc_checksum(string))
       throw "Wrong checksum";
-    return parser.parse();
+    return new Parser(result.data.split(',')).parse();
+  }
+
+  function unchecked_string_into_data(string) {
+    var result = split_string(string);
+    return new Parser(result.data.split(',')).parse();
+  }
+
+  function serialize_storages(storages) {
+    var storage_data = {'ssd': [], 'hdd': []};
+    _.each(storages, function(storage) {
+      storage_data[storage.type].push(storage.choosen());
+    });
+    return storage_data;
   }
 
   function serialize_base_server() {
-    var drives_data = {ssd: [], hdd: []},
-        drives = this.drives();
-    for (var i=0; i < drives.length; i++) {
-      drives_data[drives[i].type].push(drives[i].choosen());
-    }
-    var result = [
-      this.cpu.choosen(),
-      this.ram.choosen(),
-      this.ip.choosen(),
-      this.firewall.choosen(),
-      this.number_of_instances()
-    ];
-    result.push(drives_data['ssd']);
+    var storage_data = serialize_storages(this.storages()),
+        result = [
+          this.cpu.choosen(),
+          this.ram.choosen(),
+          this.ip.choosen(),
+          this.firewall.choosen(),
+          this.number_of_instances()
+        ];
+    result.push(storage_data['ssd']);
     result.push(SPLIT_INSTANCES);
-    result.push(drives_data['hdd']);
+    result.push(storage_data['hdd']);
     result.push(SPLIT_INSTANCES);
     return result;
   }
 
+  function licenses() {
+    var self = this;
+    return [
+      self.windows_server_licenses.choosen(),
+      self.additional_microsoft_licenses.choosen(),
+      self.remote_desktops.value()
+    ];
+  }
+
   function serialize_virtual_machine() {
-    var machine_data = serialize_base_server.call(this),
-        result = [
-          this.windows_server_licenses.choosen(),
-          this.additional_microsoft_licenses.choosen(),
-          this.remote_desktops.choosen()
-        ];
+    var self = this,
+        machine_data = serialize_base_server.call(self),
+        result = licenses.call(self);
     machine_data.push(result);
     return machine_data;
   }
@@ -146,20 +166,136 @@ define(['lib/knockout', 'lib/underscore', './utils'], function(ko, _, utils) {
     result.push(temp_list['container']);
     result.push(SPLIT_INSTANCES);
     result.push(this.account_details.serialize());
-    result.push(this.subscription_plans.choosen());
     result.push(this.country());
 
-    var result_string = _.flatten(result).join(','),
-        checksum = utils.calc_checksum(result_string),
-        encoded_uri = checksum + SPLIT_CHECKSUM + result_string;
-    location.hash = encoded_uri;
-    return result_string;
+    return _.flatten(result).join(',');
   }
 
+  function serialize_view_to_url() {
+    var result_string = serialize_base_server.call(this),
+        checksum = utils.calc_checksum(result_string),
+        encoded_uri = checksum + SPLIT_CHECKSUM + result_string;
+    return encoded_uri;
+  }
+
+  function common_resources() {
+    var self = this,
+        resources = {},
+        storages;
+
+
+    resources[CONSTANTS.RESOURCES.ip] = self.ip.choosen() ? 1 : 0;
+    resources[CONSTANTS.RESOURCES.firewall] = self.firewall.choosen() ? 1 : 0;
+
+    storages = serialize_storages(self.storages());
+
+    resources[CONSTANTS.RESOURCES.ssd] = _.reduce(storages['ssd'], function(memo, size) {
+      return memo + utils.force_int(size);
+    }, 0);
+    resources[CONSTANTS.RESOURCES.hdd] = _.reduce(storages['hdd'], function(memo, size) {
+      return memo + utils.force_int(size);
+    }, 0);
+
+    return resources;
+  }
+
+  function licenses_resources() {
+    var self = this,
+        resources = {}, key;
+
+    resources[CONSTANTS.RESOURCES.windows_remote_desktop] = utils.force_int(self.remote_desktops.value());
+
+    key = CONSTANTS.ADDITIONAL_MICROSOFT_LICENSE_ORDER[self.additional_microsoft_licenses.choosen()];
+    if (key)
+      resources[key] = 1;
+
+    key = CONSTANTS.WINDOWS_LICENSE_ORDER[self.windows_server_licenses.choosen()];
+    if (key)
+      resources[key] = 1;
+
+    return resources;
+  }
+
+  function virtual_machine_resources(data) {
+    var self = this,
+        resources = common_resources.call(self);
+
+    resources[CONSTANTS.RESOURCES.cpu_virtual_machine] = utils.force_int(self.cpu.choosen());
+    resources[CONSTANTS.RESOURCES.ram_virtual_machine] = utils.force_int(self.ram.choosen());
+
+    return _.extend(resources, licenses_resources.call(self));
+  }
+
+  function container_resources() {
+    var self = this,
+        resources = common_resources.call(self);
+
+    resources[CONSTANTS.RESOURCES.cpu_container] = utils.force_int(self.cpu.choosen());
+    resources[CONSTANTS.RESOURCES.ram_container] = utils.force_int(self.ram.choosen());
+
+    return resources;
+  }
+
+  function disconnected_storage_resources(type) {
+    var self = this,
+        resources = {};
+
+    resources[type] = self.choosen();
+
+    return resources;
+  }
+
+  function disconnected_folder_resources() {
+    var self = this;
+    return disconnected_storage_resources.call(self, CONSTANTS.RESOURCES.ssd);
+  }
+
+  function disconnected_ssd_drive_resources() {
+    var self = this,
+        resources = disconnected_storage_resources.call(self, CONSTANTS.RESOURCES.ssd);
+
+    return _.extend(resources, licenses_resources.call(self));
+  }
+
+  function disconnected_hdd_drive_resources() {
+    var self = this,
+        resources = disconnected_storage_resources.call(self, CONSTANTS.RESOURCES.hdd);
+
+    return _.extend(resources, licenses_resources.call(self));
+  }
+
+  function join_all_resources() {
+    var self = this,
+        resources = {};
+    function add_keys(obj) {
+      _.each(obj.resources(), function(value, key) {
+        if (!resources[key])
+          resources[key] = 0;
+        resources[key] += value;
+      });
+    }
+
+    _.each(self.raw_disconnected_drives(), add_keys);
+    _.each(self.raw_disconnected_folders(), add_keys);
+    _.each(self.servers(), add_keys);
+    _.each([self.account_details()], add_keys);
+
+    return resources;
+  }
+
+
   return {
+    'disconnected_folder_resources': disconnected_folder_resources,
+    'disconnected_ssd_drive_resources': disconnected_ssd_drive_resources,
+    'disconnected_hdd_drive_resources': disconnected_hdd_drive_resources,
+    'virtual_machine_resources': virtual_machine_resources,
+    'container_resources': container_resources,
     'string_into_data': string_into_data,
     'serialize_base_server': serialize_base_server,
     'serialize_virtual_machine': serialize_virtual_machine,
-    'serialize_view': serialize_view
+    'serialize_view': serialize_view,
+    'serialize_view_to_url': serialize_view_to_url,
+    'unchecked_string_into_data': unchecked_string_into_data,
+    'join_all_resources': join_all_resources
   };
 });
