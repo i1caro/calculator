@@ -1,19 +1,21 @@
-define(['lib/underscore', './constants', './pricing'], function(_, CONSTANTS, pricing) {
+define(['lib/underscore', './constants'], function(_, CONSTANTS) {
 
-  function extend_objects(child, parent) {
-      for (var property in parent)
-        if (parent.hasOwnProperty(property))
-          child[property] = parent[property];
-      function child_constructor() {
-        this.constructor = child;
-      }
-      child_constructor.prototype = parent.prototype;
-      child.prototype = new child_constructor();
+  function force_int(value) {
+    var result = parseInt(value);
+    if (!result)
+      return 0;
+    return result;
   }
-  var extend = this.extend || extend_objects;
+  function copy(obj) {
+    return JSON.parse(JSON.stringify(obj));
+  }
 
   function toBoolean(string) {
     return string === '1';
+  }
+
+  function bytes_to_gigabytes(bytes) {
+    return Math.ceil(bytes / Math.pow(1024, 3));
   }
 
   function sum_function(memo, obj) {
@@ -23,7 +25,7 @@ define(['lib/underscore', './constants', './pricing'], function(_, CONSTANTS, pr
 
   function format_price(price) {
     var clean_price = price ? price.toFixed(2) : '0.00';
-    return pricing.currency() + clean_price;
+    return CONSTANTS.PRICES.currency() + clean_price;
   }
 
   function get_country_based_on_location() {
@@ -56,6 +58,39 @@ define(['lib/underscore', './constants', './pricing'], function(_, CONSTANTS, pr
     return distance;
   }
 
+  // http://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
+  function post(path, params, method) {
+    method = method || "post"; // Set method to post by default if not specified.
+
+    // The rest of this code assumes you are not using a library.
+    // It can be made less wordy if you use one.
+    var form = document.createElement("form");
+    form.setAttribute("method", method);
+    form.setAttribute("action", path);
+
+    for (var key in params) {
+      if (params.hasOwnProperty(key)) {
+        var hiddenField = document.createElement("input");
+        hiddenField.setAttribute("type", "hidden");
+        hiddenField.setAttribute("name", key);
+        hiddenField.setAttribute("value", params[key]);
+
+        form.appendChild(hiddenField);
+      }
+    }
+
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  var unique_id = {
+    build: function() {
+      unique_id.prev++;
+      return unique_id.prev;
+    },
+    prev: 0
+  };
+
   function dynPop() {
     var timeoutId;
     $('.drive-icon, .server-icon').hover(function() {
@@ -84,20 +119,29 @@ define(['lib/underscore', './constants', './pricing'], function(_, CONSTANTS, pr
 
   function serverSlideUp(e, callback) {
     jQuery(e).parents(".server").slideUp();
-    window.setTimeout(function(){callback()},500);
+    window.setTimeout(function() {callback();}, 500);
   }
 
   return {
     'get_country_based_on_location': get_country_based_on_location,
+    'bytes_to_gigabytes': bytes_to_gigabytes,
     'calc_checksum': calc_checksum,
     'sum_function': sum_function,
     'format_price': format_price,
     'pageOffset': pageOffset,
     'toBoolean': toBoolean,
+    'unique_id': unique_id,
     'limit': limit,
+    'copy': copy,
+    'post': post,
+    'force_int': force_int,
     'dynPop': dynPop,
     'serverSlideDown': serverSlideDown,
     'serverSlideUp': serverSlideUp,
-    'extend': extend
   };
 });
+
+
+
+
+
