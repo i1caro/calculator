@@ -5,6 +5,8 @@ define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing)
     'lon-b': false,
     'ams-e': false,
     'sjc-c': false,
+    'dal-a': true,
+    'mmi-a': true,
     'lax-p': false,
     'sat-p': true,
     'tor-p': false,
@@ -36,6 +38,16 @@ define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing)
     {
       id: "lax-p",
       name: "Los Angeles, CA",
+      flag: "USAFlag.png",
+    },
+    {
+      id: "dal-a",
+      name: "Dallas",
+      flag: "USAFlag.png",
+    },
+    {
+      id: "mmi-p",
+      name: "Miami",
       flag: "USAFlag.png",
     },
     {
