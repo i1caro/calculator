@@ -66,7 +66,7 @@ var POUND_PRICES = {
       vm_cpu: 0.018,
       vm_mem: 0.025,
       container_cpu: 0.008,
-      container_mem: 0.012,
+      container_mem: 0.011,
       // Disk/transfer costs.
       disk: 0.10,
       ssd: 0.25,
