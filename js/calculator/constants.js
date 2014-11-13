@@ -1,19 +1,5 @@
 define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing) {
 
-  var CONTAINER_UNAVAILABILITY = {
-    'lon-p': false,
-    'lon-b': false,
-    'ams-e': false,
-    'sjc-c': false,
-    'dal-a': true,
-    'mmi-a': true,
-    'lax-p': false,
-    'sat-p': true,
-    'tor-p': false,
-    'hkg-e': false,
-    'syd-v': true
-  };
-
   var ZONES = [
     {
       id: 'lon-p',
@@ -54,6 +40,7 @@ define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing)
       id: 'sat-p',
       name: 'San Antonio, TX',
       flag: 'USAFlag.png',
+      containers_unavailable: true
     },
     {
       id: 'tor-p',
@@ -71,6 +58,12 @@ define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing)
       flag: 'AUSFlag.png',
     }
   ];
+
+  var CONTAINER_UNAVAILABILITY = _.reduce(ZONES, function(memo, zone) {
+    if (zone.containers_unavailable) {
+      memo[zone.id] = zone.containers_unavailable;
+    }
+  }, {});
 
   var DOMAINS_TO_LOCATION = {
     'nl': 'ams-e',
