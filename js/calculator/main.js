@@ -1,5 +1,5 @@
-define(['lib/knockout', 'lib/underscore', './constants', './models', './utils', './parser', './pricing', './load_templates'],
-    function(ko, _, CONSTANTS, models, utils, parser, pricing) {
+define(['lib/knockout', 'lib/underscore', './constants', './models', './utils', './parser', './pricing', './billing_first_time', './load_templates'],
+    function(ko, _, CONSTANTS, models, utils, parser, pricing, billing_first_time) {
         function get_country_container_availability(id) {
             return CONSTANTS.CONTAINER_UNAVAILABILITY[id];
         }
@@ -198,21 +198,7 @@ define(['lib/knockout', 'lib/underscore', './constants', './models', './utils', 
 
         $(".yellow-nohover.hover-huge").click(function(e) {
             e.preventDefault();
-            var h = location.hash
-            var l = $(this);
-            $.ajax({
-                url: 'http://jonsmarketingfunnel.co.uk:5001/?' + EHhash + EHcookie,
-                type: 'GET',
-                crossDomain: true
-            })
-                .done(function() {
-                    location.href = "/cloud-servers/free-trial/";
-                });
-            setTimeout(function() {
-                location.href = "/cloud-servers/free-trial/";
-            }, 5000);
-            l.css('cursor', 'wait').text("Just a second...");
-            return false;
+            billing_first_time.post();
         });
 
 
