@@ -63,6 +63,7 @@ define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing)
     if (zone.containers_unavailable) {
       memo[zone.id] = zone.containers_unavailable;
     }
+    return memo;
   }, {});
 
   var DOMAINS_TO_LOCATION = {
