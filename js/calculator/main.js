@@ -17,68 +17,97 @@ define(
 
     function viewModel() {
       var self = this,
-          first_country = utils.get_country_based_on_location(),
           initial_data = {
-            'virtual_machines': [],
+            'virtual_machines': [{
+              cpu: 2000,
+              ram: 1024,
+              ip: true,
+              firewall: false,
+              number_of_instances: 1,
+              ssd: [],
+              hdd: [20]
+            }],
             'containers': [],
             'account_details': {
               'bandwidth': 10,
               'ips': 0,
               'vlans': 0
-            },
-            'subscription': 0,
-            'country': first_country
+            }
           };
 
       // See if the url can turn into a data set
       if (location.hash) {
         try {
           initial_data = parser.string_into_data(location.hash);
-        } catch (err) {}
+        }
+        catch (err) {}
       }
       //Constants
       self.country_flags = CONSTANTS.ZONES;
+      self.country = ko.observable(utils.get_country_based_on_location());
 
       // Actions
-      var move_handler = function(event) {
-            var data = event.data,
-                mouse_move = ((event.clientX - data.offset) * 100) / data.bar_size,
-                distance = utils.limit(data.start + mouse_move, data.lower_bound(), data.upper_bound());
-            data.element(distance);
-          },
-          stop_move_handler = function(event) {
-            $(document).off('mousemove', move_handler);
-          },
-          start_mouse_down = function(data, event, element, lower_bound, upper_bound) {
-              $(document).on('mousemove', {
-                  offset: event.pageX - utils.pageOffset(),
-                  start: element(),
-                  bar_size: $(event.currentTarget).parents("div.noUi-base").width(),
-                  element: element,
-                  lower_bound: lower_bound,
-                  upper_bound: upper_bound
+      function move_handler(event) {
+        var data = event.data,
+            mouse_move = ((event.clientX - data.offset) * 100) / data.bar_size,
+            distance = utils.limit(data.start + mouse_move, 0, 100);
+        data.element(distance);
+      }
+      function stop_move_handler(event) {
+        $(document).off('mousemove', move_handler);
+      }
 
-              }, move_handler);
-              $(document).one('mouseup', stop_move_handler);
-          },
-          upper_bound = function() {
-            return 100;
-          },
-          lower_bound = function() {
-            return 0;
-          };
+      function start_mouse_down(data, event, element, lower_bound, upper_bound) {
+        $(document).on('mousemove', {
+          offset: event.pageX - utils.pageOffset(),
+          start: element(),
+          bar_size: $(event.currentTarget).parent().width(),
+          element: element,
+          lower_bound: lower_bound,
+          upper_bound: upper_bound
+        }, move_handler);
+        $(document).one('mouseup', stop_move_handler);
+      }
 
-      self.mouse_down_lower = function(data, event) {
-        var tmp_bound = data.double_bars ? data.upper : upper_bound;
-        start_mouse_down(data, event, data.lower, lower_bound, tmp_bound);
+      function get_click_position(event) {
+        var parent_position = get_position(event.currentTarget),
+            x = event.clientX - parent_position.x,
+            y = event.clientY - parent_position.y;
+        return {x: x, y: y};
+      }
+
+      function get_position(element) {
+        var x = 0,
+            y = 0;
+
+        while (element) {
+          x += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+          y += (element.offsetTop - element.scrollTop + element.clientTop);
+          element = element.offsetParent;
+        }
+        return {x: x, y: y};
+      }
+
+      self.mouse_down_handle = function(data, event) {
+        start_mouse_down(data, event, data.lower);
       };
-      self.mouse_down_upper = function(data, event) {
-        var tmp_bound = data.double_bars ? data.lower : lower_bound;
-        start_mouse_down(data, event, data.upper, tmp_bound, upper_bound);
+
+      self.mouse_down = function(data, event) {
+        var position = get_click_position(event),
+            clicked = position.x / $(event.currentTarget).width() * 100;
+        data.lower(clicked);
+
+        self.mouse_down_handle(data, event);
       };
       self.change_country = function(data, event) {
         self.country(data.id);
       };
+
+      self.has_disconnected_drives = ko.computed(function() {
+        return false;
+      });
+      self.disconnected_drives = [];
+      self.disconnected_folders = [];
 
       self.add_container = function() {
         self.servers.unshift(new models.container({
@@ -145,11 +174,6 @@ define(
         return total;
       });
 
-      self.subscription_plans = new models.subscription_plans(
-        CONSTANTS.SUBSCRIPTION_DISCOUNTS,
-        self.price,
-        initial_data['subscription']
-      );
       self.burst_price = ko.computed(function() {
         return _.reduce(self.servers(), function(memo, obj) {
           var burst = obj.burst_price ? obj.burst_price() : 0,
@@ -170,25 +194,13 @@ define(
       self.formatted_burst_price = ko.computed(function() {
         return utils.format_price(self.burst_price());
       });
-      self.afterDiscount = ko.computed(function() {
-        return self.subscription_plans.price();
-      });
-      self.formatted_discount = ko.computed(function() {
-        var price = self.subscription_plans.price();
-        if (price)
-          return '-' + utils.format_price(-1 * price);
-        return utils.format_price(price);
-      });
+
       self.formatted_price = ko.computed(function() {
         return utils.format_price(self.price());
       });
       self.formatted_total_price = ko.computed(function() {
-        var price_month = self.subscription_plans.price() + self.price(),
-            price_month_formatted = utils.format_price(price_month),
-            times = self.subscription_plans.times(),
-            total_formatted = utils.format_price(price_month * times);
-        if (times)
-          return price_month_formatted + '  (for ' + times + ' months) = ' + total_formatted;
+        var price_month = self.price(),
+            price_month_formatted = utils.format_price(price_month);
         return price_month_formatted;
       });
     }

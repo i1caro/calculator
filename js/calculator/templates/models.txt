@@ -1,0 +1,450 @@
+<script type="text/html" id="base-calculator-template">
+  <!-- ko template: "add-server-modal-template" --><!-- /ko -->
+  <div class="row">
+    <div class="col-xs-10">
+      <div class="empty-box-with-text" data-toggle="modal" data-target="#add-server-modal">
+        <div class="plus-button big">
+          <p>+</p>
+        </div>
+        <p> Add Server </p>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div id="server-list">
+      <!-- ko foreach: servers -->
+        <!-- ko template: template --><!-- /ko -->
+      <!-- /ko -->
+    </div>
+      <div id="disconnected" data-bind="visible: has_disconnected_drives">
+        <div id="disconnected_drives">
+          <!-- ko foreach: disconnected_drives -->
+            <div class="row">
+              <!-- ko template: template --><!-- /ko -->
+            </div>
+          <!-- /ko -->
+        </div>
+        <div id="disconnected_folders">
+          <!-- ko foreach: disconnected_folders -->
+            <div class="row">
+              <!-- ko template: template --><!-- /ko -->
+            </div>
+          <!-- /ko -->
+        </div>
+
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-2">
+          <div class="row">
+            <div class="col-xs-2 col-xs-offset-9 price">
+              <h3 class="server-panel-total">TOTAL: <span data-bind='text: disconnected_storage_formatted_price'></span></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="account-details" data-bind="template: { name: 'account-details-template', data: account_details }"></div>
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-2">
+        <div class="row">
+          <div class="col-xs-7">
+            <div class="row col-xs-12 red-warning" data-bind="visible: has_less_resources_than_needed">
+              <p>
+                You currently selected less resources than what you are using.
+                You may have to shutdown some services to let the servers boot.
+              </p>
+            </div>
+            <div class="row col-xs-12 red-warning" data-bind="visible: has_licenses">
+              <p>
+                Be aware that Microsoft Licenses have a minimum subscription time of 2 months.
+                And this will be reflected in your first purchase.
+              </p>
+            </div>
+          </div>
+          <div class="col-xs-2 col-xs-offset-2 price">
+            <h3 class="server-panel-total">TOTAL PER MONTH: <span data-bind='text: formatted_price'></span></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row call-to-action-row" >
+    <div class="col-xs-10 col-xs-offset-2">
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-10">
+          <!-- ko if: has_resources_choosen -->
+            <div class="call-to-action" data-bind="click: submit"><p>BUY</p></div>
+          <!-- /ko -->
+          <!-- ko ifnot: has_resources_choosen -->
+            <div class="call-to-action cta-hover"><p>NOTHING SELECTED</p></div>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+</script>
+
+
+<script type="text/html" id="add-server-modal-template">
+  <!-- Modal -->
+  <div class="modal fade" id="add-server-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="modal-col clickable" data-bind="event {click: add_container}">
+                <strong>ELASTIC CONTAINER</strong>
+                <div class="server-button container-icon plus-modal"></div>
+                <p>Linux only, automatic scaling, hassle-free infrastructure for applications that fluctuate in load.</p>
+              </div>
+            </div>
+
+            <div class="col-xs-6">
+              <div class="modal-col clickable" data-bind="event {click: add_virtual_machine}">
+                <strong>VIRTUAL MACHINE</strong>
+                <div class="server-button vm-icon plus-modal"></div>
+                <p>Versatile VM. Any size, any spec, any operating system.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+</script>
+
+<script type="text/html" id="server-template">
+  <div class="server-panel">
+    <div class="row">
+      <div class="col-xs-2 server-icon-zone">
+        <div class="x-sign" data-bind="click: $root.remove_server"> X </div>
+        <div class="server-button" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
+        <div class="server-name" data-bind="text: server.name"></div>
+      </div>
+      <div class="col-xs-10">
+        <!-- ko with: server -->
+          <div class="row">
+            <!-- ko template: { name: "input-range-template", data: cpu } --><!-- /ko -->
+          </div>
+          <div class="row">
+            <!-- ko template: { name: "input-range-template", data: ram } --><!-- /ko -->
+          </div>
+          <div class="row">
+            <!-- ko template: { name: "input-checkboxes-template", data: ip } --><!-- /ko -->
+          </div>
+          <div class="row">
+            <!-- ko template: { name: "input-checkboxes-template", data: firewall } --><!-- /ko -->
+          </div>
+        <!-- /ko -->
+      </div>
+    </div>
+    <!-- ko with: server -->
+      <!-- ko foreach: storages -->
+        <div class="row">
+          <!-- ko template: template --><!-- /ko -->
+        </div>
+      <!-- /ko -->
+    <!-- /ko -->
+
+    <div class="row">
+      <div class="col-xs-9 drive-icon-zone">
+        <div class="empty-box-with-text" data-bind="event: {click: server.add_disk}">
+          <div class="plus-button">
+            <p>+</p>
+          </div>
+          <p> Add Drive </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ko if: has_licenses -->
+      <div class="row">
+        <div class="col-xs-2">
+          <div data-bind="template: {name: 'add-licenses-template', data: server}"></div>
+        </div>
+        <div class="col-xs-10">
+          <!-- ko template: {name: 'chosen-licenses-template', data: server} --><!-- /ko -->
+        </div>
+      </div>
+    <!-- /ko -->
+
+    <!-- ko with: server -->
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-2">
+          <div class="row">
+            <div class="col-xs-2 col-xs-offset-9 price">
+              <h3 class="server-panel-total">TOTAL: <span data-bind='text: formatted_price'></span></h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- /ko -->
+  </div>
+</script>
+
+<script type="text/html" id="virtual-machine-template">
+  <!-- ko template: {
+        name: "server-template",
+        data: {
+          server: $data,
+          icon: "vm-icon",
+          pop: "Virtual Machine",
+          long: 'Our VMs are virtualized, flexible, on-demand servers for any OS. They are designed to behave just like physical servers.',
+          has_licenses: true,
+        }
+      } -->
+  <!-- /ko -->
+</script>
+
+<script type="text/html" id="container-template">
+  <!-- ko template: {
+        name: "server-template",
+        data: {
+          server: $data,
+          icon: "container-icon",
+          pop: "Elastic Container",
+          long: "Elastic Containers are hassle-free, high performance Linux cloud servers that scale up and down automatically, saving you money when not running at maximum load.",
+          has_licenses: false
+        }
+      } -->
+  <!-- /ko -->
+</script>
+
+<script type="text/html" id="add-licenses-template">
+  <div class="licenses-button-mask" data-toggle="modal" data-bind="attr: {'data-target': '#' + unique_id}">
+    Add Licenses
+  </div>
+  <div class="licenses-button">
+    <p><i class="icon-windows"></i></p>
+  </div>
+
+
+  <div data-bind="attr: {id: unique_id}" class="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Add Microsoft Licenses</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label data-bind="attr: {'for': name}">Windows Server Licenses</label>
+            <!-- ko template: {name: 'system-options-modal-template', data: windows_server_licenses} --><!-- /ko -->
+          </div>
+          <div class="form-group">
+            <label data-bind="attr: {'for': name}">Other Microsoft Server Licenses</label>
+            <!-- ko template: {name: 'system-options-modal-template', data: additional_microsoft_licenses} --><!-- /ko -->
+          </div>
+
+          <div class="form-group">
+            <label data-bind="text: remote_desktops.name"></label>
+            <div class="row">
+              <div class="col-xs-10">
+                <input type="text" class="form-control" data-bind="value: remote_desktops.value">
+              </div>
+              <div class="col-xs-2">
+                <span data-bind="text: remote_desktops.formatted_unit_price"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
+
+<script type="text/html" id="disconnected-ssd-drive-template">
+  <!-- ko template: {
+    name: "storage-template",
+    data: {
+      icon: "drive-ssd",
+      pop: "SSD",
+      long: "Our Enterprise-Grade Solid State Drives are recommended for IO-intensive applications like streaming media servers or large databases.",
+      can_switch: true,
+      switch_message: "Switch to HDD",
+      switch_disk: $parent.switch_to_hdd_drive,
+      has_licenses: true,
+      data: $data
+    }
+  }-->
+  <!-- /ko -->
+</script>
+<script type="text/html" id="disconnected-hdd-drive-template">
+  <!-- ko template: {
+    name: "storage-template",
+    data: {
+      icon: "drive-hdd",
+      pop: "HDD",
+      long: "Hard Disk Drive. Moving from HDD to SSD is often a bigger performance improvement than increasing CPU or Memory.",
+      can_switch: true,
+      switch_message: "Switch to SSD",
+      switch_disk: $parent.switch_to_ssd_drive,
+      has_licenses: true,
+      data: $data
+    }
+  }-->
+  <!-- /ko -->
+</script>
+<script type="text/html" id="ssd-folder-template">
+  <!-- ko template: {
+    name: "storage-template",
+    data: {
+      icon: "folder-ssd",
+      pop: "Folder",
+      long: "Folders are the cloud storage that Elastic Containers use. They are also elastic and resize automatically to fit their contents. All Folders are backed by Enterprise-Grade SSD.",
+      can_switch: false,
+      data: $data,
+      has_licenses: false,
+    }
+  }-->
+  <!-- /ko -->
+</script>
+<script type="text/html" id="ssd-drive-template">
+  <!-- ko template: {
+    name: "storage-template",
+    data: {
+      icon: "drive-ssd",
+      pop: "SSD",
+      long: "Our Enterprise-Grade Solid State Drives are recommended for IO-intensive applications like streaming media servers or large databases.",
+      can_switch: true,
+      switch_message: "Switch to HDD",
+      switch_disk: $parent.switch_to_hdd_drive,
+      has_licenses: false,
+      data: $data
+    }
+  }-->
+  <!-- /ko -->
+</script>
+<script type="text/html" id="hdd-drive-template">
+  <!-- ko template: {
+    name: "storage-template",
+    data: {
+      icon: "drive-hdd",
+      pop: "HDD",
+      long: "Hard Disk Drive. Moving from HDD to SSD is often a bigger performance improvement than increasing CPU or Memory.",
+      can_switch: true,
+      switch_message: "Switch to SSD",
+      switch_disk: $parent.switch_to_ssd_drive,
+      has_licenses: false,
+      data: $data
+    }
+  }-->
+  <!-- /ko -->
+</script>
+
+<script type="text/html" id="storage-template">
+  <div class="col-xs-2 drive-icon-zone">
+    <div class="x-sign" data-bind="click: $parents[1].remove_storage"> X </div>
+    <!-- ko if: can_switch -->
+      <div class="drive-button-mask" data-bind="event: {click: switch_disk}, title: switch_message">
+        <p data-bind="text: switch_message"></p>
+      </div>
+    <!-- /ko -->
+
+    <div class="drive-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
+  </div>
+  <div class="col-xs-10">
+    <div class="row">
+      <!-- ko template: {name: "input-range-template", data: data} --><!-- /ko -->
+    </div>
+
+    <!-- ko if: has_licenses -->
+      <!-- ko template: {name: "chosen-licenses-template", data: data} --><!-- /ko -->
+    <!-- /ko -->
+  </div>
+</script>
+
+<script type="text/html" >
+  <div class="row">
+    <a data-bind="event: {click: switch_disk}, text: switch_message, title: switch_message"></a>
+  </div>
+</script>
+
+<script type="text/html" id="chosen-licenses-template">
+
+  <!-- ko if: windows_server_licenses.value -->
+    <div class="row">
+      <div data-bind="template: {name: 'system-options-template', data: windows_server_licenses}"></div>
+    </div>
+  <!-- /ko -->
+
+  <!-- ko if: additional_microsoft_licenses.value -->
+    <div class="row">
+      <div data-bind="template: {name: 'system-options-template', data: additional_microsoft_licenses}"></div>
+    </div>
+  <!-- /ko -->
+
+  <!-- ko with: remote_desktops -->
+    <!-- ko if: value -->
+      <div class="row" data-bind="if: value">
+        <div class="col-xs-5">
+          <div class="checkbox">
+            <label data-bind="event: {click: remove_option}">
+              <input type="checkbox" checked="active">
+              <span data-bind="text: value"></span> X <span data-bind="text: name"></span>
+            </label>
+          </div>
+        </div>
+        <div class="col-xs-offset-4 col-xs-2 price" data-bind="text: formatted_price"></div>
+      </div>
+    <!-- /ko -->
+  <!-- /ko -->
+</script>
+
+<script type="text/html" id="storage-switch-template">
+  <div class="row">
+    <a data-bind="event: {click: switch_disk}, text: switch_message, title: switch_message"></a>
+  </div>
+</script>
+
+<script type="text/html" id="account-details-template">
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="details-button">
+        <p>Bandwidth</p>
+      </div>
+    </div>
+    <div class="col-xs-10">
+      <div class="row">
+        <div data-bind="template: { name: 'input-range-template', data: bandwidth}"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="details-button">
+        <p>Additional Ips</p>
+      </div>
+    </div>
+    <div class="col-xs-10">
+      <div class="row">
+        <!-- ko template: {name: "input-choices-template", data: additional_ips} --><!-- /ko -->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div class="details-button">
+        <p>Additional VLANs</p>
+      </div>
+    </div>
+    <div class="col-xs-10">
+      <div class="row">
+        <!-- ko template: {name: "input-choices-template", data: additional_vlans} --><!-- /ko -->
+      </div>
+    </div>
+  </div>
+</script>
+
+<!-- <pre data-bind="text: ko.toJSON($data, null, 2)"></pre> -->

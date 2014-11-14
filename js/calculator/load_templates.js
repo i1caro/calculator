@@ -1,7 +1,10 @@
 define([
-    'text!./templates/templates.txt',
+    // 'text!./templates/templates.txt',
+    'text!./templates/models.txt',
+    'text!./templates/components.txt',
   ],
-  function(templates) {
-    $("body").append(templates);
+  function(models, components) {
+    $("body").append(models);
+    $("body").append(components);
   }
 );

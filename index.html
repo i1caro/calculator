@@ -550,111 +550,12 @@
 
 
                     <!-- Calculator -->
-                    <div class="span6">
-                        <header class="subhead" id="overview">
-                            <h1>Calculator</h1>
-                        </header>
-                        <!-- /wordpress copy below -->
-                        <div style="">
-                            <div style="color: #313785">
-                                <div class="pricing-stuff">
-                                    <h2 id="zonetitle">Select Region:</h2>
-
-                                    <div id="whichzone" style="position:relative;">
-                                        <div id="pop1" class="popover right in" style="display:none;position: absolute; top: 0; left: 560px;width: 157px;">
-                                            <div class="arrow" style="border-right: 5px solid #313785;"></div>
-                                            <div class="popover-content">
-                                                Please pick a zone. We've tried to select your closest one, but another may be more cost efficient for bandwidth. You can read about our data centres <a href="/cloud-servers/data-centres/" style="color:#fbac29" alt="Our Data Centres">here</a>
-                                            </div>
-                                        </div>
-                                        <!-- ko foreach: country_flags -->
-                                        <div class="zoneselector" data-bind="attr: {id: id}, event: {mousedown: $root.change_country}, css: { selectedzone: id == $root.country() }">
-                                            <img data-bind="attr: {src: '/wp-content/uploads/' + flag}" />
-                                            <span data-bind="text: name"></span>
-                                        </div>
-                                        <!-- /ko -->
-                                        <span class='stretch'></span>
-                                    </div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading" style="width:100%;">
-                                            <div class="btn-toolbar" style="position: relative;" id="add-new-buttons" role="toolbar">
-                                                <div id="pop2" class="popover right in" style="display:none;position: absolute; top: 0; left: 560px;width: 150px;">
-                                                    <div class="arrow" style="border-right: 5px solid #313785;"></div>
-                                                    <div class="popover-content">
-                                                        Click here to add cloud servers to your plan.</div>
-                                                </div>
-                                                <p class="cont-warning" data-bind="visible: coming_soon">Please be aware that Elastic Containers are not yet available in this zone.</p>
-                                                <h2>Add servers:</h2>
-
-
-                                                <div class="btn-group" style="width:100%;margin-left: 7px;">
-                                                    <div class="add_vm add_server" style="border-right: 1px solid #ddd;">
-                                                        <div class="server_description">
-                                                            Virtual Machine
-                                                            <ul>
-                                                                <li>Any operating system</li>
-                                                                <li>Totally flexible specification</li>
-                                                                <li>Design your perfect server</li>
-                                                            </ul>
-                                                        </div>
-                                                        <a class="blue-hover hover-large" style="" data-bind="click: add_virtual_machine">Add Virtual Machine</a>
-                                                    </div>
-                                                    <div class="add_cont add_server">
-                                                        <div class="server_description">
-                                                            Elastic Container
-                                                            <ul>
-                                                                <li>Linux only</li>
-                                                                <li>Hassle-free auto-scaling</li>
-                                                                <li>Bare metal performance</li>
-                                                            </ul>
-                                                        </div>
-                                                        <a class="blue-hover hover-large" style="" data-bind="click: add_container">Add Elastic Container</a>
-                                                    </div>
-                                                </div>
-
-                                                <h2>My plan:</h2>
-
-
-                                            </div>
-                                        </div>
-                                        <div id="server-list" style="margin-top: 20px;">
-                                            <!-- ko foreach: servers -->
-                                            <!-- ko template: template -->
-                                            <!-- /ko -->
-                                            <!-- /ko -->
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                    <div class="panel-heading"></div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading"></div>
-                                        <div class="panel-body" data-bind="template: { name: 'account-details-template', data: account_details }"></div>
-                                    </div>
-                                    <div class="panel panel-default my-total">
-                                        <p class="text-right burst-price-label">Total cost per month:
-                                        </p>
-                                        <span class="burst-price" data-bind='text: formatted_price'></span>
-                                        <br />
-                                        <p class="text-right burst-price-label">Maximum additional monthly cost of CPU, RAM burst usage:
-                                        </p>
-                                        <span class="burst-price" data-bind='text: formatted_burst_price'></span>
-                                        <br/>
-                                        <!--            <p class="text-right burst-price-label">
-              <a class="my-event blue-hover hover-small" data-toggle="modal" data-target="#subscription">Add<span data-bind="if: afterDiscount"> / Remove</span> discount</a>
-            </p>
-            <span class="burst-price" data-bind='text: formatted_discount'></span>
-            <br/> -->
-                                        <p class="text-right prominent-price-label">
-                                            Total
-                                            <span data-bind="if: afterDiscount">after discount</span>:
-                                        </p>
-                                        <span class="prominent-price" data-bind='text: formatted_total_price'></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="/cloud-servers/free-trial" class="yellow-nohover hover-huge">Sign up now</a>
-                        </div>
+                    <div id="calculator">
+                        <div data-bind="template: 'base-calculator-template'"></div>
                     </div>
+                    <!-------------->
+
+
                     <!-- /wordpress copy above -->
                 </div>
                 <!-- /.span6 -->
