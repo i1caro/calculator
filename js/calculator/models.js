@@ -124,11 +124,7 @@ define(['lib/knockout', 'lib/underscore', './constants', './utils', './parser', 
   }
 
   function base_server(options) {
-    var self = this,
-        number_of_instances = 1;
-
-    if (options.number_of_instances > 0)
-      number_of_instances = options.number_of_instances;
+    var self = this;
 
     self.ip = new components.checkbox({
       'name': 'Static IP',
@@ -143,8 +139,6 @@ define(['lib/knockout', 'lib/underscore', './constants', './utils', './parser', 
 
     self.storages = ko.observableArray();
 
-    self.number_of_instances = ko.observable(number_of_instances);
-
     // Actions
     self.remove_storage = function(data, event) {
       self.storages.remove(data.data);
@@ -158,18 +152,11 @@ define(['lib/knockout', 'lib/underscore', './constants', './utils', './parser', 
   }
 
   function server_formatted_price() {
-    var single_total = utils.format_price(this.single_price()),
-        total = utils.format_price(this.price()),
-        number_of_instances = this.number_of_instances(),
-        stype = this.type.replace("_", " ");
-    if (number_of_instances > 1)
-      return number_of_instances + ' ' + stype + 's, at ' + single_total + ' per ' + stype + ' = ' + total;
-    else
-      return total;
+    return utils.format_price(this.price());
   }
 
   function calc_server_full_price() {
-    return this.single_price() * this.number_of_instances();
+    return this.single_price();
   }
 
   function calc_server_single_price() {

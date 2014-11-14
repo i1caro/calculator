@@ -23,7 +23,6 @@ define(
               ram: 1024,
               ip: true,
               firewall: false,
-              number_of_instances: 1,
               ssd: [],
               hdd: [20]
             }],
@@ -115,7 +114,6 @@ define(
           ram: [256, 1024],
           ip: true,
           firewall: false,
-          number_of_instances: 1,
           ssd: [20],
           hdd: []
         }));
@@ -127,7 +125,6 @@ define(
           ram: 1024,
           ip: true,
           firewall: false,
-          number_of_instances: 1,
           ssd: [],
           hdd: [20]
         }));
@@ -158,12 +155,8 @@ define(
       });
 
       // Computed
-      self.remove_server = ko.computed(function() {
-        ko.utils.arrayForEach(self.servers(), function(server) {
-          if (server.number_of_instances() === 0) {
-            self.servers.remove(server);
-          }
-        });
+      self.remove_server = ko.computed(function(server) {
+        self.servers.remove(server);
       });
 
       self.price = ko.computed(function() {
@@ -309,27 +302,10 @@ define(
       }
 
     $("#server-list").delegate(".minus", "click", function() {
-      var context = ko.contextFor(this),
-          num = parseInt(context.$data.server.number_of_instances()) - 1;
-
-      if (num <= 0) {
-        utils.serverSlideUp(this, function() {
-          context.$root.servers.remove(context.$data.server);
-        });
-      }
-      else {
-        context.$data.server.number_of_instances(num);
-      }
-
-      return false;
-    });
-    $("#server-list").delegate(".plus", "click", function() {
-      //retrieve the context
-      var context = ko.contextFor(this),
-          num = parseInt(context.$data.server.number_of_instances()) + 1;
-
-      if (num < 11) // No more than 10 servers per stack
-        context.$data.server.number_of_instances(num);
+      var context = ko.contextFor(this);
+      utils.serverSlideUp(this, function() {
+        context.$root.servers.remove(context.$data.server);
+      });
 
       return false;
     });

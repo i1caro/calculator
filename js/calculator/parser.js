@@ -15,7 +15,6 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
         'ram': output.shift(),
         'ip': utils.toBoolean(output.shift()),
         'firewall': utils.toBoolean(output.shift()),
-        'number_of_instances': output.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives(),
         'windows_server_license': output.shift(),
@@ -30,7 +29,6 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
         'ram': [output.shift(), output.shift()],
         'ip': utils.toBoolean(output.shift()),
         'firewall': utils.toBoolean(output.shift()),
-        'number_of_instances': output.shift(),
         'ssd': self.get_drives(),
         'hdd': self.get_drives()
       };
@@ -120,8 +118,7 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
           this.cpu.choosen(),
           this.ram.choosen(),
           this.ip.choosen(),
-          this.firewall.choosen(),
-          this.number_of_instances()
+          this.firewall.choosen()
         ];
     result.push(storage_data['ssd']);
     result.push(SPLIT_INSTANCES);
