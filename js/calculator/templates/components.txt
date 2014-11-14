@@ -3,10 +3,8 @@
     <span class="handlbar-label" data-bind="text: name"></span>
   </div>
   <div class="col-xs-4">
-    <div class="slider-margin noUi-base">
-      <div class="my-slider" data-bind="event: {mousedown: $root.mouse_down}">
-        <div class="my-slider-handle lower-handle" data-title="Subscription" data-bind="event: {mousedown: $root.mouse_down_handle}, style: {left: lower_style()}"></div>
-      </div>
+    <div class="slider" data-bind="event: {mousedown: $root.mouse_down}">
+      <div class="slider-handle" data-title="Subscription" data-bind="event: {mousedown: $root.mouse_down_handle}, style: {left: lower_style()}"></div>
     </div>
   </div>
   <div class="col-xs-3">

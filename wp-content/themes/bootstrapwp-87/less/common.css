@@ -11,3 +11,28 @@
 * * * * * * { background-color: rgba(255,255,0,.2); }
 */
 
+.slider-handle {
+  border-color: #313785;
+  border-radius: 0px;
+  background-image: none;
+  cursor: pointer;
+  background-color: #000000;
+  top: -.3em;
+  margin-left: -.6em;
+  position: absolute;
+  z-index: 2;
+  width: 1.2em;
+  height: 1.2em;
+  border: 1px solid #444444;
+}
+
+.slider {
+  height: 8px;
+  width: 248px;
+  background-color: #f2f2f2;
+  border: 1px solid #000000;
+  position: relative;
+  margin-top: 6px;
+  margin-left: 12px;
+  border-radius: 5px;
+}
