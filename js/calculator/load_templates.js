@@ -1,5 +1,4 @@
 define([
-    // 'text!./templates/templates.txt',
     'text!./templates/models.txt',
     'text!./templates/components.txt',
   ],
