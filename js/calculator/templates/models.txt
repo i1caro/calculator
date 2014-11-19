@@ -1,72 +1,23 @@
 <script type="text/html" id="base-calculator-template">
-  <!-- ko template: "add-server-modal-template" --><!-- /ko -->
   <div class="row">
-    <div class="col-xs-10">
-      <div class="empty-box-with-text" data-toggle="modal" data-target="#add-server-modal">
-        <div class="plus-button big">
-          <p>+</p>
-        </div>
-        <p> Add Server </p>
-      </div>
+    <div class="span5">
+      <!-- ko template: "add-server-buttons" --><!-- /ko -->
     </div>
   </div>
-  <div class="container">
-    <div id="server-list">
-      <!-- ko foreach: servers -->
-        <!-- ko template: template --><!-- /ko -->
-      <!-- /ko -->
-    </div>
-      <div id="disconnected" data-bind="visible: has_disconnected_drives">
-        <div id="disconnected_drives">
-          <!-- ko foreach: disconnected_drives -->
-            <div class="row">
-              <!-- ko template: template --><!-- /ko -->
-            </div>
-          <!-- /ko -->
-        </div>
-        <div id="disconnected_folders">
-          <!-- ko foreach: disconnected_folders -->
-            <div class="row">
-              <!-- ko template: template --><!-- /ko -->
-            </div>
-          <!-- /ko -->
-        </div>
-
+  <div id="server-list">
+    <!-- ko foreach: servers -->
       <div class="row">
-        <div class="col-xs-10 col-xs-offset-2">
-          <div class="row">
-            <div class="col-xs-2 col-xs-offset-9 price">
-              <h3 class="server-panel-total">TOTAL: <span data-bind='text: disconnected_storage_formatted_price'></span></h3>
-            </div>
-          </div>
+        <div class="span8">
+          <!-- ko template: template --><!-- /ko -->
         </div>
       </div>
-    </div>
-    <div id="account-details" data-bind="template: { name: 'account-details-template', data: account_details }"></div>
-    <div class="row">
-      <div class="col-xs-10 col-xs-offset-2">
-        <div class="row">
-          <div class="col-xs-7">
-            <div class="row col-xs-12 red-warning" data-bind="visible: has_less_resources_than_needed">
-              <p>
-                You currently selected less resources than what you are using.
-                You may have to shutdown some services to let the servers boot.
-              </p>
-            </div>
-            <div class="row col-xs-12 red-warning" data-bind="visible: has_licenses">
-              <p>
-                Be aware that Microsoft Licenses have a minimum subscription time of 2 months.
-                And this will be reflected in your first purchase.
-              </p>
-            </div>
-          </div>
-          <div class="col-xs-2 col-xs-offset-2 price">
-            <h3 class="server-panel-total">TOTAL PER MONTH: <span data-bind='text: formatted_price'></span></h3>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- /ko -->
   </div>
+  <!-- template: "base-disconnected-drives" --><!-- / -->
+
+  <div id="account-details" data-bind="template: {name: 'account-details-template', data: account_details}"></div>
+
+  <!-- template: "base-price-display" --><!-- / -->
 
   <div class="row call-to-action-row" >
     <div class="col-xs-10 col-xs-offset-2">
@@ -82,111 +33,129 @@
       </div>
     </div>
   </div>
-
 </script>
 
-
-<script type="text/html" id="add-server-modal-template">
-  <!-- Modal -->
-  <div class="modal fade" id="add-server-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<script type="text/html" id="base-price-display">
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-2">
+      <div class="row">
+        <div class="col-xs-7">
+          <div class="row col-xs-12 red-warning" data-bind="visible: has_less_resources_than_needed">
+            <p>
+              You currently selected less resources than what you are using.
+              You may have to shutdown some services to let the servers boot.
+            </p>
+          </div>
+          <div class="row col-xs-12 red-warning" data-bind="visible: has_licenses">
+            <p>
+              Be aware that Microsoft Licenses have a minimum subscription time of 2 months.
+              And this will be reflected in your first purchase.
+            </p>
+          </div>
         </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-xs-6">
-              <div class="modal-col clickable" data-bind="event {click: add_container}">
-                <strong>ELASTIC CONTAINER</strong>
-                <div class="server-button container-icon plus-modal"></div>
-                <p>Linux only, automatic scaling, hassle-free infrastructure for applications that fluctuate in load.</p>
-              </div>
-            </div>
+        <div class="col-xs-2 col-xs-offset-2 price">
+          <h3 class="server-panel-total">TOTAL PER MONTH: <span data-bind='text: formatted_price'></span></h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</script>
 
-            <div class="col-xs-6">
-              <div class="modal-col clickable" data-bind="event {click: add_virtual_machine}">
-                <strong>VIRTUAL MACHINE</strong>
-                <div class="server-button vm-icon plus-modal"></div>
-                <p>Versatile VM. Any size, any spec, any operating system.</p>
-              </div>
-            </div>
+<script type="text/html" id="base-disconnected-drives">
+  <div id="disconnected" data-bind="visible: has_disconnected_drives">
+    <div id="disconnected_drives">
+      <!-- ko foreach: disconnected_drives -->
+        <div class="row">
+          <!-- ko template: template --><!-- /ko -->
+        </div>
+      <!-- /ko -->
+    </div>
+    <div id="disconnected_folders">
+      <!-- ko foreach: disconnected_folders -->
+        <div class="row">
+          <!-- ko template: template --><!-- /ko -->
+        </div>
+      <!-- /ko -->
+    </div>
+
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-2">
+        <div class="row">
+          <div class="col-xs-2 col-xs-offset-9 price">
+            <h3 class="server-panel-total">TOTAL: <span data-bind='text: disconnected_storage_formatted_price'></span></h3>
           </div>
         </div>
       </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
   </div>
-  <!-- /.modal -->
 </script>
+
+<script type="text/html" id="add-server-buttons">
+  <div class="btn-group">
+    <a class="add-button" data-bind="click: add_virtual_machine">Virtual Machine</a>
+    <a class="add-button" data-bind="click: add_container">Linux Container</a>
+  </div>
+</script>
+
 
 <script type="text/html" id="server-template">
   <div class="server-panel">
-    <div class="row">
-      <div class="col-xs-2 server-icon-zone">
-        <div class="x-sign" data-bind="click: $root.remove_server"> X </div>
-        <div class="server-button" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
+
+    <div class="panel-header">
+      <h1>Linux Container</h1>
+      <div type="button" class="remove-button" data-bind="click: $root.remove_server" aria-hidden="true">Remove</div>
+    </div>
+
+    <div class="gray-label">
+      <p>Server</p>
+    </div>
+
+    <div class="grey-box"></div>
+
+    <div class="panel-body row">
+      <div class="server-icon-box">
+        <div class="server-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
         <div class="server-name" data-bind="text: server.name"></div>
       </div>
-      <div class="col-xs-10">
+
+      <div class="server-details">
         <!-- ko with: server -->
-          <div class="row">
-            <!-- ko template: { name: "input-range-template", data: cpu } --><!-- /ko -->
+          <div class="server-component">
+            <!-- ko template: {name: "input-range-template", data: cpu} --><!-- /ko -->
           </div>
-          <div class="row">
-            <!-- ko template: { name: "input-range-template", data: ram } --><!-- /ko -->
+          <div class="server-component">
+            <!-- ko template: {name: "input-range-template", data: ram} --><!-- /ko -->
           </div>
-          <div class="row">
-            <!-- ko template: { name: "input-checkboxes-template", data: ip } --><!-- /ko -->
+          <div class="server-component">
+            <div class="server-checkbox-align">
+              <!-- ko template: {name: "input-checkboxes-template", data: ip} --><!-- /ko -->
+            </div>
           </div>
-          <div class="row">
-            <!-- ko template: { name: "input-checkboxes-template", data: firewall } --><!-- /ko -->
+          <div class="server-component">
+            <div class="server-checkbox-align">
+              <!-- ko template: {name: "input-checkboxes-template", data: firewall} --><!-- /ko -->
+            </div>
           </div>
         <!-- /ko -->
       </div>
     </div>
     <!-- ko with: server -->
       <!-- ko foreach: storages -->
-        <div class="row">
-          <!-- ko template: template --><!-- /ko -->
-        </div>
+        <!-- ko template: template --><!-- /ko -->
       <!-- /ko -->
     <!-- /ko -->
 
-    <div class="row">
-      <div class="col-xs-9 drive-icon-zone">
-        <div class="empty-box-with-text" data-bind="event: {click: server.add_disk}">
-          <div class="plus-button">
-            <p>+</p>
-          </div>
-          <p> Add Drive </p>
-        </div>
-      </div>
+      <!-- ko if: has_licenses -->
+        <!-- ko template: {name: 'chosen-licenses-template', data: server} --><!-- /ko -->
+      <!-- /ko -->
+    <div class="panel-body row">
+      <!-- ko if: has_licenses -->
+        <div data-bind="template: {name: 'add-licenses-template', data: server}"></div>
+      <!-- /ko -->
+      <!-- ko with: server -->
+        <a class="add-button" data-bind="click: add_disk">Add Storage</a>
+      <!-- /ko -->
     </div>
-
-    <!-- ko if: has_licenses -->
-      <div class="row">
-        <div class="col-xs-2">
-          <div data-bind="template: {name: 'add-licenses-template', data: server}"></div>
-        </div>
-        <div class="col-xs-10">
-          <!-- ko template: {name: 'chosen-licenses-template', data: server} --><!-- /ko -->
-        </div>
-      </div>
-    <!-- /ko -->
-
-    <!-- ko with: server -->
-      <div class="row">
-        <div class="col-xs-10 col-xs-offset-2">
-          <div class="row">
-            <div class="col-xs-2 col-xs-offset-9 price">
-              <h3 class="server-panel-total">TOTAL: <span data-bind='text: formatted_price'></span></h3>
-            </div>
-          </div>
-        </div>
-      </div>
-    <!-- /ko -->
   </div>
 </script>
 
@@ -219,15 +188,9 @@
 </script>
 
 <script type="text/html" id="add-licenses-template">
-  <div class="licenses-button-mask" data-toggle="modal" data-bind="attr: {'data-target': '#' + unique_id}">
-    Add Licenses
-  </div>
-  <div class="licenses-button">
-    <p><i class="icon-windows"></i></p>
-  </div>
+  <a class="add-button" data-toggle="modal" data-bind="attr: {'data-target': '#' + unique_id}">Add Licenses</a>
 
-
-  <div data-bind="attr: {id: unique_id}" class="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div data-bind="attr: {id: unique_id}" class="modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
@@ -344,24 +307,31 @@
 </script>
 
 <script type="text/html" id="storage-template">
-  <div class="col-xs-2 drive-icon-zone">
-    <div class="x-sign" data-bind="click: $parents[1].remove_storage"> X </div>
-    <!-- ko if: can_switch -->
-      <div class="drive-button-mask" data-bind="event: {click: switch_disk}, title: switch_message">
-        <p data-bind="text: switch_message"></p>
-      </div>
-    <!-- /ko -->
-
-    <div class="drive-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
-  </div>
-  <div class="col-xs-10">
-    <div class="row">
-      <!-- ko template: {name: "input-range-template", data: data} --><!-- /ko -->
+  <div class="panel-body row">
+    <button type="button" class="btn-drive-close" title="Remove disk" data-bind="click: $parents[1].remove_storage" aria-hidden="true"></button>
+    <div class="gray-label">
+      <p data-bind="text: pop"></p>
     </div>
 
-    <!-- ko if: has_licenses -->
-      <!-- ko template: {name: "chosen-licenses-template", data: data} --><!-- /ko -->
-    <!-- /ko -->
+    <div class="server-icon-box">
+      <div class="drive-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
+    </div>
+    <div class="server-details">
+      <div class="server-component">
+        <!-- ko template: {name: "input-range-template", data: data} --><!-- /ko -->
+      </div>
+      <div class="server-component">
+        <!-- ko if: can_switch -->
+          <span>
+            <a class="my-event blue-hover hover-small switch" data-bind="event: {click: switch_disk}, text: switch_message">Switch to HDD</a>
+          </span>
+        <!-- /ko -->
+      </div>
+
+      <!-- ko if: has_licenses -->
+        <!-- ko template: {name: "chosen-licenses-template", data: data} --><!-- /ko -->
+      <!-- /ko -->
+    </div>
   </div>
 </script>
 
@@ -374,14 +344,16 @@
 <script type="text/html" id="chosen-licenses-template">
 
   <!-- ko if: windows_server_licenses.value -->
-    <div class="row">
-      <div data-bind="template: {name: 'system-options-template', data: windows_server_licenses}"></div>
+    <div class="row licenses panel-body">
+      <!-- ko template: {name: 'system-options-template', data: windows_server_licenses} -->
+      <!-- /ko -->
     </div>
   <!-- /ko -->
 
   <!-- ko if: additional_microsoft_licenses.value -->
-    <div class="row">
-      <div data-bind="template: {name: 'system-options-template', data: additional_microsoft_licenses}"></div>
+    <div class="row licenses panel-body">
+      <!-- ko template: {name: 'system-options-template', data: additional_microsoft_licenses} -->
+      <!-- /ko -->
     </div>
   <!-- /ko -->
 
@@ -417,7 +389,7 @@
     </div>
     <div class="col-xs-10">
       <div class="row">
-        <div data-bind="template: { name: 'input-range-template', data: bandwidth}"></div>
+        <div data-bind="template: {name: 'input-range-template', data: bandwidth}"></div>
       </div>
     </div>
   </div>

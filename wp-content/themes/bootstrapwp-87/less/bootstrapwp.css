@@ -148,14 +148,6 @@ a:hover {
 .row {
     margin-left: -20px;
     *zoom: 1;
-    *zoom: 1;
-}
-.row:before, .row:after {
-    display: table;
-    content: "";
-}
-.row:after {
-    clear: both;
 }
 .row:before, .row:after {
     display: table;
@@ -242,25 +234,6 @@ a:hover {
 }
 .offset1 {
     margin-left: 100px;
-}
-.row {
-    margin-left: -20px;
-    *zoom: 1;
-    *zoom: 1;
-}
-.row:before, .row:after {
-    display: table;
-    content: "";
-}
-.row:after {
-    clear: both;
-}
-.row:before, .row:after {
-    display: table;
-    content: "";
-}
-.row:after {
-    clear: both;
 }
 [class*="span"] {
     float: left;

@@ -131,6 +131,14 @@ define(
         utils.serverSlideDown();
       };
 
+      // To be fixed attributes
+      self.disconnected_storage_formatted_price = function() {
+        return 0;
+      };
+      self.has_less_resources_than_needed = function() {
+        return false;
+      };
+
       // Normal attributes
       self.coming_soon = ko.computed(function() {
         return get_country_container_availability(self.country());
@@ -155,9 +163,9 @@ define(
       });
 
       // Computed
-      self.remove_server = ko.computed(function(server) {
-        self.servers.remove(server);
-      });
+      self.remove_server = function(data) {
+        self.servers.remove(data.server);
+      };
 
       self.price = ko.computed(function() {
         var total = 0;
@@ -285,6 +293,7 @@ define(
     function goActive() {
       startTimer();
     }
+
 
     // Snapshot ==============
     var current_hash = "";

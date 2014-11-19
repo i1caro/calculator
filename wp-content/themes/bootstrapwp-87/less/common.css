@@ -36,3 +36,192 @@
   margin-left: 12px;
   border-radius: 5px;
 }
+
+.add-button {
+  background: #f6882f url("/wp-content/uploads/drive_add.png") top 5px left 6px no-repeat;
+  background-size: 12px 12px;
+  display: inline;
+  float: left;
+  height: 22px;
+  padding: 0px 12px 0px 24px;
+  background-color: #f6882f;
+  margin-right: 2px;
+  color: #ffffff;
+  cursor: pointer;
+}
+div.btn-group a.add-button {
+  text-decoration: none;
+  color: #ffffff;
+}
+.panel-header {
+  background-color: #000000;
+  height: 32px;
+  width: 100%;
+}
+div.panel-header h1{
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+  float: left;
+  margin: 6px 0 0 16px;
+  padding: 0;
+}
+div.panel-header .remove-button{
+  margin: 4px 8px;
+  padding-right: 20px;
+  background: url('../img/remove.svg') right 6px no-repeat;
+  background-size: 12px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: bold;
+  height: 24px;
+  float: right;
+}
+.gray-label {
+  top: 0;
+  left: 0;
+}
+.gray-label p {
+  color: #7e8284;
+  background-color: #f2f2f2;
+  padding: 2px 12px 2px 8px;
+  display: inline;
+}
+.btn-drive-close {
+  background: #000000 url('../img/remove.svg') center 4px no-repeat;
+  background-size: 12px;
+  height: 20px;
+  width: 20px;
+  border: none;
+  float: right;
+}
+.panel-body {
+  border-bottom: 1px solid #b6b6b6;
+  margin-left: 0px;
+}
+
+
+.grey-box {
+  position: absolute;
+  width: 97px;
+  height: 100%;
+  z-index: -1;
+  right: 0;
+  top: 0;
+  background-color: #f2f2f2;
+}
+
+.server-icon {
+  width: 72px;
+  height: 83px;
+  background-repeat: no-repeat;
+  float: left;
+  position: relative;
+}
+.container-icon {
+  background: url('/wp-content/uploads/container.png');
+}
+.vm-icon {
+  background: url('/wp-content/uploads/vm.png');
+}
+
+.drive-icon {
+  width: 72px;
+  height: 83px;
+  background-repeat: no-repeat;
+  float: left;
+  position: relative;
+}
+
+.drive-hdd {
+  background-image: url('/wp-content/uploads/drive_disk.png');
+}
+.drive-ssd {
+  background-image: url('/wp-content/uploads/drive_ssd.png');
+}
+.folder-ssd {
+  background-image: url('/wp-content/uploads/folder.png');
+}
+
+.server-panel {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+  border: 3px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.server-icon-box {
+  float: left;
+  padding: 10px 38px;
+}
+.server-details {
+  width: 60%;
+  float: left;
+}
+
+.server-component {
+  width: 605px;
+  height: 40px;
+}
+.server-component > div {
+  float: left;
+}
+.slider-label {
+  width: 10%;
+}
+.slider-handlebar {
+  width: 50%;
+}
+.slider-input {
+  width: 20%;
+}
+.slider-input input {
+  width: 42px;
+  height: 14px;
+  margin: 0 0 8px 12px;
+}
+.slider-price {
+  width: 10%;
+  margin-left: 10%;
+}
+.server-checkbox-align {
+  margin-left: 40%;
+  width: 60%;
+}
+.server-checkbox-align .checkbox {
+  float: left;
+  width: 50%;
+}
+.server-checkbox-align input[type="checkbox"] {
+  float: none;
+  margin-left: 20px;
+}
+.server-checkbox-align .price {
+  padding-left: 28%;
+  float: left;
+}
+
+.licenses > div {
+  float: left;
+}
+.sys-options-label {
+  width: 470px;
+  text-align: right;
+}
+.sys-options-remove {
+  width: 98px;
+  text-align: right;
+}
+.licenses .price {
+  padding-left: 84px;
+  text-align: right;
+}

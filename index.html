@@ -92,149 +92,6 @@
     <script data-main="/js/calculator/app" src="/js/lib/require.js"></script>
     <link rel="stylesheet" href="/wp-content/themes/bootstrapwp-87/less/common.css">
 
-
-    <script>
-    </script>
-
-
-    <style>
-    select {
-        background-color: white;
-    }
-    #frequency-descriptions {
-        display: none;
-    }
-    div.box-large {
-        border: none;
-    }
-    #pricing-form .onethird {
-        width: 33%;
-    }
-    #pricing-form .extras-title {
-        font-weight: normal !important;
-    }
-    #pricing-form .help-inline {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-    }
-    #pricing-form li {
-        font-size: 9pt !important;
-        color: #313785 !important;
-        font-familty: Arial;
-        font-weight: normal !important;
-    }
-    #pricing-form .invisible {
-        display: none;
-    }
-    #pricing-form .help-block ul {
-        position: relative;
-    }
-    #pricing-form .price-result {
-        text-align: center;
-        width: 16%;
-    }
-    #pricing-form {
-        font-size: 9.5pt;
-        font-familty: Arial;
-        font-weight: bold;
-        color: #313785;
-        margin-bottom: 0px !important;
-    }
-    #total-price {
-        width: auto !important;
-        float: right;
-    }
-    #price-total {
-        font-size: 11pt;
-        font-familty: Arial;
-        font-weight: bold;
-        color: #313785;
-    }
-    #extras-table,
-    #extras-table td,
-    #extras-table tr,
-    #extras-table td,
-    #slider-table,
-    #slider-table td,
-    #slider-table tr,
-    #slider-table th {
-        border-width: 0px !important;
-    }
-    #pricing-form .slider-label {
-        text-align: right;
-    }
-    #pricing-form .sliderUnits {
-        text-align: left;
-    }
-    #pricing-form .sliderVal {
-        margin-bottom: 0px !important;
-        border-color: #313785 !important;
-        width: 35px !important;
-    }
-    #extras-table td {
-        font-size: 8pt;
-        font-familty: Arial;
-        text-align: right;
-    }
-    #extras-table select {
-        width: 50px;
-        border-width: 1px;
-        border-color: #313785;
-        border-style: solid;
-        margin-bottom: 0px;
-    }
-    #extras-table .price-result {
-        text-align: center;
-        width: 14%;
-    }
-    #extras-table .extras-section-title {
-        font-weight: bold;
-    }
-    #pricing-form .btn,
-    #pricing-form .btn-primary {
-        font-size: 9.5pt;
-        font-familty: Arial;
-        font-weight: bold;
-        box-shadow: none !important;
-        background-color: white !important;
-        border-radius: 0px !important;
-        background-image: none !important;
-        color: #313785 !important;
-    }
-    #pricing-form .btn-primary {
-        background-color: #22a6ff !important;
-        color: white !important;
-    }
-    #pricing-form .ui-widget-content {
-        background-color: white !important;
-    }
-    #pricing-form .slider-margin {
-        margin-left: 12px !important;
-        float: none;
-        width: 200px;
-    }
-    #pricing-form .ui-slider,
-    #pricing-form .ui-slider-handle {
-        border-color: #313785 !important;
-        border-radius: 0px;
-        background-image: none !important;
-        cursor: pointer;
-    }
-    #pricing-form .ui-slider-handle {
-        background-color: #22a6ff !important;
-    }
-    </style>
-
-    <style media="print" type="text/css">
-    div.faq_answer {
-        display: block!important;
-    }
-    p.faq_nav {
-        display: none;
-    }
-    </style>
-
 </head>
 
 <body class="page page-id-77 page-template-default" data-spy="scroll" data-target=".subnav" data-offset="50">
@@ -481,43 +338,44 @@
     <!-- End Header -->
     <div id="content-wrapper">
         <div class="container">
-
-            <!-- Begin Template Content -->
-            <script type="text/javascript">
-            //jQuery(document).ready(function($) {
-            jQuery(".nav li").mouseover(function() {
-                jQuery(this).css('background-color', '#313785');
-                jQuery(this).children('.dropdown-menu').css({
-                    'display': 'block',
-                    'left': 'auto',
-                    'top': 'auto'
-                });
-
-            }).mouseout(function() {
-                jQuery(".nav > li").css('background-color', '#22A6FF');
-                jQuery(this).children('.dropdown-menu').css('display', 'none');
-            });
-
-            jQuery(".dropdown-menu").mouseout(function() {
-                jQuery(this).css('display', 'none');
-
-            });
-             //});
-            </script>
-            <!-- Page Template -->
-            <div class="">
-                <div class="">
-                    <ul class="breadcrumb">
-                        <li><a href="http://www.elastichosts.co.uk">Home</a>
-                        </li>
-                        <span class="divider">&gt;</span>
-                        <li class="active">Calculator</li>
-                    </ul>
-                </div>
-                <!--/.container -->
+            <div class="row show-grid">
+                <div class="span1">1</div>
+                <div class="span1">1</div>
+                <div class="span1">1</div>
+                <div class="span1">1</div>
+                <div class="span1">1</div>
+                <div class="span1">1</div>
+                <div class="span1">1</div>
+                <div class="span1">1</div>
+                <div class="span1">1</div>
             </div>
-            <!--/.row -->
-            <div class="container">
+            <div class="row show-grid">
+                <div class="span9">9</div>
+                <div class="span3">3</div>
+            </div>
+            <div class="row show-grid">
+                <div class="span9">
+                  Level 1 column
+                  <div class="row show-grid">
+                    <div class="span9">
+                      Level 2
+                    </div>
+                    <div class="span3">
+                      Level 2
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row show-grid">
+                <div class="span2">2</div>
+                <div class="span10">10</div>
+            </div>
+
+            <div class="row show-grid">
+                <div class="span3">3</div>
+                <div class="span9">9</div>
+            </div>
+
 
 
                 <!-- Masthead
@@ -550,7 +408,8 @@
 
 
                     <!-- Calculator -->
-                    <div id="calculator">
+
+                    <div class="span10" id="calculator">
                         <div data-bind="template: 'base-calculator-template'"></div>
                     </div>
                     <!-------------->
@@ -600,37 +459,10 @@
                     </a>
                 </div>
                 <!-- /.span2 -->
-                <style>
-                .rightbar {
-                    text-align: center;
-                    background-color: rgba(220, 220, 255, 0.5);
-                    padding: 10px;
-                }
-                .rightbar img {
-                    height: 60px;
-                    padding: 15px;
-                }
-                .rightbar a {
-                    color: inherit;
-                    text-decoration: none;
-                }
-                </style>
-                <script>
-                // this fixes the table formatting not working in webkit, opera and chrome
-                jQuery(document).ready(function() {
-                    jQuery(".dctable").nextAll(".dctable").each(function() {
-                        var rowCount = jQuery(this).find("tbody > tr").length;
-                        if (!jQuery(this).hasClass("overview")) {
-                            jQuery(this).find("> tbody > tr :nth-last-of-type(2)").attr("rowspan", rowCount);
-                        };
-                    });
-                })
-                </script>
+
             </div>
             <!-- End Template Content -->
         </div>
-        <!--/.container -->
-    </div>
     <!--/#content-wrapper -->
     <div class="widefooter">
         <footer>
