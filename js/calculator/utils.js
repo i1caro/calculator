@@ -93,11 +93,11 @@ define(['lib/underscore', './constants'], function(_, CONSTANTS) {
 
   function dynPop() {
     var timeoutId;
-    $('.drive-icon, .server-icon').hover(function() {
+    $('.icon-image, .icon-image').hover(function() {
         if (!timeoutId) {
           timeoutId = window.setTimeout(function() {
             timeoutId = null;
-            $("#dynamicpop").text(".drive-icon:hover:before, .server-icon:hover:before {white-space:normal; width:180px;content: attr(data-long);}");
+            $("#dynamicpop").text(".icon-image:hover:before, .icon-image:hover:before {white-space:normal; width:180px;content: attr(data-long);}");
           }, 1000);
         }
       },
