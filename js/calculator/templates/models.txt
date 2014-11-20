@@ -123,8 +123,7 @@
 
     <div class="panel-body row">
       <div class="panel-icon-box">
-        <div class="server-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
-        <div class="server-name" data-bind="text: server.name"></div>
+        <div class="server-icon icon-image" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
       </div>
 
       <div class="server-details">
@@ -323,7 +322,7 @@
     </div>
 
     <div class="panel-icon-box">
-      <div class="drive-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
+      <div class="icon-image drive-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
     </div>
     <div class="server-details">
       <div class="server-component">
@@ -331,9 +330,9 @@
       </div>
       <div class="server-component">
         <!-- ko if: can_switch -->
-          <span>
-            <a class="my-event blue-hover hover-small switch" data-bind="event: {click: switch_disk}, text: switch_message">Switch to HDD</a>
-          </span>
+          <div class="switch-message">
+            <a class="action-link" data-bind="event: {click: switch_disk}, text: switch_message">Switch to HDD</a>
+          </div>
         <!-- /ko -->
       </div>
 
@@ -391,7 +390,7 @@
 
     <div class="panel-body row">
       <div class="panel-icon-box">
-        <div class="drive-icon bandwidth-icon"></div>
+        <div class="icon-image bandwidth-icon"></div>
       </div>
 
       <div class="server-details">

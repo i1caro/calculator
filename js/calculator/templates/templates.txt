@@ -91,7 +91,7 @@
   </div>
   <div class="my-server" style ="padding: 5px">
       <div class="column" style="width: 10%">
-        <div class="server-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
+        <div class="icon-image" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
         <!-- ko with: server -->
           <a class="my-event blue-hover hover-small" data-bind="event: {click: add_disk}">Add Disk</a>
         <!-- /ko -->
@@ -185,7 +185,7 @@
     <button type="button" class="close" style="margin-top:-8px;font-size:17px;padding-bottom:2px;" title="Remove disk" data-bind="click: $parents[1].remove_disk" aria-hidden="true">×</button>
     <li>
       <div class="column" style="width: 9%; padding-bottom: 10px">
-        <div class="drive-icon" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
+        <div class="icon-image" data-bind="css: icon, attr: {'data-pop': pop, 'data-long': long}"></div>
         <span>
           <!-- ko if: can_switch -->
             <a class="my-event blue-hover hover-small" data-bind="event: {click: switch_disk}, text: switch_message"></a>
@@ -218,7 +218,7 @@
 </script>
 <script type="text/html" id="account-details-template">
   <div class="column" style="width: 10%">
-    <div class="server-icon bandwith-icon" data-pop="Bandwidth Subscription" data-long="Your monthly data transfer subscription."></div>
+    <div class="icon-image bandwith-icon" data-pop="Bandwidth Subscription" data-long="Your monthly data transfer subscription."></div>
   </div>
   <div class="column" style="width: 85%">
     <ul class="my-ul">

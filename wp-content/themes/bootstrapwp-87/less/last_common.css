@@ -12,12 +12,12 @@
   position: relative;
   text-decoration: none;
 }
-.server-icon:hover:before, .drive-icon:hover:before {
+.icon-image:hover:before, .icon-image:hover:before {
   float:right;
   margin:0 82px 0 0;
   content:attr(data-pop);
 }
-.lower-handle:hover:after, .upper-handle:hover:after, .server-icon:hover:before, .drive-icon:hover:before {
+.lower-handle:hover:after, .upper-handle:hover:after, .icon-image:hover:before, .icon-image:hover:before {
   background: #333;
   background: rgba(37, 53, 136, .8);
   border-radius: 5px;
@@ -226,7 +226,7 @@
   display: inline-block;
   vertical-align: middle;
 }
-.drive-icon {
+.icon-image {
   width: 64px;
   height: 64px;
   background-repeat: no-repeat;
@@ -243,7 +243,7 @@
   background: url('/wp-content/uploads/container.png');
 }
 .bandwith-icon {
-  background:url('/wp-content/uploads/datatransfer.png') 100% 12% no-repeat
+  background:url('/wp-content/uploads/datatransfer.png');
 }
 .drive-ssd {
   background-image: url('/wp-content/uploads/drive_ssd.png');
@@ -254,7 +254,7 @@
 .drive-folder {
   background-image: url('/wp-content/uploads/folder.png');
 }
-.server-icon {
+.icon-image {
   width: 72px;
   height: 72px;
   background-repeat: no-repeat;

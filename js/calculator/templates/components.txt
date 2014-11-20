@@ -39,7 +39,7 @@
 <script type="text/html" id="system-options-template">
   <div class="sys-options-label" data-bind="text: formatted_name"></div>
   <div class="sys-options-remove">
-    <a data-bind="event: {click: remove_option}">Remove</a>
+    <a class="action-link" data-bind="event: {click: remove_option}">Remove</a>
   </div>
   <div class="price" data-bind="text: formatted_price"></div>
 </script>

@@ -112,12 +112,24 @@ div.panel-header .remove-button{
   background-color: #f2f2f2;
 }
 
-.server-icon {
+
+.panel-icon-box {
+  float: left;
+  padding: 10px 38px;
   width: 72px;
   height: 83px;
+}
+
+.icon-image {
   background-repeat: no-repeat;
   float: left;
   position: relative;
+}
+
+.server-icon {
+  width: 74px;
+  height: 72px;
+  margin-left: -9px;
 }
 .container-icon {
   background: url('/wp-content/uploads/container.png');
@@ -125,15 +137,17 @@ div.panel-header .remove-button{
 .vm-icon {
   background: url('/wp-content/uploads/vm.png');
 }
-
-.drive-icon {
-  width: 72px;
-  height: 83px;
-  background-repeat: no-repeat;
-  float: left;
-  position: relative;
+.bandwidth-icon {
+  width: 59px;
+  height: 43px;
+  background:url('/wp-content/uploads/datatransfer.png');
 }
 
+.drive-icon {
+  width: 80px;
+  height: 80px;
+  margin: -14px 0 0 -14px;
+}
 .drive-hdd {
   background-image: url('/wp-content/uploads/drive_disk.png');
 }
@@ -143,6 +157,7 @@ div.panel-header .remove-button{
 .folder-ssd {
   background-image: url('/wp-content/uploads/folder.png');
 }
+
 
 .server-panel {
   max-width: 100%;
@@ -157,15 +172,28 @@ div.panel-header .remove-button{
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   position: relative;
+  margin-bottom: 20px;
 }
 
-.panel-icon-box {
-  float: left;
-  padding: 10px 38px;
+.price, .slider-price {
+  font-size: 15px;
+  margin-top: 2px;
 }
 .server-details {
   width: 60%;
   float: left;
+  margin-top: 15px;
+}
+
+.switch-message {
+  padding-left: 75px;
+  margin-top: -12px;
+}
+
+.action-link {
+  cursor: pointer;
+  color: #f6882f !important;
+  text-decoration: none !important;
 }
 
 .server-component {
@@ -177,6 +205,7 @@ div.panel-header .remove-button{
 }
 .slider-label {
   width: 10%;
+  margin-top: 3px;
 }
 .slider-handlebar {
   width: 50%;
@@ -295,7 +324,4 @@ div.panel-header .remove-button{
 }
 .modal label {
   font-weight: 300;
-}
-.bandwidth-icon {
-  background:url('/wp-content/uploads/datatransfer.png');
 }
