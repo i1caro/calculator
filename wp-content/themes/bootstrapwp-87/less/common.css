@@ -247,7 +247,9 @@ div.panel-header h1 {
 }
 .server-checkbox-align .checkbox {
   float: left;
-  width: 50%;
+  width: 30%;
+  margin-right: 20%;
+  text-align: right;
 }
 .server-checkbox-align input[type="checkbox"] {
   float: none;
@@ -293,6 +295,24 @@ div.panel-header h1 {
   font-size: 13px;
   font-weight: normal;
   line-height: 18px;
+}
+
+.bottom-panel {
+  color: #7e8284;
+  font-size: 19px;
+  line-height: 0 0 33px 24px;
+  margin: 24px;
+  text-align: right;
+
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+  position: relative;
+}
+
+.total-price {
+  width: 140px;
+  display: inline-block;
 }
 
 .modal-header {
