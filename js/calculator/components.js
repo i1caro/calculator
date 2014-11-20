@@ -115,18 +115,12 @@ define(['lib/knockout', 'lib/underscore', './utils'],
     };
   }
 
-  function removable_account_option(options) {
-    var self = this;
-    ko.utils.extend(self, new account_option(options));
-    self.remove_option = function() {};
-  }
-
   function account_option(options) {
     var self = this;
     self.name = options.name;
     self.unit = options.unit;
     self.max = options.max;
-    self._value = ko.observable(options.value);
+    self._value = ko.observable(options.value || 0);
     self.value = ko.computed({
       write: function(value) {
         if (value < 0)
@@ -154,8 +148,8 @@ define(['lib/knockout', 'lib/underscore', './utils'],
   function simple_input(options) {
     var self = this;
 
-    self.name = options.name;
     self.value = ko.observable(options.value || 0);
+    self.name = options.name;
 
     self.remove_option = function() {
       self.value(0);
@@ -168,6 +162,21 @@ define(['lib/knockout', 'lib/underscore', './utils'],
     self.formatted_price = ko.computed(formatted_price, self);
     self.formatted_unit_price = ko.computed(function() {
       return utils.format_price(self.unit_price());
+    });
+
+    self.formatted_name = ko.computed(function() {
+      var choosen_option = self.value();
+      if (choosen_option)
+        return choosen_option + ' X ' + self.name;
+      return '';
+    });
+
+    self.view_context = ko.computed(function() {
+      return {
+        name: self.value() + ' X ' + self.name,
+        formatted_price: self.formatted_price,
+        remove_option: self.remove_option
+      };
     });
   }
 
@@ -193,7 +202,7 @@ define(['lib/knockout', 'lib/underscore', './utils'],
     self.value = ko.observable();
 
     self.remove_option = function() {
-      self.value(0);
+      self.value(null);
     };
 
     self.choose = function(option) {
@@ -206,11 +215,17 @@ define(['lib/knockout', 'lib/underscore', './utils'],
     self.choose(choosen);
 
     self.price = ko.computed(function() {
-      var value2 = self.value();
-      if (value2)
-        return value2.price();
+      var choosen_option = self.value();
+      if (choosen_option)
+        return choosen_option.price();
       return 0;
     });
+
+    self.formatted_name = ko.computed(function() {
+      var choosen_option = self.value() || {'name': ''};
+      return choosen_option.name;
+    });
+
     self.formatted_price = ko.computed(formatted_price, self);
     self.choosen = function() {
       return _.indexOf(self.options(), self.value());
@@ -223,7 +238,6 @@ define(['lib/knockout', 'lib/underscore', './utils'],
     'single_slider': single_slider,
     'checkbox': checkbox,
     'account_option': account_option,
-    'removable_account_option': removable_account_option,
     'server_licenses': server_licenses,
   };
 });

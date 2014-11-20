@@ -139,6 +139,8 @@ define(
         return false;
       };
 
+      self.has_resources_choosen = false
+
       // Normal attributes
       self.coming_soon = ko.computed(function() {
         return get_country_container_availability(self.country());

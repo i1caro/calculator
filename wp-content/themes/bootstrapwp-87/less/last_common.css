@@ -1,0 +1,469 @@
+ .panel-heading > .btn-toolbar > .btn-group > a {
+  position:relative;
+}
+.rightbar {
+  display:none;
+}
+.span6 .hover-huge {
+  margin:20px auto;
+}
+.tooltipa, a.tooltipa, a.tooltipb, .tooltipb, .lower-handle, .upper-handle {
+  display: inline;
+  position: relative;
+  text-decoration: none;
+}
+.server-icon:hover:before, .drive-icon:hover:before {
+  float:right;
+  margin:0 82px 0 0;
+  content:attr(data-pop);
+}
+.lower-handle:hover:after, .upper-handle:hover:after, .server-icon:hover:before, .drive-icon:hover:before {
+  background: #333;
+  background: rgba(37, 53, 136, .8);
+  border-radius: 5px;
+  bottom: 22px;
+  color: #fff;
+  padding: 5px 15px;
+  z-index: 98;
+  white-space:nowrap;
+}
+.lower-handle:hover:after, .upper-handle:hover:after {
+  bottom: 22px;
+  content: attr(data-title);
+  position: absolute;
+}
+.upper-handle:hover:after {
+  left: -43px;
+}
+.lower-handle:hover:after {
+  left: -48px;
+}
+.popover-content{
+  background-color:#313785;
+  color: #fff;
+  border-radius: 5px;
+}
+.bandwith-icon {
+  background:url('/wp-content/uploads/datatransfer.png') center, no repeat;
+}
+[data-bind="template: { name: 'account-details-template', data: account_details }"] {
+  padding: 15px 0px 0px 0px;
+  border: 3px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+}
+.pricing-stuff a {
+  cursor:pointer;
+}
+.pricing-stuff button.close {
+  padding:5px;
+}
+#zonetitle, #servertitle {
+  padding: 10px 0 15px 0;
+}
+#whichzone {
+  -ms-text-justify: distribute-all-lines;
+  text-justify: distribute-all-lines;
+  margin-bottom: 79px;
+  text-align: justify;
+  height:105px;
+  line-height:15px;
+}
+.stretch {
+  width:100%!important;
+  display:inline-block!important;
+}
+.zoneselector {
+  display: inline-block;
+  zoom: 1;
+  opacity: 0.6;
+  padding: 12px;
+  max-width: 100px;
+  vertical-align: top;
+  cursor: pointer;
+  width: 80px;
+  font-size: 12px;
+  padding-bottom:0px;
+  margin-bottom:5px;
+}
+#whichzone .selectedzone {
+  background-color: #22A6FF;
+  border-radius: 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 1;
+}
+#whichzone img {
+  display: block;
+  margin: 0 auto;
+  max-width: 58px;
+}
+#whichzone span {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+#whichzone .comingsoon {
+  cursor: not-allowed;
+  opacity:0.4;
+}
+.comingsoon:before {
+  position: absolute;
+  content:'';
+  height: 100px;
+  width: 100px;
+  background: url("/wp-content/uploads/coming-soon.png") top right no-repeat;
+}
+.panel-heading {
+  vertical-align: middle;
+  display: table;
+}
+.panel-heading span {
+  vertical-align: middle;
+  display: table-cell;
+}
+.panel-heading .hover-large {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+  float: left;
+  padding:3px 15px 3px 15px;
+  margin-right: 15px;
+}
+.example {
+  border: 1px solid #DDD;
+  border-radius: 4px;
+  position: relative;
+  padding: 50px 30px 20px;
+  margin: 30px 0px 20px;
+  overflow: hidden;
+}
+.big-letter {
+  font-size:48px;
+}
+.small-bar {
+  height: 8px;
+}
+.handler {
+  background-color: green;
+  position: absolute;
+  width: 1.5em;
+  height: 1.5em;
+  cursor: default;
+}
+.container {
+  width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.three-fourths {
+  width: 75%;
+}
+.one-fourth {
+  width: 25%;
+}
+.column {
+  float: left;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.slider-tooltip {
+  position: absolute;
+  display: block;
+  top: -25px;
+  width: 35px;
+  height: 20px;
+  color: #fff;
+  text-align: center;
+  font: 10pt Tahoma, Arial, sans-serif;
+  border-radius: 3px;
+  border: 1px solid #333;
+  -webkit-box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, .3);
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, .3);
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background: -moz-linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(69, 72, 77, 0.5)), color-stop(100%, rgba(0, 0, 0, 0.5)));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* IE10+ */
+  background: linear-gradient(top, rgba(69, 72, 77, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#8045484d', endColorstr='#80000000', GradientType=0);
+  /* IE6-9 */
+}
+.noUi-target {
+  border-radius: 4px;
+  border: 1px solid #D3D3D3;
+  box-shadow: inset 0 1px 1px #F0F0F0, 0 3px 6px -5px #BBB;
+}
+.noUi-horizontal {
+  /*position: relative;*/
+  height: 20px;
+}
+.noUI-base {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #f0ad4e;
+}
+.btn-cp {
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 31px;
+  height: 31px;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  text-indent: -9999px;
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.drive-icon {
+  width: 64px;
+  height: 64px;
+  background-repeat: no-repeat;
+  float: left;
+  margin-bottom: 3px;
+}
+.btn-delete {
+  background-position: 0 -279px;
+}
+.vm-icon {
+  background: url('/wp-content/uploads/vm.png');
+}
+.container-icon {
+  background: url('/wp-content/uploads/container.png');
+}
+.bandwith-icon {
+  background:url('/wp-content/uploads/datatransfer.png') 100% 12% no-repeat
+}
+.drive-ssd {
+  background-image: url('/wp-content/uploads/drive_ssd.png');
+}
+.drive-hdd {
+  background-image: url('/wp-content/uploads/drive_disk.png');
+}
+.drive-folder {
+  background-image: url('/wp-content/uploads/folder.png');
+}
+.server-icon {
+  width: 72px;
+  height: 72px;
+  background-repeat: no-repeat;
+  float: left;
+  position: relative;
+  margin-bottom: 10px;
+  margin-left: -4px;
+}
+.my-checkbox {
+  margin-left: 36px !important;
+}
+.my-input-select-box {
+  margin-left: 10px;
+  width: 45px;
+}
+.storage-icon {
+  cursor: pointer;
+  background: url("/wp-content/uploads/drive_add.png") no-repeat top left;
+  padding-left:23px;
+  width: 20px;
+  height: 20px;
+  line-height: 21px;
+  display: inline-block;
+  font-weight: bold;
+}
+ul.my-ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0 0 9px 5px;
+}
+li.slider-definition {
+  font-weight: bold;
+  text-align: left;
+  display:inline;
+}
+.my-slider-handle {
+  border-color: #313785;
+  border-radius: 0px;
+  background-image: none;
+  cursor: pointer;
+  background-color: #22a6ff;
+  top: -.3em;
+  margin-left: -.6em;
+  position: absolute;
+  z-index: 2;
+  width: 1.2em;
+  height: 1.2em;
+  border: 1px solid #444444;
+}
+.my-slider {
+  margin:7px 5px 0 5px;
+  border: 1px solid #555555;
+  border-color: #313785;
+  border-radius: 0px;
+  background-color: white;
+  height: .8em;
+  position: relative;
+  text-align: left;
+  margin-left:5px;
+}
+.my-input-box {
+  margin-bottom: 0px;
+  border-color: #313785;
+  width: 35px;
+}
+.my-text {
+  margin-top: 5px;
+}
+.my-text-number {
+  margin-top: 5px;
+  float: right;
+}
+.my-event {
+  white-space: nowrap;
+  overflow: auto;
+}
+.text-right {
+  text-align: right;
+}
+ul.my-modal-ul {
+  list-style-type: none;
+  padding: 6px;
+  margin: 0 0 5px 5px;
+}
+.my-final-price {
+  font-size: 11pt;
+  font-weight: bold;
+  color: #313785;
+}
+.my-total {
+  padding-right: 14px;
+  padding-top: 20px;
+  text-align: right;
+}
+.my-burst-input {
+  width: 70px;
+  text-align: right;
+}
+.pricing-stuff {
+  font-size: 9.5pt;
+  font-weight: bold;
+  color: #313785;
+}
+.pricing-stuff .btn, .pricing-stuff .btn-primary {
+  font-size: 9.5pt;
+  font-family: Arial;
+  font-weight: bold;
+  box-shadow: none;
+  background-color: white;
+  border-radius: 0px !important;
+  background-image: none;
+  color: #313785;
+}
+.pricing-stuff .btn-primary {
+  background-color: #22a6ff;
+  color: white;
+}
+.my-total p, .my-total span {
+  display:inline;
+  line-height: 30px;
+}
+.prominent-price {
+  font-size: 22px;
+  margin-left: 5px;
+  line-height: 40px !important;
+}
+.prominent-price-label {
+  font-size: 19px;
+}
+.burst-price-label {
+  font-size: 12px;
+}
+.burst-price {
+  font-size: 15px;
+  margin-left: 5px;
+}
+.final-price {
+  font-size:25px;
+  margin-left: 5px;
+}
+.final-price-label {
+  font-size:22px;
+}
+.modal-body h2 {
+  margin-top:0px;
+}
+.modal-header {
+  background-color:#f5f5f5;
+}
+.pricing-stuff .modal-header button.close {
+  padding:0px;
+}
+.span6 div.pricing-stuff h3 {
+  margin-top: 0px;
+  margin-bottom: 10px
+}
+div.pricing-stuff div.popover {
+  z-index: 4;
+}
+#subscription .modal-body ul {
+  width: 225px;
+  float: left;
+}
+#subscription .modal-description {
+  float: left;
+  width: 49%;
+}
+.cont-warning {
+  background-color: #fc6666;
+  color: #fcf8e3;
+  text-align: center;
+  padding: 10px;
+}
+
+.stack {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Image styles */
+.stack .server {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+  border: 3px solid rgba(0, 0, 0, 0.4);
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  padding: 6px;
+  background-color: white;
+}
+
+.stack .border {
+  content: "";
+  border-radius: 3px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border: 3px solid rgba(0, 0, 0, 0.4);
+  left: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.4);
+  background-color: white;
+}

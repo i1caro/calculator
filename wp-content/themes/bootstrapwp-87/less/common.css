@@ -13,7 +13,7 @@
 
 .slider-handle {
   border-color: #313785;
-  border-radius: 0px;
+  border-radius: 0;
   background-image: none;
   cursor: pointer;
   background-color: #000000;
@@ -40,16 +40,16 @@
 .add-button {
   background: #f6882f url("/wp-content/uploads/drive_add.png") top 5px left 6px no-repeat;
   background-size: 12px 12px;
-  display: inline;
   float: left;
   height: 22px;
-  padding: 0px 12px 0px 24px;
+  padding: 0px 16px 0px 24px;
   background-color: #f6882f;
   margin-right: 2px;
   color: #ffffff;
   cursor: pointer;
 }
-div.btn-group a.add-button {
+
+a.add-button {
   text-decoration: none;
   color: #ffffff;
 }
@@ -159,7 +159,7 @@ div.panel-header .remove-button{
   position: relative;
 }
 
-.server-icon-box {
+.panel-icon-box {
   float: left;
   padding: 10px 38px;
 }
@@ -213,6 +213,18 @@ div.panel-header .remove-button{
 .licenses > div {
   float: left;
 }
+.account-options .option-label {
+  width: 320px;
+  text-align: right;
+}
+.account-options .slider-input {
+  padding-left: 43px;
+}
+
+.account-options .price {
+  padding-left: 19px;
+}
+
 .sys-options-label {
   width: 470px;
   text-align: right;
@@ -224,4 +236,66 @@ div.panel-header .remove-button{
 .licenses .price {
   padding-left: 84px;
   text-align: right;
+}
+
+.option-label {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+}
+
+.modal-header {
+  padding: 4px 4px 8px 4px;
+  border-bottom: 1px solid #eee;
+  background-color: #000;
+  height: 22px;
+}
+.modal-title {
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 22px;
+  text-transform: uppercase;
+  float: left;
+  margin: 6px 0 0 16px;
+  padding: 0;
+}
+
+.modal h2 {
+  color: black;
+  display: inline;
+  font-size: 14px;
+  line-height: 14px;
+  min-width: 72px;
+  text-align: right;
+}
+.modal ul {
+  list-style-type: none;
+  padding: 10px 0 0 0;
+}
+.modal .form-group {
+  padding-left: 20px;
+}
+.modal input {
+  width: 22px;
+  text-align: center;
+}
+.modal .desktop-cals{
+  padding: 10px 0 0 21px;
+}
+.modal .close {
+  font-size: 26px;
+  padding-top: 3px;
+  padding-right: 10px;
+  cursor: pointer;
+  color: white;
+  opacity: 1;
+}
+.modal label {
+  font-weight: 300;
+}
+.bandwidth-icon {
+  background:url('/wp-content/uploads/datatransfer.png');
 }

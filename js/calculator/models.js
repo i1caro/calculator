@@ -247,7 +247,6 @@ define(['lib/knockout', 'lib/underscore', './constants', './utils', './parser', 
   }
 
   function virtual_machine(options) {
-
     var self = this,
         unique_id = utils.unique_id.build();
     ko.utils.extend(self, new base_server(options));

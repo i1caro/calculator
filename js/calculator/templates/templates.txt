@@ -35,7 +35,7 @@
   <div class="column" style="float: right" data-bind="text: formatted_price"></div>
   <div class="clearfix"></div>
 </script>
-<script type="text/html" id="input-choices-template">
+<script type="text/html" id="input-options-template">
   <div class="column" style="text-align: right; width: 62%">
     <label>
       <span data-bind="text: name"></span>
@@ -223,8 +223,8 @@
   <div class="column" style="width: 85%">
     <ul class="my-ul">
       <div data-bind="template: { name: 'input-range-template', data: bandwidth}"></div>
-      <div data-bind="template: { name: 'input-choices-template', data: additional_ips}"></div>
-      <div data-bind="template: { name: 'input-choices-template', data: additional_vlans}"></div>
+      <div data-bind="template: { name: 'input-options-template', data: additional_ips}"></div>
+      <div data-bind="template: { name: 'input-options-template', data: additional_vlans}"></div>
     </ul>
   </div>
   <div class="clearfix"></div>
