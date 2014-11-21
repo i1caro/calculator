@@ -12,11 +12,10 @@
 */
 
 .slider-handle {
-  border-color: #313785;
   border-radius: 0;
   background-image: none;
   cursor: pointer;
-  background-color: #000000;
+  background-color: #313785;
   top: -.3em;
   margin-left: -.6em;
   position: absolute;
@@ -42,7 +41,7 @@ a.add-button {
   color: #ffffff;
 }
 .panel-header {
-  background-color: #000000;
+  background-color: #313785;
   height: 32px;
   width: 100%;
 }
@@ -71,7 +70,7 @@ div.panel-header h1 {
 }
 
 .single-x-button {
-  background: black;
+  background: #313785;
   color: #ffffff;
   cursor: pointer;
   font-weight: bold;
@@ -94,7 +93,7 @@ div.panel-header h1 {
 .add-button {
   cursor: pointer;
   font-weight: bold;
-  background-color: #f6882f;
+  background-color: #fbac29;
   color: #ffffff;
   line-height: 22px;
 
@@ -212,7 +211,7 @@ div.panel-header h1 {
 
 .action-link {
   cursor: pointer;
-  color: #f6882f !important;
+  color: #fbac29 !important;
   text-decoration: none !important;
 }
 
@@ -318,7 +317,7 @@ div.panel-header h1 {
 .modal-header {
   padding: 4px 4px 8px 4px;
   border-bottom: 1px solid #eee;
-  background-color: #000;
+  background-color: #313785;
   height: 22px;
 }
 .modal-title {
@@ -332,7 +331,7 @@ div.panel-header h1 {
 }
 
 .modal h2 {
-  color: black;
+  color: #313785;
   display: inline;
   font-size: 14px;
   line-height: 14px;
