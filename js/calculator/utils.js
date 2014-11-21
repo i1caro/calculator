@@ -91,37 +91,6 @@ define(['lib/underscore', './constants'], function(_, CONSTANTS) {
     prev: 0
   };
 
-  function dynPop() {
-    var timeoutId;
-    $('.icon-image, .icon-image').hover(function() {
-        if (!timeoutId) {
-          timeoutId = window.setTimeout(function() {
-            timeoutId = null;
-            $("#dynamicpop").text(".icon-image:hover:before, .icon-image:hover:before {white-space:normal; width:180px;content: attr(data-long);}");
-          }, 1000);
-        }
-      },
-      function() {
-        if (timeoutId) {
-          window.clearTimeout(timeoutId);
-          timeoutId = null;
-        }
-        else {
-          $("#dynamicpop").text("");
-        }
-      });
-  }
-
-  function serverSlideDown() {
-    jQuery("div.server").first().hide();
-    jQuery("div.server").first().slideDown();
-  }
-
-  function serverSlideUp(e, callback) {
-    jQuery(e).parents(".server").slideUp();
-    window.setTimeout(function() {callback();}, 500);
-  }
-
   return {
     'get_country_based_on_location': get_country_based_on_location,
     'bytes_to_gigabytes': bytes_to_gigabytes,
@@ -134,10 +103,7 @@ define(['lib/underscore', './constants'], function(_, CONSTANTS) {
     'limit': limit,
     'copy': copy,
     'post': post,
-    'force_int': force_int,
-    'dynPop': dynPop,
-    'serverSlideDown': serverSlideDown,
-    'serverSlideUp': serverSlideUp,
+    'force_int': force_int
   };
 });
 

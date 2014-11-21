@@ -1,4 +1,7 @@
-/* exported LIMITS, PRICES, CURRENCY, LOCAL_PRICES, DEVICE_LIST */
+// Load modules that are loaded by the html
+define('$', function() {
+    return $;
+});
 
 require.config({
   'baseUrl': 'js',
@@ -12,6 +15,7 @@ require.config({
     }
   }
 });
+
 
 function clone(data) {
   return JSON.parse(JSON.stringify(data));
@@ -111,7 +115,8 @@ var LIMITS = {},
     PRICES = POUND_PRICES,
     CURRENCY = POUND_PRICES.currency;
 
-
 // Load the main app module to start the app
-require(['calculator/main']);
+require(['main']);
+
+
 

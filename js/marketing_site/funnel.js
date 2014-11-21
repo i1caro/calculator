@@ -19,6 +19,7 @@ define([],
     }
 
     return {
-      'post': post
+      'has_licenses': false,
+      'post': post,
     };
 });
