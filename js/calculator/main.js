@@ -6,70 +6,14 @@ define(
     './models',
     './utils',
     './parser',
+    './mouse_actions',
     './load_templates'
   ],
-  function(ko, _, CONSTANTS, models, utils, parser) {
-    function get_country_container_availability(id) {
-      return CONSTANTS.CONTAINER_UNAVAILABILITY[id];
-    }
+  function(ko, _, CONSTANTS, models, utils, parser, mouse_actions) {
     // Main View Model
 
     function viewModel() {
       var self = this;
-
-      // Actions
-      function move_handler(event) {
-        var data = event.data,
-            mouse_move = ((event.clientX - data.offset) * 100) / data.bar_size,
-            distance = utils.limit(data.start + mouse_move, 0, 100);
-        data.element(distance);
-      }
-      function stop_move_handler(event) {
-        $(document).off('mousemove', move_handler);
-      }
-
-      function start_mouse_down(data, event, element, lower_bound, upper_bound) {
-        $(document).on('mousemove', {
-          offset: event.pageX - utils.pageOffset(),
-          start: element(),
-          bar_size: $(event.currentTarget).parent().width(),
-          element: element,
-          lower_bound: lower_bound,
-          upper_bound: upper_bound
-        }, move_handler);
-        $(document).one('mouseup', stop_move_handler);
-      }
-
-      function get_click_position(event) {
-        var parent_position = get_position(event.currentTarget),
-            x = event.clientX - parent_position.x,
-            y = event.clientY - parent_position.y;
-        return {x: x, y: y};
-      }
-
-      function get_position(element) {
-        var x = 0,
-            y = 0;
-
-        while (element) {
-          x += (element.offsetLeft - element.scrollLeft + element.clientLeft);
-          y += (element.offsetTop - element.scrollTop + element.clientTop);
-          element = element.offsetParent;
-        }
-        return {x: x, y: y};
-      }
-
-      self.mouse_down_handle = function(data, event) {
-        start_mouse_down(data, event, data.lower);
-      };
-
-      self.mouse_down = function(data, event) {
-        var position = get_click_position(event),
-            clicked = position.x / $(event.currentTarget).width() * 100;
-        data.lower(clicked);
-
-        self.mouse_down_handle(data, event);
-      };
 
       self.has_disconnected_drives = ko.computed(function() {
         return false;
@@ -86,7 +30,6 @@ define(
           ssd: [20],
           hdd: []
         }));
-        utils.serverSlideDown();
       };
       self.add_virtual_machine = function() {
         self.servers.unshift(new models.virtual_machine({
@@ -97,8 +40,13 @@ define(
           ssd: [],
           hdd: [20]
         }));
-        utils.serverSlideDown();
       };
+
+      self.account_details = new models.account_details({
+        lower: 0,
+        virtual_lans: 0,
+        ips: 0
+      });
 
       // To be fixed attributes
       self.disconnected_storage_formatted_price = function() {
@@ -148,6 +96,10 @@ define(
             price_month_formatted = utils.format_price(price_month);
         return price_month_formatted;
       });
+
+      // Actions
+      self.click_handle_down = mouse_actions.click_handle_down;
+      self.click_slider_down = mouse_actions.click_slider_down;
     }
 
     var model = new viewModel();
@@ -156,3 +108,4 @@ define(
     return model;
   }
 );
+
