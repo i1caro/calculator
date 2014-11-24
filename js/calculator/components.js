@@ -15,11 +15,11 @@ define(['lib/knockout', 'lib/underscore', './utils'],
 
   function snap_value(value, snap) {
     if (value > 0)
-        return Math.ceil(value / snap) * snap;
+      return Math.ceil(value / snap) * snap;
     else if (value < 0)
-        return Math.floor(value / snap) * snap;
+      return Math.floor(value / snap) * snap;
     else
-        return value;
+      return value;
   }
 
   function compute_value(percentage, min, max, snap) {
@@ -32,8 +32,7 @@ define(['lib/knockout', 'lib/underscore', './utils'],
   function get_percentage_from_value(value, min, max, snap) {
     var trimmed = trim_value(value, min, max),
         snapped = snap_value(trimmed, snap);
-
-    return 43.4294 * Math.log((max - 10 + 9 * snapped) / (max));
+    return 43.4294 * Math.log((max + 9 * snapped) / max);
   }
 
   function single_slider(options) {
@@ -55,7 +54,6 @@ define(['lib/knockout', 'lib/underscore', './utils'],
         max_percentage = get_percentage_from_value(options.max, options.min, options.max, options.snap);
 
     self.lower = ko.computed({
-
       read: function() {
         return self._lower();
       },
@@ -68,14 +66,15 @@ define(['lib/knockout', 'lib/underscore', './utils'],
 
     self.lower_input = ko.computed({
       read: function() {
-        return parseInt(compute_value(self.lower(), options.min, options.max, options.snap).toFixed(0));
+        return Number(compute_value(self.lower(), options.min, options.max, options.snap).toFixed(0));
       },
       write: function(value) {
-        if (value < options.min)
-          value = options.min;
-        if (value > options.max)
-          value = options.max;
-        var percentage = get_percentage_from_value(value, options.min, options.max, options.snap);
+        var clean_value = Number(value);
+        if (clean_value < options.min)
+          clean_value = options.min;
+        if (clean_value > options.max)
+          clean_value = options.max;
+        var percentage = get_percentage_from_value(clean_value, options.min, options.max, options.snap);
         self.lower(percentage);
       },
       owner: self

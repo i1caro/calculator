@@ -5,9 +5,9 @@
     <div class="column" style="width: 43%">
       <div class="slider-margin noUi-base">
         <div class="my-slider">
-          <div class="my-slider-handle lower-handle" data-title="Subscription" data-bind="event: {mousedown: $root.mouse_down_lower}, style: {left: lower_style()}"></div>
+          <div class="my-slider-handle lower-handle" data-title="Subscription" data-bind="event: {mousedown: $root.calculator.mouse_down_lower}, style: {left: lower_style()}"></div>
           <!-- ko if: double_bars -->
-          <div class="my-slider-handle upper-handle" data-title="Max. Burst" data-bind="event: {mousedown: $root.mouse_down_upper}, style: {left: upper_style()}"></div>
+          <div class="my-slider-handle upper-handle" data-title="Max. Burst" data-bind="event: {mousedown: $root.calculator.mouse_down_upper}, style: {left: upper_style()}"></div>
           <!-- /ko -->
         </div>
       </div>

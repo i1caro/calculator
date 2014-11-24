@@ -202,7 +202,7 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
     // $("#server-list").delegate(".minus", "click", function() {
     //   var context = ko.contextFor(this);
     //   serverSlideUp(this, function() {
-    //     context.$root.servers.remove(context.$data.server);
+    //     context.$root.calculator.servers.remove(context.$data.server);
     //   });
 
     //   return false;

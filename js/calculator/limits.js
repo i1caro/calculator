@@ -4,14 +4,14 @@ define(['lib/underscore'], function(_) {
 
   var DEFAULT_LIMITS = {
     cpu_increments: 50,
-    cpu_container_min: 2000,
+    cpu_container_min: 500,
     cpu_container_max: 20000, // Mhz
-    cpu_vm_min: 2000,
+    cpu_vm_min: 500,
     cpu_vm_max: 20000, // Mhz
     ram_increments: 128,
-    ram_container_min: 1024, // MB
+    ram_container_min: 256, // MB
     ram_container_max: 32768,
-    ram_vm_min: 1024, // MB
+    ram_vm_min: 256, // MB
     ram_vm_max: 32768,
     hdd_min: 0, // GB
     hdd_max: 1862,
