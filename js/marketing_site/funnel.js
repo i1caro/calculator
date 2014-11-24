@@ -1,6 +1,5 @@
 define([],
   function() {
-
     function post(data) {
       var l = $(this);
       $.ajax({
@@ -19,7 +18,6 @@ define([],
     }
 
     return {
-      'has_licenses': false,
-      'post': post,
+      'post': post
     };
 });

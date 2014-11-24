@@ -76,7 +76,6 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
         data['containers'] = self.get_containers();
         data['account_details'] = self.build_account_details();
         data['subscription'] = output.shift();
-        data['country'] = output.shift();
       }
       return data;
     };
@@ -91,7 +90,7 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     return {checksum: splited_info[0], data: splited_info[1]};
   }
 
-  function string_into_data(string) {
+  function serialize_load(string) {
     var result = split_string(string);
 
     if (parseInt(result.checksum) !== utils.calc_checksum(string))
@@ -99,7 +98,7 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     return new Parser(result.data.split(',')).parse();
   }
 
-  function unchecked_string_into_data(string) {
+  function unchecked_serialize_load(string) {
     var result = split_string(string);
     return new Parser(result.data.split(',')).parse();
   }
@@ -144,17 +143,17 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     return machine_data;
   }
 
-  function serialize_view() {
+  function serialize_dump() {
     var servers = this.servers(),
         temp_server,
         temp_list,
-        result = [],
-        i;
+        result = [];
+
     temp_list = {
       'container': [],
       'virtual_machine': []
     };
-    for (i=0; i < servers.length; i++) {
+    for (var i=0; i < servers.length; i++) {
       temp_server = servers[i];
       temp_list[temp_server.type].push(temp_server.serialize());
     }
@@ -163,19 +162,18 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     result.push(temp_list['container']);
     result.push(SPLIT_INSTANCES);
     result.push(this.account_details.serialize());
-    result.push(this.country());
 
     return _.flatten(result).join(',');
   }
 
-  function serialize_view_to_url() {
-    var result_string = serialize_base_server.call(this),
+  function serialize_dump_to_url() {
+    var result_string = serialize_dump.call(this),
         checksum = utils.calc_checksum(result_string),
         encoded_uri = checksum + SPLIT_CHECKSUM + result_string;
     return encoded_uri;
   }
 
-  function common_resources() {
+  function common_server_resources() {
     var self = this,
         resources = {},
         storages;
@@ -215,7 +213,7 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
 
   function virtual_machine_resources(data) {
     var self = this,
-        resources = common_resources.call(self);
+        resources = common_server_resources.call(self);
 
     resources[CONSTANTS.RESOURCES.cpu_virtual_machine] = utils.force_int(self.cpu.choosen());
     resources[CONSTANTS.RESOURCES.ram_virtual_machine] = utils.force_int(self.ram.choosen());
@@ -225,7 +223,7 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
 
   function container_resources() {
     var self = this,
-        resources = common_resources.call(self);
+        resources = common_server_resources.call(self);
 
     resources[CONSTANTS.RESOURCES.cpu_container] = utils.force_int(self.cpu.choosen());
     resources[CONSTANTS.RESOURCES.ram_container] = utils.force_int(self.ram.choosen());
@@ -261,24 +259,24 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     return _.extend(resources, licenses_resources.call(self));
   }
 
-  function join_all_resources() {
-    var self = this,
-        resources = {};
-    function add_keys(obj) {
-      _.each(obj.resources(), function(value, key) {
-        if (!resources[key])
-          resources[key] = 0;
-        resources[key] += value;
-      });
-    }
+  // function join_all_resources() {
+  //   var self = this,
+  //       resources = {};
+  //   function add_keys(obj) {
+  //     _.each(obj.resources(), function(value, key) {
+  //       if (!resources[key])
+  //         resources[key] = 0;
+  //       resources[key] += value;
+  //     });
+  //   }
 
-    _.each(self.raw_disconnected_drives(), add_keys);
-    _.each(self.raw_disconnected_folders(), add_keys);
-    _.each(self.servers(), add_keys);
-    _.each([self.account_details()], add_keys);
+  //   _.each(self.raw_disconnected_drives(), add_keys);
+  //   _.each(self.raw_disconnected_folders(), add_keys);
+  //   _.each(self.servers(), add_keys);
+  //   _.each([self.account_details()], add_keys);
 
-    return resources;
-  }
+  //   return resources;
+  // }
 
 
   return {
@@ -287,12 +285,12 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     'disconnected_hdd_drive_resources': disconnected_hdd_drive_resources,
     'virtual_machine_resources': virtual_machine_resources,
     'container_resources': container_resources,
-    'string_into_data': string_into_data,
+    'serialize_load': serialize_load,
     'serialize_base_server': serialize_base_server,
     'serialize_virtual_machine': serialize_virtual_machine,
-    'serialize_view': serialize_view,
-    'serialize_view_to_url': serialize_view_to_url,
-    'unchecked_string_into_data': unchecked_string_into_data,
-    'join_all_resources': join_all_resources
+    'serialize_dump': serialize_dump,
+    'serialize_dump_to_url': serialize_dump_to_url,
+    'unchecked_serialize_load': unchecked_serialize_load,
+    // 'join_all_resources': join_all_resources
   };
 });

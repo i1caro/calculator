@@ -2,24 +2,16 @@ define(
   [
     'lib/knockout',
     'lib/underscore',
-    './constants',
+    './pricing',
     './models',
     './utils',
     './parser',
     './mouse_actions',
     './load_templates'
   ],
-  function(ko, _, CONSTANTS, models, utils, parser, mouse_actions) {
-    // Main View Model
-
+  function(ko, _, pricing, models, utils, parser, mouse_actions) {
     function viewModel() {
       var self = this;
-
-      self.has_disconnected_drives = ko.computed(function() {
-        return false;
-      });
-      self.disconnected_drives = [];
-      self.disconnected_folders = [];
 
       self.add_container = function() {
         self.servers.unshift(new models.container({
@@ -42,13 +34,7 @@ define(
         }));
       };
 
-      self.account_details = new models.account_details({
-        lower: 0,
-        virtual_lans: 0,
-        ips: 0
-      });
-
-      // To be fixed attributes
+      // To fixed variables
       self.disconnected_storage_formatted_price = function() {
         return 0;
       };
@@ -58,7 +44,19 @@ define(
 
       self.has_resources_choosen = false;
 
+      self.has_disconnected_drives = false;
+      self.disconnected_drives = [];
+      self.disconnected_folders = [];
+
+      // Observables
+
       self.servers = ko.observableArray();
+
+      self.account_details = new models.account_details({
+        bandwidth: 0,
+        virtual_lans: 0,
+        ips: 0
+      });
 
       // Computed
       self.remove_server = function(data) {
@@ -73,21 +71,6 @@ define(
         return total;
       });
 
-      self.burst_price = ko.computed(function() {
-        return _.reduce(self.servers(), function(memo, obj) {
-          var burst = obj.burst_price ? obj.burst_price() : 0,
-              price = parseFloat(burst);
-
-          if (_.isNumber(price))
-            return memo + price;
-          return memo;
-        }, 0);
-      });
-
-      self.formatted_burst_price = ko.computed(function() {
-        return utils.format_price(self.burst_price());
-      });
-
       self.formatted_price = ko.computed(function() {
         return utils.format_price(self.price());
       });
@@ -100,12 +83,34 @@ define(
       // Actions
       self.click_handle_down = mouse_actions.click_handle_down;
       self.click_slider_down = mouse_actions.click_slider_down;
+
+      // External
+      self.set_pricing = pricing.set_pricing;
+
+      self.set_servers = function(data) {
+        self.servers.removeAll();
+        _.each(data.containers, function(container) {
+          self.servers.push(new models.container(container));
+        });
+        _.each(data.virtual_machines, function(virtual_machine) {
+          self.servers.push(new models.virtual_machine(virtual_machine));
+        });
+      };
+      self.set_account_details = function(data) {
+        self.account_details = new models.account_details(data);
+      };
+      self.set_data = function(data) {
+        self.set_servers(data);
+        self.set_account_details(data['account_details']);
+      };
+
+      self.serialize_dump = parser.serialize_dump;
+      self.serialize_load = parser.serialize_load;
+      self.serialize_dump_to_url = parser.serialize_dump_to_url;
+
     }
 
-    var model = new viewModel();
-    ko.applyBindings(model);
-
-    return model;
+    return new viewModel();
   }
 );
 

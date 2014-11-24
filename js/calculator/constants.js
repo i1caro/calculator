@@ -1,80 +1,5 @@
 define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing) {
 
-  var ZONES = [
-    {
-      id: 'lon-p',
-      name: 'London Portsmouth',
-      flag: 'UKflag.png',
-    },
-    {
-      id: 'lon-b',
-      name: 'London Maidenhead',
-      flag: 'UKflag.png',
-    },
-    {
-      id: 'ams-e',
-      name: 'Amsterdam',
-      flag: 'NLFlag.png',
-    },
-    {
-      id: 'sjc-c',
-      name: 'San Jose, CA',
-      flag: 'USAFlag.png',
-    },
-    {
-      id: 'lax-p',
-      name: 'Los Angeles, CA',
-      flag: 'USAFlag.png',
-    },
-    {
-      id: 'dal-a',
-      name: 'Dallas',
-      flag: 'USAFlag.png',
-    },
-    {
-      id: 'mmi-p',
-      name: 'Miami',
-      flag: 'USAFlag.png',
-    },
-    {
-      id: 'sat-p',
-      name: 'San Antonio, TX',
-      flag: 'USAFlag.png',
-      containers_unavailable: true
-    },
-    {
-      id: 'tor-p',
-      name: 'Toronto',
-      flag: 'CANFlag.png',
-    },
-    {
-      id: 'hkg-e',
-      name: 'Hong Kong',
-      flag: 'HKGFlag.png',
-    },
-    {
-      id: 'syd-v',
-      name: 'Sydney',
-      flag: 'AUSFlag.png',
-    }
-  ];
-
-  var CONTAINER_UNAVAILABILITY = _.reduce(ZONES, function(memo, zone) {
-    if (zone.containers_unavailable) {
-      memo[zone.id] = zone.containers_unavailable;
-    }
-    return memo;
-  }, {});
-
-  var DOMAINS_TO_LOCATION = {
-    'nl': 'ams-e',
-    'au': 'hkg-e',
-    'hk': 'hkg-e',
-    'ca': 'tor-p',
-    'uk': 'lon-p',
-    'com': 'sjc-c'
-  };
-
   var RESOURCES = {
     'cpu_virtual_machine': 'vm_cpu',
     'ram_virtual_machine': 'vm_mem',
@@ -124,9 +49,6 @@ define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing)
     'TYPES': TYPES,
     'WINDOWS_LICENSE_ORDER': WINDOWS_LICENSE_ORDER,
     'ADDITIONAL_MICROSOFT_LICENSE_ORDER': ADDITIONAL_MICROSOFT_LICENSE_ORDER,
-    'DOMAINS_TO_LOCATION': DOMAINS_TO_LOCATION,
-    'ZONES': ZONES,
-    'CONTAINER_UNAVAILABILITY': CONTAINER_UNAVAILABILITY,
     'LICENSES_KEYS': LICENSES_KEYS,
     'LIMITS': limits,
     'PRICES': pricing,

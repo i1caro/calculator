@@ -1,4 +1,4 @@
-define(['lib/underscore', './constants'], function(_, CONSTANTS) {
+define(['lib/underscore', './pricing'], function(_, pricing) {
 
   function force_int(value) {
     var result = parseInt(value);
@@ -25,15 +25,7 @@ define(['lib/underscore', './constants'], function(_, CONSTANTS) {
 
   function format_price(price) {
     var clean_price = price ? price.toFixed(2) : '0.00';
-    return CONSTANTS.PRICES.currency() + clean_price;
-  }
-
-  function get_country_based_on_location() {
-    var domain = location.host.split('.').splice(-1, 1)[0],
-      local = CONSTANTS.DOMAINS_TO_LOCATION[domain];
-    if (local)
-      return local;
-    return CONSTANTS.DOMAINS_TO_LOCATION['com'];
+    return pricing.currency() + clean_price;
   }
 
   function pageOffset() {
@@ -92,7 +84,6 @@ define(['lib/underscore', './constants'], function(_, CONSTANTS) {
   };
 
   return {
-    'get_country_based_on_location': get_country_based_on_location,
     'bytes_to_gigabytes': bytes_to_gigabytes,
     'calc_checksum': calc_checksum,
     'sum_function': sum_function,

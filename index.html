@@ -367,10 +367,22 @@
 
 
                     <!-- Calculator -->
+                    <!-- ko with: marketing -->
+                        <div class="span10" id="whichzone">
+                            <!-- ko foreach: country_flags -->
+                            <div class="zoneselector" data-bind="attr: {id: id}, event: {click: $parent.change_country}, css: { selectedzone: id == $parent.country() }">
+                                <img data-bind="attr: {src: '/wp-content/uploads/' + flag}" />
+                                <span data-bind="text: name"></span>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    <!-- /ko -->
 
-                    <div class="span10" id="calculator">
-                        <div data-bind="template: 'base-calculator-template'"></div>
-                    </div>
+                    <!-- ko with: calculator -->
+                        <div class="span10" id="calculator">
+                            <div data-bind="template: 'base-calculator-template'"></div>
+                        </div>
+                    <!-- /ko -->
                     <!-------------->
 
 

@@ -356,3 +356,40 @@ div.panel-header h1 {
 .modal label {
   font-weight: 300;
 }
+
+.zoneselector {
+  display: inline-block;
+  zoom: 1;
+  opacity: 0.6;
+  padding: 12px;
+  max-width: 100px;
+  vertical-align: top;
+  cursor: pointer;
+  width: 80px;
+  font-size: 12px;
+  padding-bottom:0px;
+  margin-bottom:5px;
+}
+
+#whichzone .selectedzone {
+  background-color: #22A6FF;
+  border-radius: 4px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-weight: bold;
+  opacity: 1;
+}
+#whichzone img {
+  display: block;
+  margin: 0 auto;
+  max-width: 58px;
+}
+#whichzone span {
+  display: block;
+  margin: 10px auto;
+  text-align: center;
+}
+#whichzone .comingsoon {
+  cursor: not-allowed;
+  opacity:0.4;
+}
