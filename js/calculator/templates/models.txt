@@ -426,9 +426,14 @@
       </div>
 
       <div class="server-details">
-        <div class="server-component">
+        <div class="server-component" data-bind="visible: free_bandwidth() == false">
           <!-- ko template: {name: 'input-range-template', data: bandwidth} --><!-- /ko -->
         </div>
+        <div class="server-component account-options" data-bind="visible: free_bandwidth() == true">
+          <div class="option-label">1 TB free, then $0.05 per GB</div>
+          <div class="free price">Free</div>
+        </div>
+
         <div class="server-component account-options">
           <div class="option-label">Additional IPs</div>
           <!-- ko template: {name: 'input-options-template', data: additional_ips} --><!-- /ko -->

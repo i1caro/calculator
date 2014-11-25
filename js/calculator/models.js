@@ -308,6 +308,7 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
 
       function account_details(options) {
         var self = this;
+
         self.bandwidth = new bandwidth(options.bandwidth);
         self.additional_ips = new components.account_option({
           name: 'Additional IPs',
@@ -324,12 +325,19 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
           value: options.vlans
         });
 
+        self.free_bandwidth = ko.observable(false);
+
+        self.update_bandwidth = ko.computed(function() {
+          if (self.free_bandwidth())
+            self.bandwidth.lower_input(0);
+        });
+
         self.price = ko.computed(function() {
           var total = 0;
+
           total += self.bandwidth.price();
           total += self.additional_ips.price();
           total += self.additional_vlans.price();
-
           return total;
         });
         self.serialize = function() {

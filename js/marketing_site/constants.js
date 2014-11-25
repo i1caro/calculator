@@ -29,21 +29,25 @@ define(['lib/underscore'], function(_) {
       id: 'sjc-c',
       name: 'San Jose, CA',
       flag: 'USAFlag.png',
+      free_bandwidth: true,
     },
     {
       id: 'lax-p',
       name: 'Los Angeles, CA',
       flag: 'USAFlag.png',
+      free_bandwidth: true,
     },
     {
       id: 'dal-a',
       name: 'Dallas, TX',
       flag: 'USAFlag.png',
+      free_bandwidth: true,
     },
     {
       id: 'mmi-a',
       name: 'Miami, FL',
       flag: 'USAFlag.png',
+      free_bandwidth: true,
     },
     {
       id: 'tor-p',
@@ -62,9 +66,9 @@ define(['lib/underscore'], function(_) {
     }
   ];
 
-  var CONTAINER_UNAVAILABILITY = _.reduce(ZONES, function(memo, zone) {
-    if (zone.containers_unavailable) {
-      memo[zone.id] = zone.containers_unavailable;
+  var FREE_BANDWIDTH = _.reduce(ZONES, function(memo, zone) {
+    if (zone.free_bandwidth) {
+      memo[zone.id] = zone.free_bandwidth;
     }
     return memo;
   }, {});
@@ -181,7 +185,7 @@ define(['lib/underscore'], function(_) {
   };
 
   return {
-    'CONTAINER_UNAVAILABILITY': CONTAINER_UNAVAILABILITY,
+    'FREE_BANDWIDTH': FREE_BANDWIDTH,
     'DOMAINS_TO_LOCATION': DOMAINS_TO_LOCATION,
     'LIMITS': LIMITS,
     'LOCAL_PRICES': LOCAL_PRICES,

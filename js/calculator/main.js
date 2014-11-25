@@ -24,6 +24,8 @@ define(
       pricing.set_pricing(prices);
 
 
+
+
       // To fixed variables
       self.disconnected_storage_formatted_price = function() {
         return 0;
@@ -88,9 +90,19 @@ define(
           self.servers.push(new models.virtual_machine(virtual_machine));
         });
       };
+
+      self.account_details = new models.account_details({
+        bandwidth: 0,
+        virtual_lans: 0,
+        ips: 0
+      });
+
       self.set_account_details = function(data) {
-        self.account_details = new models.account_details(data);
+        self.account_details.bandwidth.lower_input(data['bandwidth']);
+        self.account_details.additional_vlans.value(data['vlans']);
+        self.account_details.additional_ips.value(data['ips']);
       };
+
       self.set_data = function(data) {
         self.set_servers(data);
         self.set_account_details(data['account_details']);
@@ -113,9 +125,7 @@ define(
         return utils.format_price(self.price());
       });
       self.formatted_total_price = ko.computed(function() {
-        var price_month = self.price(),
-            price_month_formatted = utils.format_price(price_month);
-        return price_month_formatted;
+        return utils.format_price(self.price());
       });
 
       self.serialize_dump = parser.serialize_dump;

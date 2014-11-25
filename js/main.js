@@ -64,7 +64,12 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
       };
 
       self.update_prices = ko.computed(function() {
-        self.set_pricing(CONSTANTS.LOCAL_PRICES[self.country()]);
+        var country = self.country();
+
+        self.set_pricing(CONSTANTS.LOCAL_PRICES[country]);
+        self.account_details.free_bandwidth(
+          CONSTANTS.FREE_BANDWIDTH[country] || false
+        );
       });
 
       self.update_serializer = ko.computed(function() {
