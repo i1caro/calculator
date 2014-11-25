@@ -1,0 +1,31 @@
+<div class="span10" style="margin:0;">
+
+    <!-- Calculator -->
+    <div class="span8" id="whichzone" style="margin:0;padding:15px 45px;">
+        <!-- ko foreach: country_flags -->
+        <div class="zoneselector" data-bind="attr: {id: id}, event: {click: $parent.change_country}, css: { selectedzone: id == $parent.country() }">
+            <img data-bind="attr: {src: '/wp-content/uploads/' + flag}" />
+            <span data-bind="text: name"></span>
+        </div>
+        <!-- /ko -->
+    </div>
+
+    <div class="span10" id="calculator" style="margin:0;">
+        <div data-bind="template: 'base-calculator-template'"></div>
+    </div>
+    <!-------------->
+    <div style="clear: both;"></div>
+    <a href="/cloud-servers/free-trial/" class="cta-button">SIGN UP NOW</a>
+</div>
+
+
+
+
+
+
+-----CSS etc----
+
+<script data-main="/wp-content/themes/bootstrapwp-87/calculator/js/app" src="/wp-content/themes/bootstrapwp-87/calculator/js/lib/require.js"></script>
+<link rel="stylesheet" href="/wp-content/themes/bootstrapwp-87/calculator/common.css">
+
+https://site.elastichosts.com/calculator/#127+500,256,1,0,/,10,/,-1,-1,0,/,/,0,0,0dal-a

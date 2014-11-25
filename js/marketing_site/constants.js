@@ -37,19 +37,13 @@ define(['lib/underscore'], function(_) {
     },
     {
       id: 'dal-a',
-      name: 'Dallas',
+      name: 'Dallas, TX',
       flag: 'USAFlag.png',
     },
     {
       id: 'mmi-a',
-      name: 'Miami',
+      name: 'Miami, FL',
       flag: 'USAFlag.png',
-    },
-    {
-      id: 'sat-p',
-      name: 'San Antonio, TX',
-      flag: 'USAFlag.png',
-      containers_unavailable: true
     },
     {
       id: 'tor-p',
@@ -159,7 +153,6 @@ define(['lib/underscore'], function(_) {
     'mmi-a': DOLAR_PRICES,
     'dal-a': DOLAR_PRICES,
     'lax-p': DOLAR_PRICES,
-    'sat-p': DOLAR_PRICES,
     'tor-p': DOLAR_PRICES,
     'hkg-e': HONG_KONG_PRICE,
     'syd-v': AUSTRALIA_PRICE

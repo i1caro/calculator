@@ -38,7 +38,7 @@
   border-radius: 5px;
 }
 
-a.add-button {
+a.add-button, a.cta-button {
   text-decoration: none;
   color: #ffffff;
 }
@@ -367,7 +367,7 @@ div.panel-header h1 {
   max-width: 100px;
   vertical-align: top;
   cursor: pointer;
-  width: 80px;
+  width: 105px;
   font-size: 12px;
   padding-bottom:0px;
   margin-bottom:5px;
@@ -394,4 +394,22 @@ div.panel-header h1 {
 #whichzone .comingsoon {
   cursor: not-allowed;
   opacity:0.4;
+}
+div.clearing {
+  clear:both;
+}
+.cta-button {
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #fbac29;
+  color: #ffffff;
+  line-height: 22px;
+  height: 22px;
+  margin-right: 2px;
+  padding: 15px 20px;
+  width: 50%;
+  font-size: 26px;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
 }
