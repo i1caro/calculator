@@ -57,8 +57,8 @@ define(
 
       self.add_container = function() {
         self.servers.unshift(new models.container({
-          cpu: [500, 0],
-          ram: [126, 0],
+          cpu: 500,
+          ram: 126,
           ip: true,
           firewall: false,
           ssd: [10],

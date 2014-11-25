@@ -9,30 +9,27 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     for (var i=0; i < list.length; i++) {
       output.push(list[i]);
     }
-    self.build_virtual_machine = function() {
-      var result = {
-        'cpu': output.shift(),
-        'ram': output.shift(),
-        'ip': utils.toBoolean(output.shift()),
-        'firewall': utils.toBoolean(output.shift()),
-        'ssd': self.get_drives(),
-        'hdd': self.get_drives(),
-        'windows_server_license': output.shift(),
-        'additional_microsoft_license': output.shift(),
-        'remote_desktops': output.shift()
-      };
-      return result;
-    };
-    self.build_container = function() {
-      var result = {
-        'cpu': [output.shift(), output.shift()],
-        'ram': [output.shift(), output.shift()],
+    self.build_server = function() {
+      return {
+        'cpu': Number(output.shift()),
+        'ram': Number(output.shift()),
         'ip': utils.toBoolean(output.shift()),
         'firewall': utils.toBoolean(output.shift()),
         'ssd': self.get_drives(),
         'hdd': self.get_drives()
       };
+    };
+    self.build_virtual_machine = function() {
+      var result = self.build_server();
+
+      result['windows_server_license'] = Number(output.shift());
+      result['additional_microsoft_license'] = Number(output.shift());
+      result['remote_desktops'] = Number(output.shift());
+
       return result;
+    };
+    self.build_container = function() {
+      return self.build_server();
     };
     self.get_drives = function() {
       var list = [],
