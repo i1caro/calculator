@@ -258,26 +258,6 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     return _.extend(resources, licenses_resources.call(self));
   }
 
-  // function join_all_resources() {
-  //   var self = this,
-  //       resources = {};
-  //   function add_keys(obj) {
-  //     _.each(obj.resources(), function(value, key) {
-  //       if (!resources[key])
-  //         resources[key] = 0;
-  //       resources[key] += value;
-  //     });
-  //   }
-
-  //   _.each(self.raw_disconnected_drives(), add_keys);
-  //   _.each(self.raw_disconnected_folders(), add_keys);
-  //   _.each(self.servers(), add_keys);
-  //   _.each([self.account_details()], add_keys);
-
-  //   return resources;
-  // }
-
-
   return {
     'disconnected_folder_resources': disconnected_folder_resources,
     'disconnected_ssd_drive_resources': disconnected_ssd_drive_resources,
@@ -289,7 +269,6 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     'serialize_virtual_machine': serialize_virtual_machine,
     'serialize_dump': serialize_dump,
     'serialize_dump_to_url': serialize_dump_to_url,
-    'unchecked_serialize_load': unchecked_serialize_load,
-    // 'join_all_resources': join_all_resources
+    'unchecked_serialize_load': unchecked_serialize_load
   };
 });

@@ -169,14 +169,6 @@ define(['lib/knockout', 'lib/underscore', './utils'],
         return choosen_option + ' X ' + self.name;
       return '';
     });
-
-    self.view_context = ko.computed(function() {
-      return {
-        name: self.value() + ' X ' + self.name,
-        formatted_price: self.formatted_price,
-        remove_option: self.remove_option
-      };
-    });
   }
 
   function server_licenses(name, options, choosen) {

@@ -39,7 +39,6 @@ define(
       self.disconnected_folders = [];
 
       // Observables
-
       self.servers = ko.observableArray();
 
       self.account_details = new models.account_details({
