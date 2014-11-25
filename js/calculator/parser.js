@@ -92,8 +92,7 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
 
   function serialize_load(string) {
     var result = split_string(string);
-
-    if (parseInt(result.checksum) !== utils.calc_checksum(string))
+    if (parseInt(result.checksum) !== utils.calc_checksum(result.data))
       throw "Wrong checksum";
     return new Parser(result.data.split(',')).parse();
   }

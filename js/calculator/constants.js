@@ -1,4 +1,4 @@
-define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing) {
+define(['lib/underscore'], function(_) {
 
   var RESOURCES = {
     'cpu_virtual_machine': 'vm_cpu',
@@ -44,13 +44,35 @@ define(['lib/underscore', './limits', './pricing'], function(_, limits, pricing)
     'hdd': 'disk',
   };
 
+  var DEFAULT_LIMITS = {
+        cpu_increments: 50,
+        cpu_container_min: 500,
+        cpu_container_max: 20000, // Mhz
+        cpu_vm_min: 500,
+        cpu_vm_max: 20000, // Mhz
+        ram_increments: 128,
+        ram_container_min: 256, // MB
+        ram_container_max: 32768,
+        ram_vm_min: 256, // MB
+        ram_vm_max: 32768,
+        hdd_min: 0, // GB
+        hdd_max: 1862,
+        ssd_min: 0,
+        ssd_max: 1862,
+        bandwidth_min: 0, // GB
+        bandwidth_max: 1000,
+        ip_max: 12,
+        ip6_max: 12,
+        vlan_max: 5,
+      };
+
+
   return {
     'RESOURCES': RESOURCES,
     'TYPES': TYPES,
     'WINDOWS_LICENSE_ORDER': WINDOWS_LICENSE_ORDER,
     'ADDITIONAL_MICROSOFT_LICENSE_ORDER': ADDITIONAL_MICROSOFT_LICENSE_ORDER,
     'LICENSES_KEYS': LICENSES_KEYS,
-    'LIMITS': limits,
-    'PRICES': pricing,
+    'DEFAULT_LIMITS': DEFAULT_LIMITS,
   };
 });

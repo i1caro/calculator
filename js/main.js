@@ -1,16 +1,32 @@
 define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/constants'],
   function(_, ko, calculator, CONSTANTS) {
-    function viewModel() {
 
-      var self = this,
-          initial_data = {
+    function get_country_based_on_location() {
+      var domain = location.host.split('.').splice(-1, 1)[0],
+        local = CONSTANTS.DOMAINS_TO_LOCATION[domain];
+      if (local)
+        return local;
+      return CONSTANTS.DOMAINS_TO_LOCATION['com'];
+    }
+
+    function viewModel() {
+      var self = this;
+
+      self.country = ko.observable(get_country_based_on_location());
+
+      ko.utils.extend(self, new calculator(
+        CONSTANTS.LIMITS,
+        CONSTANTS.LOCAL_PRICES[self.country()]
+      ));
+
+      var initial_data = {
             'virtual_machines': [{
-              cpu: 2000,
-              ram: 1024,
+              cpu: 500,
+              ram: 256,
               ip: true,
               firewall: false,
               ssd: [],
-              hdd: [20]
+              hdd: [10]
             }],
             'containers': [],
             'account_details': {
@@ -21,33 +37,38 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
           };
 
       if (location.hash) {
+        var SIZE_COUNTRY_ID = 5,
+            hash = location.hash,
+            country_id = hash.substring(
+              hash.length - SIZE_COUNTRY_ID, hash.length
+            ),
+            clean_hash;
+        if (CONSTANTS.LOCAL_PRICES[country_id]) {
+          clean_hash = hash.substring(0, hash.length - SIZE_COUNTRY_ID);
+          self.country(country_id);
+        }
+        else
+          clean_hash = hash;
+
         try {
-          initial_data = calculator.serialize_load(location.hash);
+          initial_data = self.serialize_load(clean_hash);
         }
         catch (err) {}
       }
 
-      function get_country_based_on_location() {
-        var domain = location.host.split('.').splice(-1, 1)[0],
-          local = CONSTANTS.DOMAINS_TO_LOCATION[domain];
-        if (local)
-          return local;
-        return CONSTANTS.DOMAINS_TO_LOCATION['com'];
-      }
+      self.set_data(initial_data);
 
-      self.country = ko.observable(get_country_based_on_location());
 
       self.change_country = function(data, event) {
         self.country(data.id);
       };
 
-      calculator.set_data(initial_data);
       self.update_prices = ko.computed(function() {
-        calculator.set_pricing(CONSTANTS.LOCAL_PRICES[self.country()]);
+        self.set_pricing(CONSTANTS.LOCAL_PRICES[self.country()]);
       });
 
       self.update_serializer = ko.computed(function() {
-        location.hash = calculator.serialize_dump_to_url();
+        location.hash = self.serialize_dump_to_url() + self.country();
       }).extend({
         rateLimit: 1000
       });
@@ -61,10 +82,7 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
       }
     }
 
-    ko.applyBindings({
-      'marketing': new viewModel(),
-      'calculator': calculator
-    });
+    ko.applyBindings(new viewModel());
     // // JAvascript nonsense
 
     // //attach event handlers
@@ -202,7 +220,7 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
     // $("#server-list").delegate(".minus", "click", function() {
     //   var context = ko.contextFor(this);
     //   serverSlideUp(this, function() {
-    //     context.$root.calculator.servers.remove(context.$data.server);
+    //     context.$root.servers.remove(context.$data.server);
     //   });
 
     //   return false;

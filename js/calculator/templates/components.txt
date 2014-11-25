@@ -1,8 +1,8 @@
 <script type="text/html" id="input-range-template">
   <div class="slider-label" data-bind="text: name"></div>
   <div class="slider-handlebar">
-    <div class="slider" data-bind="event: {mousedown: $root.calculator.click_slider_down}">
-      <div class="slider-handle" data-title="Subscription" data-bind="event: {mousedown: $root.calculator.click_handle_down}, style: {left: lower_style()}"></div>
+    <div class="slider" data-bind="event: {mousedown: $root.click_slider_down}">
+      <div class="slider-handle" data-title="Subscription" data-bind="event: {mousedown: $root.click_handle_down}, style: {left: lower_style()}"></div>
     </div>
   </div>
   <input type="text" style="display:none" data-bind="value: lower" />

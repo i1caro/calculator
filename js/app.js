@@ -16,8 +16,6 @@ require.config({
   }
 });
 
-var LIMITS = {};
-
 // Load the main app module to start the app
 require(['main']);
 

@@ -165,10 +165,32 @@ define(['lib/underscore'], function(_) {
     'syd-v': AUSTRALIA_PRICE
   };
 
+  var LIMITS = {
+    cpu_increments: 50,
+    cpu_container_min: 500,
+    cpu_container_max: 20000, // Mhz
+    cpu_vm_min: 500,
+    cpu_vm_max: 20000, // Mhz
+    ram_increments: 128,
+    ram_container_min: 256, // MB
+    ram_container_max: 32768,
+    ram_vm_min: 256, // MB
+    ram_vm_max: 32768,
+    hdd_min: 0, // GB
+    hdd_max: 1862,
+    ssd_min: 0,
+    ssd_max: 1862,
+    bandwidth_min: 0, // GB
+    bandwidth_max: 1000,
+    ip_max: 12,
+    ip6_max: 12,
+    vlan_max: 5,
+  };
 
   return {
     'CONTAINER_UNAVAILABILITY': CONTAINER_UNAVAILABILITY,
     'DOMAINS_TO_LOCATION': DOMAINS_TO_LOCATION,
+    'LIMITS': LIMITS,
     'LOCAL_PRICES': LOCAL_PRICES,
     'ZONES': ZONES
   };
