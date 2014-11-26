@@ -206,29 +206,29 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
 
       var windows_server_licenses = [
         {
-          'name': 'Server 2008 Web',
+          'name': 'Windows Server 2008 Web',
           'price': prices.cost_per_winserverweb
         },
         {
-          'name': 'Server 2008 Standard',
+          'name': 'Windows Server 2008 Standard',
           'price': prices.cost_per_winserverstd
         },
         {
-          'name': 'Server 2008 Enterprise',
+          'name': 'Windows Server 2008 Enterprise',
           'price': prices.cost_per_winserverent
         }
       ],
       other_windows_licenses = [
         {
-          'name': 'SQL Server 2008 / 2012 Web',
+          'name': 'Windows SQL Server 2008 / 2012 Web',
           'price': prices.cost_per_mssqlserverweb
         },
         {
-          'name': 'SQL Server 2008 Standard',
+          'name': 'Windows SQL Server 2008 Standard',
           'price': prices.cost_per_mssqlserverstd
         },
         {
-          'name': 'SQL Server 2012 Standard',
+          'name': 'Windows SQL Server 2012 Standard',
           'price': prices.cost_per_mssqlserver12
         }
       ];
