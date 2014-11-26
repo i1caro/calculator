@@ -176,7 +176,7 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
       function container(options) {
         var self = this;
 
-        self.name = 'Container ' + utils.unique_id.build();
+        self.name = 'Linux Container ' + utils.unique_id.build();
 
         ko.utils.extend(self, new base_server(options));
         // Normal attributes
@@ -263,7 +263,7 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
 
         self.unique_id = 'VM' + unique_id;
 
-        self.name = 'VM ' + unique_id;
+        self.name = 'Virtual Machine ' + unique_id;
 
         self = _.extend(self, apply_licenses(options));
 

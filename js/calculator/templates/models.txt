@@ -122,7 +122,7 @@
   <div class="server-panel">
 
     <div class="panel-header">
-      <h1 data-bind="text: server_title"></h1>
+      <h1 data-bind="text: server.name"></h1>
       <div class="remove-server-button" data-bind="click: $root.remove_server" aria-hidden="true">
         <span>Remove</span>
         <span class='symbol'>×</span>
@@ -190,7 +190,6 @@
         data: {
           server: $data,
           icon: 'vm-icon',
-          server_title: 'Virtual Machine',
           pop: 'Virtual Machine',
           long: 'Our VMs are virtualized, flexible, on-demand servers for any OS. They are designed to behave just like physical servers.',
           has_licenses: true,
@@ -205,7 +204,6 @@
         data: {
           server: $data,
           icon: 'container-icon',
-          server_title: 'Linux Container',
           pop: 'Elastic Container',
           long: 'Elastic Containers are hassle-free, high performance Linux cloud servers that scale up and down automatically, saving you money when not running at maximum load.',
           has_licenses: false
