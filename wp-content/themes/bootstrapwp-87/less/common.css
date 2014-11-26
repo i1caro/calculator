@@ -320,6 +320,10 @@ div.panel-header h1 {
   display: inline-block;
 }
 
+.total-price.hourly{
+  font-size: 15px;
+}
+
 .modal-header {
   padding: 4px 4px 8px 4px;
   border-bottom: 1px solid #eee;

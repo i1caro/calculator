@@ -1,10 +1,12 @@
 define(['lib/knockout', 'lib/underscore'], function(ko, _) {
 
+  var MONTHS_HOURS = 24 * 30;
+
   var PRICES_UNIT_CONVERSIONS = {
-    cpu_virtual_machine_per_mhz: 24 * 30 / 1000.0,
-    ram_virtual_machine_per_mb: 24 * 30 / 1024.0,
-    cpu_container_per_mhz: 24 * 30 / 1000.0,
-    ram_container_per_mb: 24 * 30 / 1024.0,
+    cpu_virtual_machine_per_mhz: MONTHS_HOURS / 1000.0,
+    ram_virtual_machine_per_mb: MONTHS_HOURS / 1024.0,
+    cpu_container_per_mhz: MONTHS_HOURS / 1000.0,
+    ram_container_per_mb: MONTHS_HOURS / 1024.0,
   };
 
   var PRICE_KEYS = [
@@ -56,10 +58,10 @@ define(['lib/knockout', 'lib/underscore'], function(ko, _) {
       currency(new_prices['currency']);
   }
 
-
   return {
     'currency': currency,
     'prices': prices,
-    'set_pricing': set_pricing
+    'set_pricing': set_pricing,
+    'MONTHS_HOURS': MONTHS_HOURS
   };
 });

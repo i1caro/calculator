@@ -23,8 +23,23 @@ define(['lib/underscore', './pricing'], function(_, pricing) {
     return memo + price;
   }
 
-  function format_price(price) {
-    var clean_price = price ? price.toFixed(2) : '0.00';
+  function zeroes(n) {
+    if (n <= 0)
+      return '0';
+
+    var result = '';
+
+    while (result.length < n)
+      result = result + '0';
+    return '0.' + result;
+  }
+
+  function format_price(price, n) {
+    if (_.isUndefined(n)) {
+      n = 2;
+    }
+
+    var clean_price = price ? price.toFixed(n) : zeroes(n);
     return pricing.currency() + clean_price;
   }
 

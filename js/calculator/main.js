@@ -127,6 +127,10 @@ define(
       self.formatted_total_price = ko.computed(function() {
         return utils.format_price(self.price());
       });
+      self.formatted_hour_price = ko.computed(function() {
+        var price = self.price() / pricing.MONTHS_HOURS;
+        return utils.format_price(price, 4);
+      });
 
       self.serialize_dump = parser.serialize_dump;
       self.serialize_load = parser.serialize_load;
