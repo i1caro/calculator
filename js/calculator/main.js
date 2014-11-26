@@ -20,7 +20,7 @@ define(
       if (!prices)
         prices = {};
 
-      models = models(limits);
+      self.models = models(limits);
       pricing.set_pricing(prices);
 
 
@@ -43,7 +43,7 @@ define(
       // Observables
       self.servers = ko.observableArray();
 
-      self.account_details = new models.account_details({
+      self.account_details = new self.models.account_details({
         bandwidth: 0,
         virtual_lans: 0,
         ips: 0
@@ -58,7 +58,7 @@ define(
       self.click_slider_down = mouse_actions.click_slider_down;
 
       self.add_container = function() {
-        self.servers.unshift(new models.container({
+        self.servers.unshift(new self.models.container({
           cpu: 500,
           ram: 126,
           ip: true,
@@ -68,7 +68,7 @@ define(
         }));
       };
       self.add_virtual_machine = function() {
-        self.servers.unshift(new models.virtual_machine({
+        self.servers.unshift(new self.models.virtual_machine({
           cpu: 500,
           ram: 126,
           ip: true,
@@ -84,14 +84,14 @@ define(
       self.set_servers = function(data) {
         self.servers.removeAll();
         _.each(data.containers, function(container) {
-          self.servers.push(new models.container(container));
+          self.servers.push(new self.models.container(container));
         });
         _.each(data.virtual_machines, function(virtual_machine) {
-          self.servers.push(new models.virtual_machine(virtual_machine));
+          self.servers.push(new self.models.virtual_machine(virtual_machine));
         });
       };
 
-      self.account_details = new models.account_details({
+      self.account_details = new self.models.account_details({
         bandwidth: 0,
         virtual_lans: 0,
         ips: 0

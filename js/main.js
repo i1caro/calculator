@@ -9,6 +9,18 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
       return CONSTANTS.DOMAINS_TO_LOCATION['com'];
     }
 
+    function serverSlideDown() {
+      jQuery('#server-list>div').first().hide();
+      jQuery('#server-list>div').first().slideDown();
+    }
+
+    function serverSlideUp(e, callback) {
+      jQuery(e.target).parents('.server-panel').slideUp();
+      window.setTimeout(function() {
+        callback();
+      }, 500);
+    }
+
     function viewModel() {
       var self = this;
 
@@ -18,6 +30,36 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
         CONSTANTS.LIMITS,
         CONSTANTS.LOCAL_PRICES[self.country()]
       ));
+
+      // Overwrite
+      self.remove_server = function(data, e) {
+        serverSlideUp(e, function() {
+          self.servers.remove(data.server);
+        });
+      };
+
+      self.add_container = function() {
+        self.servers.unshift(new self.models.container({
+          cpu: 500,
+          ram: 126,
+          ip: true,
+          firewall: false,
+          ssd: [10],
+          hdd: []
+        }));
+        serverSlideDown();
+      };
+      self.add_virtual_machine = function() {
+        self.servers.unshift(new self.models.virtual_machine({
+          cpu: 500,
+          ram: 126,
+          ip: true,
+          firewall: false,
+          ssd: [],
+          hdd: [10]
+        }));
+        serverSlideDown();
+      };
 
       var initial_data = {
             'virtual_machines': [{
