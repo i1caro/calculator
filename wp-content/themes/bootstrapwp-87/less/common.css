@@ -184,14 +184,14 @@ div.panel-header h1 {
   max-width: 100%;
   height: auto;
   vertical-align: bottom;
-  border: 3px solid rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 3px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
   position: relative;
   margin-bottom: 20px;
 }
