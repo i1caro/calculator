@@ -20,13 +20,13 @@ define(['lib/knockout', 'lib/underscore'], function(ko, _) {
         'cost_per_static_ip',
         'cost_per_vlan',
         'cost_per_firewall',
-        'cost_per_desktopcal',
-        'cost_per_winserverweb',
-        'cost_per_winserverstd',
-        'cost_per_winserverent',
-        'cost_per_mssqlserverweb',
-        'cost_per_mssqlserverstd',
-        'cost_per_mssqlserver12'
+        'cost_per_windows_remote_desktop',
+        'cost_per_windows_server_2008_web',
+        'cost_per_windows_server_2008_standard',
+        'cost_per_windows_server_2008_enterprise',
+        'cost_per_windows_sql_server_2008_web',
+        'cost_per_windows_sql_server_2008_standard',
+        'cost_per_windows_sql_server_2012_standard'
       ];
 
 

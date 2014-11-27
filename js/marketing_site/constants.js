@@ -87,13 +87,14 @@ define(['lib/underscore'], function(_) {
         cost_per_static_ip: 2.00,
         cost_per_vlan: 5.00,
         cost_per_firewall: 5.00,
-        cost_per_desktopcal: 4.00,
-        cost_per_winserverweb: 10.00,
-        cost_per_winserverstd: 20.00,
-        cost_per_winserverent: 45.00,
-        cost_per_mssqlserverweb: 15.00,
-        cost_per_mssqlserverstd: 240.00,
-        cost_per_mssqlserver12: 240.00,
+        cost_per_windows_server_2008_web: 10.00,
+        cost_per_windows_server_2008_standard: 20.00,
+        cost_per_windows_server_2008_enterprise: 45.00,
+        cost_per_windows_server_2012: 20.00,
+        cost_per_windows_sql_server_2008_web: 15.00,
+        cost_per_windows_sql_server_2008_standard: 240.00,
+        cost_per_windows_sql_server_2012_standard: 240.00,
+        cost_per_windows_remote_desktop: 4.00,
         currency: '£'
       },
       EURO_PRICES = {
@@ -109,13 +110,14 @@ define(['lib/underscore'], function(_) {
         cost_per_static_ip: 2.50,
         cost_per_vlan: 6.00,
         cost_per_firewall: 6.00,
-        cost_per_desktopcal: 5.00,
-        cost_per_winserverweb: 12.00,
-        cost_per_winserverstd: 24.00,
-        cost_per_winserverent: 55.00,
-        cost_per_mssqlserverweb: 18.00,
-        cost_per_mssqlserverstd: 300.00,
-        cost_per_mssqlserver12: 300.00,
+        cost_per_windows_server_2008_web: 12.00,
+        cost_per_windows_server_2008_standard: 24.00,
+        cost_per_windows_server_2008_enterprise: 55.00,
+        cost_per_windows_server_2012: 24.00,
+        cost_per_windows_sql_server_2008_web: 18.00,
+        cost_per_windows_sql_server_2008_standard: 300.00,
+        cost_per_windows_sql_server_2012_standard: 300.00,
+        cost_per_windows_remote_desktop: 5.00,
         currency: '€'
       },
       DOLAR_PRICES = {
@@ -126,38 +128,39 @@ define(['lib/underscore'], function(_) {
         // Disk/transfer costs.
         hdd_per_gb: 0.10,
         ssd_per_gb: 0.25,
-        bandwidth_per_gb: 0.15,
+        bandwidth_per_gb: 0.05,
         // Extra costs
         cost_per_static_ip: 3.00,
         cost_per_vlan: 7.50,
         cost_per_firewall: 7.50,
-        cost_per_desktopcal: 5.50,
-        cost_per_winserverweb: 15.00,
-        cost_per_winserverstd: 30.00,
-        cost_per_winserverent: 75.00,
-        cost_per_mssqlserverweb: 22.50,
-        cost_per_mssqlserverstd: 385.00,
-        cost_per_mssqlserver12: 385.00,
+        cost_per_windows_server_2008_web: 15.00,
+        cost_per_windows_server_2008_standard: 30.00,
+        cost_per_windows_server_2008_enterprise: 75.00,
+        cost_per_windows_server_2012: 30.00,
+        cost_per_windows_sql_server_2008_web: 22.50,
+        cost_per_windows_sql_server_2008_standard: 385.00,
+        cost_per_windows_sql_server_2012_standard: 385.00,
+        cost_per_windows_remote_desktop: 5.50,
         currency: '$'
       };
 
-  var US_SAN_JOSE_PRICE = _.clone(DOLAR_PRICES),
+  var US_TEXAS_PRICE = _.clone(DOLAR_PRICES),
       HONG_KONG_PRICE = _.clone(DOLAR_PRICES),
       AUSTRALIA_PRICE = _.clone(DOLAR_PRICES);
 
-  US_SAN_JOSE_PRICE.bandwidth_per_gb = 0.05;
+  US_TEXAS_PRICE.bandwidth_per_gb = 0.15;
   HONG_KONG_PRICE.bandwidth_per_gb = 0.40;
-  AUSTRALIA_PRICE.bandwidth_per_gb = 0.65;
+  AUSTRALIA_PRICE.bandwidth_per_gb = 0.25;
 
   var LOCAL_PRICES = {
     'lon-b': POUND_PRICES,
     'lon-p': POUND_PRICES,
     'ams-e': EURO_PRICES,
-    'sjc-c': US_SAN_JOSE_PRICE,
+    'sjc-c': DOLAR_PRICES,
     'mmi-a': DOLAR_PRICES,
     'dal-a': DOLAR_PRICES,
-    'lax-p': DOLAR_PRICES,
-    'tor-p': DOLAR_PRICES,
+    'lax-p': US_TEXAS_PRICE,
+    'tor-p': US_TEXAS_PRICE,
     'hkg-e': HONG_KONG_PRICE,
     'syd-v': AUSTRALIA_PRICE
   };

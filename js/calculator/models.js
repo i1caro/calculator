@@ -207,29 +207,29 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
       var windows_server_licenses = [
         {
           'name': 'Windows Server 2008 Web',
-          'price': prices.cost_per_winserverweb
+          'price': prices.cost_per_windows_server_2008_web
         },
         {
           'name': 'Windows Server 2008 Standard',
-          'price': prices.cost_per_winserverstd
+          'price': prices.cost_per_windows_server_2008_standard
         },
         {
           'name': 'Windows Server 2008 Enterprise',
-          'price': prices.cost_per_winserverent
+          'price': prices.cost_per_windows_server_2008_enterprise
         }
       ],
       other_windows_licenses = [
         {
           'name': 'Windows SQL Server 2008 / 2012 Web',
-          'price': prices.cost_per_mssqlserverweb
+          'price': prices.cost_per_windows_sql_server_2008_web
         },
         {
           'name': 'Windows SQL Server 2008 Standard',
-          'price': prices.cost_per_mssqlserverstd
+          'price': prices.cost_per_windows_sql_server_2008_standard
         },
         {
           'name': 'Windows SQL Server 2012 Standard',
-          'price': prices.cost_per_mssqlserver12
+          'price': prices.cost_per_windows_sql_server_2012_standard
         }
       ];
 
@@ -243,7 +243,7 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
           ),
           'remote_desktops': new components.simple_input({
             name: 'Remote Desktop CALs',
-            price: prices.cost_per_desktopcal,
+            price: prices.cost_per_windows_remote_desktop,
             value: options.remote_desktops
           })
         };
