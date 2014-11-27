@@ -216,6 +216,10 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
         {
           'name': 'Windows Server 2008 Enterprise',
           'price': prices.cost_per_windows_server_2008_enterprise
+        },
+        {
+          'name': 'Windows Server 2012',
+          'price': prices.cost_per_windows_server_2012
         }
       ],
       other_windows_licenses = [
