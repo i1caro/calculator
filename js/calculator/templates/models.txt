@@ -44,7 +44,7 @@
 
 <script type="text/html" id="base-price-display">
   <p>
-    Hour Price:
+    Total Hourly Price:
     <span class="total-price hourly" data-bind="text: formatted_hour_price"></span>
   </p>
   <p>

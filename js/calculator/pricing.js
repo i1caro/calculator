@@ -24,6 +24,7 @@ define(['lib/knockout', 'lib/underscore'], function(ko, _) {
         'cost_per_windows_server_2008_web',
         'cost_per_windows_server_2008_standard',
         'cost_per_windows_server_2008_enterprise',
+        'cost_per_windows_server_2012',
         'cost_per_windows_sql_server_2008_web',
         'cost_per_windows_sql_server_2008_standard',
         'cost_per_windows_sql_server_2012_standard'
