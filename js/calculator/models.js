@@ -332,7 +332,7 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
         self.free_bandwidth = ko.observable(false);
 
         self.update_bandwidth = ko.computed(function() {
-          if (self.free_bandwidth())
+          if (self.free_bandwidth() != false)
             self.bandwidth.lower_input(0);
         });
 

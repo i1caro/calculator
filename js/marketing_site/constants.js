@@ -29,25 +29,24 @@ define(['lib/underscore'], function(_) {
       id: 'sjc-c',
       name: 'San Jose, CA',
       flag: 'USAFlag.png',
-      free_bandwidth: true,
+      free_bandwidth: 1000,
     },
     {
       id: 'lax-p',
       name: 'Los Angeles, CA',
       flag: 'USAFlag.png',
-      free_bandwidth: true,
     },
     {
       id: 'dal-a',
       name: 'Dallas, TX',
       flag: 'USAFlag.png',
-      free_bandwidth: true,
+      free_bandwidth: 1000,
     },
     {
       id: 'mmi-a',
       name: 'Miami, FL',
       flag: 'USAFlag.png',
-      free_bandwidth: true,
+      free_bandwidth: 1000,
     },
     {
       id: 'tor-p',
@@ -58,6 +57,7 @@ define(['lib/underscore'], function(_) {
       id: 'hkg-e',
       name: 'Hong Kong',
       flag: 'HKGFlag.png',
+      free_bandwidth: 100,
     },
     {
       id: 'syd-v',
@@ -149,7 +149,7 @@ define(['lib/underscore'], function(_) {
       AUSTRALIA_PRICE = _.clone(DOLAR_PRICES);
 
   US_TEXAS_PRICE.bandwidth_per_gb = 0.15;
-  HONG_KONG_PRICE.bandwidth_per_gb = 0.40;
+  HONG_KONG_PRICE.bandwidth_per_gb = 0.05;
   AUSTRALIA_PRICE.bandwidth_per_gb = 0.25;
 
   var LOCAL_PRICES = {

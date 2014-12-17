@@ -431,8 +431,8 @@
         <div class="server-component" data-bind="visible: free_bandwidth() == false">
           <!-- ko template: {name: 'input-range-template', data: bandwidth} --><!-- /ko -->
         </div>
-        <div class="server-component account-options" data-bind="visible: free_bandwidth() == true">
-          <div class="option-label">1 TB free, then $0.05 per GB</div>
+        <div class="server-component account-options" data-bind="visible: free_bandwidth() != false">
+          <div class="option-label"><span data-bind="text:free_bandwidth"></span> GB free, then $0.05 per GB</div>
           <div class="free price">Free</div>
         </div>
 
