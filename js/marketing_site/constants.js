@@ -146,7 +146,12 @@ define(['lib/underscore'], function(_) {
 
   var US_TEXAS_PRICE = _.clone(DOLAR_PRICES),
       HONG_KONG_PRICE = _.clone(DOLAR_PRICES),
+      CANADA_PRICE = _.clone(DOLAR_PRICES),
       AUSTRALIA_PRICE = _.clone(DOLAR_PRICES);
+
+  AUSTRALIA_PRICE.currency = "USD $";
+  HONG_KONG_PRICE.currency = "USD $";
+  CANADA_PRICE.currency = "USD $";
 
   US_TEXAS_PRICE.bandwidth_per_gb = 0.15;
   HONG_KONG_PRICE.bandwidth_per_gb = 0.05;
@@ -160,7 +165,7 @@ define(['lib/underscore'], function(_) {
     'mmi-a': DOLAR_PRICES,
     'dal-a': DOLAR_PRICES,
     'lax-p': US_TEXAS_PRICE,
-    'tor-p': US_TEXAS_PRICE,
+    'tor-p': CANADA_PRICE,
     'hkg-e': HONG_KONG_PRICE,
     'syd-v': AUSTRALIA_PRICE
   };
