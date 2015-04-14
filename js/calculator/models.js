@@ -234,6 +234,10 @@ define(['lib/knockout', 'lib/underscore', './constants', './pricing', './utils',
         {
           'name': 'Windows SQL Server 2012 Standard',
           'price': prices.cost_per_windows_sql_server_2012_standard
+        },
+        {
+          'name': 'cPanel License',
+          'price': prices.cost_per_cpanel
         }
       ];
 

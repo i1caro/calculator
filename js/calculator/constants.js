@@ -18,7 +18,8 @@ define(['lib/underscore'], function(_) {
     'windows_server_2012_standard': 'msft_p73_04837_2012std',
     'windows_remote_desktop': 'msft_6wc_00002',
     'microsoft_sql_server_2008_web': 'msft_tfa_00009',
-    'microsoft_sql_server_2008_standard': 'msft_228_03159'
+    'microsoft_sql_server_2008_standard': 'msft_228_03159',
+    'cpanel_vps': 'cpanel_vps_1m'
   };
 
   var WINDOWS_LICENSE_ORDER = [
@@ -32,7 +33,8 @@ define(['lib/underscore'], function(_) {
   var ADDITIONAL_MICROSOFT_LICENSE_ORDER = [
     '',
     RESOURCES.microsoft_sql_server_2008_web,
-    RESOURCES.microsoft_sql_server_2008_standard
+    RESOURCES.microsoft_sql_server_2008_standard,
+    RESOURCES.cpanel_vps
   ];
 
   var LICENSES_KEYS = _.union(WINDOWS_LICENSE_ORDER, ADDITIONAL_MICROSOFT_LICENSE_ORDER, [RESOURCES.windows_remote_desktop]);

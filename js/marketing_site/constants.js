@@ -95,6 +95,7 @@ define(['lib/underscore'], function(_) {
         cost_per_windows_sql_server_2008_standard: 240.00,
         cost_per_windows_sql_server_2012_standard: 240.00,
         cost_per_windows_remote_desktop: 4.00,
+        cost_per_cpanel: 13.00,
         currency: '£'
       },
       EURO_PRICES = {
@@ -118,6 +119,7 @@ define(['lib/underscore'], function(_) {
         cost_per_windows_sql_server_2008_standard: 300.00,
         cost_per_windows_sql_server_2012_standard: 300.00,
         cost_per_windows_remote_desktop: 5.00,
+        cost_per_cpanel: 18.00,
         currency: '€'
       },
       DOLAR_PRICES = {
@@ -141,6 +143,7 @@ define(['lib/underscore'], function(_) {
         cost_per_windows_sql_server_2008_standard: 385.00,
         cost_per_windows_sql_server_2012_standard: 385.00,
         cost_per_windows_remote_desktop: 5.50,
+        cost_per_cpanel: 20.00,
         currency: '$'
       };
 

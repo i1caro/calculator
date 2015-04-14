@@ -229,7 +229,7 @@
           <div data-dismiss="modal" class="single-x-button" title="Close"aria-hidden="true">
             <div class='symbol'>×</div>
           </div>
-          <h1 class="modal-title">Add Microsoft Licenses</h1>
+          <h1 class="modal-title">Add Licenses</h1>
           <div class="clear"></div>
         </div>
         <div class="modal-body">
@@ -238,7 +238,7 @@
             <!-- ko template: {name: 'system-options-modal-template', data: windows_server_licenses} --><!-- /ko -->
           </div>
           <div class="form-group">
-            <h2>Other Microsoft Server Licenses</h2>
+            <h2>Other Server Licenses</h2>
             <!-- ko template: {name: 'system-options-modal-template', data: additional_microsoft_licenses} --><!-- /ko -->
           </div>
 
