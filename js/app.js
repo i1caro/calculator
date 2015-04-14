@@ -4,7 +4,8 @@ define('$', function() {
 });
 
 require.config({
-  'baseUrl': 'js',
+  // BaseUrl must be removed for the live site for some reason
+  // 'baseUrl': 'js',
   'paths': {
     'text': 'lib/require.text',
     'css': 'lib/require.css'
