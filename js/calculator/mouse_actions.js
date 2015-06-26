@@ -3,21 +3,20 @@ define(['./utils'], function(utils) {
   function move_handler(event) {
     var data = event.data,
         mouse_move = ((event.clientX - data.offset) * 100) / data.bar_size,
-        distance = utils.limit(data.start + mouse_move, 0, 100);
+        distance = utils.trim(data.start + mouse_move, 0, 100);
     data.element(distance);
   }
   function stop_move_handler(event) {
     $(document).off('mousemove', move_handler);
   }
 
-  function start_mouse_down(data, event, element, lower_bound, upper_bound) {
+  function start_mouse_down(data, event, element, lower_bound) {
     $(document).on('mousemove', {
       offset: event.pageX - utils.pageOffset(),
       start: element(),
       bar_size: $(event.currentTarget).parent().width(),
       element: element,
-      lower_bound: lower_bound,
-      upper_bound: upper_bound
+      lower_bound: lower_bound
     }, move_handler);
     $(document).one('mouseup', stop_move_handler);
   }
@@ -42,13 +41,13 @@ define(['./utils'], function(utils) {
   }
 
   function click_handle_down(data, event) {
-    start_mouse_down(data, event, data.lower);
+    start_mouse_down(data, event, data.percentage);
   }
 
   function click_slider_down(data, event) {
     var position = get_click_position(event),
         clicked = position.x / $(event.currentTarget).width() * 100;
-    data.lower(clicked);
+    data.percentage(clicked);
 
     click_handle_down(data, event);
   }

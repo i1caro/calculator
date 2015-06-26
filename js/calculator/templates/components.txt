@@ -2,12 +2,12 @@
   <div class="slider-label" data-bind="text: name"></div>
   <div class="slider-handlebar">
     <div class="slider" data-bind="event: {mousedown: $root.click_slider_down}">
-      <div class="slider-handle" data-title="Subscription" data-bind="event: {mousedown: $root.click_handle_down}, style: {left: lower_style()}"></div>
+      <div class="slider-handle" data-title="Subscription" data-bind="event: {mousedown: $root.click_handle_down}, style: {left: percentage_style}"></div>
     </div>
   </div>
-  <input type="text" style="display:none" data-bind="value: lower" />
+  <input type="text" style="display:none" data-bind="value: percentage" />
   <div class="slider-input">
-    <input class="form-control" type="text" data-bind="value: lower_input" />
+    <input class="form-control" type="text" data-bind="value: value" />
     <span class="input-group-addon" data-bind="text: unit"></span>
   </div>
   <div class="slider-price" data-bind="text: formatted_price"></div>
@@ -22,7 +22,7 @@
 
 <script type="text/html" id="system-options-modal-template">
   <ul>
-    <!-- ko foreach: valid_options -->
+    <!-- ko foreach: valid_choices -->
       <li>
         <div class="radio">
           <label class="option-label">
@@ -39,7 +39,7 @@
 <script type="text/html" id="system-options-template">
   <div class="sys-options-label" data-bind="text: formatted_name"></div>
   <div class="sys-options-remove">
-    <a class="action-link" data-bind="event: {click: remove_option}">Remove</a>
+    <a class="action-link" data-bind="event: {click: remove_choice}">Remove</a>
   </div>
   <div class="price" data-bind="text: formatted_price"></div>
 </script>
@@ -48,7 +48,8 @@
   <div class="checkbox">
     <label class="option-label">
       <span data-bind="text: name"></span>
-      <input type="checkbox" data-bind="checked: active">
+      <input type="checkbox"
+        data-bind="checked: checked, attr: {disabled: !active()}">
     </label>
   </div>
   <div class="price" data-bind="text: formatted_price"></div>

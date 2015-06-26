@@ -1,84 +1,78 @@
-define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANTS) {
+define(['lib/underscore', './utils'], function(_, utils) {
   var SPLIT_CHECKSUM = '+',
       SPLIT_INSTANCES = '/';
 
   function Parser(list) {
-    var self = this,
-        output = [];
-
-    for (var i=0; i < list.length; i++) {
-      output.push(list[i]);
-    }
-    self.build_server = function() {
+    this.list = list;
+    _.bindAll(this, 'build_virtual_machine', 'build_container');
+  }
+  _.extend(Parser.prototype, {
+    build_server: function() {
       return {
-        'cpu': Number(output.shift()),
-        'ram': Number(output.shift()),
-        'ip': utils.toBoolean(output.shift()),
-        'firewall': utils.toBoolean(output.shift()),
-        'ssd': self.get_drives(),
-        'hdd': self.get_drives()
+        'cpu': Number(this.list.shift()),
+        'ram': Number(this.list.shift()),
+        'ip': utils.toBoolean(this.list.shift()),
+        'firewall': utils.toBoolean(this.list.shift()),
+        'ssd': this.get_drives(),
+        'hdd': this.get_drives()
       };
-    };
-    self.build_virtual_machine = function() {
-      var result = self.build_server();
+    },
+    build_virtual_machine: function() {
+      var result = this.build_server();
 
-      result['windows_server_license'] = Number(output.shift());
-      result['additional_microsoft_license'] = Number(output.shift());
-      result['remote_desktops'] = Number(output.shift());
+      result['windows_server_license'] = Number(this.list.shift());
+      result['additional_license'] = Number(this.list.shift());
+      result['remote_desktops'] = Number(this.list.shift());
 
       return result;
-    };
-    self.build_container = function() {
-      return self.build_server();
-    };
-    self.get_drives = function() {
+    },
+    build_container: function() {
+      return this.build_server();
+    },
+    get_drives: function() {
       var list = [],
-          element = output.shift();
-      while (self.not_end(element)) {
+          element = this.list.shift();
+      while (this.not_end(element)) {
         list.push(element);
-        element = output.shift();
+        element = this.list.shift();
       }
       return list;
-    };
-    self.get_virtual_machines = function() {
-      return self.get_servers(self.build_virtual_machine);
-    };
-    self.get_containers = function() {
-      return self.get_servers(self.build_container);
-    };
-    self.get_servers = function(factory) {
-      var element = output[0],
-          servers = [];
-      while (self.not_end(element)) {
+    },
+    get_virtual_machines: function() {
+      return this.get_servers(this.build_virtual_machine);
+    },
+    get_containers: function() {
+      return this.get_servers(this.build_container);
+    },
+    get_servers: function(factory) {
+      var servers = [];
+      while (this.not_end(this.list[0])) {
         servers.push(factory());
-        element = output[0];
       }
-      output.shift(); // remove SPLIT_INSTANCES
+      this.list.shift(); // remove SPLIT_INSTANCES
       return servers;
-    };
-    self.not_end = function(element) {
-      return element !== SPLIT_INSTANCES && output.length > 0;
-    };
-    self.build_account_details = function() {
+    },
+    not_end: function(element) {
+      return element !== SPLIT_INSTANCES && this.list.length > 0;
+    },
+    build_account_details: function() {
       return {
-        'bandwidth': output.shift(),
-        'ips': output.shift(),
-        'vlans': output.shift()
+        'bandwidth': this.list.shift(),
+        'ips': this.list.shift(),
+        'vlans': this.list.shift()
       };
-    };
-    self.parse = function() {
+    },
+    parse: function() {
       var data = {};
-      if (output.length) {
-        data['virtual_machines'] = self.get_virtual_machines();
-        data['containers'] = self.get_containers();
-        data['account_details'] = self.build_account_details();
-        data['subscription'] = output.shift();
+      if (this.list.length) {
+        data['virtual_machines'] = this.get_virtual_machines();
+        data['containers'] = this.get_containers();
+        data['account_details'] = this.build_account_details();
+        data['subscription'] = this.list.shift();
       }
       return data;
-    };
-  }
-  Parser.prototype = Object.create(Array.prototype);
-  Parser.constructor = Parser;
+    }
+  });
 
   function split_string(string) {
     var no_hash = string.substring(1),
@@ -102,7 +96,7 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
   function serialize_storages(storages) {
     var storage_data = {'ssd': [], 'hdd': []};
     _.each(storages, function(storage) {
-      storage_data[storage.type].push(storage.choosen());
+      storage_data[storage.type].push(storage.chosen());
     });
     return storage_data;
   }
@@ -110,10 +104,10 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
   function serialize_base_server() {
     var storage_data = serialize_storages(this.storages()),
         result = [
-          this.cpu.choosen(),
-          this.ram.choosen(),
-          this.ip.choosen(),
-          this.firewall.choosen()
+          this.cpu.chosen(),
+          this.ram.chosen(),
+          this.ip.chosen(),
+          this.firewall.chosen()
         ];
     result.push(storage_data['ssd']);
     result.push(SPLIT_INSTANCES);
@@ -123,25 +117,22 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
   }
 
   function licenses() {
-    var self = this;
     return [
-      self.windows_server_licenses.choosen(),
-      self.additional_microsoft_licenses.choosen(),
-      self.remote_desktops.value()
+      this.windows_server_licenses.chosen(),
+      this.additional_licenses.chosen(),
+      this.remote_desktops.value()
     ];
   }
 
   function serialize_virtual_machine() {
-    var self = this,
-        machine_data = serialize_base_server.call(self),
-        result = licenses.call(self);
+    var machine_data = serialize_base_server.call(this),
+        result = licenses.call(this.licenses);
     machine_data.push(result);
     return machine_data;
   }
 
   function serialize_dump() {
     var servers = this.servers(),
-        temp_server,
         temp_list,
         result = [];
 
@@ -149,15 +140,16 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
       'container': [],
       'virtual_machine': []
     };
-    for (var i=0; i < servers.length; i++) {
-      temp_server = servers[i];
-      temp_list[temp_server.type].push(temp_server.serialize());
-    }
+
+    _.each(servers, function(server) {
+      temp_list[server.type].push(server.serialize());
+    });
+
     result.push(temp_list['virtual_machine']);
     result.push(SPLIT_INSTANCES);
     result.push(temp_list['container']);
     result.push(SPLIT_INSTANCES);
-    result.push(this.account_details.serialize());
+    result.push(this.account_details().serialize());
 
     return _.flatten(result).join(',');
   }
@@ -169,99 +161,9 @@ define(['lib/underscore', './utils', './constants'], function(_, utils, CONSTANT
     return encoded_uri;
   }
 
-  function common_server_resources() {
-    var self = this,
-        resources = {},
-        storages;
-
-
-    resources[CONSTANTS.RESOURCES.ip] = self.ip.choosen() ? 1 : 0;
-    resources[CONSTANTS.RESOURCES.firewall] = self.firewall.choosen() ? 1 : 0;
-
-    storages = serialize_storages(self.storages());
-
-    resources[CONSTANTS.RESOURCES.ssd] = _.reduce(storages['ssd'], function(memo, size) {
-      return memo + utils.force_int(size);
-    }, 0);
-    resources[CONSTANTS.RESOURCES.hdd] = _.reduce(storages['hdd'], function(memo, size) {
-      return memo + utils.force_int(size);
-    }, 0);
-
-    return resources;
-  }
-
-  function licenses_resources() {
-    var self = this,
-        resources = {}, key;
-
-    resources[CONSTANTS.RESOURCES.windows_remote_desktop] = utils.force_int(self.remote_desktops.value());
-
-    key = CONSTANTS.ADDITIONAL_MICROSOFT_LICENSE_ORDER[self.additional_microsoft_licenses.choosen()];
-    if (key)
-      resources[key] = 1;
-
-    key = CONSTANTS.WINDOWS_LICENSE_ORDER[self.windows_server_licenses.choosen()];
-    if (key)
-      resources[key] = 1;
-
-    return resources;
-  }
-
-  function virtual_machine_resources(data) {
-    var self = this,
-        resources = common_server_resources.call(self);
-
-    resources[CONSTANTS.RESOURCES.cpu_virtual_machine] = utils.force_int(self.cpu.choosen());
-    resources[CONSTANTS.RESOURCES.ram_virtual_machine] = utils.force_int(self.ram.choosen());
-
-    return _.extend(resources, licenses_resources.call(self));
-  }
-
-  function container_resources() {
-    var self = this,
-        resources = common_server_resources.call(self);
-
-    resources[CONSTANTS.RESOURCES.cpu_container] = utils.force_int(self.cpu.choosen());
-    resources[CONSTANTS.RESOURCES.ram_container] = utils.force_int(self.ram.choosen());
-
-    return resources;
-  }
-
-  function disconnected_storage_resources(type) {
-    var self = this,
-        resources = {};
-
-    resources[type] = self.choosen();
-
-    return resources;
-  }
-
-  function disconnected_folder_resources() {
-    var self = this;
-    return disconnected_storage_resources.call(self, CONSTANTS.RESOURCES.ssd);
-  }
-
-  function disconnected_ssd_drive_resources() {
-    var self = this,
-        resources = disconnected_storage_resources.call(self, CONSTANTS.RESOURCES.ssd);
-
-    return _.extend(resources, licenses_resources.call(self));
-  }
-
-  function disconnected_hdd_drive_resources() {
-    var self = this,
-        resources = disconnected_storage_resources.call(self, CONSTANTS.RESOURCES.hdd);
-
-    return _.extend(resources, licenses_resources.call(self));
-  }
-
   return {
-    'disconnected_folder_resources': disconnected_folder_resources,
-    'disconnected_ssd_drive_resources': disconnected_ssd_drive_resources,
-    'disconnected_hdd_drive_resources': disconnected_hdd_drive_resources,
-    'virtual_machine_resources': virtual_machine_resources,
-    'container_resources': container_resources,
     'serialize_load': serialize_load,
+    'serialize_storages': serialize_storages,
     'serialize_base_server': serialize_base_server,
     'serialize_virtual_machine': serialize_virtual_machine,
     'serialize_dump': serialize_dump,

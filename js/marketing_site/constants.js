@@ -75,75 +75,75 @@ define(['lib/underscore'], function(_) {
 
   // Globals
   var POUND_PRICES = {
-        cpu_virtual_machine_per_mhz: 0.012,
-        ram_virtual_machine_per_mb: 0.016,
-        cpu_container_per_mhz: 0.005,
-        ram_container_per_mb: 0.007,
+        vm_cpu: 0.012,
+        vm_mem: 0.016,
+        container_cpu: 0.005,
+        container_mem: 0.007,
         // Disk/transfer costs.
-        hdd_per_gb: 0.06,
-        ssd_per_gb: 0.15,
-        bandwidth_per_gb: 0.06,
+        disk: 0.06,
+        ssd: 0.15,
+        xfer: 0.06,
         // Extra costs
-        cost_per_static_ip: 2.00,
-        cost_per_vlan: 5.00,
-        cost_per_firewall: 5.00,
-        cost_per_windows_server_2008_web: 10.00,
-        cost_per_windows_server_2008_standard: 20.00,
-        cost_per_windows_server_2008_enterprise: 45.00,
-        cost_per_windows_server_2012: 20.00,
-        cost_per_windows_sql_server_2008_web: 15.00,
-        cost_per_windows_sql_server_2008_standard: 240.00,
-        cost_per_windows_sql_server_2012_standard: 240.00,
-        cost_per_windows_remote_desktop: 4.00,
-        cost_per_cpanel: 13.00,
+        ip: 2.00,
+        vlan: 5.00,
+        firewall: 5.00,
+        windows_remote_desktop: 4.00,
+        windows_server_2008_web: 10.00,
+        windows_server_2008_standard: 20.00,
+        windows_server_2008_enterprise: 45.00,
+        windows_server_2012: 20.00,
+        microsoft_sql_server_2008_web: 15.00,
+        microsoft_sql_server_2008_standard: 240.00,
+        microsoft_sql_server_2012_standard: 240.00,
+        cpanel_vm: 13.00,
         currency: '£'
       },
       EURO_PRICES = {
-        cpu_virtual_machine_per_mhz: 0.015,
-        ram_virtual_machine_per_mb: 0.02,
-        cpu_container_per_mhz: 0.006,
-        ram_container_per_mb: 0.009,
+        vm_cpu: 0.015,
+        vm_mem: 0.02,
+        container_cpu: 0.006,
+        container_mem: 0.009,
         // Disk/transfer costs.
-        hdd_per_gb: 0.07,
-        ssd_per_gb: 0.18,
-        bandwidth_per_gb: 0.06,
+        disk: 0.07,
+        ssd: 0.18,
+        xfer: 0.06,
         // Extra costs
-        cost_per_static_ip: 2.50,
-        cost_per_vlan: 6.00,
-        cost_per_firewall: 6.00,
-        cost_per_windows_server_2008_web: 12.00,
-        cost_per_windows_server_2008_standard: 24.00,
-        cost_per_windows_server_2008_enterprise: 55.00,
-        cost_per_windows_server_2012: 24.00,
-        cost_per_windows_sql_server_2008_web: 18.00,
-        cost_per_windows_sql_server_2008_standard: 300.00,
-        cost_per_windows_sql_server_2012_standard: 300.00,
-        cost_per_windows_remote_desktop: 5.00,
-        cost_per_cpanel: 18.00,
+        ip: 2.50,
+        vlan: 6.00,
+        firewall: 6.00,
+        windows_remote_desktop: 5.00,
+        windows_server_2008_web: 12.00,
+        windows_server_2008_standard: 24.00,
+        windows_server_2008_enterprise: 55.00,
+        windows_server_2012: 24.00,
+        microsoft_sql_server_2008_web: 18.00,
+        microsoft_sql_server_2008_standard: 300.00,
+        microsoft_sql_server_2012_standard: 300.00,
+        cpanel_vm: 18.00,
         currency: '€'
       },
       DOLAR_PRICES = {
-        cpu_virtual_machine_per_mhz: 0.018,
-        ram_virtual_machine_per_mb: 0.025,
-        cpu_container_per_mhz: 0.008,
-        ram_container_per_mb: 0.011,
+        vm_cpu: 0.018,
+        vm_mem: 0.025,
+        container_cpu: 0.008,
+        container_mem: 0.011,
         // Disk/transfer costs.
-        hdd_per_gb: 0.10,
-        ssd_per_gb: 0.25,
-        bandwidth_per_gb: 0.05,
+        disk: 0.10,
+        ssd: 0.25,
+        xfer: 0.05,
         // Extra costs
-        cost_per_static_ip: 3.00,
-        cost_per_vlan: 7.50,
-        cost_per_firewall: 7.50,
-        cost_per_windows_server_2008_web: 15.00,
-        cost_per_windows_server_2008_standard: 30.00,
-        cost_per_windows_server_2008_enterprise: 75.00,
-        cost_per_windows_server_2012: 30.00,
-        cost_per_windows_sql_server_2008_web: 22.50,
-        cost_per_windows_sql_server_2008_standard: 385.00,
-        cost_per_windows_sql_server_2012_standard: 385.00,
-        cost_per_windows_remote_desktop: 5.50,
-        cost_per_cpanel: 20.00,
+        ip: 3.00,
+        vlan: 7.50,
+        firewall: 7.50,
+        windows_remote_desktop: 5.50,
+        windows_server_2008_web: 15.00,
+        windows_server_2008_standard: 30.00,
+        windows_server_2008_enterprise: 75.00,
+        windows_server_2012: 30.00,
+        microsoft_sql_server_2008_web: 22.50,
+        microsoft_sql_server_2008_standard: 385.00,
+        microsoft_sql_server_2012_standard: 385.00,
+        cpanel_vm: 20.00,
         currency: '$'
       };
 
@@ -174,32 +174,52 @@ define(['lib/underscore'], function(_) {
   };
 
   var LIMITS = {
-    cpu_increments: 50,
-    cpu_container_min: 500,
-    cpu_container_max: 20000, // Mhz
-    cpu_vm_min: 500,
-    cpu_vm_max: 20000, // Mhz
-    ram_increments: 128,
-    ram_container_min: 256, // MB
-    ram_container_max: 32768,
-    ram_vm_min: 256, // MB
-    ram_vm_max: 32768,
-    hdd_min: 0, // GB
-    hdd_max: 1862,
-    ssd_min: 0,
-    ssd_max: 1862,
-    bandwidth_min: 0, // GB
-    bandwidth_max: 1000,
-    ip_max: 12,
-    ip6_max: 12,
-    vlan_max: 5,
+    'instance': {
+      'cpu_min': 0,
+      'cpu_max': 20000,
+      'cpu_step': 50,
+      'mem_min': 0,
+      'mem_max': 8192,
+      'mem_step': 128,
+      'disk_min': 0,
+      'disk_max': 1862
+    },
+    'subscription': {
+      'min_container_cpu': 0,
+      'max_container_cpu': 100000,
+      'min_vm_cpu': 0,
+      'max_vm_cpu': 100000,
+      'min_container_mem': 0,
+      'max_container_mem': 32768,
+      'min_vm_mem': 0,
+      'max_vm_mem': 65536,
+      'min_xfer': 0,
+      'max_xfer': 1000,
+      'max_remote_desktops': 10,
+      'max_ip': 12,
+      'max_ip6': 12,
+      'max_vlan': 5
+    }
   };
 
+  var AVAILABLE_ITEMS = {
+    'virtual_machine': true,
+    'drives': {
+      'ssd': true,
+      'hdd': true
+    },
+    'container': true,
+    'folders': {
+      'ssd': true,
+      'hdd': true
+    }
+   };
   return {
     'FREE_BANDWIDTH': FREE_BANDWIDTH,
     'DOMAINS_TO_LOCATION': DOMAINS_TO_LOCATION,
     'LIMITS': LIMITS,
     'LOCAL_PRICES': LOCAL_PRICES,
-    'ZONES': ZONES
+    'ZONES': ZONES,
+    'AVAILABLE_ITEMS': AVAILABLE_ITEMS
   };
 });

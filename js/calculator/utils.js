@@ -1,21 +1,10 @@
 define(['lib/underscore', './pricing'], function(_, pricing) {
-
-  function force_int(value) {
-    var result = parseInt(value);
-    if (!result)
-      return 0;
-    return result;
-  }
-  function copy(obj) {
-    return JSON.parse(JSON.stringify(obj));
-  }
-
   function toBoolean(string) {
     return string === '1';
   }
 
-  function bytes_to_gigabytes(bytes) {
-    return Math.ceil(bytes / Math.pow(1024, 3));
+  function gigaToTera(number) {
+    return (number / 1000.0).toFixed(1);
   }
 
   function sum_function(memo, obj) {
@@ -39,8 +28,15 @@ define(['lib/underscore', './pricing'], function(_, pricing) {
       n = 2;
     }
 
-    var clean_price = price ? price.toFixed(n) : zeroes(n);
-    return pricing.currency() + clean_price;
+    var clean_price = price ? price.toFixed(n) : zeroes(n),
+        sign = '';
+
+    if (clean_price < 0) {
+      clean_price = clean_price * -1;
+      sign = '-';
+    }
+
+    return sign + pricing.currency() + clean_price;
   }
 
   function pageOffset() {
@@ -57,63 +53,51 @@ define(['lib/underscore', './pricing'], function(_, pricing) {
     return checksum;
   }
 
-  function limit(distance, lower_bound, upper_bound) {
-    if (distance < lower_bound)
-      return lower_bound;
-    else if (distance > upper_bound)
-      return upper_bound;
-    return distance;
-  }
-
-  // http://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
-  function post(path, params, method) {
-    method = method || "post"; // Set method to post by default if not specified.
-
-    // The rest of this code assumes you are not using a library.
-    // It can be made less wordy if you use one.
-    var form = document.createElement("form");
-    form.setAttribute("method", method);
-    form.setAttribute("action", path);
-
-    for (var key in params) {
-      if (params.hasOwnProperty(key)) {
-        var hiddenField = document.createElement("input");
-        hiddenField.setAttribute("type", "hidden");
-        hiddenField.setAttribute("name", key);
-        hiddenField.setAttribute("value", params[key]);
-
-        form.appendChild(hiddenField);
-      }
-    }
-
-    document.body.appendChild(form);
-    form.submit();
+  function trim(value, min, max) {
+    if (value < min)
+      return min;
+    else if (value > max)
+      return max;
+    return value;
   }
 
   var unique_id = {
     build: function() {
-      unique_id.prev++;
-      return unique_id.prev;
+      return ++unique_id.prev;
     },
     prev: 0
   };
 
+  function clean_number(number) {
+    return Number(number) || 0;
+  }
+
+  function returns(val) {
+    return function() {
+      return val;
+    };
+  }
+
+  function updateObject(obja, objb) {
+    _.each(objb, function(value, key) {
+      if (_.keys(value).length)
+        updateObject(obja[key], objb[key]);
+      else
+        obja[key] = value;
+    });
+  }
+
   return {
-    'bytes_to_gigabytes': bytes_to_gigabytes,
     'calc_checksum': calc_checksum,
     'sum_function': sum_function,
     'format_price': format_price,
     'pageOffset': pageOffset,
     'toBoolean': toBoolean,
     'unique_id': unique_id,
-    'limit': limit,
-    'copy': copy,
-    'post': post,
-    'force_int': force_int
+    'clean_number': clean_number,
+    'trim': trim,
+    'gigaToTera': gigaToTera,
+    'updateObject': updateObject,
+    'returns': returns
   };
 });
-
-
-
-
-

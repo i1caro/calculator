@@ -1,5 +1,13 @@
-define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/constants'],
-  function(_, ko, calculator, CONSTANTS) {
+define([
+  'lib/underscore',
+  'lib/knockout',
+  'lib/moment',
+  'calculator/pricing',
+  'calculator/form',
+  'calculator/main',
+  'marketing_site/constants'
+],
+  function(_, ko, moment, pricing, form, Calculator, CONSTANTS) {
 
     function get_country_based_on_location() {
       var domain = location.host.split('.').splice(-1, 1)[0],
@@ -9,16 +17,13 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
       return CONSTANTS.DOMAINS_TO_LOCATION['com'];
     }
 
-    function serverSlideDown() {
-      jQuery('#server-list>div').first().hide();
-      jQuery('#server-list>div').first().slideDown();
+    function getCountryPostUrl(country) {
+      return 'http://0.0.0.0:4444/accounts/plans/new/'
+      return 'https://' + country + '.elastichosts.com/accounts/plans/new/';
     }
 
-    function serverSlideUp(e, callback) {
-      jQuery(e.target).parents('.server-panel').slideUp();
-      window.setTimeout(function() {
-        callback();
-      }, 500);
+    function nextMonth() {
+      return moment().add(1, 'month').format('YYYY-MM-DD');
     }
 
     function viewModel() {
@@ -26,40 +31,12 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
 
       self.country = ko.observable(get_country_based_on_location());
 
-      ko.utils.extend(self, new calculator(
+      Calculator.call(
+        self,
+        CONSTANTS.AVAILABLE_ITEMS,
         CONSTANTS.LIMITS,
         CONSTANTS.LOCAL_PRICES[self.country()]
-      ));
-
-      // Overwrite
-      self.remove_server = function(data, e) {
-        serverSlideUp(e, function() {
-          self.servers.remove(data.server);
-        });
-      };
-
-      self.add_container = function() {
-        self.servers.unshift(new self.models.container({
-          cpu: 500,
-          ram: 126,
-          ip: true,
-          firewall: false,
-          ssd: [10],
-          hdd: []
-        }));
-        serverSlideDown();
-      };
-      self.add_virtual_machine = function() {
-        self.servers.unshift(new self.models.virtual_machine({
-          cpu: 500,
-          ram: 126,
-          ip: true,
-          firewall: false,
-          ssd: [],
-          hdd: [10]
-        }));
-        serverSlideDown();
-      };
+      );
 
       var initial_data = {
             'virtual_machines': [{
@@ -97,7 +74,6 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
         }
         catch (err) {}
       }
-
       self.set_data(initial_data);
 
 
@@ -108,8 +84,8 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
       self.update_prices = ko.computed(function() {
         var country = self.country();
 
-        self.set_pricing(CONSTANTS.LOCAL_PRICES[country]);
-        self.account_details.free_bandwidth(
+        pricing.set(CONSTANTS.LOCAL_PRICES[country]);
+        self.account_details().free_bandwidth(
           CONSTANTS.FREE_BANDWIDTH[country] || false
         );
       });
@@ -120,10 +96,17 @@ define(['lib/underscore', 'lib/knockout', 'calculator/main', 'marketing_site/con
         rateLimit: 1000
       });
 
-
       //Constants
       self.country_flags = CONSTANTS.ZONES;
+      self.submit = function() {
+        form.post(
+          this.resources(),
+          nextMonth(),
+          getCountryPostUrl(self.country())
+        );
+      };
     }
+    _.extend(viewModel.prototype, Calculator.prototype);
 
     ko.applyBindings(new viewModel());
   }
