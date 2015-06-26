@@ -18,7 +18,6 @@ define([
     }
 
     function getCountryPostUrl(country) {
-      return 'http://0.0.0.0:4444/accounts/plans/new/'
       return 'https://' + country + '.elastichosts.com/accounts/plans/new/';
     }
 
